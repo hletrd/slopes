@@ -300,19 +300,19 @@
     "links": [
       {
         "name": "스키하우스",
-        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=0"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=0"
       },
       {
         "name": "오렌지",
-        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=1"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=1"
       },
       {
         "name": "버금마루",
-        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=2"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=2"
       },
       {
         "name": "으뜸마루",
-        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3"
       }
     ]
   },
@@ -322,47 +322,47 @@
     "links": [
       {
         "name": "설천봉 정상",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=07"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=07"
       },
       {
         "name": "설천상단슬로프",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=06"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=06"
       },
       {
         "name": "모차르트, 미뉴에트",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=08"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=08"
       },
       {
         "name": "폴카",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=09"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=09"
       },
       {
         "name": "실크로드, 미뉴에트 하단",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=10"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=10"
       },
       {
         "name": "만선봉 정상",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=02"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=02"
       },
       {
         "name": "하이디하우스",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=03"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=03"
       },
       {
         "name": "서역기행, 썬다운",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=04"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=04"
       },
       {
         "name": "커넥션",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=11"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=11"
       },
       {
         "name": "설천하우스",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=05"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=05"
       },
       {
         "name": "만선하우스",
-        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=01"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=01"
       }
     ]
   },
