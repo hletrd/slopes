@@ -52,12 +52,23 @@
     ]
   },
   {
+    "id": "elysian",
+    "name": "엘리시안 강촌",
+    "links": [
+      {
+        "name": "유튜브 채널",
+        "video": "https://www.youtube.com/@11-lf8zw/streams",
+        "video_type": "link"
+      }
+    ]
+  },
+  {
     "id": "vivaldi",
     "name": "비발디파크",
     "links": [
       {
         "name": "TODO",
-        "video":
+        "video": ""
       }
     ]
   },
@@ -66,7 +77,7 @@
     "name": "오크밸리 리조트",
     "links": [
       {
-        "name": "마운틴 정상",
+        "name": "스키광장",
         "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch2.stream/chunklist.m3u8"
       },
       {
@@ -100,11 +111,11 @@
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam03.stream/playlist.m3u8"
       },
       {
-        "name": "리조트 전경",
+        "name": "브라보",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam04.stream/playlist.m3u8"
       },
       {
-        "name": "정상광장",
+        "name": "정상 광장",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam05.stream/playlist.m3u8"
       },
       {
@@ -122,7 +133,7 @@
     "name": "휘닉스파크",
     "links": [
       {
-        "name": "호크/스패로우",
+        "name": "호크 / 스패로우",
         "video": "https://streaming.phoenixhnr.co.kr/hls/yh_02.m3u8"
       },
       {
@@ -171,7 +182,7 @@
         "video": "https://live.yongpyong.co.kr/Ycam1/cam15.stream/playlist.m3u8"
       },
       {
-        "name": "베이스전경 / 레드 슬로프",
+        "name": "베이스 전경 / 레드 슬로프",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam10.stream/playlist.m3u8"
       },
       {
@@ -179,27 +190,27 @@
         "video": "https://live.yongpyong.co.kr/Ycam1/cam05.stream/playlist.m3u8"
       },
       {
-        "name": "옐로우",
+        "name": "옐로우 슬로프",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam03.stream/playlist.m3u8"
       },
       {
-        "name": "핑크",
+        "name": "핑크 슬로프",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam07.stream/playlist.m3u8"
       },
       {
-        "name": "메가그린",
+        "name": "메가그린 슬로포",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam01.stream/playlist.m3u8"
       },
       {
-        "name": "골드 베이스",
+        "name": "골드 슬로프 전경",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam06.stream/playlist.m3u8"
       },
       {
-        "name": "골드 정상",
+        "name": "골드 슬로프 정상",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam04.stream/playlist.m3u8"
       },
       {
-        "name": "레인보우 베이스",
+        "name": "레인보우 전경",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam08.stream/playlist.m3u8"
       },
       {
@@ -207,7 +218,7 @@
         "video": "https://live.yongpyong.co.kr/Ycam1/cam09.stream/playlist.m3u8"
       },
       {
-        "name": "워터파크",
+        "name": "피크 아일랜드",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam11.stream/playlist.m3u8"
       }
     ]

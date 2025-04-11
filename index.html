@@ -334,7 +334,7 @@
   <div class="mobile-nav">
     <div class="mobile-nav-inner">
       <button class="toggle-menu btn">☰</button>
-      <div class="mobile-title"><a href="/">Slopes cam</a></div>
+      <div class="mobile-title"><a href="./">Slopes cam</a></div>
       <div style="width: 24px;"></div>
     </div>
   </div>
@@ -342,7 +342,7 @@
   <div class="sidebar-backdrop"></div>
 
   <div class="sidebar">
-    <div class="site-title"><a href="/">Slopes cam</a></div>
+    <div class="site-title"><a href="./">Slopes cam</a></div>
   </div>
 
   <div class="main-content">
@@ -545,7 +545,7 @@
       function initializeResorts(resorts) {
         data = resorts;
 
-        sidebar.innerHTML = '<div class="site-title"><a href="/">Slopes cam</a></div>';
+        sidebar.innerHTML = '<div class="site-title"><a href="./">Slopes cam</a></div>';
         const defaultContent = document.getElementById('default-message');
         const otherContent = Array.from(document.querySelectorAll('.content-section:not(#default-message)'));
         otherContent.forEach(el => el.remove());
@@ -792,6 +792,36 @@
               }
             };
           }
+        }
+
+        if (videoType === 'link') {
+          const linkContainer = document.createElement('div');
+          linkContainer.className = 'd-flex justify-content-center align-items-center';
+          linkContainer.style.height = '250px';
+          linkContainer.style.backgroundColor = '#1e1e1e';
+          linkContainer.style.borderRadius = '5px';
+
+          const linkButton = document.createElement('a');
+          linkButton.href = videoUrl;
+          linkButton.target = '_blank';
+          linkButton.rel = 'noopener noreferrer';
+          linkButton.className = 'btn btn-primary btn-lg';
+          linkButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right me-2" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+              <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+            </svg>
+            외부 링크
+          `;
+
+          linkContainer.appendChild(linkButton);
+          container.appendChild(linkContainer);
+
+          return {
+            dispose: function() {
+              container.innerHTML = '';
+            }
+          };
         }
 
         const resort = getResortAndWebcamFromId(id);
