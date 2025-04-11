@@ -117,7 +117,7 @@
         .video-js {
             width: 100%;
             height: 0;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%;
             position: relative;
         }
         .video-js .vjs-tech {
@@ -130,7 +130,7 @@
         .iframe-container {
             width: 100%;
             height: 0;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%;
             position: relative;
             margin-bottom: 20px;
             background-color: #000;
@@ -236,11 +236,11 @@
         }
         .video-card .video-js {
             height: 0;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%;
         }
         .video-card .iframe-container {
             height: 0;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%;
         }
         .mobile-nav {
             display: none;
@@ -661,7 +661,6 @@
 
                         updateUrlHash(target);
 
-                        // Close all other menu items
                         document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
                         this.classList.add('active');
 
@@ -677,10 +676,8 @@
                                 }
                             }
                         } else {
-                            // Always hide all submenus first
                             hideAllSubmenus();
 
-                            // Then show the current one if it has a submenu
                             if (hasSubmenu) {
                                 const submenu = this.parentNode.querySelector('.submenu');
                                 if (submenu && !isMobile) {
@@ -715,36 +712,7 @@
                 });
 
                 if (!window.location.hash && data.length > 0) {
-                    document.getElementById('default-message').classList.remove('active');
-
-                    const firstResort = data[0];
-                    if (firstResort) {
-                        const firstMenuItem = document.querySelector(`.menu-item[data-target="${firstResort.id}"]`);
-                        if (firstMenuItem) {
-                            firstMenuItem.classList.add('active');
-                            activeResort = firstResort.id;
-
-                            const hasSubmenu = firstMenuItem.getAttribute('data-has-submenu') === 'true';
-                            if (hasSubmenu) {
-                                const submenu = firstMenuItem.parentNode.querySelector('.submenu');
-                                if (submenu && !isMobile) {
-                                    submenu.classList.add('active');
-                                }
-
-                                const mainSection = document.getElementById(`${firstResort.id}-main`);
-                                if (mainSection) {
-                                    mainSection.classList.add('active');
-
-                                    loadAllWebcams(firstResort.id);
-                                }
-                            } else {
-                                const targetSection = document.getElementById(firstResort.id);
-                                if (targetSection) {
-                                    targetSection.classList.add('active');
-                                }
-                            }
-                        }
-                    }
+                    return;
                 }
 
                 if (window.location.hash) {
@@ -762,8 +730,8 @@
                 .then(responseData => {
                     if (Array.isArray(responseData) && responseData.length > 0) {
                         initializeResorts(responseData);
-                        if (!window.location.hash) {
-                            document.getElementById('default-message').classList.remove('active');
+                        if (window.location.hash) {
+                            handleHashChange();
                         }
                     } else {
                         throw new Error('Invalid data format');
@@ -893,6 +861,75 @@
                 }
             }
 
+            function captureVideoFrame(player) {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const video = player.el().querySelector('video');
+
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                    const dataURL = canvas.toDataURL('image/png');
+                    downloadImage(dataURL, 'webcam-capture.png');
+
+                    const container = player.el().parentNode;
+                    const successMsg = document.createElement('div');
+                    successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
+                    successMsg.style.zIndex = '100';
+                    successMsg.textContent = '캡처 완료!';
+                    container.appendChild(successMsg);
+
+                    setTimeout(() => {
+                        successMsg.remove();
+                    }, 2000);
+
+                } catch (e) {
+                    console.error('Error capturing frame:', e);
+                    alert('캡처 중 오류가 발생했습니다.');
+                }
+            }
+
+            function captureScreenshot(container) {
+                try {
+                    const iframe = container.querySelector('iframe');
+                    if (!iframe) {
+                        alert('캡처할 콘텐츠를 찾을 수 없습니다.');
+                        return;
+                    }
+
+                    html2canvas(container).then(canvas => {
+                        const dataURL = canvas.toDataURL('image/png');
+                        downloadImage(dataURL, 'webcam-capture.png');
+
+                        const successMsg = document.createElement('div');
+                        successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
+                        successMsg.style.zIndex = '100';
+                        successMsg.textContent = '캡처 완료!';
+                        container.appendChild(successMsg);
+
+                        setTimeout(() => {
+                            successMsg.remove();
+                        }, 2000);
+                    });
+                } catch (e) {
+                    console.error('Error capturing screenshot:', e);
+                    alert('캡처 중 오류가 발생했습니다. CORS 정책으로 인해 일부 콘텐츠는 캡처할 수 없습니다.');
+                }
+            }
+
+            function downloadImage(dataURL, filename) {
+                const link = document.createElement('a');
+                link.href = dataURL;
+                link.download = filename;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
             function getResortAndWebcamFromId(id) {
                 if (!id || !id.includes('-')) return null;
 
@@ -936,85 +973,6 @@
                     sidebar.classList.remove('active');
                     sidebarBackdrop.classList.remove('active');
                 }
-            }
-
-            function captureVideoFrame(player) {
-                try {
-                    // Create a canvas element
-                    const canvas = document.createElement('canvas');
-                    const video = player.el().querySelector('video');
-
-                    // Set canvas dimensions to match the video
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-
-                    // Draw the current video frame on the canvas
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                    // Convert canvas to data URL and trigger download
-                    const dataURL = canvas.toDataURL('image/png');
-                    downloadImage(dataURL, 'webcam-capture.png');
-
-                    // Show success message
-                    const container = player.el().parentNode;
-                    const successMsg = document.createElement('div');
-                    successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
-                    successMsg.style.zIndex = '100';
-                    successMsg.textContent = '캡처 완료!';
-                    container.appendChild(successMsg);
-
-                    // Remove the message after 2 seconds
-                    setTimeout(() => {
-                        successMsg.remove();
-                    }, 2000);
-
-                } catch (e) {
-                    console.error('Error capturing frame:', e);
-                    alert('캡처 중 오류가 발생했습니다.');
-                }
-            }
-
-            function captureScreenshot(container) {
-                try {
-                    // Use html2canvas to capture iframe content (note: may not work with cross-origin content)
-                    const iframe = container.querySelector('iframe');
-                    if (!iframe) {
-                        alert('캡처할 콘텐츠를 찾을 수 없습니다.');
-                        return;
-                    }
-
-                    // Attempt to capture the container itself
-                    html2canvas(container).then(canvas => {
-                        const dataURL = canvas.toDataURL('image/png');
-                        downloadImage(dataURL, 'webcam-capture.png');
-
-                        // Show success message
-                        const successMsg = document.createElement('div');
-                        successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
-                        successMsg.style.zIndex = '100';
-                        successMsg.textContent = '캡처 완료!';
-                        container.appendChild(successMsg);
-
-                        // Remove the message after 2 seconds
-                        setTimeout(() => {
-                            successMsg.remove();
-                        }, 2000);
-                    });
-                } catch (e) {
-                    console.error('Error capturing screenshot:', e);
-                    alert('캡처 중 오류가 발생했습니다. CORS 정책으로 인해 일부 콘텐츠는 캡처할 수 없습니다.');
-                }
-            }
-
-            function downloadImage(dataURL, filename) {
-                const link = document.createElement('a');
-                link.href = dataURL;
-                link.download = filename;
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
             }
 
             toggleMenu.addEventListener('click', toggleSidebar);
