@@ -112,5 +112,274 @@
         "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam04.stream/playlist.m3u8"
       }
     ]
+  },
+  {
+    "id": "oakvalley",
+    "name": "오크밸리 리조트",
+    "links": [
+      {
+        "name": "I 슬로프",
+        "video": "http://ktcdnbmt01.ktcdn.co.kr/bmt01/_definst_/ch2.stream/playlist.m3u8"
+      },
+      {
+        "name": "마운틴정상",
+        "video": "http://ktcdnbmt01.ktcdn.co.kr/bmt01/_definst_/ch4.stream/playlist.m3u8"
+      },
+      {
+        "name": "A 슬로프",
+        "video": "http://ktcdnbmt01.ktcdn.co.kr/bmt01/_definst_/ch5.stream/playlist.m3u8"
+      },
+      {
+        "name": "H 슬로프",
+        "video": "http://ktcdnbmt01.ktcdn.co.kr/bmt01/_definst_/ch6.stream/playlist.m3u8"
+      },
+      {
+        "name": "G 슬로프",
+        "video": "http://ktcdnbmt01.ktcdn.co.kr/bmt01/_definst_/ch7.stream/playlist.m3u8"
+      },
+      {
+        "name": "오크밸리 스키장 입구",
+        "video": "http://ktcdnbmt01.ktcdn.co.kr/bmt01/_definst_/ch9.stream/playlist.m3u8"
+      }
+    ]
+  },
+  {
+    "id": "wellihilli",
+    "name": "웰리힐리파크",
+    "links": [
+      {
+        "name": "알파",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam02.stream/playlist.m3u8"
+      },
+      {
+        "name": "베이스",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam03.stream/playlist.m3u8"
+      },
+      {
+        "name": "리조트 전경",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam04.stream/playlist.m3u8"
+      },
+      {
+        "name": "정상광장",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam05.stream/playlist.m3u8"
+      },
+      {
+        "name": "패밀리",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam06.stream/playlist.m3u8"
+      },
+      {
+        "name": "워터플래닛",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam07.stream/playlist.m3u8"
+      }
+    ]
+  },
+  {
+    "id": "phoenix",
+    "name": "휘닉스파크",
+    "links": [
+      {
+        "name": "호크/스패로우",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/yh_02.m3u8"
+      },
+      {
+        "name": "도도",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/sp_01.m3u8"
+      },
+      {
+        "name": "불새마루",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/ht_01.m3u8"
+      },
+      {
+        "name": "베이스",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/bc_02.m3u8"
+      },
+      {
+        "name": "펭귄",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/bc_01.m3u8"
+      },
+      {
+        "name": "스노우 빌리지",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/yh_01.m3u8"
+      }
+    ]
+  },
+  {
+    "id": "alpensia",
+    "name": "알펜시아 리조트",
+    "links": [
+      {
+        "name": "알펜시아 리조트 라이브캠",
+        "video": "https://www.youtube.com/watch?v=fStEQyg7SWc",
+        "video_type": "youtube"
+      }
+    ]
+  },
+  {
+    "id": "jisan",
+    "name": "지산 포레스트 리조트",
+    "links": [
+      {
+        "name": "레몬 탑승장",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan1.m3u8"
+      },
+      {
+        "name": "오렌지/뉴오렌지 탑승장",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan2.m3u8"
+      },
+      {
+        "name": "5번/6번 슬로프",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan3.m3u8"
+      },
+      {
+        "name": "블루 탑승장",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan4.m3u8"
+      },
+      {
+        "name": "실버 탑승장",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan5.m3u8"
+      }
+    ]
+  },
+  {
+    "id": "mona",
+    "name": "모나 용평",
+    "links": [
+      {
+        "name": "발왕산 氣 스카이워크",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam14.stream/playlist.m3u8"
+      },
+      {
+        "name": "발왕산 천년주목숲길",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam15.stream/playlist.m3u8"
+      },
+      {
+        "name": "베이스전경 / 레드 슬로프",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam10.stream/playlist.m3u8"
+      },
+      {
+        "name": "모나 용평 진입로",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam05.stream/playlist.m3u8"
+      },
+      {
+        "name": "옐로우",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam03.stream/playlist.m3u8"
+      },
+      {
+        "name": "핑크",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam07.stream/playlist.m3u8"
+      },
+      {
+        "name": "메가그린",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam01.stream/playlist.m3u8"
+      },
+      {
+        "name": "골드 베이스",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam06.stream/playlist.m3u8"
+      },
+      {
+        "name": "골드 정상",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam04.stream/playlist.m3u8"
+      },
+      {
+        "name": "레인보우 베이스",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam08.stream/playlist.m3u8"
+      },
+      {
+        "name": "레인보우 파라다이스 입구",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam09.stream/playlist.m3u8"
+      },
+      {
+        "name": "워터파크",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam11.stream/playlist.m3u8"
+      }
+    ]
+  },
+  {
+    "id": "o2resort",
+    "name": "오투리조트",
+    "links": [
+      {
+        "name": "스키하우스",
+        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=0"
+      },
+      {
+        "name": "오렌지",
+        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=1"
+      },
+      {
+        "name": "버금마루",
+        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=2"
+      },
+      {
+        "name": "으뜸마루",
+        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3"
+      }
+    ]
+  },
+  {
+    "id": "muju",
+    "name": "무주리조트",
+    "links": [
+      {
+        "name": "설천봉 정상",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=07"
+      },
+      {
+        "name": "설천상단슬로프",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=06"
+      },
+      {
+        "name": "모차르트, 미뉴에트",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=08"
+      },
+      {
+        "name": "폴카",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=09"
+      },
+      {
+        "name": "실크로드, 미뉴에트 하단",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=10"
+      },
+      {
+        "name": "만선봉 정상",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=02"
+      },
+      {
+        "name": "하이디하우스",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=03"
+      },
+      {
+        "name": "서역기행, 썬다운",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=04"
+      },
+      {
+        "name": "커넥션",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=11"
+      },
+      {
+        "name": "설천하우스",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=05"
+      },
+      {
+        "name": "만선하우스",
+        "video": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=01"
+      }
+    ]
+  },
+  {
+    "id": "edenvalley",
+    "name": "에덴밸리리조트",
+    "links": [
+      {
+        "name": "베이직",
+        "video": "https://rtsp.me/embed/BnyHAfhG",
+        "video_type": "iframe"
+      },
+      {
+        "name": "슬로프 광장",
+        "video": "https://rtsp.me/embed/eHH3reG8/",
+        "video_type": "iframe"
+      }
+    ]
   }
 ]
