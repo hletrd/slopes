@@ -92,7 +92,7 @@ jobs:
                           link = item.get('link')
                           video = item.get('video')
 
-                          if link and (not video or not video.endswith('.m3u8')):
+                          if link:
                               print(f"Processing link: {link}")
 
                               if link.endswith('.m3u8'):
