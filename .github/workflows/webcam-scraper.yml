@@ -196,10 +196,18 @@ jobs:
       - name: Run scraper
         run: python scripts/webcam_scraper.py
 
-      - name: Commit and push if there are changes
+      - name: Configure Git
         run: |
           git config --local user.email "01@0101010101.com"
           git config --local user.name "Jiyong Youn"
+
+      - name: Commit changes
+        run: |
           git add links.json
           git diff --quiet && git diff --staged --quiet || git commit -m "Update webcam links"
-          git push
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PAT }}
+          branch: ${{ github.ref }}
