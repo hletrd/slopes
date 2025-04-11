@@ -1,995 +1,995 @@
 <!DOCTYPE html>
 <html data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Slopes cam</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video-js.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/@videojs/themes@1/dist/forest/index.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <style>
-        body {
-            background-color: #121212;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
-        h2 {
-            margin-bottom: 24px;
-        }
-        .sidebar {
-            width: 250px;
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 100%;
-            background-color: #1a1a1a;
-            overflow-y: auto;
-            transition: 0.3s;
-            padding-top: 72px;
-            z-index: 90;
-        }
-        .main-content {
-            margin-left: 250px;
-            padding: 15px;
-            transition: 0.3s;
-            overflow-x: hidden;
-        }
-        .menu-item {
-            padding: 15px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-        .menu-item:hover {
-            background-color: #333;
-        }
-        .menu-item.active {
-            background-color: #444;
-            border-left: 4px solid #0069d9;
-        }
-        .submenu {
-            margin-left: 20px;
-            display: none;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-in-out;
-            width: calc(100% - 20px);
-        }
-        .submenu.active {
-            display: block;
-            max-height: 1000px;
-        }
-        @media (min-width: 769px) {
-            .menu-item-container:hover .submenu {
-                display: block;
-                max-height: 1000px;
-            }
-        }
-        .submenu-item {
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .submenu-item:hover {
-            background-color: #333;
-        }
-        .submenu-item.active {
-            background-color: #2a2a2a;
-            border-left: 2px solid #0069d9;
-        }
-        .content-section {
-            display: none;
-            padding: 20px;
-            background-color: #1e1e1e;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .content-section.active {
-            display: block;
-        }
-        .resort-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        .page-header {
-            padding: 15px;
-            background-color: #1e1e1e;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .video-container {
-            width: 100%;
-            margin-bottom: 20px;
-            position: relative;
-            max-width: 100%;
-        }
-        .video-js {
-            width: 100%;
-            height: 0;
-            padding-top: 56.25%;
-            position: relative;
-        }
-        .video-js .vjs-tech {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .iframe-container {
-            width: 100%;
-            height: 0;
-            padding-top: 56.25%;
-            position: relative;
-            margin-bottom: 20px;
-            background-color: #000;
-        }
-        .iframe-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        .webcam-info {
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #2a2a2a;
-            border-radius: 5px;
-        }
-        .toggle-menu {
-            display: none;
-            border: none;
-            background: none;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .loading {
-            text-align: center;
-            padding: 50px;
-            font-size: 18px;
-        }
-        .error-message {
-            color: #ff6b6b;
-            padding: 10px;
-            margin: 10px 0;
-            background-color: rgba(255, 107, 107, 0.1);
-            border-radius: 5px;
-        }
-        .capture-button {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            z-index: 50;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 12px;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: background-color 0.3s;
-        }
-        .capture-button:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        .capture-button svg {
-            width: 16px;
-            height: 16px;
-        }
-        .site-title {
-            padding: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #222;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
-            z-index: 100;
-            text-align: center;
-        }
-        .site-title a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .videos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 100%;
-        }
-        .video-card {
-            background-color: #2a2a2a;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 100%;
-        }
-        .video-card h3 {
-            padding: 15px;
-            margin: 0;
-            font-size: 16px;
-            background-color: #333;
-        }
-        .video-card .video-container {
-            margin-bottom: 0;
-        }
-        .video-card .video-js {
-            height: 0;
-            padding-top: 56.25%;
-        }
-        .video-card .iframe-container {
-            height: 0;
-            padding-top: 56.25%;
-        }
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: #222;
-            color: #fff;
-            height: 60px;
-            z-index: 100;
-            padding: 0 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        .mobile-nav-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-        }
-        .mobile-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .mobile-title a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .sidebar-backdrop {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 80;
-        }
-        .menu-item-container {
-            position: relative;
-        }
-        @media (max-width: 991px) {
-            .videos-grid {
-                grid-template-columns: 1fr;
-                width: 100%;
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>Slopes cam</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video-js.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@videojs/themes@1/dist/forest/index.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+    h2 {
+      margin-bottom: 24px;
+    }
+    .sidebar {
+      width: 250px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background-color: #1a1a1a;
+      overflow-y: auto;
+      transition: 0.3s;
+      padding-top: 72px;
+      z-index: 90;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 15px;
+      transition: 0.3s;
+      overflow-x: hidden;
+    }
+    .menu-item {
+      padding: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .menu-item:hover {
+      background-color: #333;
+    }
+    .menu-item.active {
+      background-color: #444;
+      border-left: 4px solid #0069d9;
+    }
+    .submenu {
+      margin-left: 20px;
+      display: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+      width: calc(100% - 20px);
+    }
+    .submenu.active {
+      display: block;
+      max-height: 1000px;
+    }
+    @media (min-width: 769px) {
+      .menu-item-container:hover .submenu {
+        display: block;
+        max-height: 1000px;
+      }
+    }
+    .submenu-item {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .submenu-item:hover {
+      background-color: #333;
+    }
+    .submenu-item.active {
+      background-color: #2a2a2a;
+      border-left: 2px solid #0069d9;
+    }
+    .content-section {
+      display: none;
+      padding: 20px;
+      background-color: #1e1e1e;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .content-section.active {
+      display: block;
+    }
+    .resort-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+    .page-header {
+      padding: 15px;
+      background-color: #1e1e1e;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .video-container {
+      width: 100%;
+      margin-bottom: 20px;
+      position: relative;
+      max-width: 100%;
+    }
+    .video-js {
+      width: 100%;
+      height: 0;
+      padding-top: 56.25%;
+      position: relative;
+    }
+    .video-js .vjs-tech {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .iframe-container {
+      width: 100%;
+      height: 0;
+      padding-top: 56.25%;
+      position: relative;
+      margin-bottom: 20px;
+      background-color: #000;
+    }
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .webcam-info {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #2a2a2a;
+      border-radius: 5px;
+    }
+    .toggle-menu {
+      display: none;
+      border: none;
+      background: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .loading {
+      text-align: center;
+      padding: 50px;
+      font-size: 18px;
+    }
+    .error-message {
+      color: #ff6b6b;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: rgba(255, 107, 107, 0.1);
+      border-radius: 5px;
+    }
+    .capture-button {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      z-index: 50;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.3s;
+    }
+    .capture-button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .capture-button svg {
+      width: 16px;
+      height: 16px;
+    }
+    .site-title {
+      padding: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #222;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      z-index: 100;
+      text-align: center;
+    }
+    .site-title a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 100%;
+    }
+    .video-card {
+      background-color: #2a2a2a;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 100%;
+    }
+    .video-card h3 {
+      padding: 15px;
+      margin: 0;
+      font-size: 16px;
+      background-color: #333;
+    }
+    .video-card .video-container {
+      margin-bottom: 0;
+    }
+    .video-card .video-js {
+      height: 0;
+      padding-top: 56.25%;
+    }
+    .video-card .iframe-container {
+      height: 0;
+      padding-top: 56.25%;
+    }
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #222;
+      color: #fff;
+      height: 60px;
+      z-index: 100;
+      padding: 0 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .mobile-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .mobile-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .mobile-title a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 80;
+    }
+    .menu-item-container {
+      position: relative;
+    }
+    @media (max-width: 991px) {
+      .videos-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
 
-            .video-js, .iframe-container {
-                max-width: 100%;
-            }
-        }
-        @media (max-width: 768px) {
-            .mobile-nav {
-                display: block;
-            }
-            .sidebar {
-                width: 0;
-                padding-top: 16px;
-                top: 60px;
-                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
-            }
-            .main-content {
-                margin-left: 0;
-                margin-top: 60px;
-            }
-            .sidebar.active {
-                width: 250px;
-            }
-            .toggle-menu {
-                display: block;
-            }
-            .site-title {
-                display: none;
-            }
-            .sidebar-backdrop.active {
-                display: block;
-            }
-            .menu-item-container:hover .submenu {
-                display: none;
-                max-height: 0;
-            }
-            .menu-item-container:hover .submenu.active {
-                display: block;
-                max-height: 1000px;
-            }
-        }
-    </style>
+      .video-js, .iframe-container {
+        max-width: 100%;
+      }
+    }
+    @media (max-width: 768px) {
+      .mobile-nav {
+        display: block;
+      }
+      .sidebar {
+        width: 0;
+        padding-top: 16px;
+        top: 60px;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+      }
+      .main-content {
+        margin-left: 0;
+        margin-top: 60px;
+      }
+      .sidebar.active {
+        width: 250px;
+      }
+      .toggle-menu {
+        display: block;
+      }
+      .site-title {
+        display: none;
+      }
+      .sidebar-backdrop.active {
+        display: block;
+      }
+      .menu-item-container:hover .submenu {
+        display: none;
+        max-height: 0;
+      }
+      .menu-item-container:hover .submenu.active {
+        display: block;
+        max-height: 1000px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="mobile-nav">
-        <div class="mobile-nav-inner">
-            <button class="toggle-menu btn">☰</button>
-            <div class="mobile-title"><a href="/">Slopes cam</a></div>
-            <div style="width: 24px;"></div>
-        </div>
+  <div class="mobile-nav">
+    <div class="mobile-nav-inner">
+      <button class="toggle-menu btn">☰</button>
+      <div class="mobile-title"><a href="/">Slopes cam</a></div>
+      <div style="width: 24px;"></div>
     </div>
+  </div>
 
-    <div class="sidebar-backdrop"></div>
+  <div class="sidebar-backdrop"></div>
 
-    <div class="sidebar">
-        <div class="site-title"><a href="/">Slopes cam</a></div>
+  <div class="sidebar">
+    <div class="site-title"><a href="/">Slopes cam</a></div>
+  </div>
+
+  <div class="main-content">
+    <div id="default-message" class="content-section active">
+      <div class="text-center p-5">
+        <h2>Slopes cam</h2>
+        <p class="lead">Select a resort and slope from the sidebar to view webcams</p>
+      </div>
     </div>
+  </div>
 
-    <div class="main-content">
-        <div id="default-message" class="content-section active">
-            <div class="text-center p-5">
-                <h2>Slopes cam</h2>
-                <p class="lead">Select a resort and slope from the sidebar to view webcams</p>
-            </div>
-        </div>
-    </div>
+  <script src="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggleMenu = document.querySelector('.toggle-menu');
+      const sidebar = document.querySelector('.sidebar');
+      const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+      const mainContent = document.querySelector('.main-content');
+      let activePlayers = [];
+      let activeResort = null;
+      let activeWebcam = null;
+      let data = [];
+      let isMobile = window.innerWidth <= 768;
 
-    <script src="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleMenu = document.querySelector('.toggle-menu');
-            const sidebar = document.querySelector('.sidebar');
-            const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
-            const mainContent = document.querySelector('.main-content');
-            let activePlayers = [];
-            let activeResort = null;
-            let activeWebcam = null;
-            let data = [];
-            let isMobile = window.innerWidth <= 768;
+      function hideAllSubmenus() {
+        document.querySelectorAll('.submenu').forEach(submenu => {
+          submenu.classList.remove('active');
+        });
+        document.querySelectorAll('.menu-item').forEach(item => {
+          if (item.getAttribute('data-has-submenu') === 'true') {
+            item.classList.remove('active');
+          }
+        });
+      }
 
-            function hideAllSubmenus() {
-                document.querySelectorAll('.submenu').forEach(submenu => {
-                    submenu.classList.remove('active');
-                });
-                document.querySelectorAll('.menu-item').forEach(item => {
-                    if (item.getAttribute('data-has-submenu') === 'true') {
-                        item.classList.remove('active');
-                    }
-                });
+      function updateUrlHash(resort, webcam) {
+        const currentHash = window.location.hash.substring(1);
+        const newHash = webcam ? `${resort}/${webcam}` : resort;
+
+        if (currentHash === newHash) return;
+
+        const url = new URL(window.location);
+        url.hash = newHash;
+        history.replaceState(null, '', url);
+      }
+
+      function disposeAllPlayers() {
+        if (activePlayers && activePlayers.length > 0) {
+          activePlayers.forEach(player => {
+            if (player && typeof player.dispose === 'function') {
+              player.dispose();
             }
-
-            function updateUrlHash(resort, webcam) {
-                const currentHash = window.location.hash.substring(1);
-                const newHash = webcam ? `${resort}/${webcam}` : resort;
-
-                if (currentHash === newHash) return;
-
-                const url = new URL(window.location);
-                url.hash = newHash;
-                history.replaceState(null, '', url);
-            }
-
-            function disposeAllPlayers() {
-                if (activePlayers && activePlayers.length > 0) {
-                    activePlayers.forEach(player => {
-                        if (player && typeof player.dispose === 'function') {
-                            player.dispose();
-                        }
-                    });
-                    activePlayers = [];
-                }
-            }
-
-            function handleHashChange() {
-                const hash = window.location.hash.substring(1);
-                if (!hash) {
-                    document.querySelectorAll('.content-section').forEach(section => {
-                        section.classList.remove('active');
-                    });
-                    document.getElementById('default-message').classList.add('active');
-                    return;
-                }
-
-                if (window.processingHashChange) return;
-                window.processingHashChange = true;
-
-                try {
-                    const parts = hash.split('/');
-                    const resortId = parts[0];
-                    const webcamId = parts[1];
-
-                    const resortMenuItem = document.querySelector(`.menu-item[data-target="${resortId}"]`);
-                    if (resortMenuItem) {
-                        document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
-                        resortMenuItem.classList.add('active');
-
-                        hideAllSubmenus();
-
-                        disposeAllPlayers();
-
-                        document.querySelectorAll('.content-section').forEach(section => {
-                            section.classList.remove('active');
-                        });
-
-                        const hasSubmenu = resortMenuItem.getAttribute('data-has-submenu') === 'true';
-                        if (hasSubmenu) {
-                            const submenu = document.getElementById(`${resortId}-submenu`);
-                            if (submenu) {
-                                submenu.classList.add('active');
-                            }
-
-                            if (webcamId) {
-                                const webcamIndex = parseInt(webcamId);
-                                if (!isNaN(webcamIndex)) {
-                                    const webcamItem = document.querySelector(`#${resortId}-submenu .submenu-item[data-webcam-index="${webcamIndex}"]`);
-                                    if (webcamItem) {
-                                        document.querySelectorAll('.submenu-item').forEach(item => {
-                                            item.classList.remove('active');
-                                        });
-                                        webcamItem.classList.add('active');
-
-                                        const targetSection = document.getElementById(webcamItem.getAttribute('data-target'));
-                                        if (targetSection) {
-                                            targetSection.classList.add('active');
-
-                                            const videoContainer = targetSection.querySelector('.video-container');
-                                            if (videoContainer) {
-                                                const resort = data.find(r => r.id === resortId);
-                                                if (resort) {
-                                                    const webcams = resort.links || resort.webcams || [];
-                                                    if (webcams[webcamIndex]) {
-                                                        const videoUrl = webcams[webcamIndex].video || webcams[webcamIndex].link;
-                                                        if (videoUrl) {
-                                                            const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-${webcamIndex}`, webcams[webcamIndex].video_type);
-                                                            if (player) activePlayers.push(player);
-                                                        } else {
-                                                            videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
-                                                        }
-                                                    } else {
-                                                        videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            } else {
-                                const mainSection = document.getElementById(`${resortId}-main`);
-                                if (mainSection) {
-                                    mainSection.classList.add('active');
-
-                                    loadAllWebcams(resortId);
-                                }
-                            }
-                        } else {
-                            const targetSection = document.getElementById(resortId);
-                            if (targetSection) {
-                                targetSection.classList.add('active');
-                            }
-                        }
-                    }
-                } finally {
-                    setTimeout(() => {
-                        window.processingHashChange = false;
-                    }, 100);
-                }
-            }
-
-            function loadAllWebcams(resortId) {
-                const resort = data.find(r => r.id === resortId);
-                if (!resort) return;
-
-                const webcams = resort.links || resort.webcams || [];
-                if (webcams.length === 0) return;
-
-                const mainSection = document.getElementById(`${resortId}-main`);
-                if (!mainSection) return;
-
-                let videosGrid = mainSection.querySelector('.videos-grid');
-                if (!videosGrid) {
-                    videosGrid = document.createElement('div');
-                    videosGrid.className = 'videos-grid';
-
-                    const title = mainSection.querySelector('h2');
-                    if (title) {
-                        title.after(videosGrid);
-                    } else {
-                        mainSection.appendChild(videosGrid);
-                    }
-                }
-
-                videosGrid.innerHTML = '';
-
-                webcams.forEach((webcam, index) => {
-                    const videoUrl = webcam.video || webcam.link;
-                    if (!videoUrl) return;
-
-                    const videoCard = document.createElement('div');
-                    videoCard.className = 'video-card';
-
-                    const cardTitle = document.createElement('h3');
-                    cardTitle.textContent = webcam.name;
-                    videoCard.appendChild(cardTitle);
-
-                    const videoContainer = document.createElement('div');
-                    videoContainer.className = 'video-container';
-                    videoCard.appendChild(videoContainer);
-
-                    videosGrid.appendChild(videoCard);
-
-                    const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-grid-${index}`, webcam.video_type);
-                    if (player) activePlayers.push(player);
-                });
-            }
-
-            function initializeResorts(resorts) {
-                data = resorts;
-
-                sidebar.innerHTML = '<div class="site-title"><a href="/">Slopes cam</a></div>';
-                const defaultContent = document.getElementById('default-message');
-                const otherContent = Array.from(document.querySelectorAll('.content-section:not(#default-message)'));
-                otherContent.forEach(el => el.remove());
-
-                resorts.forEach(resort => {
-                    const resortId = resort.id;
-                    const resortName = resort.name;
-                    const webcams = resort.links || resort.webcams || [];
-                    const hasSubmenu = webcams.length > 0;
-
-                    const menuItemContainer = document.createElement('div');
-                    menuItemContainer.className = 'menu-item-container';
-
-                    const menuItem = document.createElement('div');
-                    menuItem.className = 'menu-item';
-                    menuItem.setAttribute('data-target', resortId);
-                    if (hasSubmenu) {
-                        menuItem.setAttribute('data-has-submenu', 'true');
-                        menuItem.setAttribute('data-resort-id', resortId);
-                    }
-                    menuItem.textContent = resortName;
-                    menuItemContainer.appendChild(menuItem);
-
-                    sidebar.appendChild(menuItemContainer);
-
-                    const contentSection = document.createElement('div');
-                    contentSection.className = 'content-section';
-                    contentSection.id = hasSubmenu ? `${resortId}-main` : resortId;
-
-                    const contentTitle = document.createElement('h2');
-                    contentTitle.textContent = resortName;
-                    contentSection.appendChild(contentTitle);
-
-                    mainContent.appendChild(contentSection);
-
-                    if (hasSubmenu) {
-                        const submenu = document.createElement('div');
-                        submenu.className = 'submenu';
-                        submenu.id = `${resortId}-submenu`;
-                        menuItemContainer.appendChild(submenu);
-
-                        webcams.forEach((webcam, index) => {
-                            const webcamName = webcam.name;
-                            if (!webcamName) return;
-
-                            const submenuItem = document.createElement('div');
-                            submenuItem.className = 'submenu-item';
-                            submenuItem.setAttribute('data-target', `${resortId}-webcam-${index}`);
-                            submenuItem.setAttribute('data-webcam-index', index);
-                            submenuItem.textContent = webcamName;
-                            submenu.appendChild(submenuItem);
-
-                            const webcamSection = document.createElement('div');
-                            webcamSection.className = 'content-section';
-                            webcamSection.id = `${resortId}-webcam-${index}`;
-
-                            const webcamTitle = document.createElement('h2');
-                            webcamTitle.textContent = webcamName;
-                            webcamSection.appendChild(webcamTitle);
-
-                            const videoContainer = document.createElement('div');
-                            videoContainer.className = 'video-container';
-                            webcamSection.appendChild(videoContainer);
-
-                            mainContent.appendChild(webcamSection);
-
-                            submenuItem.addEventListener('click', function() {
-                                const webcamIndex = this.getAttribute('data-webcam-index');
-                                activeWebcam = webcamIndex;
-
-                                updateUrlHash(resortId, webcamIndex);
-
-                                document.querySelectorAll('.submenu-item').forEach(item => {
-                                    item.classList.remove('active');
-                                });
-                                this.classList.add('active');
-
-                                document.querySelectorAll('.content-section').forEach(section => {
-                                    section.classList.remove('active');
-                                });
-
-                                const targetSection = document.getElementById(this.getAttribute('data-target'));
-                                if (targetSection) {
-                                    targetSection.classList.add('active');
-
-                                    disposeAllPlayers();
-
-                                    const videoContainer = targetSection.querySelector('.video-container');
-                                    if (videoContainer && webcams[webcamIndex]) {
-                                        const videoUrl = webcams[webcamIndex].video || webcams[webcamIndex].link;
-                                        if (videoUrl) {
-                                            const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-${index}`, webcams[webcamIndex].video_type);
-                                            if (player) activePlayers.push(player);
-                                        } else {
-                                            videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
-                                        }
-                                    }
-                                }
-
-                                closeSidebar();
-                            });
-                        });
-                    }
-
-                    menuItem.addEventListener('click', function() {
-                        const target = this.getAttribute('data-target');
-                        const hasSubmenu = this.getAttribute('data-has-submenu') === 'true';
-                        const resortId = this.getAttribute('data-resort-id');
-
-                        if (resortId) {
-                            activeResort = resortId;
-                            activeWebcam = null;
-                        }
-
-                        updateUrlHash(target);
-
-                        document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
-                        this.classList.add('active');
-
-                        if (isMobile && hasSubmenu) {
-                            const submenu = this.parentNode.querySelector('.submenu');
-                            if (submenu) {
-                                const isActive = submenu.classList.contains('active');
-                                hideAllSubmenus();
-                                if (!isActive) {
-                                    submenu.classList.add('active');
-                                    this.classList.add('active');
-                                    return;
-                                }
-                            }
-                        } else {
-                            hideAllSubmenus();
-
-                            if (hasSubmenu) {
-                                const submenu = this.parentNode.querySelector('.submenu');
-                                if (submenu && !isMobile) {
-                                    submenu.classList.add('active');
-                                    this.classList.add('active');
-                                }
-                            }
-                        }
-
-                        disposeAllPlayers();
-
-                        document.querySelectorAll('.content-section').forEach(section => {
-                            section.classList.remove('active');
-                        });
-
-                        if (hasSubmenu) {
-                            const mainSection = document.getElementById(`${target}-main`);
-                            if (mainSection) {
-                                mainSection.classList.add('active');
-
-                                loadAllWebcams(target);
-                            }
-                        } else {
-                            const targetSection = document.getElementById(target);
-                            if (targetSection) {
-                                targetSection.classList.add('active');
-                            }
-                        }
-
-                        closeSidebar();
-                    });
-                });
-
-                if (!window.location.hash && data.length > 0) {
-                    return;
-                }
-
-                if (window.location.hash) {
-                    handleHashChange();
-                }
-            }
-
-            fetch('links.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(responseData => {
-                    if (Array.isArray(responseData) && responseData.length > 0) {
-                        initializeResorts(responseData);
-                        if (window.location.hash) {
-                            handleHashChange();
-                        }
-                    } else {
-                        throw new Error('Invalid data format');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching links.json:', error);
-                    const defaultMessage = document.getElementById('default-message');
-                    if (defaultMessage) {
-                        defaultMessage.innerHTML = '<div class="error-message p-5 text-center"><h3>리조트 정보를 불러오지 못했습니다.</h3><p>페이지를 새로고침하세요.</p></div>';
-                        defaultMessage.classList.add('active');
-                    } else {
-                        mainContent.innerHTML = '<div class="error-message">리조트 정보를 불러오지 못했습니다.</div>';
-                    }
-                });
-
-            function createVideoPlayer(videoUrl, container, id, videoType) {
-                container.innerHTML = '';
-
-                if (videoType === 'iframe') {
-                    const iframeContainer = document.createElement('div');
-                    iframeContainer.className = 'iframe-container';
-                    iframeContainer.innerHTML = `<iframe src="${videoUrl}" allowfullscreen></iframe>`;
-                    container.appendChild(iframeContainer);
-
-                    return {
-                        dispose: function() {
-                            container.innerHTML = '';
-                        }
-                    };
-                }
-
-                if (videoType === 'youtube') {
-                    const youtubeContainer = document.createElement('div');
-                    youtubeContainer.className = 'iframe-container';
-
-                    const youtubeId = getYoutubeId(videoUrl);
-                    if (youtubeId) {
-                        youtubeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1" allowfullscreen></iframe>`;
-                        container.appendChild(youtubeContainer);
-
-                        const captureBtn = document.createElement('button');
-                        captureBtn.className = 'capture-button';
-                        captureBtn.innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>
-                                <path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                            </svg>
-                            캡처
-                        `;
-                        captureBtn.addEventListener('click', () => captureScreenshot(youtubeContainer));
-                        container.appendChild(captureBtn);
-
-                        return {
-                            dispose: function() {
-                                container.innerHTML = '';
-                            }
-                        };
-                    }
-                }
-
-                const resort = getResortAndWebcamFromId(id);
-                let linkUrl = null;
-                if (resort && resort.webcam && resort.webcam.link) {
-                    linkUrl = resort.webcam.link;
-                }
-
-                container.innerHTML = `
-                    <video
-                        id="webcam-player-${id}"
-                        class="video-js vjs-theme-forest vjs-big-play-centered"
-                        controls
-                        autoplay
-                        muted
-                        playsinline
-                    >
-                        <source src="${videoUrl}" type="application/x-mpegURL">
-                        <p class="vjs-no-js">
-                            최신 브라우저를 사용하세요.
-                        </p>
-                    </video>
-                `;
-
-                try {
-                    const player = videojs(`webcam-player-${id}`, {
-                        liveui: true,
-                        responsive: true,
-                        fluid: false,
-                        liveTracker: {
-                            trackingThreshold: 0,
-                            liveTolerance: 15
-                        }
-                    });
-
-                    const captureBtn = document.createElement('button');
-                    captureBtn.className = 'capture-button';
-                    captureBtn.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>
-                            <path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                        </svg>
-                        캡처
-                    `;
-                    captureBtn.addEventListener('click', () => captureVideoFrame(player));
-                    container.appendChild(captureBtn);
-
-                    player.on('error', function() {
-                        const error = player.error();
-
-                        if (error && error.code === 4 && linkUrl) {
-                            container.innerHTML = `
-                                <div class="error-message">
-                                    <p>직접 스트리밍이 제한되었습니다 (403 Forbidden).</p>
-                                    <button class="btn btn-primary mt-2" onclick="window.open('${linkUrl}', '_blank')">원본 링크에서 보기</button>
-                                </div>
-                            `;
-                        } else {
-                            container.innerHTML = '<div class="error-message">비디오 재생 중 오류가 발생했습니다.</div>';
-                        }
-                    });
-
-                    return player;
-                } catch (e) {
-                    console.error('Error creating video player:', e);
-                    container.innerHTML = '<div class="error-message">비디오 플레이어를 생성하는 중 오류가 발생했습니다.</div>';
-                    return null;
-                }
-            }
-
-            function captureVideoFrame(player) {
-                try {
-                    const canvas = document.createElement('canvas');
-                    const video = player.el().querySelector('video');
-
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                    const dataURL = canvas.toDataURL('image/png');
-                    downloadImage(dataURL, 'webcam-capture.png');
-
-                    const container = player.el().parentNode;
-                    const successMsg = document.createElement('div');
-                    successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
-                    successMsg.style.zIndex = '100';
-                    successMsg.textContent = '캡처 완료!';
-                    container.appendChild(successMsg);
-
-                    setTimeout(() => {
-                        successMsg.remove();
-                    }, 2000);
-
-                } catch (e) {
-                    console.error('Error capturing frame:', e);
-                    alert('캡처 중 오류가 발생했습니다.');
-                }
-            }
-
-            function captureScreenshot(container) {
-                try {
-                    const iframe = container.querySelector('iframe');
-                    if (!iframe) {
-                        alert('캡처할 콘텐츠를 찾을 수 없습니다.');
-                        return;
-                    }
-
-                    html2canvas(container).then(canvas => {
-                        const dataURL = canvas.toDataURL('image/png');
-                        downloadImage(dataURL, 'webcam-capture.png');
-
-                        const successMsg = document.createElement('div');
-                        successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
-                        successMsg.style.zIndex = '100';
-                        successMsg.textContent = '캡처 완료!';
-                        container.appendChild(successMsg);
-
-                        setTimeout(() => {
-                            successMsg.remove();
-                        }, 2000);
-                    });
-                } catch (e) {
-                    console.error('Error capturing screenshot:', e);
-                    alert('캡처 중 오류가 발생했습니다. CORS 정책으로 인해 일부 콘텐츠는 캡처할 수 없습니다.');
-                }
-            }
-
-            function downloadImage(dataURL, filename) {
-                const link = document.createElement('a');
-                link.href = dataURL;
-                link.download = filename;
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-
-            function getResortAndWebcamFromId(id) {
-                if (!id || !id.includes('-')) return null;
-
-                const parts = id.split('-');
-                if (parts.length < 2) return null;
-
-                const resortId = parts[0];
-                let webcamIndex = parseInt(parts[1]);
-
-                if (parts.length === 3 && parts[1] === 'grid') {
-                    webcamIndex = parseInt(parts[2]);
-                }
-
-                if (isNaN(webcamIndex)) return null;
-
-                const resort = data.find(r => r.id === resortId);
-                if (!resort) return null;
-
-                const webcams = resort.links || resort.webcams || [];
-                if (!webcams[webcamIndex]) return null;
-
-                return {
-                    resort: resort,
-                    webcam: webcams[webcamIndex]
-                };
-            }
-
-            function getYoutubeId(url) {
-                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-                const match = url.match(regExp);
-                return (match && match[2].length === 11) ? match[2] : null;
-            }
-
-            function toggleSidebar() {
-                sidebar.classList.toggle('active');
-                sidebarBackdrop.classList.toggle('active');
-            }
-
-            function closeSidebar() {
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('active');
-                    sidebarBackdrop.classList.remove('active');
-                }
-            }
-
-            toggleMenu.addEventListener('click', toggleSidebar);
-
-            sidebarBackdrop.addEventListener('click', closeSidebar);
-
-            window.addEventListener('resize', function() {
-                isMobile = window.innerWidth <= 768;
-                if (window.innerWidth > 768) {
-                    sidebar.classList.remove('active');
-                    sidebarBackdrop.classList.remove('active');
-                }
+          });
+          activePlayers = [];
+        }
+      }
+
+      function handleHashChange() {
+        const hash = window.location.hash.substring(1);
+        if (!hash) {
+          document.querySelectorAll('.content-section').forEach(section => {
+            section.classList.remove('active');
+          });
+          document.getElementById('default-message').classList.add('active');
+          return;
+        }
+
+        if (window.processingHashChange) return;
+        window.processingHashChange = true;
+
+        try {
+          const parts = hash.split('/');
+          const resortId = parts[0];
+          const webcamId = parts[1];
+
+          const resortMenuItem = document.querySelector(`.menu-item[data-target="${resortId}"]`);
+          if (resortMenuItem) {
+            document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
+            resortMenuItem.classList.add('active');
+
+            hideAllSubmenus();
+
+            disposeAllPlayers();
+
+            document.querySelectorAll('.content-section').forEach(section => {
+              section.classList.remove('active');
             });
 
-            window.addEventListener('hashchange', handleHashChange);
+            const hasSubmenu = resortMenuItem.getAttribute('data-has-submenu') === 'true';
+            if (hasSubmenu) {
+              const submenu = document.getElementById(`${resortId}-submenu`);
+              if (submenu) {
+                submenu.classList.add('active');
+              }
+
+              if (webcamId) {
+                const webcamIndex = parseInt(webcamId);
+                if (!isNaN(webcamIndex)) {
+                  const webcamItem = document.querySelector(`#${resortId}-submenu .submenu-item[data-webcam-index="${webcamIndex}"]`);
+                  if (webcamItem) {
+                    document.querySelectorAll('.submenu-item').forEach(item => {
+                      item.classList.remove('active');
+                    });
+                    webcamItem.classList.add('active');
+
+                    const targetSection = document.getElementById(webcamItem.getAttribute('data-target'));
+                    if (targetSection) {
+                      targetSection.classList.add('active');
+
+                      const videoContainer = targetSection.querySelector('.video-container');
+                      if (videoContainer) {
+                        const resort = data.find(r => r.id === resortId);
+                        if (resort) {
+                          const webcams = resort.links || resort.webcams || [];
+                          if (webcams[webcamIndex]) {
+                            const videoUrl = webcams[webcamIndex].video || webcams[webcamIndex].link;
+                            if (videoUrl) {
+                              const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-${webcamIndex}`, webcams[webcamIndex].video_type);
+                              if (player) activePlayers.push(player);
+                            } else {
+                              videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
+                            }
+                          } else {
+                            videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              } else {
+                const mainSection = document.getElementById(`${resortId}-main`);
+                if (mainSection) {
+                  mainSection.classList.add('active');
+
+                  loadAllWebcams(resortId);
+                }
+              }
+            } else {
+              const targetSection = document.getElementById(resortId);
+              if (targetSection) {
+                targetSection.classList.add('active');
+              }
+            }
+          }
+        } finally {
+          setTimeout(() => {
+            window.processingHashChange = false;
+          }, 100);
+        }
+      }
+
+      function loadAllWebcams(resortId) {
+        const resort = data.find(r => r.id === resortId);
+        if (!resort) return;
+
+        const webcams = resort.links || resort.webcams || [];
+        if (webcams.length === 0) return;
+
+        const mainSection = document.getElementById(`${resortId}-main`);
+        if (!mainSection) return;
+
+        let videosGrid = mainSection.querySelector('.videos-grid');
+        if (!videosGrid) {
+          videosGrid = document.createElement('div');
+          videosGrid.className = 'videos-grid';
+
+          const title = mainSection.querySelector('h2');
+          if (title) {
+            title.after(videosGrid);
+          } else {
+            mainSection.appendChild(videosGrid);
+          }
+        }
+
+        videosGrid.innerHTML = '';
+
+        webcams.forEach((webcam, index) => {
+          const videoUrl = webcam.video || webcam.link;
+          if (!videoUrl) return;
+
+          const videoCard = document.createElement('div');
+          videoCard.className = 'video-card';
+
+          const cardTitle = document.createElement('h3');
+          cardTitle.textContent = webcam.name;
+          videoCard.appendChild(cardTitle);
+
+          const videoContainer = document.createElement('div');
+          videoContainer.className = 'video-container';
+          videoCard.appendChild(videoContainer);
+
+          videosGrid.appendChild(videoCard);
+
+          const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-grid-${index}`, webcam.video_type);
+          if (player) activePlayers.push(player);
         });
-    </script>
+      }
+
+      function initializeResorts(resorts) {
+        data = resorts;
+
+        sidebar.innerHTML = '<div class="site-title"><a href="/">Slopes cam</a></div>';
+        const defaultContent = document.getElementById('default-message');
+        const otherContent = Array.from(document.querySelectorAll('.content-section:not(#default-message)'));
+        otherContent.forEach(el => el.remove());
+
+        resorts.forEach(resort => {
+          const resortId = resort.id;
+          const resortName = resort.name;
+          const webcams = resort.links || resort.webcams || [];
+          const hasSubmenu = webcams.length > 0;
+
+          const menuItemContainer = document.createElement('div');
+          menuItemContainer.className = 'menu-item-container';
+
+          const menuItem = document.createElement('div');
+          menuItem.className = 'menu-item';
+          menuItem.setAttribute('data-target', resortId);
+          if (hasSubmenu) {
+            menuItem.setAttribute('data-has-submenu', 'true');
+            menuItem.setAttribute('data-resort-id', resortId);
+          }
+          menuItem.textContent = resortName;
+          menuItemContainer.appendChild(menuItem);
+
+          sidebar.appendChild(menuItemContainer);
+
+          const contentSection = document.createElement('div');
+          contentSection.className = 'content-section';
+          contentSection.id = hasSubmenu ? `${resortId}-main` : resortId;
+
+          const contentTitle = document.createElement('h2');
+          contentTitle.textContent = resortName;
+          contentSection.appendChild(contentTitle);
+
+          mainContent.appendChild(contentSection);
+
+          if (hasSubmenu) {
+            const submenu = document.createElement('div');
+            submenu.className = 'submenu';
+            submenu.id = `${resortId}-submenu`;
+            menuItemContainer.appendChild(submenu);
+
+            webcams.forEach((webcam, index) => {
+              const webcamName = webcam.name;
+              if (!webcamName) return;
+
+              const submenuItem = document.createElement('div');
+              submenuItem.className = 'submenu-item';
+              submenuItem.setAttribute('data-target', `${resortId}-webcam-${index}`);
+              submenuItem.setAttribute('data-webcam-index', index);
+              submenuItem.textContent = webcamName;
+              submenu.appendChild(submenuItem);
+
+              const webcamSection = document.createElement('div');
+              webcamSection.className = 'content-section';
+              webcamSection.id = `${resortId}-webcam-${index}`;
+
+              const webcamTitle = document.createElement('h2');
+              webcamTitle.textContent = webcamName;
+              webcamSection.appendChild(webcamTitle);
+
+              const videoContainer = document.createElement('div');
+              videoContainer.className = 'video-container';
+              webcamSection.appendChild(videoContainer);
+
+              mainContent.appendChild(webcamSection);
+
+              submenuItem.addEventListener('click', function() {
+                const webcamIndex = this.getAttribute('data-webcam-index');
+                activeWebcam = webcamIndex;
+
+                updateUrlHash(resortId, webcamIndex);
+
+                document.querySelectorAll('.submenu-item').forEach(item => {
+                  item.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                document.querySelectorAll('.content-section').forEach(section => {
+                  section.classList.remove('active');
+                });
+
+                const targetSection = document.getElementById(this.getAttribute('data-target'));
+                if (targetSection) {
+                  targetSection.classList.add('active');
+
+                  disposeAllPlayers();
+
+                  const videoContainer = targetSection.querySelector('.video-container');
+                  if (videoContainer && webcams[webcamIndex]) {
+                    const videoUrl = webcams[webcamIndex].video || webcams[webcamIndex].link;
+                    if (videoUrl) {
+                      const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-${index}`, webcams[webcamIndex].video_type);
+                      if (player) activePlayers.push(player);
+                    } else {
+                      videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
+                    }
+                  }
+                }
+
+                closeSidebar();
+              });
+            });
+          }
+
+          menuItem.addEventListener('click', function() {
+            const target = this.getAttribute('data-target');
+            const hasSubmenu = this.getAttribute('data-has-submenu') === 'true';
+            const resortId = this.getAttribute('data-resort-id');
+
+            if (resortId) {
+              activeResort = resortId;
+              activeWebcam = null;
+            }
+
+            updateUrlHash(target);
+
+            document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
+            this.classList.add('active');
+
+            if (isMobile && hasSubmenu) {
+              const submenu = this.parentNode.querySelector('.submenu');
+              if (submenu) {
+                const isActive = submenu.classList.contains('active');
+                hideAllSubmenus();
+                if (!isActive) {
+                  submenu.classList.add('active');
+                  this.classList.add('active');
+                  return;
+                }
+              }
+            } else {
+              hideAllSubmenus();
+
+              if (hasSubmenu) {
+                const submenu = this.parentNode.querySelector('.submenu');
+                if (submenu && !isMobile) {
+                  submenu.classList.add('active');
+                  this.classList.add('active');
+                }
+              }
+            }
+
+            disposeAllPlayers();
+
+            document.querySelectorAll('.content-section').forEach(section => {
+              section.classList.remove('active');
+            });
+
+            if (hasSubmenu) {
+              const mainSection = document.getElementById(`${target}-main`);
+              if (mainSection) {
+                mainSection.classList.add('active');
+
+                loadAllWebcams(target);
+              }
+            } else {
+              const targetSection = document.getElementById(target);
+              if (targetSection) {
+                targetSection.classList.add('active');
+              }
+            }
+
+            closeSidebar();
+          });
+        });
+
+        if (!window.location.hash && data.length > 0) {
+          return;
+        }
+
+        if (window.location.hash) {
+          handleHashChange();
+        }
+      }
+
+      fetch('links.json?v=' + new Date().getTime())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(responseData => {
+          if (Array.isArray(responseData) && responseData.length > 0) {
+            initializeResorts(responseData);
+            if (window.location.hash) {
+              handleHashChange();
+            }
+          } else {
+            throw new Error('Invalid data format');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching links.json:', error);
+          const defaultMessage = document.getElementById('default-message');
+          if (defaultMessage) {
+            defaultMessage.innerHTML = '<div class="error-message p-5 text-center"><h3>리조트 정보를 불러오지 못했습니다.</h3><p>페이지를 새로고침하세요.</p></div>';
+            defaultMessage.classList.add('active');
+          } else {
+            mainContent.innerHTML = '<div class="error-message">리조트 정보를 불러오지 못했습니다.</div>';
+          }
+        });
+
+      function createVideoPlayer(videoUrl, container, id, videoType) {
+        container.innerHTML = '';
+
+        if (videoType === 'iframe') {
+          const iframeContainer = document.createElement('div');
+          iframeContainer.className = 'iframe-container';
+          iframeContainer.innerHTML = `<iframe src="${videoUrl}" allowfullscreen></iframe>`;
+          container.appendChild(iframeContainer);
+
+          return {
+            dispose: function() {
+              container.innerHTML = '';
+            }
+          };
+        }
+
+        if (videoType === 'youtube') {
+          const youtubeContainer = document.createElement('div');
+          youtubeContainer.className = 'iframe-container';
+
+          const youtubeId = getYoutubeId(videoUrl);
+          if (youtubeId) {
+            youtubeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1" allowfullscreen></iframe>`;
+            container.appendChild(youtubeContainer);
+
+            const captureBtn = document.createElement('button');
+            captureBtn.className = 'capture-button';
+            captureBtn.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>
+                <path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+              캡처
+            `;
+            captureBtn.addEventListener('click', () => captureScreenshot(youtubeContainer));
+            container.appendChild(captureBtn);
+
+            return {
+              dispose: function() {
+                container.innerHTML = '';
+              }
+            };
+          }
+        }
+
+        const resort = getResortAndWebcamFromId(id);
+        let linkUrl = null;
+        if (resort && resort.webcam && resort.webcam.link) {
+          linkUrl = resort.webcam.link;
+        }
+
+        container.innerHTML = `
+          <video
+            id="webcam-player-${id}"
+            class="video-js vjs-theme-forest vjs-big-play-centered"
+            controls
+            autoplay
+            muted
+            playsinline
+          >
+            <source src="${videoUrl}" type="application/x-mpegURL">
+            <p class="vjs-no-js">
+              최신 브라우저를 사용하세요.
+            </p>
+          </video>
+        `;
+
+        try {
+          const player = videojs(`webcam-player-${id}`, {
+            liveui: true,
+            responsive: true,
+            fluid: false,
+            liveTracker: {
+              trackingThreshold: 0,
+              liveTolerance: 15
+            }
+          });
+
+          const captureBtn = document.createElement('button');
+          captureBtn.className = 'capture-button';
+          captureBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>
+              <path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+            </svg>
+            캡처
+          `;
+          captureBtn.addEventListener('click', () => captureVideoFrame(player));
+          container.appendChild(captureBtn);
+
+          player.on('error', function() {
+            const error = player.error();
+
+            if (error && error.code === 4 && linkUrl) {
+              container.innerHTML = `
+                <div class="error-message">
+                  <p>직접 스트리밍이 제한되었습니다 (403 Forbidden).</p>
+                  <button class="btn btn-primary mt-2" onclick="window.open('${linkUrl}', '_blank')">원본 링크에서 보기</button>
+                </div>
+              `;
+            } else {
+              container.innerHTML = '<div class="error-message">비디오 재생 중 오류가 발생했습니다.</div>';
+            }
+          });
+
+          return player;
+        } catch (e) {
+          console.error('Error creating video player:', e);
+          container.innerHTML = '<div class="error-message">비디오 플레이어를 생성하는 중 오류가 발생했습니다.</div>';
+          return null;
+        }
+      }
+
+      function captureVideoFrame(player) {
+        try {
+          const canvas = document.createElement('canvas');
+          const video = player.el().querySelector('video');
+
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+          const dataURL = canvas.toDataURL('image/png');
+          downloadImage(dataURL, 'webcam-capture.png');
+
+          const container = player.el().parentNode;
+          const successMsg = document.createElement('div');
+          successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
+          successMsg.style.zIndex = '100';
+          successMsg.textContent = '캡처에 성공했습니다.';
+          container.appendChild(successMsg);
+
+          setTimeout(() => {
+            successMsg.remove();
+          }, 2000);
+
+        } catch (e) {
+          console.error('Error capturing frame:', e);
+          alert('캡처 중 오류가 발생했습니다.');
+        }
+      }
+
+      function captureScreenshot(container) {
+        try {
+          const iframe = container.querySelector('iframe');
+          if (!iframe) {
+            alert('캡처할 콘텐츠를 찾을 수 없습니다.');
+            return;
+          }
+
+          html2canvas(container).then(canvas => {
+            const dataURL = canvas.toDataURL('image/png');
+            downloadImage(dataURL, 'webcam-capture.png');
+
+            const successMsg = document.createElement('div');
+            successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
+            successMsg.style.zIndex = '100';
+            successMsg.textContent = '캡처 완료!';
+            container.appendChild(successMsg);
+
+            setTimeout(() => {
+              successMsg.remove();
+            }, 2000);
+          });
+        } catch (e) {
+          console.error('Error capturing screenshot:', e);
+          alert('캡처 중 오류가 발생했습니다.');
+        }
+      }
+
+      function downloadImage(dataURL, filename) {
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = filename;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function getResortAndWebcamFromId(id) {
+        if (!id || !id.includes('-')) return null;
+
+        const parts = id.split('-');
+        if (parts.length < 2) return null;
+
+        const resortId = parts[0];
+        let webcamIndex = parseInt(parts[1]);
+
+        if (parts.length === 3 && parts[1] === 'grid') {
+          webcamIndex = parseInt(parts[2]);
+        }
+
+        if (isNaN(webcamIndex)) return null;
+
+        const resort = data.find(r => r.id === resortId);
+        if (!resort) return null;
+
+        const webcams = resort.links || resort.webcams || [];
+        if (!webcams[webcamIndex]) return null;
+
+        return {
+          resort: resort,
+          webcam: webcams[webcamIndex]
+        };
+      }
+
+      function getYoutubeId(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
+      }
+
+      function toggleSidebar() {
+        sidebar.classList.toggle('active');
+        sidebarBackdrop.classList.toggle('active');
+      }
+
+      function closeSidebar() {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('active');
+          sidebarBackdrop.classList.remove('active');
+        }
+      }
+
+      toggleMenu.addEventListener('click', toggleSidebar);
+
+      sidebarBackdrop.addEventListener('click', closeSidebar);
+
+      window.addEventListener('resize', function() {
+        isMobile = window.innerWidth <= 768;
+        if (window.innerWidth > 768) {
+          sidebar.classList.remove('active');
+          sidebarBackdrop.classList.remove('active');
+        }
+      });
+
+      window.addEventListener('hashchange', handleHashChange);
+    });
+  </script>
 </body>
 </html>
