@@ -75,122 +75,54 @@ jobs:
                   print(f"Error extracting m3u8 from {url}: {e}")
                   return None
 
-          def update_video_links(data):
-              if isinstance(data, list):
-                  for item in data:
-                      update_video_links(item)
-
-              elif isinstance(data, dict):
-                  if 'webcams' in data:
-                      webcams = data['webcams']
-                      for webcam in webcams:
-                          process_webcam(webcam)
-
-                  elif 'url' in data:
-                      process_webcam(data)
-
-                  else:
-                      for key, value in data.items():
-                          if isinstance(value, (dict, list)):
-                              update_video_links(value)
-
-          def process_webcam(webcam):
-              url = webcam.get('url')
-              video = webcam.get('video')
-
-              if url and (not video or not video.endswith('.m3u8')):
-                  print(f"Processing webcam at {url}")
-
-                  if url.endswith('.m3u8'):
-                      webcam['video'] = url
-                      print(f"URL is already an m3u8 link: {url}")
-                  else:
-                      m3u8_link = extract_m3u8_from_url(url)
-                      if m3u8_link:
-                          webcam['video'] = m3u8_link
-                          print(f"Found m3u8 link: {m3u8_link}")
-                      else:
-                          webcam['video'] = None
-                          print(f"No m3u8 link found for {url}")
-              else:
-                  print(f"Skipping webcam at {url}: {'Already has valid video link' if video and video.endswith('.m3u8') else 'No URL'}")
-
           try:
+              print("Reading links.json file...")
               with open('links.json', 'r', encoding='utf-8') as f:
                   data = json.load(f)
-                  print(f"Loaded data from links.json")
 
-                  update_video_links(data)
+              modified = False
 
-              with open('links.json', 'w', encoding='utf-8') as f:
-                  json.dump(data, f, ensure_ascii=False, indent=2)
+              for resort in data:
+                  resort_id = resort.get('id', 'unknown')
+                  print(f"Processing resort: {resort_id}")
 
-              print("Updated links.json with video links")
+                  if 'links' in resort:
+                      links = resort.get('links', [])
+                      for item in links:
+                          link = item.get('link')
+                          video = item.get('video')
 
-          except FileNotFoundError:
-              print("links.json not found. Creating from scratch with data from pages.json")
+                          if link and (not video or not video.endswith('.m3u8')):
+                              print(f"Processing link: {link}")
 
-              try:
-                  with open('pages.json', 'r', encoding='utf-8') as f:
-                      data = json.load(f)
-                      print(f"Loaded data from pages.json")
+                              if link.endswith('.m3u8'):
+                                  item['video'] = link
+                                  print(f"Link is already an m3u8 link: {link}")
+                                  modified = True
+                              else:
+                                  m3u8_link = extract_m3u8_from_url(link)
+                                  if m3u8_link:
+                                      item['video'] = m3u8_link
+                                      print(f"Found m3u8 link: {m3u8_link}")
+                                      modified = True
+                                  else:
+                                      print(f"No m3u8 link found for {link}")
+                          else:
+                              if video:
+                                  print(f"Already has video link: {video}")
+                              else:
+                                  print(f"No link available")
 
-                      if isinstance(data, list) and all(isinstance(item, str) for item in data):
-                          results = []
-                          for url in data:
-                              print(f"Processing {url}")
-                              m3u8_link = extract_m3u8_from_url(url) if not url.endswith('.m3u8') else url
-                              results.append({
-                                  'url': url,
-                                  'video': m3u8_link
-                              })
-                              time.sleep(1)
+              if modified:
+                  print("Saving updated links.json file...")
+                  with open('links.json', 'w', encoding='utf-8') as f:
+                      json.dump(data, f, ensure_ascii=False, indent=2)
+                  print("Saved links.json successfully")
+              else:
+                  print("No changes to links.json")
 
-                          with open('links.json', 'w', encoding='utf-8') as f:
-                              json.dump(results, f, ensure_ascii=False, indent=2)
-
-                      elif isinstance(data, list) and 'links' in data[0]:
-                          results = []
-
-                          for resort in data:
-                              resort_id = resort.get('id', 'unknown')
-                              resort_links = resort.get('links', [])
-                              resort_results = []
-
-                              print(f"Processing resort: {resort_id} with {len(resort_links)} webcams")
-
-                              for link_info in resort_links:
-                                  url = link_info.get('link')
-                                  name = link_info.get('name')
-
-                                  if url:
-                                      m3u8_link = extract_m3u8_from_url(url) if not url.endswith('.m3u8') else url
-                                      result = {
-                                          'url': url,
-                                          'video': m3u8_link
-                                      }
-                                      if name:
-                                          result['name'] = name
-                                      resort_results.append(result)
-                                      time.sleep(1)
-
-                              results.append({
-                                  'id': resort_id,
-                                  'webcams': resort_results
-                              })
-
-                          with open('links.json', 'w', encoding='utf-8') as f:
-                              json.dump(results, f, ensure_ascii=False, indent=2)
-                      else:
-                          print("Unrecognized format in pages.json")
-              except FileNotFoundError:
-                  print("Neither links.json nor pages.json found. Cannot proceed.")
-              except Exception as e:
-                  print(f"Error processing pages.json: {e}")
           except Exception as e:
               print(f"Error processing links.json: {e}")
-
-          print("Processing complete. Results saved to links.json")
           EOF
 
       - name: Run scraper
