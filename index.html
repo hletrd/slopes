@@ -193,6 +193,46 @@
       width: 16px;
       height: 16px;
     }
+    .bookmark-button {
+      position: absolute;
+      right: 15px;
+      top: 55px;
+      z-index: 50;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.3s;
+    }
+    .bookmark-button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .bookmark-button svg {
+      width: 16px;
+      height: 16px;
+    }
+    .bookmark-button.active {
+      color: #ffd700;
+    }
+    .favorites-section {
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #1e1e1e;
+      border-radius: 5px;
+    }
+    .favorites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 100%;
+    }
     .site-title {
       padding: 15px;
       font-size: 24px;
@@ -283,7 +323,7 @@
       position: relative;
     }
     @media (max-width: 991px) {
-      .videos-grid {
+      .videos-grid, .favorites-grid {
         grid-template-columns: 1fr;
         width: 100%;
       }
@@ -350,6 +390,10 @@
         <h2>전국 스키장 실시간 웹캠 모음</h2>
         <p class="lead">왼쪽 사이드 메뉴에서 스키장 및 카메라를 선택하세요.</p>
       </div>
+      <div id="favorites-container" class="favorites-section" style="display: none;">
+        <h3>고정 영상</h3>
+        <div id="favorites-grid" class="favorites-grid"></div>
+      </div>
     </div>
   </div>
 
@@ -365,6 +409,160 @@
       let activeWebcam = null;
       let data = [];
       let isMobile = window.innerWidth <= 768;
+      let favorites = loadFavorites();
+
+      function loadFavorites() {
+        try {
+          const favoritesData = localStorage.getItem('webcamFavorites');
+          return favoritesData ? JSON.parse(favoritesData) : [];
+        } catch (e) {
+          console.error('Error loading favorites:', e);
+          return [];
+        }
+      }
+
+      function saveFavorites() {
+        try {
+          localStorage.setItem('webcamFavorites', JSON.stringify(favorites));
+        } catch (e) {
+          console.error('Error saving favorites:', e);
+        }
+      }
+
+      function isFavorite(resortId, webcamIndex) {
+        return favorites.some(f => f.resortId === resortId && f.webcamIndex === webcamIndex);
+      }
+
+      function toggleFavorite(resortId, webcamIndex, webcamName, videoUrl, videoType) {
+        const index = favorites.findIndex(f => f.resortId === resortId && f.webcamIndex === webcamIndex);
+
+        if (index === -1) {
+          favorites.push({
+            resortId,
+            webcamIndex,
+            webcamName,
+            resortName: data.find(r => r.id === resortId)?.name || '',
+            videoUrl,
+            videoType
+          });
+        } else {
+          favorites.splice(index, 1);
+        }
+
+        saveFavorites();
+        updateFavoriteButtons();
+        updateFavoritesDisplay();
+      }
+
+      function updateFavoriteButtons() {
+        document.querySelectorAll('.bookmark-button').forEach(btn => {
+          const resortId = btn.getAttribute('data-resort-id');
+          const webcamIndex = parseInt(btn.getAttribute('data-webcam-index'));
+
+          if (isFavorite(resortId, webcamIndex)) {
+            btn.classList.add('active');
+            btn.querySelector('svg').innerHTML = '<path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />';
+          } else {
+            btn.classList.remove('active');
+            btn.querySelector('svg').innerHTML = '<path d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" />';
+          }
+        });
+      }
+
+      function updateFavoritesDisplay() {
+        const favoritesContainer = document.getElementById('favorites-container');
+        const favoritesGrid = document.getElementById('favorites-grid');
+
+        if (!favoritesContainer || !favoritesGrid) {
+          console.error("Favorites container or grid not found");
+          return;
+        }
+
+        if (favorites.length === 0) {
+          favoritesContainer.style.display = 'none';
+          return;
+        }
+
+        favoritesContainer.style.display = 'block';
+        favoritesGrid.innerHTML = '';
+
+        const favoritesSection = favoritesContainer.closest('.content-section');
+        if (favoritesSection && window.location.hash === '') {
+          document.querySelectorAll('.content-section').forEach(section => {
+            if (section.contains(favoritesContainer)) {
+              section.style.display = 'block';
+            }
+          });
+        }
+
+        if (activePlayers && activePlayers.length > 0) {
+          activePlayers = activePlayers.filter(player => {
+            const id = player.el_?.id;
+            if (id && id.includes('favorite-player')) {
+              player.dispose();
+              return false;
+            }
+            return true;
+          });
+        }
+
+        favorites.forEach((favorite, idx) => {
+          const videoCard = document.createElement('div');
+          videoCard.className = 'video-card';
+
+          const header = document.createElement('h3');
+          header.textContent = `${favorite.resortName} - ${favorite.webcamName}`;
+
+          const headerContainer = document.createElement('div');
+          headerContainer.style.display = 'flex';
+          headerContainer.style.justifyContent = 'space-between';
+          headerContainer.style.alignItems = 'center';
+          headerContainer.style.padding = '0 15px 0 0';
+          headerContainer.appendChild(header);
+
+          const removeButton = document.createElement('button');
+          removeButton.className = 'btn btn-sm btn-danger';
+          removeButton.innerHTML = '×';
+          removeButton.style.padding = '0 6px';
+          removeButton.style.fontSize = '16px';
+          removeButton.style.lineHeight = '1';
+          removeButton.setAttribute('title', '고정 제거');
+          removeButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleFavorite(favorite.resortId, favorite.webcamIndex);
+          });
+
+          headerContainer.appendChild(removeButton);
+          videoCard.appendChild(headerContainer);
+
+          const videoContainer = document.createElement('div');
+          videoContainer.className = 'video-container';
+          videoCard.appendChild(videoContainer);
+
+          favoritesGrid.appendChild(videoCard);
+
+          if (favorite.videoUrl) {
+            const playerId = `favorite-player-${idx}`;
+            const player = createVideoPlayer(
+              favorite.videoUrl,
+              videoContainer,
+              playerId,
+              favorite.videoType
+            );
+            if (player) activePlayers.push(player);
+
+            const viewButton = document.createElement('button');
+            viewButton.className = 'btn btn-primary mt-2 w-100';
+            viewButton.textContent = '전체화면으로 보기';
+            viewButton.addEventListener('click', function() {
+              window.location.hash = `${favorite.resortId}/${favorite.webcamIndex}`;
+            });
+
+            videoCard.appendChild(viewButton);
+          }
+        });
+      }
 
       function hideAllSubmenus() {
         document.querySelectorAll('.submenu').forEach(submenu => {
@@ -406,6 +604,7 @@
             section.classList.remove('active');
           });
           document.getElementById('default-message').classList.add('active');
+          updateFavoritesDisplay();
           return;
         }
 
@@ -461,6 +660,27 @@
                             if (videoUrl) {
                               const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-${webcamIndex}`, webcams[webcamIndex].video_type);
                               if (player) activePlayers.push(player);
+
+                              const bookmarkBtn = document.createElement('button');
+                              bookmarkBtn.className = 'bookmark-button';
+                              bookmarkBtn.setAttribute('data-resort-id', resortId);
+                              bookmarkBtn.setAttribute('data-webcam-index', webcamIndex);
+                              bookmarkBtn.innerHTML = `
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                  <path d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" />
+                                </svg>
+                                고정
+                              `;
+                              bookmarkBtn.addEventListener('click', function() {
+                                toggleFavorite(
+                                  resortId,
+                                  webcamIndex,
+                                  webcams[webcamIndex].name,
+                                  videoUrl,
+                                  webcams[webcamIndex].video_type
+                                );
+                              });
+                              videoContainer.appendChild(bookmarkBtn);
                             } else {
                               videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
                             }
@@ -490,6 +710,7 @@
         } finally {
           setTimeout(() => {
             window.processingHashChange = false;
+            updateFavoriteButtons();
           }, 100);
         }
       }
@@ -538,7 +759,30 @@
 
           const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-grid-${index}`, webcam.video_type);
           if (player) activePlayers.push(player);
+
+          const bookmarkBtn = document.createElement('button');
+          bookmarkBtn.className = 'bookmark-button';
+          bookmarkBtn.setAttribute('data-resort-id', resortId);
+          bookmarkBtn.setAttribute('data-webcam-index', index);
+          bookmarkBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+              <path d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" />
+            </svg>
+            고정
+          `;
+          bookmarkBtn.addEventListener('click', function() {
+            toggleFavorite(
+              resortId,
+              index,
+              webcam.name,
+              videoUrl,
+              webcam.video_type
+            );
+          });
+          videoContainer.appendChild(bookmarkBtn);
         });
+
+        updateFavoriteButtons();
       }
 
       function initializeResorts(resorts) {
@@ -732,6 +976,8 @@
             initializeResorts(responseData);
             if (window.location.hash) {
               handleHashChange();
+            } else {
+              updateFavoritesDisplay();
             }
           } else {
             throw new Error('Invalid data format');
@@ -751,11 +997,34 @@
       function createVideoPlayer(videoUrl, container, id, videoType) {
         container.innerHTML = '';
 
+        const idParts = id.split('-');
+        const resortId = idParts[0];
+        let webcamIndex = parseInt(idParts[1]);
+
+        if (idParts.length === 3 && idParts[1] === 'grid') {
+          webcamIndex = parseInt(idParts[2]);
+        }
+
+        let webcamName = '';
+        if (resortId && !isNaN(webcamIndex)) {
+          const resort = data.find(r => r.id === resortId);
+          if (resort) {
+            const webcams = resort.links || resort.webcams || [];
+            if (webcams[webcamIndex]) {
+              webcamName = webcams[webcamIndex].name || '';
+            }
+          }
+        }
+
         if (videoType === 'iframe') {
           const iframeContainer = document.createElement('div');
           iframeContainer.className = 'iframe-container';
           iframeContainer.innerHTML = `<iframe src="${videoUrl}" allowfullscreen></iframe>`;
           container.appendChild(iframeContainer);
+
+          if (resortId && !isNaN(webcamIndex)) {
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+          }
 
           return {
             dispose: function() {
@@ -784,6 +1053,10 @@
             `;
             captureBtn.addEventListener('click', () => captureScreenshot(youtubeContainer));
             container.appendChild(captureBtn);
+
+            if (resortId && !isNaN(webcamIndex)) {
+              addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+            }
 
             return {
               dispose: function() {
@@ -815,6 +1088,10 @@
 
           linkContainer.appendChild(linkButton);
           container.appendChild(linkContainer);
+
+          if (resortId && !isNaN(webcamIndex)) {
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+          }
 
           return {
             dispose: function() {
@@ -868,6 +1145,10 @@
           captureBtn.addEventListener('click', () => captureVideoFrame(player));
           container.appendChild(captureBtn);
 
+          if (resortId && !isNaN(webcamIndex)) {
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+          }
+
           player.on('error', function() {
             const error = player.error();
 
@@ -878,8 +1159,16 @@
                   <button class="btn btn-primary mt-2" onclick="window.open('${linkUrl}', '_blank')">원본 링크에서 보기</button>
                 </div>
               `;
+
+              if (resortId && !isNaN(webcamIndex)) {
+                addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+              }
             } else {
               container.innerHTML = '<div class="error-message">비디오 재생 중 오류가 발생했습니다.</div>';
+
+              if (resortId && !isNaN(webcamIndex)) {
+                addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+              }
             }
           });
 
@@ -887,8 +1176,40 @@
         } catch (e) {
           console.error('Error creating video player:', e);
           container.innerHTML = '<div class="error-message">비디오 플레이어를 생성하는 중 오류가 발생했습니다.</div>';
+
+          if (resortId && !isNaN(webcamIndex)) {
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+          }
+
           return null;
         }
+      }
+
+      function addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType) {
+        if (typeof resortId === 'string' && resortId.includes('favorite-player')) {
+          return;
+        }
+
+        const bookmarkBtn = document.createElement('button');
+        bookmarkBtn.className = 'bookmark-button';
+        bookmarkBtn.setAttribute('data-resort-id', resortId);
+        bookmarkBtn.setAttribute('data-webcam-index', webcamIndex);
+        bookmarkBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+            <path d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" />
+          </svg>
+          고정
+        `;
+        bookmarkBtn.addEventListener('click', function() {
+          toggleFavorite(
+            resortId,
+            webcamIndex,
+            webcamName,
+            videoUrl,
+            videoType
+          );
+        });
+        container.appendChild(bookmarkBtn);
       }
 
       function captureVideoFrame(player) {
