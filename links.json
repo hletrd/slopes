@@ -5,11 +5,13 @@
     "links": [
       {
         "name": "하이원탑 (제우스1 입구)",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=1"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=1",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch1.stream/playlist.m3u8"
       },
       {
         "name": "하이원탑 (헤라2 입구)",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=2"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=2",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch2.stream/playlist.m3u8"
       },
       {
         "name": "하이원탑 (아폴로1 입구)",
@@ -21,11 +23,13 @@
       },
       {
         "name": "마운틴허브 (아폴로3 입구)",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=5"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=5",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch5.stream/playlist.m3u8"
       },
       {
         "name": "마운틴허브 (아테나2 입구)",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=6"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=6",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch6.stream/playlist.m3u8"
       },
       {
         "name": "마운틴 베이스 (아테나 리프트)",
@@ -37,11 +41,13 @@
       },
       {
         "name": "밸리탑 (빅토리아1 입구)",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=9"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=9",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch9.stream/playlist.m3u8"
       },
       {
         "name": "제우스2 합류구간",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=10"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=10",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch10.stream/playlist.m3u8"
       },
       {
         "name": "밸리허브 (헤라 리프트 입구)",
@@ -53,11 +59,13 @@
       },
       {
         "name": "밸리허브 (제우스3)",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=13"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=13",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch13.stream/playlist.m3u8"
       },
       {
         "name": "제우스3 중단",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=14"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=14",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch14.stream/playlist.m3u8"
       },
       {
         "name": "아폴로4 중단",
@@ -69,11 +77,13 @@
       },
       {
         "name": "제우스3 하단",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=17"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=17",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch17.stream/playlist.m3u8"
       },
       {
         "name": "밸리 베이스",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=18"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=18",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch18.stream/playlist.m3u8"
       }
     ]
   },
