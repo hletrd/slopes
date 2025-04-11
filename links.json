@@ -1,0 +1,106 @@
+[
+  {
+    "id": "high1",
+    "name": "하이원 리조트",
+    "links": [
+      {
+        "name": "하이원탑 (제우스1 입구)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=1"
+      },
+      {
+        "name": "하이원탑 (헤라2 입구)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=2"
+      },
+      {
+        "name": "하이원탑 (아폴로1 입구)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=3"
+      },
+      {
+        "name": "마운틴허브 (스노우월드 입구)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=4"
+      },
+      {
+        "name": "마운틴허브 (아폴로3 입구)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=5"
+      },
+      {
+        "name": "마운틴허브 (아테나2 입구)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=6"
+      },
+      {
+        "name": "마운틴 베이스 (아테나 리프트)",
+        "link":  "https://www.high1.com/webcam/pop_webcam.do?ch=7"
+      },
+      {
+        "name": "아테나2 하단",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=8"
+      },
+      {
+        "name": "밸리탑 (빅토리아1 입구)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=9"
+      },
+      {
+        "name": "제우스2 합류구간",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=10"
+      },
+      {
+        "name": "밸리허브 (헤라 리프트 입구)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=11"
+      },
+      {
+        "name": "밸리허브 (아폴로3 합류)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=12"
+      },
+      {
+        "name": "밸리허브 (제우스3)",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=13"
+      },
+      {
+        "name": "제우스3 중단",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=14"
+      },
+      {
+        "name": "아폴로4 중단",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=15"
+      },
+      {
+        "name": "아폴로 베이스",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=16"
+      },
+      {
+        "name": "제우스3 하단",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=17"
+      },
+      {
+        "name": "밸리 베이스",
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=18"
+      }
+    ]
+  },
+  {
+    "id": "konjiam",
+    "name": "곤지암리조트",
+    "links": [
+      {
+        "name": "정상 휴게소",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam01.stream/playlist.m3u8"
+      },
+      {
+        "name": "정상부 슬로프",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam02.stream/playlist.m3u8"
+      },
+      {
+        "name": "중간 슬로프",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam05.stream/playlist.m3u8"
+      },
+      {
+        "name": "초중급 베이스",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam03.stream/playlist.m3u8"
+      },
+      {
+        "name": "중상급 베이스",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam04.stream/playlist.m3u8"
+      }
+    ]
+  }
+]

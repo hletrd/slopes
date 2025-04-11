@@ -1,0 +1,199 @@
+name: Webcam URL Scraper
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+
+      - name: Create scripts directory if it doesn't exist
+        run: mkdir -p scripts
+
+      - name: Create webcam scraper script
+        run: |
+          cat > scripts/webcam_scraper.py << 'EOF'
+          import requests
+          from bs4 import BeautifulSoup
+          import json
+          import re
+          import time
+          import os
+
+          def extract_m3u8_from_url(url):
+              headers = {
+                  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'
+              }
+
+              try:
+                  response = requests.get(url, headers=headers)
+                  response.raise_for_status()
+
+                  soup = BeautifulSoup(response.text, 'html.parser')
+
+                  page_text = soup.get_text()
+                  m3u8_matches = re.findall(r'https?://[^\s\'"]+\.m3u8[^\s\'"]*', page_text)
+                  if m3u8_matches:
+                      return m3u8_matches[0]
+
+                  for script in soup.find_all('script'):
+                      if script.string:
+                          script_m3u8 = re.findall(r'https?://[^\s\'"]+\.m3u8[^\s\'"]*', script.string)
+                          if script_m3u8:
+                              return script_m3u8[0]
+
+                  for tag in soup.find_all(True):
+                      for attr in tag.attrs:
+                          if isinstance(tag[attr], str) and '.m3u8' in tag[attr]:
+                              attr_m3u8 = re.findall(r'https?://[^\s\'"]+\.m3u8[^\s\'"]*', tag[attr])
+                              if attr_m3u8:
+                                  return attr_m3u8[0]
+
+                  return None
+              except Exception as e:
+                  print(f"Error extracting m3u8 from {url}: {e}")
+                  return None
+
+          def update_video_links(data):
+              if isinstance(data, list):
+                  for item in data:
+                      update_video_links(item)
+
+              elif isinstance(data, dict):
+                  if 'webcams' in data:
+                      webcams = data['webcams']
+                      for webcam in webcams:
+                          process_webcam(webcam)
+
+                  elif 'url' in data:
+                      process_webcam(data)
+
+                  else:
+                      for key, value in data.items():
+                          if isinstance(value, (dict, list)):
+                              update_video_links(value)
+
+          def process_webcam(webcam):
+              url = webcam.get('url')
+              video = webcam.get('video')
+
+              if url and (not video or not video.endswith('.m3u8')):
+                  print(f"Processing webcam at {url}")
+
+                  if url.endswith('.m3u8'):
+                      webcam['video'] = url
+                      print(f"URL is already an m3u8 link: {url}")
+                  else:
+                      m3u8_link = extract_m3u8_from_url(url)
+                      if m3u8_link:
+                          webcam['video'] = m3u8_link
+                          print(f"Found m3u8 link: {m3u8_link}")
+                      else:
+                          webcam['video'] = None
+                          print(f"No m3u8 link found for {url}")
+              else:
+                  print(f"Skipping webcam at {url}: {'Already has valid video link' if video and video.endswith('.m3u8') else 'No URL'}")
+
+          try:
+              with open('links.json', 'r', encoding='utf-8') as f:
+                  data = json.load(f)
+                  print(f"Loaded data from links.json")
+
+                  update_video_links(data)
+
+              with open('links.json', 'w', encoding='utf-8') as f:
+                  json.dump(data, f, ensure_ascii=False, indent=2)
+
+              print("Updated links.json with video links")
+
+          except FileNotFoundError:
+              print("links.json not found. Creating from scratch with data from pages.json")
+
+              try:
+                  with open('pages.json', 'r', encoding='utf-8') as f:
+                      data = json.load(f)
+                      print(f"Loaded data from pages.json")
+
+                      if isinstance(data, list) and all(isinstance(item, str) for item in data):
+                          results = []
+                          for url in data:
+                              print(f"Processing {url}")
+                              m3u8_link = extract_m3u8_from_url(url) if not url.endswith('.m3u8') else url
+                              results.append({
+                                  'url': url,
+                                  'video': m3u8_link
+                              })
+                              time.sleep(1)
+
+                          with open('links.json', 'w', encoding='utf-8') as f:
+                              json.dump(results, f, ensure_ascii=False, indent=2)
+
+                      elif isinstance(data, list) and 'links' in data[0]:
+                          results = []
+
+                          for resort in data:
+                              resort_id = resort.get('id', 'unknown')
+                              resort_links = resort.get('links', [])
+                              resort_results = []
+
+                              print(f"Processing resort: {resort_id} with {len(resort_links)} webcams")
+
+                              for link_info in resort_links:
+                                  url = link_info.get('link')
+                                  name = link_info.get('name')
+
+                                  if url:
+                                      m3u8_link = extract_m3u8_from_url(url) if not url.endswith('.m3u8') else url
+                                      result = {
+                                          'url': url,
+                                          'video': m3u8_link
+                                      }
+                                      if name:
+                                          result['name'] = name
+                                      resort_results.append(result)
+                                      time.sleep(1)
+
+                              results.append({
+                                  'id': resort_id,
+                                  'webcams': resort_results
+                              })
+
+                          with open('links.json', 'w', encoding='utf-8') as f:
+                              json.dump(results, f, ensure_ascii=False, indent=2)
+                      else:
+                          print("Unrecognized format in pages.json")
+              except FileNotFoundError:
+                  print("Neither links.json nor pages.json found. Cannot proceed.")
+              except Exception as e:
+                  print(f"Error processing pages.json: {e}")
+          except Exception as e:
+              print(f"Error processing links.json: {e}")
+
+          print("Processing complete. Results saved to links.json")
+          EOF
+
+      - name: Run scraper
+        run: python scripts/webcam_scraper.py
+
+      - name: Commit and push if there are changes
+        run: |
+          git config --local user.email "01@0101010101.com"
+          git config --local user.name "Jiyong Youn"
+          git add links.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update webcam links"
+          git push
