@@ -1,19 +1,20 @@
-name: Webcam URL Scraper
+name: Generate Static Pages
 
 on:
+  push:
+    branches: [ main ]
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 * * * *'  # Run hourly
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  scrape:
+  generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           token: ${{ secrets.PAT }}
           persist-credentials: true
@@ -23,23 +24,18 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
+      - name: Create static directory
+        run: mkdir -p static
 
-      - name: Run scraper
-        run: python .github/scripts/webcam_scraper.py
+      - name: Generate static pages
+        run: python .github/scripts/generate_pages.py
 
-      - name: Configure Git
+      - name: Commit and push if changed
         run: |
           git config --local user.email "01@0101010101.com"
           git config --local user.name "Jiyong Youn"
-
-      - name: Commit changes
-        run: |
-          git add links.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "[Bot] Update webcam links"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update static pages"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
