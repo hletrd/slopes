@@ -33,11 +33,13 @@
       },
       {
         "name": "마운틴 베이스 (아테나 리프트)",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=7"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=7",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch7.stream/playlist.m3u8"
       },
       {
         "name": "아테나2 하단",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=8"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=8",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch8.stream/playlist.m3u8"
       },
       {
         "name": "밸리탑 (빅토리아1 입구)",
@@ -55,7 +57,8 @@
       },
       {
         "name": "밸리허브 (아폴로3 합류)",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=12"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=12",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch12.stream/playlist.m3u8"
       },
       {
         "name": "밸리허브 (제우스3)",
@@ -69,7 +72,8 @@
       },
       {
         "name": "아폴로4 중단",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=15"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=15",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch15.stream/playlist.m3u8"
       },
       {
         "name": "아폴로 베이스",
@@ -300,19 +304,23 @@
     "links": [
       {
         "name": "스키하우스",
-        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=0"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=0",
+        "video": "http://118.46.149.144:8080/ramdisk/cam0.m3u8"
       },
       {
         "name": "오렌지",
-        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=1"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=1",
+        "video": "http://118.46.149.144:8080/ramdisk/cam1.m3u8"
       },
       {
         "name": "버금마루",
-        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=2"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=2",
+        "video": "http://118.46.149.144:8080/ramdisk/cam2.m3u8"
       },
       {
         "name": "으뜸마루",
-        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3",
+        "video": "http://118.46.149.144:8080/ramdisk/cam3.m3u8"
       }
     ]
   },
@@ -322,47 +330,58 @@
     "links": [
       {
         "name": "설천봉 정상",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=07"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=07",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam07.stream/playlist.m3u8?e=1744404319&h=cd6aba6e054757d851f5a95760cac07f"
       },
       {
         "name": "설천상단슬로프",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=06"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=06",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam06.stream/playlist.m3u8?e=1744404320&h=ccc66e76cb7d0804a84d20e85c83e1d8"
       },
       {
         "name": "모차르트, 미뉴에트",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=08"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=08",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam08.stream/playlist.m3u8?e=1744404320&h=732b25722edb7b086773d2d92e8c0aff"
       },
       {
         "name": "폴카",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=09"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=09",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam09.stream/playlist.m3u8?e=1744404321&h=760cc43c047fba7652e69b7d5fd9c5cf"
       },
       {
         "name": "실크로드, 미뉴에트 하단",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=10"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=10",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam10.stream/playlist.m3u8?e=1744404321&h=46c78323f0cfd0ea92819b8b5bcf102b"
       },
       {
         "name": "만선봉 정상",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=02"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=02",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam02.stream/playlist.m3u8?e=1744404321&h=84e839e462dd6a30410a463cdc633dea"
       },
       {
         "name": "하이디하우스",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=03"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=03",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam03.stream/playlist.m3u8?e=1744404322&h=312ce1b84875f8c62024e95dcea6591b"
       },
       {
         "name": "서역기행, 썬다운",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=04"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=04",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam04.stream/playlist.m3u8?e=1744404322&h=67e23071ba16487de5bf6786e65e4950"
       },
       {
         "name": "커넥션",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=11"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=11",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam11.stream/playlist.m3u8?e=1744404323&h=2d1be20084cc2057198a873e56fd2dce"
       },
       {
         "name": "설천하우스",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=05"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=05",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam05.stream/playlist.m3u8?e=1744404323&h=7fc7cfaeb827ad1b9059596d32b334d4"
       },
       {
         "name": "만선하우스",
-        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=01"
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=01",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam01.stream/playlist.m3u8?e=1744404324&h=6c6a3901d3c17d645afe27dac58747cb"
       }
     ]
   },
