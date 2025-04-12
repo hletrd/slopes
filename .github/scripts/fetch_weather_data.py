@@ -228,6 +228,27 @@ def main():
 
   updated_locations = 0
   new_locations = 0
+  removed_locations = 0
+
+  valid_keys = set()
+  for resort in resorts:
+    resort_name = resort.get("name", "")
+    coordinates = resort.get("coordinates", [])
+
+    for location in coordinates:
+      location_name = location.get("name", "")
+      valid_keys.add(f"{resort_name}:{location_name}")
+
+  keys_to_remove = []
+  for key in weather_data_dict:
+    if key not in valid_keys:
+      keys_to_remove.append(key)
+      removed_locations += 1
+
+  for key in keys_to_remove:
+    del weather_data_dict[key]
+
+  print(f"Removed {removed_locations} locations no longer in links.json")
 
   for resort in resorts:
     resort_name = resort.get("name", "Unknown Resort")
@@ -270,7 +291,8 @@ def main():
 
     print(
       f"Successfully saved weather data for {len(updated_weather_data)} "
-      f"locations to {output_file} ({updated_locations} updated, {new_locations} new)"
+      f"locations to {output_file} ({updated_locations} updated, "
+      f"{new_locations} new, {removed_locations} removed)"
     )
 
     generate_preview_image(updated_weather_data, resorts)
