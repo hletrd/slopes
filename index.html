@@ -429,6 +429,66 @@
     .github-buttons {
       margin-bottom: -10px;
     }
+    .info-button {
+      position: fixed;
+      top: 40px;
+      right: 40px;
+      background-color: transparent;
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+      z-index: 100;
+      font-size: 24px;
+    }
+    .info-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .info-content {
+      background-color: #222;
+      padding: 25px;
+      padding-bottom: 8px;
+      border-radius: 5px;
+      max-width: 800px;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    .info-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .info-title {
+      font-size: 1.2rem;
+      margin-bottom: 24px;
+      color: white;
+    }
+    .info-text {
+      color: #ddd;
+      margin-top: 15px;
+      line-height: 1.8;
+      margin-bottom: 0;
+    }
     .add-to-home {
       position: fixed;
       bottom: 70px;
@@ -547,6 +607,12 @@
         padding: 8px;
         height: auto;
         min-height: 36px;
+      }
+      .info-button {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
       }
     }
     @media (max-width: 576px) {
@@ -715,6 +781,32 @@
     </div>
   </div>
 
+  <button id="infoButton" class="info-button">
+    <i class="bi bi-file-earmark-text"></i>
+  </button>
+
+  <div id="infoModal" class="info-modal">
+    <div class="info-content">
+      <button class="info-close" id="closeInfoModal"><i class="bi bi-x"></i></button>
+      <h4 class="info-title">Slopes cam</h4>
+      <div class="info-text">
+        <ul>
+          <li>각 영상은 스키장에서 제공하는 실시간 웹캠 영상입니다.</li>
+          <ul>
+            <li>스키장에 따라 영상 제공 방식이 상이하므로 재생 방식이 다를 수 있습니다.</li>
+            <li>스키장의 상황에 따라 일부 영상이 제공되지 않을 수 있습니다.</li>
+          </ul>
+          <li>날씨 정보는 실시간 관측 정보를 바탕으로 3차원 모델을 통해 계산된 정보입니다.</li>
+          <ul>
+            <li>날씨 정보는 국지적인 정보를 정확히 반영하지 않을 수 있습니다.</li>
+            <li>날씨 정보는 부정확한 정보를 포함할 수 있습니다.</li>
+            <li>풍속은 10분 풍속, 강수량은 1시간 강수량이며, 적설량은 3시간 적설량입니다.</li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <div class="sidebar-backdrop"></div>
 
   <div class="sidebar">
@@ -727,7 +819,7 @@
         <h2>전국 스키장 실시간 웹캠 모음</h2>
         <p class="lead" style="font-size: 1.1rem;">왼쪽 메뉴에서 스키장 또는 카메라를 선택하세요.</p>
         <p class="disclaimer text-secondary mt-4" style="font-size: 0.8rem;">
-          이 사이트에서 제공하는 영상은 각 스키장에서 제공하는 실시간 웹캠 영상의 단순 링크로, 스키장의 상황에 따라 웹캠 영상이 제공되지 않거나 변경될 수 있습니다. 날씨는 기상청 API에서 제공되는 정보로 매 시간 업데이트되며, 부정확한 정보를 포함할 수 있습니다. 날씨는 위치 정보만을 반영하므로 고도에 따른 변화를 반영하지 않습니다.
+          이 사이트에서 제공하는 영상은 각 스키장에서 제공하는 실시간 웹캠 영상의 단순 링크로, 스키장의 상황에 따라 웹캠 영상이 제공되지 않거나 변경될 수 있습니다. 날씨는 기상청 API에서 제공되는 정보로 매 시간 업데이트되며, 부정확한 정보를 포함할 수 있습니다.
           <br>
           사이트 관련 문의 및 기능 제안: <a href="mailto:01@0101010101.com">01@0101010101.com</a>
         </p>
@@ -2028,6 +2120,25 @@
 
       window.addEventListener('appinstalled', (evt) => {
         addToHomeButton.style.display = 'none';
+      });
+
+      // Info button functionality
+      const infoButton = document.getElementById('infoButton');
+      const infoModal = document.getElementById('infoModal');
+      const closeInfoModal = document.getElementById('closeInfoModal');
+
+      infoButton.addEventListener('click', () => {
+        infoModal.style.display = 'flex';
+      });
+
+      closeInfoModal.addEventListener('click', () => {
+        infoModal.style.display = 'none';
+      });
+
+      infoModal.addEventListener('click', (e) => {
+        if (e.target === infoModal) {
+          infoModal.style.display = 'none';
+        }
       });
     });
   </script>
