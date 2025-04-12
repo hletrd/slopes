@@ -34,7 +34,7 @@ def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_k
   base_url = "https://apihub.kma.go.kr/api/typ01/url/sfc_nc_var.php"
   params = (
     f"?tm1={tm1}&tm2={tm2}&lon={lon}&lat={lat}"
-    f"&obs=ta,hm,ws_10m,rn_ox,sd_tot,sd_3hr&itv={INTERVAL}&help=0"
+    f"&obs=ta,hm,ws_10m,rn_60m,sd_tot,sd_3hr&itv={INTERVAL}&help=0"
     f"&authKey={auth_key}"
   )
   url = base_url + params
@@ -188,7 +188,7 @@ def generate_preview_image(weather_data, resorts):
     draw.text((metrics_col2_x, metrics_line2_y), f"10분 풍속  {resort['wind_speed']:.1f}m/s",
               fill=(32, 201, 151), font=label_font)
 
-    draw.text((metrics_col3_x, metrics_y), f"강수량 (1시간)  {resort['rainfall']:.1f}mm",
+    draw.text((metrics_col3_x, metrics_y), f"1시간 강수  {resort['rainfall']:.1f}mm",
               fill=(77, 171, 247), font=label_font)
 
   try:
