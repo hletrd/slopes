@@ -8,10 +8,12 @@ on:
 jobs:
   fetch-data:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -27,6 +29,11 @@ jobs:
         env:
           KMA_API_KEY: ${{ secrets.KMA_API_KEY }}
         run: python .github/scripts/fetch_weather_data.py
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "01@0101010101.com"
+          git config --local user.name "Jiyong Youn"
 
       - name: Commit changes
         run: |
