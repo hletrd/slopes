@@ -28,11 +28,13 @@
       overflow-y: auto;
       transition: 0.3s;
       padding-top: 72px;
+      padding-bottom: 50px;
       z-index: 90;
     }
     .main-content {
       margin-left: 250px;
       padding: 15px;
+      padding-bottom: 50px;
       transition: 0.3s;
       overflow-x: hidden;
     }
@@ -368,6 +370,18 @@
     .content-section-default {
       padding: 8px;
     }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(33, 33, 33, 0.9);
+      color: #aaa;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      z-index: 90;
+    }
     @media (max-width: 991px) {
       .videos-grid, .favorites-grid {
         grid-template-columns: 1fr;
@@ -443,6 +457,10 @@
         <div id="favorites-grid" class="favorites-grid"></div>
       </div>
     </div>
+  </div>
+
+  <div class="footer">
+    이 서비스는 스키장에서 공식적으로 제공하는 서비스가 아닙니다. 관련하여 스키장에 문의를 넣지 마세요.
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video.min.js"></script>
