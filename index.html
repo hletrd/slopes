@@ -224,7 +224,7 @@
       color: #ffd700;
     }
     .favorites-section {
-      margin-top: 30px;
+      margin-top: 16px;
       padding: 15px;
       background-color: #1e1e1e;
       border-radius: 5px;
@@ -365,6 +365,17 @@
     .bookmarks-title {
       font-size: 1.4rem;
       margin-bottom: 16px;
+    }
+    .all-resorts-weather {
+      margin-top: 16px;
+      margin-bottom: -20px;
+      padding: 8px;
+      border-radius: 5px;
+    }
+    .all-resorts-weather h3 {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      margin-left: 8px;
     }
     .content-section-default {
       padding: 8px;
@@ -675,6 +686,61 @@
             if (player) activePlayers.push(player);
           }
         });
+
+        updateAllResortsWeather();
+      }
+
+      function updateAllResortsWeather() {
+        if (!weatherData || weatherData.length === 0) return;
+        if (!data || data.length === 0) return;
+
+        const defaultMessage = document.getElementById('default-message');
+        if (!defaultMessage) return;
+
+        const existingWeatherOverview = defaultMessage.querySelector('.all-resorts-weather');
+        if (existingWeatherOverview) existingWeatherOverview.remove();
+
+        const allResortsWeatherContainer = document.createElement('div');
+        allResortsWeatherContainer.className = 'all-resorts-weather';
+        allResortsWeatherContainer.innerHTML = '<h3>전국 스키장 날씨</h3>';
+
+        const weatherGrid = document.createElement('div');
+        weatherGrid.className = 'weather-container';
+        allResortsWeatherContainer.appendChild(weatherGrid);
+
+        data.forEach(resort => {
+          const resortName = resort.name;
+          const baseAreaWeather = weatherData.find(w => w.resort === resortName && w.name === '스키하우스');
+
+          if (baseAreaWeather && baseAreaWeather.data && baseAreaWeather.data.length > 0) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'weather-info-wrapper';
+
+            const weatherInfo = document.createElement('div');
+            weatherInfo.className = 'weather-info';
+
+            const mostRecent = baseAreaWeather.data[baseAreaWeather.data.length - 1];
+
+            weatherInfo.innerHTML = `
+              <div class="location-name">${resortName}</div>
+              <span class="temperature"><i class="bi bi-thermometer-half"></i>${mostRecent.temperature.toFixed(1)}°C</span> &bull;
+              <span class="humidity"><i class="bi bi-moisture"></i>${mostRecent.humidity.toFixed(0)}%</span> &bull;
+              <span class="snowfall"><i class="bi bi-snow"></i>${mostRecent.snowfall_3hr.toFixed(1)}cm</span>
+            `;
+
+            wrapper.appendChild(weatherInfo);
+            weatherGrid.appendChild(wrapper);
+          }
+        });
+
+        if (weatherGrid.children.length > 0) {
+          const favoritesContainer = defaultMessage.querySelector('#favorites-container');
+          if (favoritesContainer) {
+            defaultMessage.insertBefore(allResortsWeatherContainer, favoritesContainer);
+          } else {
+            defaultMessage.appendChild(allResortsWeatherContainer);
+          }
+        }
       }
 
       function hideAllSubmenus() {
@@ -1520,6 +1586,8 @@
                         updateWeatherDisplay(resortId);
                       }
                     }
+
+                    updateAllResortsWeather();
                   }
 
                   if (window.location.hash) {
