@@ -211,6 +211,14 @@
       gap: 4px;
       transition: background-color 0.3s;
     }
+    .bookmark-button-error {
+      top: 8px;
+      right: 16px;
+    }
+    .bookmark-button-link {
+      top: 8px;
+      right: 8px;
+    }
     .bookmark-button:hover {
       background-color: rgba(0, 0, 0, 0.8);
     }
@@ -360,9 +368,6 @@
     }
     .content-section-default {
       padding: 8px;
-    }
-    video {
-      border-radius: 5px;
     }
     @media (max-width: 991px) {
       .videos-grid, .favorites-grid {
@@ -1052,7 +1057,7 @@
           container.appendChild(iframeContainer);
 
           if (resortId && !isNaN(webcamIndex)) {
-            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 2);
           }
 
           return {
@@ -1115,7 +1120,7 @@
           container.appendChild(linkContainer);
 
           if (resortId && !isNaN(webcamIndex)) {
-            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 2);
           }
 
           return {
@@ -1185,13 +1190,13 @@
               `;
 
               if (resortId && !isNaN(webcamIndex)) {
-                addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+                addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 1);
               }
             } else {
               container.innerHTML = '<div class="error-message">비디오 재생 중 오류가 발생했습니다.</div>';
 
               if (resortId && !isNaN(webcamIndex)) {
-                addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+                addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 1);
               }
             }
           });
@@ -1202,14 +1207,14 @@
           container.innerHTML = '<div class="error-message">비디오 플레이어를 생성하는 중 오류가 발생했습니다.</div>';
 
           if (resortId && !isNaN(webcamIndex)) {
-            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 1);
           }
 
           return null;
         }
       }
 
-      function addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType) {
+      function addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, type = 0) {
         if (typeof resortId === 'string' && resortId.includes('favorite-player')) {
           return;
         }
@@ -1238,6 +1243,12 @@
           );
         });
         container.appendChild(bookmarkBtn);
+
+        if (type === 1) {
+          bookmarkBtn.classList.add('bookmark-button-error');
+        } else if (type === 2) {
+          bookmarkBtn.classList.add('bookmark-button-link');
+        }
       }
 
       function captureVideoFrame(player) {
@@ -1369,3 +1380,4 @@
   </script>
 </body>
 </html>
+
