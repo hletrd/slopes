@@ -2,6 +2,18 @@
   {
     "id": "konjiam",
     "name": "곤지암리조트",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.3369,
+        "longitude": 127.2934
+      },
+      {
+        "name": "정상 휴게소",
+        "latitude": 37.3292,
+        "longitude": 127.2808
+      }
+    ],
     "links": [
       {
         "name": "정상 휴게소",
@@ -28,6 +40,23 @@
   {
     "id": "jisan",
     "name": "지산 포레스트 리조트",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.21583,
+        "longitude": 127.34694
+      },
+      {
+        "name": "오렌지 정상",
+        "latitude": 37.20972,
+        "longitude": 127.34333
+      },
+      {
+        "name": "블루 정상",
+        "latitude": 37.20972,
+        "longitude": 127.34333
+      }
+    ],
     "links": [
       {
         "name": "레몬 탑승장",
@@ -54,6 +83,18 @@
   {
     "id": "elysian",
     "name": "엘리시안 강촌",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.82139,
+        "longitude": 127.58972
+      },
+      {
+        "name": "정상",
+        "latitude": 37.81472,
+        "longitude": 127.58250
+      }
+    ],
     "links": [
       {
         "name": "유튜브 채널",
@@ -65,6 +106,18 @@
   {
     "id": "vivaldi",
     "name": "비발디파크",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.64500,
+        "longitude": 127.68194
+      },
+      {
+        "name": "정상",
+        "latitude": 37.63722,
+        "longitude": 127.68972
+      }
+    ],
     "links": [
       {
         "name": "TODO",
@@ -75,6 +128,18 @@
   {
     "id": "oakvalley",
     "name": "오크밸리",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.40750,
+        "longitude": 127.80861
+      },
+      {
+        "name": "정상",
+        "latitude": 37.40222,
+        "longitude": 127.81861
+      }
+    ],
     "links": [
       {
         "name": "스키광장",
@@ -101,6 +166,18 @@
   {
     "id": "wellihilli",
     "name": "웰리힐리파크",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.49028,
+        "longitude": 128.24944
+      },
+      {
+        "name": "정상",
+        "latitude": 37.48028,
+        "longitude": 128.24361
+      }
+    ],
     "links": [
       {
         "name": "알파",
@@ -131,6 +208,23 @@
   {
     "id": "phoenix",
     "name": "휘닉스파크",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.58306,
+        "longitude": 128.32528
+      },
+      {
+        "name": "불새마루 정상",
+        "latitude": 37.57361,
+        "longitude": 128.32194
+      },
+      {
+        "name": "몽블랑 정상",
+        "latitude": 37.57389,
+        "longitude": 128.31028
+      }
+    ],
     "links": [
       {
         "name": "호크 / 스패로우",
@@ -161,6 +255,23 @@
   {
     "id": "alpensia",
     "name": "알펜시아 리조트",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.65639,
+        "longitude": 128.67333
+      },
+      {
+        "name": "정상",
+        "latitude": 37.64972,
+        "longitude": 128.67306
+      },
+      {
+        "name": "알파 정상",
+        "latitude": 37.65139,
+        "longitude": 128.66889
+      }
+    ],
     "links": [
       {
         "name": "알펜시아 리조트 라이브캠",
@@ -172,6 +283,43 @@
   {
     "id": "mona",
     "name": "모나 용평",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.64417,
+        "longitude": 128.67972
+      },
+      {
+        "name": "레인보우 베이스",
+        "latitude": 37.62222,
+        "longitude": 128.66361
+      },
+      {
+        "name": "레인보우 정상",
+        "latitude": 37.61167,
+        "longitude": 128.67167
+      },
+      {
+        "name": "실버 정상",
+        "latitude": 37.63306,
+        "longitude": 128.67500
+      },
+      {
+        "name": "레드 정상",
+        "latitude": 37.63611,
+        "longitude": 128.68306
+      },
+      {
+        "name": "골드 베이스",
+        "latitude": 37.63833,
+        "longitude": 128.68667
+      },
+      {
+        "name": "골드 정상",
+        "latitude": 37.62389,
+        "longitude": 128.68667
+      }
+    ],
     "links": [
       {
         "name": "발왕산 氣 스카이워크",
@@ -226,6 +374,38 @@
   {
     "id": "high1",
     "name": "하이원리조트",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.20778,
+        "longitude": 128.82583
+      },
+      {
+        "name": "마운틴허브",
+        "latitude": 37.19389,
+        "longitude": 128.81972
+      },
+      {
+        "name": "마운틴탑",
+        "latitude": 37.18278,
+        "longitude": 128.81722
+      },
+      {
+        "name": "밸리 스키하우스",
+        "latitude": 37.20444,
+        "longitude": 128.83917
+      },
+      {
+        "name": "밸리허브",
+        "latitude": 37.19056,
+        "longitude": 128.82778
+      },
+      {
+        "name": "밸리탑",
+        "latitude": 37.17861,
+        "longitude": 128.83000
+      }
+    ],
     "links": [
       {
         "name": "하이원탑 (제우스1 입구)",
@@ -320,6 +500,28 @@
   {
     "id": "o2resort",
     "name": "오투리조트",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.17722,
+        "longitude": 128.94750
+      },
+      {
+        "name": "글로리 정상 (콘도)",
+        "latitude": 37.17083,
+        "longitude": 128.94722
+      },
+      {
+        "name": "버금마루",
+        "latitude": 37.17083,
+        "longitude": 128.93861
+      },
+      {
+        "name": "으뜸마루",
+        "latitude": 37.16750,
+        "longitude": 128.92694
+      }
+    ],
     "links": [
       {
         "name": "스키하우스",
@@ -346,6 +548,38 @@
   {
     "id": "muju",
     "name": "무주리조트",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 35.89056,
+        "longitude": 127.73667
+      },
+      {
+        "name": "설천 베이스",
+        "latitude": 35.88889,
+        "longitude": 127.74556
+      },
+      {
+        "name": "돌체 베이스",
+        "latitude": 35.87528,
+        "longitude": 127.75333
+      },
+      {
+        "name": "설천 정상",
+        "latitude": 35.86528,
+        "longitude": 127.74361
+      },
+      {
+        "name": "하이디 하우스",
+        "latitude": 35.88194,
+        "longitude": 127.73028
+      },
+      {
+        "name": "만선 정상",
+        "latitude": 35.87667,
+        "longitude": 127.73500
+      }
+    ],
     "links": [
       {
         "name": "설천봉 정상",
@@ -407,6 +641,18 @@
   {
     "id": "edenvalley",
     "name": "에덴밸리리조트",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 35.42861,
+        "longitude": 128.98417
+      },
+      {
+        "name": "정상",
+        "latitude": 35.41917,
+        "longitude": 128.98250
+      }
+    ],
     "links": [
       {
         "name": "베이직",
