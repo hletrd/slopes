@@ -6,31 +6,31 @@
       "latitude": 37.3369,
       "longitude": 127.2934
     },
-    "timestamp": "2025-04-12T20:12:05.595408+09:00",
+    "timestamp": "2025-04-12T20:16:16.056054+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 16.9,
-        "humidity": 50.6,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 16.7,
+        "humidity": 52.9,
         "wind_speed": 2.1,
+        "rainfall": 0.6,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 13.8,
+        "humidity": 70.1,
+        "wind_speed": 1.7,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 14.1,
-        "humidity": 67.5,
-        "wind_speed": 1.4,
-        "rainfall": 0.4,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 10.6,
-        "humidity": 86.3,
-        "wind_speed": 1.2,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 10.4,
+        "humidity": 86.8,
+        "wind_speed": 1.1,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -44,31 +44,31 @@
       "latitude": 37.3292,
       "longitude": 127.2808
     },
-    "timestamp": "2025-04-12T20:12:12.005905+09:00",
+    "timestamp": "2025-04-12T20:16:19.388774+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 14.8,
-        "humidity": 49.2,
-        "wind_speed": 2.1,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 14.6,
+        "humidity": 51.6,
+        "wind_speed": 2.0,
+        "rainfall": 0.6,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 12.2,
+        "humidity": 64.7,
+        "wind_speed": 1.7,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 12.4,
-        "humidity": 63.2,
-        "wind_speed": 1.4,
-        "rainfall": 0.5,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 8.8,
-        "humidity": 88.9,
-        "wind_speed": 1.3,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 8.5,
+        "humidity": 89.1,
+        "wind_speed": 1.2,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -82,31 +82,31 @@
       "latitude": 37.21583,
       "longitude": 127.34694
     },
-    "timestamp": "2025-04-12T20:12:14.573417+09:00",
+    "timestamp": "2025-04-12T20:16:22.578338+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 17.9,
-        "humidity": 49.4,
-        "wind_speed": 2.0,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 17.7,
+        "humidity": 50.7,
+        "wind_speed": 1.9,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 15.1,
+        "humidity": 64.6,
+        "wind_speed": 2.7,
         "rainfall": 0.6,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 15.3,
-        "humidity": 62.6,
-        "wind_speed": 2.5,
-        "rainfall": 0.2,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 12.0,
-        "humidity": 82.4,
-        "wind_speed": 1.4,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 11.8,
+        "humidity": 82.9,
+        "wind_speed": 1.2,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -120,31 +120,31 @@
       "latitude": 37.20972,
       "longitude": 127.34333
     },
-    "timestamp": "2025-04-12T20:12:15.829267+09:00",
+    "timestamp": "2025-04-12T20:16:26.184401+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 17.8,
-        "humidity": 46.8,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 17.6,
+        "humidity": 49.0,
         "wind_speed": 2.0,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 14.7,
+        "humidity": 66.3,
+        "wind_speed": 2.7,
         "rainfall": 0.6,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 14.9,
-        "humidity": 63.7,
-        "wind_speed": 2.5,
-        "rainfall": 0.2,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 12.0,
-        "humidity": 81.6,
-        "wind_speed": 1.4,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 11.7,
+        "humidity": 82.3,
+        "wind_speed": 1.2,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -158,31 +158,31 @@
       "latitude": 37.20972,
       "longitude": 127.34333
     },
-    "timestamp": "2025-04-12T20:12:17.714465+09:00",
+    "timestamp": "2025-04-12T20:16:31.752798+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 17.8,
-        "humidity": 46.8,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 17.6,
+        "humidity": 49.0,
         "wind_speed": 2.0,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 14.7,
+        "humidity": 66.3,
+        "wind_speed": 2.7,
         "rainfall": 0.6,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 14.9,
-        "humidity": 63.7,
-        "wind_speed": 2.5,
-        "rainfall": 0.2,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 12.0,
-        "humidity": 81.6,
-        "wind_speed": 1.4,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 11.7,
+        "humidity": 82.3,
+        "wind_speed": 1.2,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -196,31 +196,31 @@
       "latitude": 37.82139,
       "longitude": 127.58972
     },
-    "timestamp": "2025-04-12T20:12:18.605445+09:00",
+    "timestamp": "2025-04-12T20:16:34.781960+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 17.1,
-        "humidity": 42.1,
-        "wind_speed": 1.4,
+        "humidity": 43.3,
+        "wind_speed": 1.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 17.9,
-        "humidity": 39.7,
-        "wind_speed": 3.3,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 17.6,
+        "humidity": 39.1,
+        "wind_speed": 2.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 15.5,
-        "humidity": 55.7,
-        "wind_speed": 3.7,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 15.1,
+        "humidity": 58.5,
+        "wind_speed": 3.5,
         "rainfall": 0.4,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -234,31 +234,31 @@
       "latitude": 37.81472,
       "longitude": 127.5825
     },
-    "timestamp": "2025-04-12T20:12:19.913927+09:00",
+    "timestamp": "2025-04-12T20:16:38.300484+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 17.2,
-        "humidity": 41.1,
-        "wind_speed": 1.4,
+        "humidity": 41.8,
+        "wind_speed": 1.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 17.7,
-        "humidity": 39.6,
-        "wind_speed": 3.3,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 17.5,
+        "humidity": 38.8,
+        "wind_speed": 3.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 15.1,
-        "humidity": 56.1,
-        "wind_speed": 3.6,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 14.5,
+        "humidity": 60.6,
+        "wind_speed": 3.5,
         "rainfall": 0.5,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -272,32 +272,32 @@
       "latitude": 37.645,
       "longitude": 127.68194
     },
-    "timestamp": "2025-04-12T20:12:26.019520+09:00",
+    "timestamp": "2025-04-12T20:16:41.175855+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 16.2,
-        "humidity": 38.4,
-        "wind_speed": 0.6,
+        "humidity": 38.7,
+        "wind_speed": 0.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 16.0,
-        "humidity": 36.8,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 15.9,
+        "humidity": 38.2,
         "wind_speed": 2.9,
-        "rainfall": 0.0,
+        "rainfall": 0.3,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 11.1,
-        "humidity": 79.1,
-        "wind_speed": 1.3,
-        "rainfall": 0.9,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 10.8,
+        "humidity": 81.1,
+        "wind_speed": 1.2,
+        "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -310,31 +310,31 @@
       "latitude": 37.63722,
       "longitude": 127.68972
     },
-    "timestamp": "2025-04-12T20:12:29.822442+09:00",
+    "timestamp": "2025-04-12T20:16:44.057127+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 15.6,
-        "humidity": 40.2,
-        "wind_speed": 0.6,
+        "humidity": 39.7,
+        "wind_speed": 0.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 15.1,
-        "humidity": 41.6,
-        "wind_speed": 3.0,
-        "rainfall": 0.0,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 14.8,
+        "humidity": 43.3,
+        "wind_speed": 2.9,
+        "rainfall": 0.2,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 10.7,
-        "humidity": 75.7,
-        "wind_speed": 1.3,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 10.4,
+        "humidity": 79.3,
+        "wind_speed": 1.2,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -348,32 +348,32 @@
       "latitude": 37.4075,
       "longitude": 127.80861
     },
-    "timestamp": "2025-04-12T20:12:31.707642+09:00",
+    "timestamp": "2025-04-12T20:16:46.746036+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 19.1,
-        "humidity": 31.5,
-        "wind_speed": 2.9,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 19.2,
+        "humidity": 30.4,
+        "wind_speed": 3.4,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 17.9,
-        "humidity": 36.8,
-        "wind_speed": 5.0,
-        "rainfall": 0.5,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 17.6,
+        "humidity": 38.8,
+        "wind_speed": 4.5,
+        "rainfall": 0.6,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 13.6,
-        "humidity": 65.3,
-        "wind_speed": 2.4,
-        "rainfall": 0.2,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 13.3,
+        "humidity": 66.6,
+        "wind_speed": 2.5,
+        "rainfall": 0.5,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -386,32 +386,32 @@
       "latitude": 37.40222,
       "longitude": 127.81861
     },
-    "timestamp": "2025-04-12T20:12:33.429257+09:00",
+    "timestamp": "2025-04-12T20:16:50.424514+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 17.1,
-        "humidity": 34.2,
-        "wind_speed": 2.9,
+        "humidity": 34.6,
+        "wind_speed": 3.3,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 16.1,
-        "humidity": 41.2,
-        "wind_speed": 4.9,
-        "rainfall": 0.5,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 15.7,
+        "humidity": 43.3,
+        "wind_speed": 4.5,
+        "rainfall": 0.6,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
+        "time": "2025-04-12T19:15:00+09:00",
         "temperature": 13.7,
-        "humidity": 58.5,
-        "wind_speed": 2.3,
-        "rainfall": 0.2,
+        "humidity": 59.5,
+        "wind_speed": 2.4,
+        "rainfall": 0.5,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -424,30 +424,30 @@
       "latitude": 37.49028,
       "longitude": 128.24944
     },
-    "timestamp": "2025-04-12T20:12:34.858883+09:00",
+    "timestamp": "2025-04-12T20:16:53.596515+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 15.2,
-        "humidity": 32.0,
-        "wind_speed": 0.8,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 15.3,
+        "humidity": 32.5,
+        "wind_speed": 0.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 14.9,
-        "humidity": 35.8,
-        "wind_speed": 1.5,
-        "rainfall": 0.0,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 14.7,
+        "humidity": 36.8,
+        "wind_speed": 1.6,
+        "rainfall": 0.1,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 12.2,
-        "humidity": 55.9,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 12.0,
+        "humidity": 58.0,
         "wind_speed": 1.5,
         "rainfall": 0.2,
         "snow_cover": 0.0,
@@ -462,30 +462,30 @@
       "latitude": 37.48028,
       "longitude": 128.24361
     },
-    "timestamp": "2025-04-12T20:12:35.768218+09:00",
+    "timestamp": "2025-04-12T20:16:55.509098+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 14.2,
-        "humidity": 34.3,
-        "wind_speed": 0.8,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 14.3,
+        "humidity": 34.2,
+        "wind_speed": 0.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 13.7,
-        "humidity": 39.4,
-        "wind_speed": 1.5,
-        "rainfall": 0.0,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 13.5,
+        "humidity": 41.4,
+        "wind_speed": 1.6,
+        "rainfall": 0.1,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 9.8,
-        "humidity": 74.0,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 9.7,
+        "humidity": 75.9,
         "wind_speed": 1.4,
         "rainfall": 0.3,
         "snow_cover": 0.0,
@@ -500,31 +500,31 @@
       "latitude": 37.58306,
       "longitude": 128.32528
     },
-    "timestamp": "2025-04-12T20:12:40.063528+09:00",
+    "timestamp": "2025-04-12T20:16:58.847923+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 15.0,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 15.1,
         "humidity": 33.3,
-        "wind_speed": 1.7,
-        "rainfall": 0.0,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 14.8,
-        "humidity": 35.9,
         "wind_speed": 1.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 12.2,
-        "humidity": 55.4,
-        "wind_speed": 2.7,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 14.7,
+        "humidity": 36.1,
+        "wind_speed": 2.1,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 12.1,
+        "humidity": 57.0,
+        "wind_speed": 2.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -538,30 +538,30 @@
       "latitude": 37.57361,
       "longitude": 128.32194
     },
-    "timestamp": "2025-04-12T20:12:43.268264+09:00",
+    "timestamp": "2025-04-12T20:17:05.827034+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 13.6,
-        "humidity": 37.5,
-        "wind_speed": 1.6,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 13.5,
+        "humidity": 37.1,
+        "wind_speed": 1.4,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 13.4,
-        "humidity": 37.2,
-        "wind_speed": 1.5,
+        "humidity": 37.8,
+        "wind_speed": 2.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 10.4,
-        "humidity": 62.7,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 10.0,
+        "humidity": 66.7,
         "wind_speed": 2.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
@@ -576,31 +576,31 @@
       "latitude": 37.57389,
       "longitude": 128.31028
     },
-    "timestamp": "2025-04-12T20:12:46.059492+09:00",
+    "timestamp": "2025-04-12T20:17:11.830861+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 12.8,
-        "humidity": 41.7,
-        "wind_speed": 1.7,
+        "humidity": 40.1,
+        "wind_speed": 1.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 12.7,
-        "humidity": 40.8,
-        "wind_speed": 1.6,
+        "humidity": 40.9,
+        "wind_speed": 2.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 9.7,
-        "humidity": 67.2,
-        "wind_speed": 2.5,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 9.2,
+        "humidity": 70.8,
+        "wind_speed": 2.4,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -614,31 +614,31 @@
       "latitude": 37.65639,
       "longitude": 128.67333
     },
-    "timestamp": "2025-04-12T20:12:48.647263+09:00",
+    "timestamp": "2025-04-12T20:17:17.026839+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 15.2,
-        "humidity": 26.8,
-        "wind_speed": 1.1,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 15.0,
+        "humidity": 27.5,
+        "wind_speed": 0.3,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 14.6,
-        "humidity": 31.7,
-        "wind_speed": 1.3,
+        "humidity": 32.1,
+        "wind_speed": 2.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
+        "time": "2025-04-12T19:15:00+09:00",
         "temperature": 12.9,
-        "humidity": 41.6,
-        "wind_speed": 0.9,
+        "humidity": 43.6,
+        "wind_speed": 0.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -652,31 +652,31 @@
       "latitude": 37.64972,
       "longitude": 128.67306
     },
-    "timestamp": "2025-04-12T20:12:50.204474+09:00",
+    "timestamp": "2025-04-12T20:17:20.524041+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 15.2,
-        "humidity": 27.0,
-        "wind_speed": 1.0,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 15.1,
+        "humidity": 27.6,
+        "wind_speed": 0.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 14.6,
-        "humidity": 31.5,
-        "wind_speed": 1.3,
+        "humidity": 31.9,
+        "wind_speed": 1.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
+        "time": "2025-04-12T19:15:00+09:00",
         "temperature": 12.9,
-        "humidity": 41.6,
-        "wind_speed": 0.8,
+        "humidity": 43.6,
+        "wind_speed": 0.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -690,31 +690,31 @@
       "latitude": 37.65139,
       "longitude": 128.66889
     },
-    "timestamp": "2025-04-12T20:12:52.210914+09:00",
+    "timestamp": "2025-04-12T20:17:23.926248+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 15.2,
-        "humidity": 27.0,
-        "wind_speed": 1.1,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 15.0,
+        "humidity": 27.6,
+        "wind_speed": 0.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 14.6,
-        "humidity": 31.8,
-        "wind_speed": 1.3,
+        "humidity": 32.1,
+        "wind_speed": 1.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 12.9,
-        "humidity": 42.0,
-        "wind_speed": 0.9,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 12.8,
+        "humidity": 44.1,
+        "wind_speed": 0.7,
         "rainfall": 0.1,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -728,31 +728,31 @@
       "latitude": 37.64417,
       "longitude": 128.67972
     },
-    "timestamp": "2025-04-12T20:12:54.174509+09:00",
+    "timestamp": "2025-04-12T20:17:25.638260+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 15.5,
-        "humidity": 28.3,
-        "wind_speed": 1.0,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 15.3,
+        "humidity": 29.0,
+        "wind_speed": 0.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 14.9,
-        "humidity": 30.9,
-        "wind_speed": 1.2,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 14.8,
+        "humidity": 31.5,
+        "wind_speed": 1.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 13.3,
-        "humidity": 40.8,
-        "wind_speed": 0.6,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 13.2,
+        "humidity": 42.0,
+        "wind_speed": 0.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -766,31 +766,31 @@
       "latitude": 37.62222,
       "longitude": 128.66361
     },
-    "timestamp": "2025-04-12T20:12:56.565446+09:00",
+    "timestamp": "2025-04-12T20:17:26.981124+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 12.8,
-        "humidity": 39.0,
-        "wind_speed": 0.7,
-        "rainfall": 0.0,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 12.6,
-        "humidity": 39.2,
-        "wind_speed": 1.1,
+        "humidity": 40.6,
+        "wind_speed": 0.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 11.0,
-        "humidity": 48.5,
-        "wind_speed": 0.5,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 12.5,
+        "humidity": 39.2,
+        "wind_speed": 1.5,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 10.7,
+        "humidity": 52.0,
+        "wind_speed": 0.7,
         "rainfall": 0.1,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -804,31 +804,31 @@
       "latitude": 37.61167,
       "longitude": 128.67167
     },
-    "timestamp": "2025-04-12T20:12:58.807187+09:00",
+    "timestamp": "2025-04-12T20:17:28.995099+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 10.0,
-        "humidity": 38.9,
-        "wind_speed": 0.6,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 9.9,
+        "humidity": 39.9,
+        "wind_speed": 0.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 9.1,
-        "humidity": 47.3,
-        "wind_speed": 1.0,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 9.0,
+        "humidity": 48.4,
+        "wind_speed": 1.4,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 6.6,
-        "humidity": 74.4,
-        "wind_speed": 0.5,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 6.5,
+        "humidity": 76.7,
+        "wind_speed": 0.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -842,31 +842,31 @@
       "latitude": 37.63306,
       "longitude": 128.675
     },
-    "timestamp": "2025-04-12T20:13:00.456164+09:00",
+    "timestamp": "2025-04-12T20:17:35.986119+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 14.1,
-        "humidity": 30.1,
-        "wind_speed": 0.8,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 13.9,
+        "humidity": 32.4,
+        "wind_speed": 0.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 13.5,
-        "humidity": 36.3,
-        "wind_speed": 1.1,
+        "humidity": 36.0,
+        "wind_speed": 1.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 11.8,
-        "humidity": 45.7,
-        "wind_speed": 0.5,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 11.5,
+        "humidity": 49.3,
+        "wind_speed": 0.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -880,30 +880,30 @@
       "latitude": 37.63611,
       "longitude": 128.68306
     },
-    "timestamp": "2025-04-12T20:13:03.191515+09:00",
+    "timestamp": "2025-04-12T20:17:40.493298+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 14.7,
-        "humidity": 26.8,
-        "wind_speed": 0.9,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 14.6,
+        "humidity": 27.5,
+        "wind_speed": 0.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 14.1,
-        "humidity": 34.6,
-        "wind_speed": 1.0,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 14.0,
+        "humidity": 34.3,
+        "wind_speed": 1.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 12.3,
-        "humidity": 45.2,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 12.1,
+        "humidity": 47.7,
         "wind_speed": 0.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
@@ -918,31 +918,31 @@
       "latitude": 37.63833,
       "longitude": 128.68667
     },
-    "timestamp": "2025-04-12T20:13:06.184364+09:00",
+    "timestamp": "2025-04-12T20:17:44.696275+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 15.1,
-        "humidity": 26.2,
-        "wind_speed": 0.9,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 15.0,
+        "humidity": 26.9,
+        "wind_speed": 0.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 14.5,
-        "humidity": 32.5,
-        "wind_speed": 1.1,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 14.4,
+        "humidity": 32.6,
+        "wind_speed": 1.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 12.8,
-        "humidity": 42.7,
-        "wind_speed": 0.6,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 12.6,
+        "humidity": 45.2,
+        "wind_speed": 0.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -956,40 +956,31 @@
       "latitude": 37.62389,
       "longitude": 128.68667
     },
-    "timestamp": "2025-04-12T20:13:08.701328+09:00",
+    "timestamp": "2025-04-12T20:17:48.090771+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 12.7,
-        "humidity": 39.2,
-        "wind_speed": 0.7,
-        "rainfall": 0.0,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 12.5,
-        "humidity": 38.7,
-        "wind_speed": 0.9,
+        "humidity": 39.7,
+        "wind_speed": 0.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 11.0,
-        "humidity": 48.8,
-        "wind_speed": 0.4,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 12.4,
+        "humidity": 39.0,
+        "wind_speed": 1.4,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 11.0,
-        "humidity": 65.8,
-        "wind_speed": 0.4,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 10.7,
+        "humidity": 51.5,
+        "wind_speed": 0.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1003,31 +994,31 @@
       "latitude": 37.20778,
       "longitude": 128.82583
     },
-    "timestamp": "2025-04-12T20:13:11.499535+09:00",
+    "timestamp": "2025-04-12T20:17:51.199791+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 13.4,
-        "humidity": 32.6,
-        "wind_speed": 2.3,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 13.3,
+        "humidity": 32.3,
+        "wind_speed": 2.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 12.2,
-        "humidity": 41.8,
-        "wind_speed": 4.3,
+        "humidity": 43.4,
+        "wind_speed": 4.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 9.3,
-        "humidity": 69.8,
-        "wind_speed": 4.0,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 9.1,
+        "humidity": 71.7,
+        "wind_speed": 3.8,
         "rainfall": 0.5,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1041,41 +1032,32 @@
       "latitude": 37.19389,
       "longitude": 128.81972
     },
-    "timestamp": "2025-04-12T20:13:13.546414+09:00",
+    "timestamp": "2025-04-12T20:17:54.488907+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 11.6,
-        "humidity": 32.6,
-        "wind_speed": 2.3,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 11.5,
+        "humidity": 32.5,
+        "wind_speed": 2.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 10.8,
-        "humidity": 39.9,
-        "wind_speed": 4.1,
-        "rainfall": 0.1,
+        "humidity": 40.5,
+        "wind_speed": 4.3,
+        "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 8.0,
-        "humidity": 71.4,
-        "wind_speed": 3.9,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 7.9,
+        "humidity": 72.3,
+        "wind_speed": 3.7,
         "rainfall": 0.3,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 8.0,
-        "humidity": 71.4,
-        "wind_speed": 3.9,
-        "rainfall": 0.9,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -1088,40 +1070,31 @@
       "latitude": 37.18278,
       "longitude": 128.81722
     },
-    "timestamp": "2025-04-12T20:13:16.301489+09:00",
+    "timestamp": "2025-04-12T20:17:55.590008+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 10.6,
-        "humidity": 38.3,
-        "wind_speed": 2.2,
+        "humidity": 38.5,
+        "wind_speed": 2.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 9.8,
-        "humidity": 46.0,
-        "wind_speed": 3.9,
-        "rainfall": 0.1,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 9.7,
+        "humidity": 47.1,
+        "wind_speed": 4.0,
+        "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 6.8,
-        "humidity": 80.0,
-        "wind_speed": 3.7,
-        "rainfall": 0.3,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 6.8,
-        "humidity": 80.0,
-        "wind_speed": 3.9,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 6.6,
+        "humidity": 81.7,
+        "wind_speed": 3.5,
         "rainfall": 0.3,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1135,40 +1108,31 @@
       "latitude": 37.20444,
       "longitude": 128.83917
     },
-    "timestamp": "2025-04-12T20:13:19.230651+09:00",
+    "timestamp": "2025-04-12T20:17:56.935682+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 15.2,
-        "humidity": 27.8,
-        "wind_speed": 2.5,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 15.1,
+        "humidity": 28.2,
+        "wind_speed": 2.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 14.1,
-        "humidity": 36.8,
-        "wind_speed": 4.6,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 14.0,
+        "humidity": 37.2,
+        "wind_speed": 4.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 11.0,
-        "humidity": 63.9,
-        "wind_speed": 4.4,
-        "rainfall": 0.5,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 9.0,
-        "humidity": 83.9,
-        "wind_speed": 4.4,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 10.7,
+        "humidity": 67.3,
+        "wind_speed": 4.1,
         "rainfall": 0.5,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1182,41 +1146,32 @@
       "latitude": 37.19056,
       "longitude": 128.82778
     },
-    "timestamp": "2025-04-12T20:13:25.173558+09:00",
+    "timestamp": "2025-04-12T20:17:59.457180+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 11.4,
-        "humidity": 33.0,
-        "wind_speed": 2.4,
+        "humidity": 32.9,
+        "wind_speed": 2.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 10.7,
-        "humidity": 40.1,
-        "wind_speed": 4.3,
-        "rainfall": 0.1,
+        "humidity": 40.7,
+        "wind_speed": 4.5,
+        "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 8.0,
-        "humidity": 71.6,
-        "wind_speed": 4.1,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 7.9,
+        "humidity": 72.4,
+        "wind_speed": 3.9,
         "rainfall": 0.3,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 8.0,
-        "humidity": 95.2,
-        "wind_speed": 4.4,
-        "rainfall": 0.9,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -1229,41 +1184,41 @@
       "latitude": 37.17861,
       "longitude": 128.83
     },
-    "timestamp": "2025-04-12T20:13:28.765104+09:00",
+    "timestamp": "2025-04-12T20:18:03.196098+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 9.7,
-        "humidity": 40.4,
-        "wind_speed": 2.4,
+        "humidity": 40.9,
+        "wind_speed": 2.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 8.4,
-        "humidity": 53.0,
-        "wind_speed": 4.2,
-        "rainfall": 0.1,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 8.3,
+        "humidity": 54.7,
+        "wind_speed": 4.4,
+        "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 5.2,
-        "humidity": 88.7,
-        "wind_speed": 4.0,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 5.1,
+        "humidity": 91.0,
+        "wind_speed": 3.9,
         "rainfall": 0.3,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 5.2,
-        "humidity": 97.4,
-        "wind_speed": 4.0,
-        "rainfall": 0.3,
+        "time": "2025-04-12T20:15:00+09:00",
+        "temperature": 4.5,
+        "humidity": 97.2,
+        "wind_speed": 4.8,
+        "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -1276,41 +1231,41 @@
       "latitude": 37.17722,
       "longitude": 128.9475
     },
-    "timestamp": "2025-04-12T20:13:33.245771+09:00",
+    "timestamp": "2025-04-12T20:18:10.355660+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 13.2,
-        "humidity": 33.7,
-        "wind_speed": 3.6,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 13.1,
+        "humidity": 33.6,
+        "wind_speed": 3.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 12.0,
-        "humidity": 43.0,
-        "wind_speed": 5.8,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 11.9,
+        "humidity": 44.3,
+        "wind_speed": 6.5,
         "rainfall": 0.3,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 9.3,
-        "humidity": 69.3,
-        "wind_speed": 6.0,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 9.1,
+        "humidity": 72.3,
+        "wind_speed": 5.5,
         "rainfall": 0.4,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 9.3,
-        "humidity": 69.3,
-        "wind_speed": 6.4,
-        "rainfall": 0.4,
+        "time": "2025-04-12T20:15:00+09:00",
+        "temperature": 7.6,
+        "humidity": 90.0,
+        "wind_speed": 7.1,
+        "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -1323,41 +1278,41 @@
       "latitude": 37.17083,
       "longitude": 128.94722
     },
-    "timestamp": "2025-04-12T20:13:36.247644+09:00",
+    "timestamp": "2025-04-12T20:18:15.350702+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 13.2,
-        "humidity": 32.1,
-        "wind_speed": 3.6,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 13.1,
+        "humidity": 32.2,
+        "wind_speed": 3.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 12.0,
-        "humidity": 41.5,
-        "wind_speed": 5.9,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 11.9,
+        "humidity": 42.8,
+        "wind_speed": 6.6,
         "rainfall": 0.3,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 9.3,
-        "humidity": 68.0,
-        "wind_speed": 6.1,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 9.0,
+        "humidity": 70.5,
+        "wind_speed": 5.5,
         "rainfall": 0.3,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 7.5,
-        "humidity": 88.6,
-        "wind_speed": 6.1,
-        "rainfall": 0.9,
+        "time": "2025-04-12T20:15:00+09:00",
+        "temperature": 7.4,
+        "humidity": 89.3,
+        "wind_speed": 7.2,
+        "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -1370,41 +1325,41 @@
       "latitude": 37.17083,
       "longitude": 128.93861
     },
-    "timestamp": "2025-04-12T20:13:41.852726+09:00",
+    "timestamp": "2025-04-12T20:18:19.920179+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 11.5,
-        "humidity": 31.7,
-        "wind_speed": 3.9,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 11.4,
+        "humidity": 32.0,
+        "wind_speed": 4.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 10.7,
-        "humidity": 39.8,
-        "wind_speed": 6.6,
+        "humidity": 40.2,
+        "wind_speed": 7.4,
         "rainfall": 0.2,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 8.3,
-        "humidity": 68.9,
-        "wind_speed": 6.8,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 8.2,
+        "humidity": 69.4,
+        "wind_speed": 6.2,
         "rainfall": 0.3,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
+        "time": "2025-04-12T20:15:00+09:00",
         "temperature": 5.8,
         "humidity": 95.0,
-        "wind_speed": 7.2,
-        "rainfall": 0.9,
+        "wind_speed": 8.0,
+        "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -1417,41 +1372,41 @@
       "latitude": 37.1675,
       "longitude": 128.92694
     },
-    "timestamp": "2025-04-12T20:13:46.923312+09:00",
+    "timestamp": "2025-04-12T20:18:20.918315+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 8.9,
-        "humidity": 40.3,
-        "wind_speed": 4.2,
+        "humidity": 41.1,
+        "wind_speed": 4.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 7.5,
-        "humidity": 54.7,
-        "wind_speed": 7.3,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 7.4,
+        "humidity": 56.6,
+        "wind_speed": 8.3,
         "rainfall": 0.1,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
+        "time": "2025-04-12T19:15:00+09:00",
         "temperature": 4.7,
-        "humidity": 89.0,
-        "wind_speed": 7.6,
+        "humidity": 91.0,
+        "wind_speed": 6.9,
         "rainfall": 0.2,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
+        "time": "2025-04-12T20:15:00+09:00",
         "temperature": 4.4,
         "humidity": 96.2,
-        "wind_speed": 8.1,
-        "rainfall": 0.9,
+        "wind_speed": 9.0,
+        "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -1464,40 +1419,40 @@
       "latitude": 35.89056,
       "longitude": 127.73667
     },
-    "timestamp": "2025-04-12T20:13:49.471205+09:00",
+    "timestamp": "2025-04-12T20:18:21.918759+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 8.4,
-        "humidity": 73.4,
-        "wind_speed": 5.9,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 8.3,
+        "humidity": 76.4,
+        "wind_speed": 6.1,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 7.1,
-        "humidity": 88.6,
-        "wind_speed": 4.7,
-        "rainfall": 0.8,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 6.9,
+        "humidity": 88.9,
+        "wind_speed": 5.2,
+        "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
+        "time": "2025-04-12T19:15:00+09:00",
         "temperature": 7.1,
-        "humidity": 92.7,
+        "humidity": 93.0,
         "wind_speed": 6.0,
         "rainfall": 0.6,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
+        "time": "2025-04-12T20:15:00+09:00",
         "temperature": 7.5,
-        "humidity": 95.4,
-        "wind_speed": 7.3,
+        "humidity": 95.9,
+        "wind_speed": 7.4,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1511,40 +1466,40 @@
       "latitude": 35.88889,
       "longitude": 127.74556
     },
-    "timestamp": "2025-04-12T20:13:55.128161+09:00",
+    "timestamp": "2025-04-12T20:18:25.148823+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 8.9,
-        "humidity": 71.5,
-        "wind_speed": 5.4,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 8.8,
+        "humidity": 73.7,
+        "wind_speed": 5.6,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 7.5,
-        "humidity": 87.1,
-        "wind_speed": 4.5,
-        "rainfall": 0.8,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 7.5,
-        "humidity": 92.6,
-        "wind_speed": 5.9,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 7.4,
+        "humidity": 87.7,
+        "wind_speed": 4.9,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 7.6,
+        "humidity": 92.8,
+        "wind_speed": 5.8,
+        "rainfall": 0.7,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T20:15:00+09:00",
         "temperature": 7.9,
-        "humidity": 96.0,
-        "wind_speed": 7.1,
+        "humidity": 96.4,
+        "wind_speed": 7.2,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1558,40 +1513,40 @@
       "latitude": 35.87528,
       "longitude": 127.75333
     },
-    "timestamp": "2025-04-12T20:13:57.981822+09:00",
+    "timestamp": "2025-04-12T20:18:28.747696+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 5.4,
-        "humidity": 82.0,
-        "wind_speed": 6.6,
-        "rainfall": 0.9,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 5.0,
-        "humidity": 90.1,
-        "wind_speed": 5.4,
+        "humidity": 80.5,
+        "wind_speed": 7.0,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 5.3,
-        "humidity": 99.9,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 5.0,
+        "humidity": 90.7,
+        "wind_speed": 5.9,
+        "rainfall": 0.8,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 5.4,
+        "humidity": 100.0,
         "wind_speed": 6.8,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 5.7,
+        "time": "2025-04-12T20:15:00+09:00",
+        "temperature": 5.8,
         "humidity": 100.0,
-        "wind_speed": 8.2,
+        "wind_speed": 8.4,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1605,40 +1560,40 @@
       "latitude": 35.86528,
       "longitude": 127.74361
     },
-    "timestamp": "2025-04-12T20:14:01.393949+09:00",
+    "timestamp": "2025-04-12T20:18:32.778829+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 4.8,
-        "humidity": 78.6,
-        "wind_speed": 8.3,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 4.7,
+        "humidity": 77.5,
+        "wind_speed": 8.8,
         "rainfall": 0.9,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 4.0,
-        "humidity": 86.1,
-        "wind_speed": 6.4,
+        "humidity": 86.9,
+        "wind_speed": 7.0,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
-        "temperature": 4.4,
-        "humidity": 99.5,
-        "wind_speed": 7.8,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 4.5,
+        "humidity": 100.0,
+        "wind_speed": 7.9,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 4.8,
+        "time": "2025-04-12T20:15:00+09:00",
+        "temperature": 4.9,
         "humidity": 100.0,
-        "wind_speed": 9.4,
+        "wind_speed": 9.6,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1652,40 +1607,40 @@
       "latitude": 35.88194,
       "longitude": 127.73028
     },
-    "timestamp": "2025-04-12T20:14:05.110932+09:00",
+    "timestamp": "2025-04-12T20:18:36.448498+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 7.2,
-        "humidity": 79.9,
-        "wind_speed": 6.9,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 7.1,
+        "humidity": 78.7,
+        "wind_speed": 7.2,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 6.2,
-        "humidity": 89.7,
-        "wind_speed": 5.4,
+        "humidity": 90.1,
+        "wind_speed": 5.9,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
+        "time": "2025-04-12T19:15:00+09:00",
         "temperature": 5.9,
-        "humidity": 99.1,
-        "wind_speed": 6.6,
+        "humidity": 99.5,
+        "wind_speed": 6.7,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 6.5,
-        "humidity": 99.9,
-        "wind_speed": 8.0,
+        "time": "2025-04-12T20:15:00+09:00",
+        "temperature": 6.6,
+        "humidity": 100.0,
+        "wind_speed": 8.2,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1699,40 +1654,40 @@
       "latitude": 35.87667,
       "longitude": 127.735
     },
-    "timestamp": "2025-04-12T20:14:08.992506+09:00",
+    "timestamp": "2025-04-12T20:18:40.055217+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
+        "time": "2025-04-12T17:15:00+09:00",
         "temperature": 6.1,
-        "humidity": 80.6,
-        "wind_speed": 7.4,
+        "humidity": 79.0,
+        "wind_speed": 7.8,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
+        "time": "2025-04-12T18:15:00+09:00",
         "temperature": 5.5,
-        "humidity": 89.4,
-        "wind_speed": 5.8,
+        "humidity": 90.0,
+        "wind_speed": 6.3,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
+        "time": "2025-04-12T19:15:00+09:00",
         "temperature": 5.5,
-        "humidity": 99.7,
-        "wind_speed": 7.0,
+        "humidity": 100.0,
+        "wind_speed": 7.2,
         "rainfall": 0.7,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 6.0,
+        "time": "2025-04-12T20:15:00+09:00",
+        "temperature": 6.1,
         "humidity": 100.0,
-        "wind_speed": 8.6,
+        "wind_speed": 8.8,
         "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
@@ -1746,41 +1701,41 @@
       "latitude": 35.42861,
       "longitude": 128.98417
     },
-    "timestamp": "2025-04-12T20:14:13.542688+09:00",
+    "timestamp": "2025-04-12T20:18:43.139078+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 9.2,
-        "humidity": 81.4,
-        "wind_speed": 1.0,
-        "rainfall": 0.4,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 9.1,
+        "humidity": 81.9,
+        "wind_speed": 0.8,
+        "rainfall": 0.6,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 9.0,
-        "humidity": 86.9,
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 8.9,
+        "humidity": 88.2,
         "wind_speed": 0.2,
         "rainfall": 0.4,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
+        "time": "2025-04-12T19:15:00+09:00",
         "temperature": 8.2,
-        "humidity": 95.1,
-        "wind_speed": 0.1,
-        "rainfall": 1.0,
+        "humidity": 95.2,
+        "wind_speed": 0.3,
+        "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 8.2,
-        "humidity": 96.1,
-        "wind_speed": 0.1,
-        "rainfall": 1.0,
+        "time": "2025-04-12T20:15:00+09:00",
+        "temperature": 8.3,
+        "humidity": 96.4,
+        "wind_speed": 0.2,
+        "rainfall": 0.9,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
@@ -1793,41 +1748,41 @@
       "latitude": 35.41917,
       "longitude": 128.9825
     },
-    "timestamp": "2025-04-12T20:14:16.850364+09:00",
+    "timestamp": "2025-04-12T20:18:47.054546+09:00",
     "data": [
       {
-        "time": "2025-04-12T17:10:00+09:00",
-        "temperature": 9.2,
-        "humidity": 81.7,
-        "wind_speed": 1.0,
+        "time": "2025-04-12T17:15:00+09:00",
+        "temperature": 9.1,
+        "humidity": 82.1,
+        "wind_speed": 0.8,
+        "rainfall": 0.7,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0
+      },
+      {
+        "time": "2025-04-12T18:15:00+09:00",
+        "temperature": 8.9,
+        "humidity": 88.2,
+        "wind_speed": 0.2,
         "rainfall": 0.5,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T18:10:00+09:00",
-        "temperature": 9.0,
-        "humidity": 87.0,
+        "time": "2025-04-12T19:15:00+09:00",
+        "temperature": 8.2,
+        "humidity": 95.3,
         "wind_speed": 0.3,
-        "rainfall": 0.5,
+        "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       },
       {
-        "time": "2025-04-12T19:10:00+09:00",
+        "time": "2025-04-12T20:15:00+09:00",
         "temperature": 8.2,
-        "humidity": 95.2,
-        "wind_speed": 0.1,
-        "rainfall": 1.0,
-        "snow_cover": 0.0,
-        "snowfall_3hr": 0.0
-      },
-      {
-        "time": "2025-04-12T20:10:00+09:00",
-        "temperature": 8.2,
-        "humidity": 96.1,
-        "wind_speed": 0.0,
-        "rainfall": 1.0,
+        "humidity": 96.5,
+        "wind_speed": 0.2,
+        "rainfall": 0.8,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0
       }
