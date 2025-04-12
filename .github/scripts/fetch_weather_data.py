@@ -99,18 +99,31 @@ def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_k
 def generate_preview_image(weather_data, resorts):
   print("Generating preview image...")
 
-  width, height = 1200, 630
+  width, height = 2400, 1260
   image = Image.new('RGB', (width, height), (18, 18, 18))
   draw = ImageDraw.Draw(image)
+
+  margin_x = int(width * 0.083)
+  margin_y = int(height * 0.048)
+  title_y = int(height * 0.085)
+  date_y = int(height * 0.145)
+  separator_y = int(height * 0.19)
+  content_start_y = int(height * 0.235)
+  row_height = int(height * 0.147)
 
   bold_font_path = os.path.join(os.path.dirname(__file__), "NotoSansKR-Bold.ttf")
   regular_font_path = os.path.join(os.path.dirname(__file__), "NotoSansKR-Regular.ttf")
 
+  title_size = int(width * 0.033)
+  header_size = int(width * 0.019)
+  label_size = int(width * 0.014)
+  small_size = int(width * 0.011)
+
   try:
-    title_font = ImageFont.truetype(bold_font_path, 40)
-    header_font = ImageFont.truetype(bold_font_path, 24)
-    label_font = ImageFont.truetype(regular_font_path, 18)
-    small_font = ImageFont.truetype(regular_font_path, 14)
+    title_font = ImageFont.truetype(bold_font_path, title_size)
+    header_font = ImageFont.truetype(bold_font_path, header_size)
+    label_font = ImageFont.truetype(regular_font_path, label_size)
+    small_font = ImageFont.truetype(regular_font_path, small_size)
   except IOError as e:
     print(f"Error loading font: {e}")
     title_font = ImageFont.load_default()
@@ -118,14 +131,14 @@ def generate_preview_image(weather_data, resorts):
     label_font = ImageFont.load_default()
     small_font = ImageFont.load_default()
 
-  draw.text((width/2, 60), "Slopes cam", fill=(255, 255, 255), font=title_font, anchor="mm")
+  draw.text((width/2, title_y), "Slopes cam", fill=(255, 255, 255), font=title_font, anchor="mm")
 
   kst = pytz.timezone('Asia/Seoul')
   now = datetime.now(kst)
   date_str = f"{now.year}년 {now.month}월 {now.day}일 {now.hour:02d}:{now.minute:02d} 기준"
-  draw.text((width/2, 100), date_str, fill=(200, 200, 200), font=small_font, anchor="mm")
+  draw.text((width/2, date_y), date_str, fill=(200, 200, 200), font=small_font, anchor="mm")
 
-  draw.line([(100, 130), (width-100, 130)], fill=(80, 80, 80), width=2)
+  draw.line([(margin_x, separator_y), (width-margin_x, separator_y)], fill=(80, 80, 80), width=2)
 
   base_areas = []
   for resort in resorts:
@@ -147,35 +160,43 @@ def generate_preview_image(weather_data, resorts):
 
   columns = 2
   max_resorts = min(10, len(base_areas))
+  col_width = (width - 2 * margin_x) / columns
 
   for i, resort in enumerate(base_areas[:max_resorts]):
     col = i % columns
     row = i // columns
 
-    x = 100 + col * (width - 200) / columns
-    y = 160 + row * 90
+    x = margin_x + col * col_width
+    y = content_start_y + row * row_height
 
     draw.text((x, y), resort["name"], fill=(255, 255, 255), font=header_font)
 
-    metrics_y = y + 30
+    metrics_y = y + int(height * 0.045)
+    metrics_line2_y = metrics_y + int(height * 0.033)
+    metrics_col2_x = x + int(width * 0.125)
+    metrics_col3_x = x + int(width * 0.25)
+
     draw.text((x, metrics_y), f"{resort['temperature']:.1f}°C",
               fill=(255, 107, 107), font=label_font)
 
-    draw.text((x, metrics_y+22), f"3시간 적설  {resort['snowfall']:.1f}cm",
+    draw.text((x, metrics_line2_y), f"3시간 적설  {resort['snowfall']:.1f}cm",
               fill=(208, 235, 255), font=label_font)
 
-    draw.text((x+150, metrics_y), f"습도  {resort['humidity']:.0f}%",
+    draw.text((metrics_col2_x, metrics_y), f"습도  {resort['humidity']:.0f}%",
               fill=(74, 192, 252), font=label_font)
 
-    draw.text((x+150, metrics_y+22), f"10분 풍속  {resort['wind_speed']:.1f}m/s",
+    draw.text((metrics_col2_x, metrics_line2_y), f"10분 풍속  {resort['wind_speed']:.1f}m/s",
               fill=(32, 201, 151), font=label_font)
 
-    draw.text((x+300, metrics_y), f"강수량 (1시간)  {resort['rainfall']:.1f}mm",
+    draw.text((metrics_col3_x, metrics_y), f"강수량 (1시간)  {resort['rainfall']:.1f}mm",
               fill=(77, 171, 247), font=label_font)
 
   try:
-    image.save("preview.jpg", quality=90)
-    print("Preview image saved as preview.jpg")
+    image_png = image.convert('RGB')
+    image_png = image_png.quantize(colors=256)
+    image_png.save("preview.png", format='PNG', optimize=True, compress_level=9)
+
+    print("Preview images saved as preview.png")
   except Exception as e:
     print(f"Error saving preview image: {e}")
 
