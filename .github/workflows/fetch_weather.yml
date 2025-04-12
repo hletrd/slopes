@@ -37,7 +37,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add weather.json
+          git add weather.json preview.jpg
           git diff --quiet && git diff --staged --quiet || git commit -m "[Bot] Update weather data"
 
       - name: Push changes
