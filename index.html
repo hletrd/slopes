@@ -472,12 +472,12 @@
       padding: 0 5px;
       margin-bottom: 10px;
     }
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       .weather-info-wrapper {
         width: 50%;
       }
     }
-    @media (min-width: 1200px) {
+    @media (min-width: 1400px) {
       .weather-info-wrapper {
         width: 33.33%;
       }
@@ -533,6 +533,9 @@
       <div class="text-center p-5">
         <h2>전국 스키장 실시간 웹캠 모음</h2>
         <p class="lead">왼쪽 메뉴에서 스키장 및 카메라를 선택하세요.</p>
+        <p class="disclaimer text-secondary mt-4" style="font-size: 0.9rem;">
+          이 사이트에서 제공하는 영상은 각 스키장에서 제공하는 실시간 웹캠 영상의 단순 링크로, 스키장의 사정에 의해 웹캠 영상이 제공되지 않거나 변경될 수 있습니다. 날씨 정보는 기상청 API에서 제공되는 정보로 매 시간 업데이트되며, 부정확한 정보를 포함할 수 있습니다.
+        </p>
         <p class="lead github-buttons">
           <iframe src="https://ghbtns.com/github-btn.html?user=hletrd&repo=slopes&type=star&count=true" frameborder="0" scrolling="0" width="80" height="20" title="GitHub"></iframe>
           <iframe src="https://ghbtns.com/github-btn.html?user=hletrd&type=follow&count=true" frameborder="0" scrolling="0" width="170" height="20" title="Follow @hletrd on GitHub"></iframe>
@@ -948,6 +951,8 @@
                                 videoUrl,
                                 webcams[webcamIndex].video_type
                               );
+
+                              updateWeatherDisplay(resortId);
                             } else {
                               videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
                             }
@@ -1171,6 +1176,8 @@
                     if (videoUrl) {
                       const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-${index}`, webcams[webcamIndex].video_type);
                       if (player) activePlayers.push(player);
+
+                      updateWeatherDisplay(resortId);
                     } else {
                       videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
                     }
@@ -1600,6 +1607,31 @@
       window.addEventListener('hashchange', handleHashChange);
 
       function initializeApp() {
+        let initialWeatherDataPromise = Promise.resolve(null);
+
+        if (window.location.hash) {
+          initialWeatherDataPromise = fetch('weather.json?v=' + new Date().getTime())
+            .then(response => {
+              if (!response.ok) {
+                console.warn('Weather data not available');
+                return null;
+              }
+              return response.json();
+            })
+            .then(weatherResult => {
+              if (weatherResult) {
+                weatherData = weatherResult;
+                console.log('Weather data loaded:', weatherData.length, 'locations');
+                return weatherResult;
+              }
+              return null;
+            })
+            .catch(error => {
+              console.error('Error loading weather data:', error);
+              return null;
+            });
+        }
+
         fetch('links.json?v=' + new Date().getTime())
           .then(response => {
             if (!response.ok) {
@@ -1611,38 +1643,44 @@
             if (Array.isArray(responseData) && responseData.length > 0) {
               initializeResorts(responseData);
 
-              return fetch('weather.json?v=' + new Date().getTime())
-                .then(response => {
-                  if (!response.ok) {
-                    console.warn('Weather data not available');
-                    return null;
-                  }
-                  return response.json();
-                })
-                .then(weatherResult => {
-                  if (weatherResult) {
-                    weatherData = weatherResult;
-                    console.log('Weather data loaded:', weatherData.length, 'locations');
-
-                    if (window.location.hash) {
-                      const parts = window.location.hash.substring(1).split('/');
-                      const resortId = parts[0];
-                      if (resortId) {
-                        updateWeatherDisplay(resortId);
+              return initialWeatherDataPromise.then(existingWeatherData => {
+                if (existingWeatherData) {
+                  return existingWeatherData;
+                } else {
+                  return fetch('weather.json?v=' + new Date().getTime())
+                    .then(response => {
+                      if (!response.ok) {
+                        console.warn('Weather data not available');
+                        return null;
                       }
-                    }
-
-                    updateAllResortsWeather();
-                  }
-
-                  if (window.location.hash) {
-                    handleHashChange();
-                  } else {
-                    updateFavoritesDisplay();
-                  }
-                });
+                      return response.json();
+                    });
+                }
+              });
             } else {
               throw new Error('Invalid data format');
+            }
+          })
+          .then(weatherResult => {
+            if (weatherResult) {
+              weatherData = weatherResult;
+              console.log('Weather data loaded:', weatherData.length, 'locations');
+
+              if (window.location.hash) {
+                const parts = window.location.hash.substring(1).split('/');
+                const resortId = parts[0];
+                if (resortId) {
+                  updateWeatherDisplay(resortId);
+                }
+              }
+
+              updateAllResortsWeather();
+            }
+
+            if (window.location.hash) {
+              handleHashChange();
+            } else {
+              updateFavoritesDisplay();
             }
           })
           .catch(error => {
