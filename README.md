@@ -2,7 +2,7 @@
 
 * 링크: [http://ski.atik.kr](http://ski.atik.kr)
 
-![preview](preview.jpg)
+![preview](preview.png)
 
 * 전국 스키장의 실시간 웹캠 뷰를 제공합니다.
 * 전국 스키장의 실시간 날씨 정보를 제공합니다.
