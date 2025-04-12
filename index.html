@@ -233,7 +233,7 @@
       color: #ffd700;
     }
     .favorites-section {
-      margin-top: 16px;
+      margin-top: 0;
       padding: 15px;
       background-color: #1e1e1e;
       border-radius: 5px;
@@ -519,7 +519,7 @@
       display: flex;
       flex-wrap: wrap;
       margin-top: 0;
-      padding-bottom: 8px;
+      padding-bottom: 0;
       margin-left: -12px;
       width: calc(100% + 10px);
     }
@@ -598,6 +598,32 @@
       display: none !important;
       content: none !important;
     }
+    .favorite-header {
+      display: block;
+      margin: 0;
+      padding: 15px;
+      font-size: 16px;
+    }
+    .favorite-location {
+      font-weight: bold;
+      display: inline;
+    }
+    .favorite-resort {
+      font-size: 0.85em;
+      color: #999;
+      font-weight: normal;
+      margin-left: 10px;
+      display: inline;
+    }
+    .disclaimer a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .disclaimer br {
+      display: block;
+      content: "";
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -622,9 +648,11 @@
         <p class="lead" style="font-size: 1.1rem;">왼쪽 메뉴에서 스키장 또는 카메라를 선택하세요.</p>
         <p class="disclaimer text-secondary mt-4" style="font-size: 0.8rem;">
           이 사이트에서 제공하는 영상은 각 스키장에서 제공하는 실시간 웹캠 영상의 단순 링크로, 스키장의 상황에 따라 웹캠 영상이 제공되지 않거나 변경될 수 있습니다. 날씨는 기상청 API에서 제공되는 정보로 매 시간 업데이트되며, 부정확한 정보를 포함할 수 있습니다. 날씨는 위치 정보만을 반영하므로 고도에 따른 변화를 반영하지 않습니다.
+          <br>
+          사이트 관련 문의 및 기능 제안: <a href="mailto:01@0101010101.com">01@0101010101.com</a>
         </p>
         <p class="lead github-buttons">
-          <iframe src="https://ghbtns.com/github-btn.html?user=hletrd&repo=slopes&type=star&count=true" frameborder="0" scrolling="0" width="60" height="20" title="GitHub"></iframe>          <iframe src="https://ghbtns.com/github-btn.html?user=hletrd&type=follow&count=true" frameborder="0" scrolling="0" width="120" height="20" title="Follow @hletrd on GitHub"></iframe>
+          <iframe src="https://ghbtns.com/github-btn.html?user=hletrd&repo=slopes&type=star&count=true" frameborder="0" scrolling="0" width="60" height="20" title="GitHub"></iframe><iframe src="https://ghbtns.com/github-btn.html?user=hletrd&type=follow&count=true" frameborder="0" scrolling="0" width="120" height="20" title="Follow @hletrd on GitHub"></iframe>
         </p>
       </div>
       <div id="favorites-container" class="favorites-section" style="display: none;">
@@ -755,11 +783,22 @@
           const videoCard = document.createElement('div');
           videoCard.className = 'video-card';
 
-          const header = document.createElement('h3');
-          header.textContent = `${favorite.resortName} - ${favorite.webcamName}`;
-
           const headerContainer = document.createElement('div');
           headerContainer.className = 'favorites-header-container';
+
+          const header = document.createElement('div');
+          header.className = 'favorite-header';
+
+          const locationName = document.createElement('span');
+          locationName.className = 'favorite-location';
+          locationName.textContent = favorite.webcamName;
+
+          const resortName = document.createElement('span');
+          resortName.className = 'favorite-resort';
+          resortName.textContent = favorite.resortName;
+
+          header.appendChild(locationName);
+          header.appendChild(resortName);
           headerContainer.appendChild(header);
 
           const removeButton = document.createElement('button');
@@ -1827,4 +1866,5 @@
   </script>
 </body>
 </html>
+
 
