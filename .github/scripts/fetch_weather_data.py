@@ -7,6 +7,9 @@ from datetime import datetime, timedelta
 import pytz
 from PIL import Image, ImageDraw, ImageFont
 import os.path
+import threading
+from concurrent.futures import ThreadPoolExecutor
+from threading import Lock
 
 HOURS = 1
 INTERVAL = 60
@@ -250,6 +253,7 @@ def main():
 
   print(f"Removed {removed_locations} locations no longer in links.json")
 
+  fetch_tasks = []
   for resort in resorts:
     resort_name = resort.get("name", "Unknown Resort")
     coordinates = resort.get("coordinates", [])
@@ -268,19 +272,32 @@ def main():
         print(f"Invalid coordinates for {full_name}, skipping")
         continue
 
-      print(f"Fetching weather data for {full_name}")
-      result = fetch_weather_data_for_location(
-        lat, lon, location_name, resort_name, auth_key
-      )
+      fetch_tasks.append((resort_name, location_name, lat, lon, full_name))
 
-      if result:
-        key = f"{resort_name}:{location_name}"
+  lock = Lock()
+
+  def fetch_location_data(resort_name, location_name, lat, lon, full_name):
+    print(f"Fetching weather data for {full_name}")
+    result = fetch_weather_data_for_location(
+      lat, lon, location_name, resort_name, auth_key
+    )
+
+    if result:
+      key = f"{resort_name}:{location_name}"
+      with lock:
         if key in weather_data_dict:
           weather_data_dict[key] = result
+          nonlocal updated_locations
           updated_locations += 1
         else:
           weather_data_dict[key] = result
+          nonlocal new_locations
           new_locations += 1
+
+  with ThreadPoolExecutor(max_workers=20) as executor:
+    for task in fetch_tasks:
+      resort_name, location_name, lat, lon, full_name = task
+      executor.submit(fetch_location_data, resort_name, location_name, lat, lon, full_name)
 
   updated_weather_data = list(weather_data_dict.values())
 
