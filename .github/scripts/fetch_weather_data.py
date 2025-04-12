@@ -5,9 +5,11 @@ import os
 import sys
 from datetime import datetime, timedelta
 import pytz
+from PIL import Image, ImageDraw, ImageFont
+import os.path
 
 HOURS = 3
-INTERVAL = 60  # in minutes
+INTERVAL = 60
 
 def format_datetime(dt):
   return dt.strftime("%Y%m%d%H%M")
@@ -94,6 +96,89 @@ def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_k
     print(f"Error fetching weather data for {location_name}: {e}")
     return None
 
+def generate_preview_image(weather_data, resorts):
+  print("Generating preview image...")
+
+  width, height = 1200, 630
+  image = Image.new('RGB', (width, height), (18, 18, 18))
+  draw = ImageDraw.Draw(image)
+
+  bold_font_path = os.path.join(os.path.dirname(__file__), "NotoSansKR-Bold.ttf")
+  regular_font_path = os.path.join(os.path.dirname(__file__), "NotoSansKR-Regular.ttf")
+
+  try:
+    title_font = ImageFont.truetype(bold_font_path, 40)
+    header_font = ImageFont.truetype(bold_font_path, 24)
+    label_font = ImageFont.truetype(regular_font_path, 18)
+    small_font = ImageFont.truetype(regular_font_path, 14)
+  except IOError as e:
+    print(f"Error loading font: {e}")
+    title_font = ImageFont.load_default()
+    header_font = ImageFont.load_default()
+    label_font = ImageFont.load_default()
+    small_font = ImageFont.load_default()
+
+  draw.text((width/2, 60), "Slopes cam", fill=(255, 255, 255), font=title_font, anchor="mm")
+
+  kst = pytz.timezone('Asia/Seoul')
+  now = datetime.now(kst)
+  date_str = f"{now.year}년 {now.month}월 {now.day}일 {now.hour:02d}:{now.minute:02d} 기준"
+  draw.text((width/2, 100), date_str, fill=(200, 200, 200), font=small_font, anchor="mm")
+
+  draw.line([(100, 130), (width-100, 130)], fill=(80, 80, 80), width=2)
+
+  base_areas = []
+  for resort in resorts:
+    resort_name = resort.get("name", "Unknown Resort")
+    base_area = next((w for w in weather_data if w["resort"] == resort_name and w["name"] == "스키하우스"), None)
+
+    if base_area and base_area.get("data") and len(base_area["data"]) > 0:
+      most_recent = base_area["data"][-1]
+      base_areas.append({
+        "name": resort_name,
+        "temperature": most_recent["temperature"],
+        "humidity": most_recent["humidity"],
+        "wind_speed": most_recent["wind_speed"],
+        "rainfall": most_recent["rainfall"],
+        "snowfall": most_recent["snowfall_3hr"]
+      })
+
+  base_areas.sort(key=lambda x: x["temperature"])
+
+  columns = 2
+  max_resorts = min(10, len(base_areas))
+
+  for i, resort in enumerate(base_areas[:max_resorts]):
+    col = i % columns
+    row = i // columns
+
+    x = 100 + col * (width - 200) / columns
+    y = 160 + row * 90
+
+    draw.text((x, y), resort["name"], fill=(255, 255, 255), font=header_font)
+
+    metrics_y = y + 30
+    draw.text((x, metrics_y), f"{resort['temperature']:.1f}°C",
+              fill=(255, 107, 107), font=label_font)
+
+    draw.text((x, metrics_y+22), f"3시간 적설  {resort['snowfall']:.1f}cm",
+              fill=(208, 235, 255), font=label_font)
+
+    draw.text((x+150, metrics_y), f"습도  {resort['humidity']:.0f}%",
+              fill=(74, 192, 252), font=label_font)
+
+    draw.text((x+150, metrics_y+22), f"10분 풍속  {resort['wind_speed']:.1f}m/s",
+              fill=(32, 201, 151), font=label_font)
+
+    draw.text((x+300, metrics_y), f"강수량 (1시간)  {resort['rainfall']:.1f}mm",
+              fill=(77, 171, 247), font=label_font)
+
+  try:
+    image.save("preview.jpg", quality=90)
+    print("Preview image saved as preview.jpg")
+  except Exception as e:
+    print(f"Error saving preview image: {e}")
+
 def main():
   auth_key = os.environ.get("KMA_API_KEY")
   if not auth_key:
@@ -107,7 +192,21 @@ def main():
     print(f"Error reading links.json: {e}")
     sys.exit(1)
 
-  weather_data = []
+  existing_weather_data = []
+  try:
+    with open('weather.json', 'r', encoding='utf-8') as f:
+      existing_weather_data = json.load(f)
+      print(f"Loaded existing weather data with {len(existing_weather_data)} entries")
+  except (FileNotFoundError, json.JSONDecodeError) as e:
+    print(f"No existing weather data found or file is invalid: {e}")
+
+  weather_data_dict = {}
+  for entry in existing_weather_data:
+    key = f"{entry['resort']}:{entry['name']}"
+    weather_data_dict[key] = entry
+
+  updated_locations = 0
+  new_locations = 0
 
   for resort in resorts:
     resort_name = resort.get("name", "Unknown Resort")
@@ -133,17 +232,27 @@ def main():
       )
 
       if result:
-        weather_data.append(result)
+        key = f"{resort_name}:{location_name}"
+        if key in weather_data_dict:
+          weather_data_dict[key] = result
+          updated_locations += 1
+        else:
+          weather_data_dict[key] = result
+          new_locations += 1
 
-  if weather_data:
+  updated_weather_data = list(weather_data_dict.values())
+
+  if updated_weather_data:
     output_file = "weather.json"
     with open(output_file, "w", encoding="utf-8") as f:
-      json.dump(weather_data, f, ensure_ascii=False, indent=2)
+      json.dump(updated_weather_data, f, ensure_ascii=False, indent=2)
 
     print(
-      f"Successfully saved weather data for {len(weather_data)} "
-      f"locations to {output_file}"
+      f"Successfully saved weather data for {len(updated_weather_data)} "
+      f"locations to {output_file} ({updated_locations} updated, {new_locations} new)"
     )
+
+    generate_preview_image(updated_weather_data, resorts)
   else:
     print("No weather data collected")
 
