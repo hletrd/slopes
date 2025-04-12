@@ -25,6 +25,14 @@
   <meta name="twitter:description" content="전국 스키장 실시간 웹캠 및 날씨">
   <meta name="twitter:image" content="http://ski.atik.kr/preview.png">
 
+  <meta name="theme-color" content="#121212">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Slopes cam">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video-js.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/@videojs/themes@1/dist/forest/index.css" rel="stylesheet" />
@@ -419,6 +427,71 @@
     .github-buttons {
       margin-bottom: -10px;
     }
+    .add-to-home {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      background-color: #0069d9;
+      color: white;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      cursor: pointer;
+      border: none;
+    }
+    .add-to-home i {
+      font-size: 24px;
+    }
+    .installation-modal {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #222;
+      color: white;
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+      padding-top: 20px;
+      text-align: center;
+    }
+    .installation-modal h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    .installation-steps {
+      margin-top: 10px;
+      padding: 15px;
+      padding-bottom: 10px;
+      background-color: #333;
+      border-radius: 5px;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .installation-steps ol {
+      margin-left: 20px;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+    .installation-steps li {
+      margin-bottom: 8px;
+    }
     @media (max-width: 991px) {
       .videos-grid, .favorites-grid {
         grid-template-columns: 1fr;
@@ -669,6 +742,32 @@
 
   <div class="footer">
     이 서비스는 스키장에서 공식적으로 제공하는 서비스가 아닙니다. 관련하여 스키장에 문의를 넣지 마세요.
+  </div>
+
+  <button id="addToHomeButton" class="add-to-home">
+    <i class="bi bi-plus-square"></i>
+  </button>
+
+  <div id="installationModal" class="installation-modal">
+    <button class="modal-close" id="closeModal"><i class="bi bi-x"></i></button>
+    <h4>홈 화면에 추가</h4>
+    <div class="installation-steps">
+      <div id="iOSInstructions">
+        <p><strong>iPhone</strong></p>
+        <ol>
+          <li>Safari 브라우저에서 공유 버튼 <i class="bi bi-box-arrow-up"></i> 탭</li>
+          <li>"홈 화면에 추가" 선택</li>
+          <li>"추가" 버튼 탭</li>
+        </ol>
+      </div>
+      <div id="androidInstructions">
+        <p><strong>Android</strong></p>
+        <ol>
+          <li>Chrome 메뉴 <i class="bi bi-three-dots-vertical"></i> 탭</li>
+          <li>"앱 설치" 또는 "홈 화면에 추가" 선택</li>
+        </ol>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video.min.js"></script>
@@ -1868,6 +1967,63 @@
     gtag('js', new Date());
 
     gtag('config', 'G-TDF3M6JH2R');
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const addToHomeButton = document.getElementById('addToHomeButton');
+      const installationModal = document.getElementById('installationModal');
+      const closeModal = document.getElementById('closeModal');
+      const iOSInstructions = document.getElementById('iOSInstructions');
+      const androidInstructions = document.getElementById('androidInstructions');
+      let deferredPrompt;
+
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                          window.navigator.standalone || document.referrer.includes('android-app://');
+
+      if (isIOS) {
+        iOSInstructions.style.display = 'block';
+        androidInstructions.style.display = 'none';
+      } else {
+        iOSInstructions.style.display = 'none';
+        androidInstructions.style.display = 'block';
+      }
+
+      if ((isIOS || /Android/.test(navigator.userAgent)) && !isStandalone) {
+        addToHomeButton.style.display = 'flex';
+      }
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        addToHomeButton.style.display = 'flex';
+      });
+
+      addToHomeButton.addEventListener('click', () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the install prompt');
+              addToHomeButton.style.display = 'none';
+            }
+            deferredPrompt = null;
+          });
+        } else {
+          installationModal.style.display = 'block';
+        }
+      });
+
+      closeModal.addEventListener('click', () => {
+        installationModal.style.display = 'none';
+      });
+
+      window.addEventListener('appinstalled', (evt) => {
+        addToHomeButton.style.display = 'none';
+      });
+    });
   </script>
 </body>
 </html>
