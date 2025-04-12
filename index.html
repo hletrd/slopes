@@ -330,11 +330,16 @@
       align-items: center;
       justify-content: space-between;
       height: 100%;
+      position: relative;
     }
     .mobile-title {
       font-size: 24px;
       font-weight: bold;
-      margin-left: -12px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      width: auto;
     }
     .mobile-title a {
       color: #fff;
@@ -357,11 +362,13 @@
       display: inline-block;
       font-size: 1.4rem;
       margin-right: 10px;
+      line-height: 1.5;
     }
     .resort-label {
       font-size: 1.1rem;
       color: #888;
       font-weight: normal;
+      line-height: 1.5;
     }
     .link-container {
       height: 250px;
@@ -381,6 +388,7 @@
       margin-top: 16px;
       margin-bottom: 0;
       padding: 12px;
+      padding-bottom: 0;
       border-radius: 5px;
     }
     .all-resorts-weather h3 {
@@ -428,6 +436,8 @@
       .main-content {
         margin-left: 0;
         margin-top: 60px;
+        padding: 0;
+        padding-bottom: 40px;
       }
       .sidebar.active {
         width: 250px;
@@ -455,6 +465,34 @@
       .footer {
         font-size: 0.75rem;
         padding: 8px;
+        height: auto;
+        min-height: 36px;
+      }
+    }
+    @media (max-width: 576px) {
+      .main-content {
+        padding-bottom: 44px;
+      }
+      .inline-title {
+        display: block;
+        margin-bottom: 12px;
+      }
+      .inline-title-submenu {
+        margin-bottom: 2px;
+      }
+      .resort-label {
+        display: block;
+        margin-bottom: 12px;
+      }
+    }
+    @media (max-width: 480px) {
+      .wind-speed::after {
+        content: "";
+        display: block;
+        margin-bottom: 2px;
+      }
+      #default-message p.lead {
+        font-size: 0.95rem !important;
       }
     }
     .weather-info {
@@ -472,6 +510,10 @@
       font-size: 0.75rem;
       display: block;
       margin-top: 3px;
+    }
+    .wind-speed::after {
+      content: "";
+      display: inline;
     }
     .weather-container {
       display: flex;
@@ -800,7 +842,7 @@
               <div class="weather-data">
                 <span class="temperature"><i class="bi bi-thermometer-half"></i>${mostRecent.temperature.toFixed(1)}°C</span> &bull;
                 <span class="humidity"><i class="bi bi-moisture"></i>${mostRecent.humidity.toFixed(0)}%</span> &bull;
-                <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span> &bull;
+                <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span>
                 <span class="rainfall"><i class="bi bi-droplet-fill"></i>${mostRecent.rainfall.toFixed(1)}mm</span> &bull;
                 <span class="snowfall"><i class="bi bi-snow"></i>${mostRecent.snowfall_3hr.toFixed(1)}cm</span>
               </div>
@@ -903,7 +945,7 @@
                <div class="weather-data">
                  <span class="temperature"><i class="bi bi-thermometer-half"></i>${mostRecent.temperature.toFixed(1)}°C</span> &bull;
                  <span class="humidity"><i class="bi bi-moisture"></i>${mostRecent.humidity.toFixed(0)}%</span> &bull;
-                 <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span> &bull;
+                 <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span>
                  <span class="rainfall"><i class="bi bi-droplet-fill"></i>${mostRecent.rainfall.toFixed(1)}mm</span> &bull;
                  <span class="snowfall"><i class="bi bi-snow"></i>${mostRecent.snowfall_3hr.toFixed(1)}cm</span>
                </div>
@@ -1221,7 +1263,7 @@
 
               const webcamTitle = document.createElement('h2');
               webcamTitle.textContent = webcamName;
-              webcamTitle.className = 'inline-title';
+              webcamTitle.className = 'inline-title inline-title-submenu';
               webcamSection.appendChild(webcamTitle);
 
               const resortLabel = document.createElement('span');
