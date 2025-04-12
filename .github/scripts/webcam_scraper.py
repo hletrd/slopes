@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
+import time
 
 
 def extract_m3u8_from_url(url):
@@ -14,6 +15,7 @@ def extract_m3u8_from_url(url):
 
   try:
     response = requests.get(url, headers=headers)
+    time.sleep(1)
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, 'html.parser')
