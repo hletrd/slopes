@@ -376,6 +376,7 @@
       font-size: 1.4rem;
       margin-right: 10px;
       line-height: 1.5;
+      margin-bottom: 12px;
     }
     .resort-label {
       font-size: 1.1rem;
@@ -411,6 +412,7 @@
     }
     .content-section-default {
       padding: 8px;
+      padding-bottom: 0;
     }
     .footer {
       position: fixed;
@@ -597,7 +599,7 @@
       display: flex;
       flex-wrap: wrap;
       margin-top: 0;
-      padding-bottom: 0;
+      padding-bottom: 8px;
       margin-left: -12px;
       width: calc(100% + 10px);
     }
@@ -741,7 +743,7 @@
   </div>
 
   <div class="footer">
-    이 서비스는 스키장에서 공식적으로 제공하는 서비스가 아닙니다. 관련하여 스키장에 문의를 넣지 마세요.
+    이 서비스는 스키장에서 공식적으로 제공하는 서비스가 아닙니다. 관련하여 스키장에 문의하지 마세요.
   </div>
 
   <button id="addToHomeButton" class="add-to-home">
@@ -985,7 +987,7 @@
               <div class="weather-data">
                 <span class="temperature"><i class="bi bi-thermometer-half"></i>${mostRecent.temperature.toFixed(1)}°C</span> &bull;
                 <span class="humidity"><i class="bi bi-moisture"></i>${mostRecent.humidity.toFixed(0)}%</span> &bull;
-                <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span>
+                <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span> &bull;
                 <span class="rainfall"><i class="bi bi-droplet-fill"></i>${mostRecent.rainfall.toFixed(1)}mm</span> &bull;
                 <span class="snowfall"><i class="bi bi-snow"></i>${mostRecent.snowfall_3hr.toFixed(1)}cm</span>
               </div>
@@ -1088,7 +1090,7 @@
                <div class="weather-data">
                  <span class="temperature"><i class="bi bi-thermometer-half"></i>${mostRecent.temperature.toFixed(1)}°C</span> &bull;
                  <span class="humidity"><i class="bi bi-moisture"></i>${mostRecent.humidity.toFixed(0)}%</span> &bull;
-                 <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span>
+                 <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span> &bull;
                  <span class="rainfall"><i class="bi bi-droplet-fill"></i>${mostRecent.rainfall.toFixed(1)}mm</span> &bull;
                  <span class="snowfall"><i class="bi bi-snow"></i>${mostRecent.snowfall_3hr.toFixed(1)}cm</span>
                </div>
@@ -1331,6 +1333,10 @@
           const resortName = resort.name;
           const webcams = resort.links || resort.webcams || [];
           const hasSubmenu = webcams.length > 0;
+
+          if (webcams.length === 0) {
+            return;
+          }
 
           const menuItemContainer = document.createElement('div');
           menuItemContainer.className = 'menu-item-container';
