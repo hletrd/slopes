@@ -261,6 +261,14 @@
       color: #ffd700;
       font-weight: 650;
     }
+    .bookmark-button-error {
+      top: 16px;
+      right: 16px;
+    }
+    .bookmark-button-link {
+      top: 16px;
+      right: 16px;
+    }
     .favorites-section {
       margin-top: 0;
       padding: 15px;
@@ -1789,24 +1797,40 @@
 
           player.on('error', function() {
             const error = player.error();
+            console.error('Video player error:', error);
 
-            if (error && error.code === 4 && linkUrl) {
-              container.innerHTML = `
-                <div class="error-message">
-                  <p>직접 스트리밍이 제한되었습니다 (403 Forbidden).</p>
-                  <button class="btn btn-primary mt-2" onclick="window.open('${linkUrl}', '_blank')">원본 링크에서 보기</button>
-                </div>
-              `;
-
-              if (resortId && !isNaN(webcamIndex)) {
-                addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 1);
-              }
+            // Get the direct link for the webcam
+            let directLink = null;
+            if (resort && resort.webcam) {
+              directLink = resort.webcam.link || null;
             } else {
-              container.innerHTML = '<div class="error-message">비디오 재생 중 오류가 발생했습니다.</div>';
-
-              if (resortId && !isNaN(webcamIndex)) {
-                addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 1);
+              // Try to find the direct link from data
+              const resortData = data.find(r => r.id === resortId);
+              if (resortData) {
+                const webcams = resortData.links || resortData.webcams || [];
+                if (webcams[webcamIndex] && webcams[webcamIndex].link) {
+                  directLink = webcams[webcamIndex].link;
+                }
               }
+            }
+
+            // Create error message with button
+            let errorHtml = '<div class="error-message"><p>비디오 재생 중 오류가 발생했습니다.</p>';
+
+            if (directLink) {
+              errorHtml += `<div class="mt-3">
+                <a href="${directLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                  <i class="bi bi-box-arrow-up-right me-2"></i>
+                  원본 링크에서 보기
+                </a>
+              </div>`;
+            }
+
+            errorHtml += '</div>';
+            container.innerHTML = errorHtml;
+
+            if (resortId && !isNaN(webcamIndex)) {
+              addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 1);
             }
           });
 
