@@ -16,6 +16,7 @@
     }
     h2 {
       margin-bottom: 24px;
+      font-size: 1.6rem;
     }
     .sidebar {
       width: 250px;
@@ -165,7 +166,7 @@
     .error-message {
       color: #ff6b6b;
       padding: 10px;
-      margin: 10px 0;
+      margin: 10px 10px;
       background-color: rgba(255, 107, 107, 0.1);
       border-radius: 5px;
     }
@@ -332,12 +333,42 @@
     .menu-item-container {
       position: relative;
     }
+    .inline-title {
+      display: inline-block;
+      font-size: 1.4rem;
+      margin-right: 10px;
+    }
+    .resort-label {
+      font-size: 1.1rem;
+      color: #888;
+      font-weight: normal;
+    }
+    .link-container {
+      height: 250px;
+      background-color: #1e1e1e;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .success-message {
+      z-index: 100;
+    }
+    .bookmarks-title {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+    .content-section-default {
+      padding: 8px;
+    }
+    video {
+      border-radius: 5px;
+    }
     @media (max-width: 991px) {
       .videos-grid, .favorites-grid {
         grid-template-columns: 1fr;
         width: 100%;
       }
-
       .video-js, .iframe-container {
         max-width: 100%;
       }
@@ -376,6 +407,9 @@
         display: block;
         max-height: 1000px;
       }
+      .content-section-default {
+        padding: 0;
+      }
     }
   </style>
 </head>
@@ -395,13 +429,13 @@
   </div>
 
   <div class="main-content">
-    <div id="default-message" class="content-section active">
+    <div id="default-message" class="content-section content-section-default active">
       <div class="text-center p-5">
         <h2>전국 스키장 실시간 웹캠 모음</h2>
         <p class="lead">왼쪽 메뉴에서 스키장 및 카메라를 선택하세요.</p>
       </div>
       <div id="favorites-container" class="favorites-section" style="display: none;">
-        <h3>북마크된 영상</h3>
+        <h3 class="bookmarks-title">북마크된 영상</h3>
         <div id="favorites-grid" class="favorites-grid"></div>
       </div>
     </div>
@@ -558,15 +592,6 @@
               favorite.videoType
             );
             if (player) activePlayers.push(player);
-
-            const viewButton = document.createElement('button');
-            viewButton.className = 'btn btn-primary mt-2 w-100';
-            viewButton.textContent = '전체화면으로 보기';
-            viewButton.addEventListener('click', function() {
-              window.location.hash = `${favorite.resortId}/${favorite.webcamIndex}`;
-            });
-
-            videoCard.appendChild(viewButton);
           }
         });
       }
@@ -625,7 +650,6 @@
           const resortId = parts[0];
           const webcamId = parts[1];
 
-          // Always hide the default message when a hash is present
           const defaultMessage = document.getElementById('default-message');
           defaultMessage.classList.remove('active');
           defaultMessage.style.display = 'none';
@@ -810,6 +834,7 @@
 
           const contentTitle = document.createElement('h2');
           contentTitle.textContent = resortName;
+          contentTitle.className = 'inline-title';
           contentSection.appendChild(contentTitle);
 
           mainContent.appendChild(contentSection);
@@ -837,7 +862,13 @@
 
               const webcamTitle = document.createElement('h2');
               webcamTitle.textContent = webcamName;
+              webcamTitle.className = 'inline-title';
               webcamSection.appendChild(webcamTitle);
+
+              const resortLabel = document.createElement('span');
+              resortLabel.textContent = resortName;
+              resortLabel.className = 'resort-label';
+              webcamSection.appendChild(resortLabel);
 
               const videoContainer = document.createElement('div');
               videoContainer.className = 'video-container';
@@ -860,7 +891,6 @@
                   section.classList.remove('active');
                 });
 
-                // Ensure default-message is hidden
                 const defaultMessage = document.getElementById('default-message');
                 defaultMessage.classList.remove('active');
                 defaultMessage.style.display = 'none';
@@ -932,7 +962,6 @@
               section.classList.remove('active');
             });
 
-            // Ensure default-message is hidden
             const defaultMessage = document.getElementById('default-message');
             defaultMessage.classList.remove('active');
             defaultMessage.style.display = 'none';
@@ -1067,10 +1096,7 @@
 
         if (videoType === 'link') {
           const linkContainer = document.createElement('div');
-          linkContainer.className = 'd-flex justify-content-center align-items-center';
-          linkContainer.style.height = '250px';
-          linkContainer.style.backgroundColor = '#1e1e1e';
-          linkContainer.style.borderRadius = '5px';
+          linkContainer.className = 'd-flex justify-content-center align-items-center link-container';
 
           const linkButton = document.createElement('a');
           linkButton.href = videoUrl;
@@ -1188,7 +1214,6 @@
           return;
         }
 
-        // Check if bookmark button already exists in the container
         if (container.querySelector('.bookmark-button')) {
           return;
         }
@@ -1231,8 +1256,7 @@
 
           const container = player.el().parentNode;
           const successMsg = document.createElement('div');
-          successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
-          successMsg.style.zIndex = '100';
+          successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
           successMsg.textContent = '캡처에 성공했습니다.';
           container.appendChild(successMsg);
 
@@ -1259,8 +1283,7 @@
             downloadImage(dataURL, 'webcam-capture.png');
 
             const successMsg = document.createElement('div');
-            successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3';
-            successMsg.style.zIndex = '100';
+            successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
             successMsg.textContent = '캡처 완료!';
             container.appendChild(successMsg);
 
