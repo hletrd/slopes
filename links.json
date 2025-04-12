@@ -5,13 +5,13 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.3369,
-        "longitude": 127.2934
+        "latitude": 37.336926,
+        "longitude": 127.293508
       },
       {
-        "name": "정상 휴게소",
-        "latitude": 37.3292,
-        "longitude": 127.2808
+        "name": "정상",
+        "latitude": 37.328921,
+        "longitude": 127.281187
       }
     ],
     "links": [
@@ -43,18 +43,23 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.21583,
-        "longitude": 127.34694
+        "latitude": 37.217222,
+        "longitude": 127.344901
       },
       {
-        "name": "오렌지 정상",
-        "latitude": 37.20972,
-        "longitude": 127.34333
+        "name": "뉴오렌지 정상",
+        "latitude": 37.209838,
+        "longitude": 127.343431
       },
       {
         "name": "블루 정상",
-        "latitude": 37.20972,
-        "longitude": 127.34333
+        "latitude": 37.211455,
+        "longitude": 127.339681
+      },
+      {
+        "name": "실버 정상",
+        "latitude": 37.213011,
+        "longitude": 127.339173
       }
     ],
     "links": [
@@ -86,13 +91,23 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.82139,
-        "longitude": 127.58972
+        "latitude": 37.820268,
+        "longitude": 127.590066
       },
       {
         "name": "정상",
-        "latitude": 37.81472,
-        "longitude": 127.5825
+        "latitude": 37.815248,
+        "longitude": 127.582710
+      },
+      {
+        "name": "래빗 상단",
+        "latitude": 37.814240,
+        "longitude": 127.587458
+      },
+      {
+        "name": "레퍼드 상단",
+        "latitude": 37.818119,
+        "longitude": 127.584561
       }
     ],
     "links": [
@@ -109,13 +124,23 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.645,
-        "longitude": 127.68194
+        "latitude": 37.644810,
+        "longitude": 127.682120
       },
       {
         "name": "정상",
-        "latitude": 37.63722,
-        "longitude": 127.68972
+        "latitude": 37.637450,
+        "longitude": 127.690009
+      },
+      {
+        "name": "재즈 상단",
+        "latitude": 37.642460,
+        "longitude": 127.692647
+      },
+      {
+        "name": "힙합 상단",
+        "latitude": 37.639005,
+        "longitude": 127.684443
       }
     ],
     "links": [
@@ -131,13 +156,23 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.4075,
-        "longitude": 127.80861
+        "latitude": 37.407486,
+        "longitude": 127.807955
       },
       {
         "name": "정상",
-        "latitude": 37.40222,
-        "longitude": 127.81861
+        "latitude": 37.402345,
+        "longitude": 127.819064
+      },
+      {
+        "name": "버드 정상",
+        "latitude": 37.402541,
+        "longitude": 127.812239
+      },
+      {
+        "name": "플라워 휴게소",
+        "latitude": 37.408135,
+        "longitude": 127.814674
       }
     ],
     "links": [
@@ -169,13 +204,18 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.49028,
-        "longitude": 128.24944
+        "latitude": 37.490504,
+        "longitude": 128.249569
       },
       {
         "name": "정상",
-        "latitude": 37.48028,
-        "longitude": 128.24361
+        "latitude": 37.480179,
+        "longitude": 128.243631
+      },
+      {
+        "name": "뉴브라보 정상",
+        "latitude": 37.481028,
+        "longitude": 128.248959
       }
     ],
     "links": [
@@ -211,18 +251,23 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.58306,
-        "longitude": 128.32528
+        "latitude": 37.583297,
+        "longitude": 128.325111
       },
       {
-        "name": "불새마루 정상",
-        "latitude": 37.57361,
-        "longitude": 128.32194
+        "name": "불새마루",
+        "latitude": 37.573736,
+        "longitude": 128.322129
       },
       {
         "name": "몽블랑 정상",
-        "latitude": 37.57389,
-        "longitude": 128.31028
+        "latitude": 37.574090,
+        "longitude": 128.310128
+      },
+      {
+        "name": "스패로우 상단",
+        "latitude": 37.581563,
+        "longitude": 128.312577
       }
     ],
     "links": [
@@ -258,18 +303,18 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.65639,
-        "longitude": 128.67333
+        "latitude": 37.656947,
+        "longitude": 128.672346
       },
       {
         "name": "정상",
-        "latitude": 37.64972,
-        "longitude": 128.67306
+        "latitude": 37.650037,
+        "longitude": 128.673341
       },
       {
-        "name": "알파 정상",
-        "latitude": 37.65139,
-        "longitude": 128.66889
+        "name": "알파 상단",
+        "latitude": 37.651708,
+        "longitude": 128.668917
       }
     ],
     "links": [
@@ -286,38 +331,48 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.64417,
-        "longitude": 128.67972
+        "latitude": 37.644475,
+        "longitude": 128.679931
       },
       {
         "name": "레인보우 베이스",
-        "latitude": 37.62222,
-        "longitude": 128.66361
+        "latitude": 37.622619,
+        "longitude": 128.663407
       },
       {
         "name": "레인보우 정상",
-        "latitude": 37.61167,
-        "longitude": 128.67167
+        "latitude": 37.611407,
+        "longitude": 128.671577
       },
       {
         "name": "실버 정상",
-        "latitude": 37.63306,
-        "longitude": 128.675
+        "latitude": 37.633116,
+        "longitude": 128.675128
+      },
+      {
+        "name": "메가그린 상단",
+        "latitude": 37.636661,
+        "longitude": 128.673182
       },
       {
         "name": "레드 정상",
-        "latitude": 37.63611,
-        "longitude": 128.68306
+        "latitude": 37.636119,
+        "longitude": 128.683102
+      },
+      {
+        "name": "뉴골드 상단",
+        "latitude": 37.631921,
+        "longitude": 128.685477
       },
       {
         "name": "골드 베이스",
-        "latitude": 37.63833,
-        "longitude": 128.68667
+        "latitude": 37.638654,
+        "longitude": 128.686773
       },
       {
         "name": "골드 정상",
-        "latitude": 37.62389,
-        "longitude": 128.68667
+        "latitude": 37.623744,
+        "longitude": 128.686841
       }
     ],
     "links": [
@@ -377,33 +432,33 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.20778,
-        "longitude": 128.82583
+        "latitude": 37.207905,
+        "longitude": 128.825829
       },
       {
         "name": "마운틴허브",
-        "latitude": 37.19389,
-        "longitude": 128.81972
+        "latitude": 37.194318,
+        "longitude": 128.819890
       },
       {
         "name": "마운틴탑",
-        "latitude": 37.18278,
-        "longitude": 128.81722
+        "latitude": 37.183029,
+        "longitude": 128.817148
       },
       {
         "name": "밸리 스키하우스",
-        "latitude": 37.20444,
-        "longitude": 128.83917
+        "latitude": 37.204624,
+        "longitude": 128.839496
       },
       {
         "name": "밸리허브",
-        "latitude": 37.19056,
-        "longitude": 128.82778
+        "latitude": 37.190277,
+        "longitude": 128.827839
       },
       {
         "name": "밸리탑",
-        "latitude": 37.17861,
-        "longitude": 128.83
+        "latitude": 37.178382,
+        "longitude": 128.830052
       }
     ],
     "links": [
@@ -504,23 +559,28 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.17722,
-        "longitude": 128.9475
+        "latitude": 37.177413,
+        "longitude": 128.947762
       },
       {
         "name": "글로리 정상 (콘도)",
-        "latitude": 37.17083,
-        "longitude": 128.94722
+        "latitude": 37.171071,
+        "longitude": 128.947326
       },
       {
         "name": "버금마루",
-        "latitude": 37.17083,
-        "longitude": 128.93861
+        "latitude": 37.171060,
+        "longitude": 128.938784
       },
       {
         "name": "으뜸마루",
-        "latitude": 37.1675,
-        "longitude": 128.92694
+        "latitude": 37.167622,
+        "longitude": 128.926934
+      },
+      {
+        "name": "드림 상단",
+        "latitude": 37.1763619,
+        "longitude": 128.930526
       }
     ],
     "links": [
@@ -552,33 +612,38 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 35.89056,
-        "longitude": 127.73667
+        "latitude": 35.890715,
+        "longitude": 127.736869
       },
       {
         "name": "설천 베이스",
-        "latitude": 35.88889,
-        "longitude": 127.74556
+        "latitude": 35.888912,
+        "longitude": 127.744951
       },
       {
-        "name": "돌체 베이스",
-        "latitude": 35.87528,
-        "longitude": 127.75333
+        "name": "돌체 휴게소",
+        "latitude": 35.875487,
+        "longitude": 127.753471
       },
       {
         "name": "설천 정상",
-        "latitude": 35.86528,
-        "longitude": 127.74361
+        "latitude": 35.864571,
+        "longitude": 127.744477
       },
       {
         "name": "하이디 하우스",
-        "latitude": 35.88194,
-        "longitude": 127.73028
+        "latitude": 35.882124,
+        "longitude": 127.730632
       },
       {
         "name": "만선 정상",
-        "latitude": 35.87667,
-        "longitude": 127.735
+        "latitude": 35.876809,
+        "longitude": 127.735373
+      },
+      {
+        "name": "스피츠하단 상단",
+        "latitude": 35.881938,
+        "longitude": 127.744772
       }
     ],
     "links": [
@@ -645,13 +710,18 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 35.42861,
-        "longitude": 128.98417
+        "latitude": 35.428750,
+        "longitude": 128.984464
       },
       {
         "name": "정상",
-        "latitude": 35.41917,
-        "longitude": 128.9825
+        "latitude": 35.419484,
+        "longitude": 128.983221
+      },
+      {
+        "name": "에덴리프트 상단",
+        "latitude": 35.419484,
+        "longitude": 128.988710
       }
     ],
     "links": [
@@ -664,6 +734,22 @@
         "name": "슬로프 광장",
         "video": "https://rtsp.me/embed/eHH3reG8/",
         "video_type": "iframe"
+      }
+    ]
+  },
+  {
+    "id": "alpine",
+    "name": "정선 알파인 경기장",
+    "coordinates": [
+      {
+        "name": "스키하우스",
+        "latitude": 37.474014,
+        "longitude": 128.609720
+      },
+      {
+        "name": "정상",
+        "latitude": 37.444482,
+        "longitude": 128.597952
       }
     ]
   }
