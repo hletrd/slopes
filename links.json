@@ -592,23 +592,19 @@
     "links": [
       {
         "name": "스키하우스",
-        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=0",
-        "video_type": "iframe"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=0",
       },
       {
         "name": "오렌지",
-        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=1",
-        "video_type": "iframe"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=1",
       },
       {
         "name": "버금마루",
-        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=2",
-        "video_type": "iframe"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=2",
       },
       {
         "name": "으뜸마루",
-        "video": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3",
-        "video_type": "iframe"
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3",
       }
     ]
   },
