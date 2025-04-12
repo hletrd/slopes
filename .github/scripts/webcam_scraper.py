@@ -14,8 +14,7 @@ def extract_m3u8_from_url(url):
   }
 
   try:
-    response = requests.get(url, headers=headers)
-    time.sleep(1)
+    response = requests.get(url, headers=headers, timeout=5)
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, 'html.parser')
