@@ -486,8 +486,11 @@
     .info-text {
       color: #ddd;
       margin-top: 15px;
-      line-height: 1.8;
+      line-height: 1.3;
       margin-bottom: 0;
+    }
+    .info-text li {
+      margin-bottom: 10px;
     }
     .add-to-home {
       position: fixed;
@@ -790,18 +793,23 @@
       <button class="info-close" id="closeInfoModal"><i class="bi bi-x"></i></button>
       <h4 class="info-title">Slopes cam</h4>
       <div class="info-text">
+        <p>Q. 일부 영상이 재생되지 않거나 오류가 있습니다.</p>
+        <p>A. 각 영상은 스키장에서 제공하는 실시간 웹캠 영상입니다.</p>
         <ul>
-          <li>각 영상은 스키장에서 제공하는 실시간 웹캠 영상입니다.</li>
-          <ul>
-            <li>스키장에 따라 영상 제공 방식이 상이하므로 재생 방식이 다를 수 있습니다.</li>
-            <li>스키장의 상황에 따라 일부 영상이 제공되지 않을 수 있습니다.</li>
-          </ul>
-          <li>날씨 정보는 실시간 관측 정보를 바탕으로 3차원 모델을 통해 계산된 정보입니다.</li>
-          <ul>
-            <li>날씨 정보는 국지적인 정보를 정확히 반영하지 않을 수 있습니다.</li>
-            <li>날씨 정보는 부정확한 정보를 포함할 수 있습니다.</li>
-            <li>풍속은 10분 풍속, 강수량은 1시간 강수량이며, 적설량은 3시간 적설량입니다.</li>
-          </ul>
+          <li>스키장에 따라 영상 제공 방식이 상이하므로 재생 방식이 다를 수 있습니다.</li>
+          <li>스키장의 상황에 따라 일부 영상이 제공되지 않을 수 있습니다.</li>
+        </ul>
+        <p>Q. 날씨 정보가 정확하지 않습니다.</p>
+        <p>A. 날씨 정보는 실시간 관측 정보를 바탕으로 3차원 모델을 통해 계산된 정보입니다.</p>
+        <ul>
+          <li>날씨 정보는 국지적인 정보를 정확히 반영하지 않을 수 있습니다.</li>
+          <li>날씨 정보는 부정확한 정보를 포함할 수 있습니다.</li>
+          <li>풍속은 10분 풍속, 강수량은 1시간 강수량이며, 적설량은 3시간 적설량입니다.</li>
+        </ul>
+        <p>Q. 왜 만든 건가요?</p>
+        <p>A. 스키장 영상을 바로 모아볼 수 있는 페이지가 없어서 만들었습니다. 날씨도요.</p>
+        <ul>
+          <li>스키장 공식 홈페이지에서 제공하는 영상은 모바일에서 보기가 불편했습니다. 스키를 타면서 노트북을 들고 다니지는 않잖아요?</li>
         </ul>
       </div>
     </div>
@@ -1464,6 +1472,28 @@
                   menuItem.classList.add('active');
                   this.innerHTML = '<i class="bi bi-chevron-up"></i>';
                 }
+              }
+
+              // Navigate to the resort main view
+              const resortId = menuItem.getAttribute('data-target');
+              if (resortId) {
+                updateUrlHash(resortId);
+                document.querySelectorAll('.content-section').forEach(section => {
+                  section.classList.remove('active');
+                });
+                const defaultMessage = document.getElementById('default-message');
+                defaultMessage.classList.remove('active');
+                defaultMessage.style.display = 'none';
+
+                const mainSection = document.getElementById(`${resortId}-main`);
+                if (mainSection) {
+                  mainSection.classList.add('active');
+
+                  disposeAllPlayers();
+                  loadAllWebcams(resortId);
+                }
+
+                closeSidebar();
               }
             });
           }
