@@ -8,7 +8,7 @@ import pytz
 from PIL import Image, ImageDraw, ImageFont
 import os.path
 
-HOURS = 3
+HOURS = 1
 INTERVAL = 60
 
 def format_datetime(dt):
