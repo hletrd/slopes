@@ -92,7 +92,7 @@
       {
         "name": "정상",
         "latitude": 37.81472,
-        "longitude": 127.58250
+        "longitude": 127.5825
       }
     ],
     "links": [
@@ -109,7 +109,7 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.64500,
+        "latitude": 37.645,
         "longitude": 127.68194
       },
       {
@@ -131,7 +131,7 @@
     "coordinates": [
       {
         "name": "스키하우스",
-        "latitude": 37.40750,
+        "latitude": 37.4075,
         "longitude": 127.80861
       },
       {
@@ -302,7 +302,7 @@
       {
         "name": "실버 정상",
         "latitude": 37.63306,
-        "longitude": 128.67500
+        "longitude": 128.675
       },
       {
         "name": "레드 정상",
@@ -403,7 +403,7 @@
       {
         "name": "밸리탑",
         "latitude": 37.17861,
-        "longitude": 128.83000
+        "longitude": 128.83
       }
     ],
     "links": [
@@ -419,7 +419,8 @@
       },
       {
         "name": "하이원탑 (아폴로1 입구)",
-        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=3"
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=3",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch3.stream/playlist.m3u8"
       },
       {
         "name": "마운틴허브 (스노우월드 입구)",
@@ -504,7 +505,7 @@
       {
         "name": "스키하우스",
         "latitude": 37.17722,
-        "longitude": 128.94750
+        "longitude": 128.9475
       },
       {
         "name": "글로리 정상 (콘도)",
@@ -518,7 +519,7 @@
       },
       {
         "name": "으뜸마루",
-        "latitude": 37.16750,
+        "latitude": 37.1675,
         "longitude": 128.92694
       }
     ],
@@ -577,64 +578,64 @@
       {
         "name": "만선 정상",
         "latitude": 35.87667,
-        "longitude": 127.73500
+        "longitude": 127.735
       }
     ],
     "links": [
       {
         "name": "설천봉 정상",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=07",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam07.stream/playlist.m3u8?e=1744474432&h=7fb95f6489fe1a36c33c94d8441cc60f"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam07.stream/playlist.m3u8?e=1744493609&h=102a69b32d59cc3ac743e0a46f9d0d87"
       },
       {
         "name": "설천상단슬로프",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=06",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam06.stream/playlist.m3u8?e=1744474432&h=40ebff2fffaa582cf43748e8eb3de4f4"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam06.stream/playlist.m3u8?e=1744493611&h=9d52fc4dcd4849a4500321357ac701d5"
       },
       {
         "name": "모차르트, 미뉴에트",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=08",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam08.stream/playlist.m3u8?e=1744474434&h=4ed0633f22d7d22e8e513a522a70ed4b"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam08.stream/playlist.m3u8?e=1744493612&h=0fe0be130597e023c32743211c58227d"
       },
       {
         "name": "폴카",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=09",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam09.stream/playlist.m3u8?e=1744474434&h=b2fc9a2027310f4d56bcb5602f1ef78b"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam09.stream/playlist.m3u8?e=1744493614&h=6deb00b00e8de047536cfa40a85046a8"
       },
       {
         "name": "실크로드, 미뉴에트 하단",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=10",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam10.stream/playlist.m3u8?e=1744474435&h=d1136ebfb5ed7a48abd6398c0f0a5d43"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam10.stream/playlist.m3u8?e=1744493616&h=a9fdf779a89f5f5b6e6b9c356cebb7d3"
       },
       {
         "name": "만선봉 정상",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=02",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam02.stream/playlist.m3u8?e=1744474435&h=b1799c4488ad98bbe2cb0f27d29f53eb"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam02.stream/playlist.m3u8?e=1744493617&h=f94929c59cb8de2de09f27f1a3749eb4"
       },
       {
         "name": "하이디하우스",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=03",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam03.stream/playlist.m3u8?e=1744474436&h=93169c6e4b343a6e0642dd81c48c91da"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam03.stream/playlist.m3u8?e=1744493619&h=ebd5b1db73e516e883e0799ab25055b9"
       },
       {
         "name": "서역기행, 썬다운",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=04",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam04.stream/playlist.m3u8?e=1744474436&h=2ce43d0bb6c40fcec049ea756601b4e4"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam04.stream/playlist.m3u8?e=1744493620&h=4365407051e95edeccbf133c33fdb9e5"
       },
       {
         "name": "커넥션",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=11",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam11.stream/playlist.m3u8?e=1744474437&h=e3fe804876f84aba795c9103b8d86c9b"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam11.stream/playlist.m3u8?e=1744493621&h=e206a6c23dcae0f52a2c79b61df0723b"
       },
       {
         "name": "설천하우스",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=05",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam05.stream/playlist.m3u8?e=1744474437&h=b7305c0b2f8dddcf88990ee64af0bff8"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam05.stream/playlist.m3u8?e=1744493623&h=6990687f4e0726918608f61ea9285541"
       },
       {
         "name": "만선하우스",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=01",
-        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam01.stream/playlist.m3u8?e=1744474438&h=501685785d1bdc265f335cd432e61755"
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam01.stream/playlist.m3u8?e=1744493624&h=9cc59b5e9abcff45f0428980836e0158"
       }
     ]
   },
@@ -650,7 +651,7 @@
       {
         "name": "정상",
         "latitude": 35.41917,
-        "longitude": 128.98250
+        "longitude": 128.9825
       }
     ],
     "links": [
