@@ -30,7 +30,13 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Slopes cam">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="icon" type="image/svg+xml" href="icons/skiing.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/skiing-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/skiing-16x16.png">
+  <link rel="apple-touch-icon" href="icons/skiing-180x180.png">
+  <link rel="manifest" href="manifest.json">
+
   <meta name="mobile-web-app-capable" content="yes">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -772,6 +778,13 @@
       display: block;
       content: "";
       margin-top: 8px;
+    }
+
+    @media all and (display-mode: standalone) {
+      .footer {
+        padding-bottom: calc(8px + env(safe-area-inset-bottom, 0));
+        min-height: calc(36px + env(safe-area-inset-bottom, 0));
+      }
     }
   </style>
 </head>
