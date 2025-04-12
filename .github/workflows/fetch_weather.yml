@@ -1,0 +1,40 @@
+name: Fetch Weather Data
+
+on:
+  schedule:
+    - cron: '3 * * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pytz
+
+      - name: Fetch weather data
+        env:
+          KMA_API_KEY: ${{ secrets.KMA_API_KEY }}
+        run: python .github/scripts/fetch_weather_data.py
+
+      - name: Commit changes
+        run: |
+          git add weather.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "[Bot] Update weather data"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PAT }}
+          branch: ${{ github.ref }}
