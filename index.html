@@ -444,7 +444,7 @@
     }
     .weather-info {
       display: inline-block;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       background-color: rgba(0, 0, 0, 0.2);
       padding: 5px 10px;
       border-radius: 4px;
@@ -452,6 +452,11 @@
       vertical-align: middle;
       margin-bottom: 5px;
       width: 100%;
+    }
+    .weather-data {
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 3px;
     }
     .weather-container {
       display: flex;
@@ -467,12 +472,12 @@
       padding: 0 5px;
       margin-bottom: 10px;
     }
-    @media (min-width: 576px) {
+    @media (min-width: 768px) {
       .weather-info-wrapper {
         width: 50%;
       }
     }
-    @media (min-width: 992px) {
+    @media (min-width: 1200px) {
       .weather-info-wrapper {
         width: 33.33%;
       }
@@ -482,17 +487,29 @@
       margin-bottom: 2px;
       color: #ccc;
     }
+    .weather-update-time {
+      font-size: 0.7rem;
+      color: #888;
+      margin-left: 8px;
+      font-weight: normal;
+    }
     .weather-info i {
       margin-right: 5px;
     }
     .temperature {
-      color: #ff9d00;
+      color: #ff6b6b;
     }
     .humidity {
+      color: #74c0fc;
+    }
+    .wind-speed {
+      color: #20c997;
+    }
+    .rainfall {
       color: #4dabf7;
     }
     .snowfall {
-      color: #8ce99a;
+      color: #d0ebff;
     }
   </style>
 </head>
@@ -721,11 +738,25 @@
 
             const mostRecent = baseAreaWeather.data[baseAreaWeather.data.length - 1];
 
+            let updateTime = '';
+            if (baseAreaWeather.timestamp) {
+              const date = new Date(baseAreaWeather.timestamp);
+              const month = date.getMonth() + 1;
+              const day = date.getDate();
+              const hours = date.getHours().toString().padStart(2, '0');
+              const minutes = date.getMinutes().toString().padStart(2, '0');
+              updateTime = `<span class="weather-update-time">${month}월 ${day}일 ${hours}:${minutes} 기준</span>`;
+            }
+
             weatherInfo.innerHTML = `
-              <div class="location-name">${resortName}</div>
-              <span class="temperature"><i class="bi bi-thermometer-half"></i>${mostRecent.temperature.toFixed(1)}°C</span> &bull;
-              <span class="humidity"><i class="bi bi-moisture"></i>${mostRecent.humidity.toFixed(0)}%</span> &bull;
-              <span class="snowfall"><i class="bi bi-snow"></i>${mostRecent.snowfall_3hr.toFixed(1)}cm</span>
+              <div class="location-name">${resortName} ${updateTime}</div>
+              <div class="weather-data">
+                <span class="temperature"><i class="bi bi-thermometer-half"></i>${mostRecent.temperature.toFixed(1)}°C</span> &bull;
+                <span class="humidity"><i class="bi bi-moisture"></i>${mostRecent.humidity.toFixed(0)}%</span> &bull;
+                <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span> &bull;
+                <span class="rainfall"><i class="bi bi-droplet-fill"></i>${mostRecent.rainfall.toFixed(1)}mm</span> &bull;
+                <span class="snowfall"><i class="bi bi-snow"></i>${mostRecent.snowfall_3hr.toFixed(1)}cm</span>
+              </div>
             `;
 
             wrapper.appendChild(weatherInfo);
@@ -810,11 +841,25 @@
             const weatherInfo = document.createElement('div');
             weatherInfo.className = 'weather-info';
 
+            let updateTime = '';
+            if (locationData.timestamp) {
+              const date = new Date(locationData.timestamp);
+              const month = date.getMonth() + 1;
+              const day = date.getDate();
+              const hours = date.getHours().toString().padStart(2, '0');
+              const minutes = date.getMinutes().toString().padStart(2, '0');
+              updateTime = `<span class="weather-update-time">${month}월 ${day}일 ${hours}:${minutes} 기준</span>`;
+            }
+
             weatherInfo.innerHTML = `
-               <div class="location-name">${locationData.name}</div>
-               <span class="temperature"><i class="bi bi-thermometer-half"></i>${mostRecent.temperature.toFixed(1)}°C</span> &bull;
-               <span class="humidity"><i class="bi bi-droplet-half"></i>${mostRecent.humidity.toFixed(0)}%</span> &bull;
-               <span class="snowfall"><i class="bi bi-snow"></i>${mostRecent.snowfall_3hr.toFixed(1)}cm</span>
+               <div class="location-name">${locationData.name} ${updateTime}</div>
+               <div class="weather-data">
+                 <span class="temperature"><i class="bi bi-thermometer-half"></i>${mostRecent.temperature.toFixed(1)}°C</span> &bull;
+                 <span class="humidity"><i class="bi bi-moisture"></i>${mostRecent.humidity.toFixed(0)}%</span> &bull;
+                 <span class="wind-speed"><i class="bi bi-wind"></i>${mostRecent.wind_speed.toFixed(1)}m/s</span> &bull;
+                 <span class="rainfall"><i class="bi bi-droplet-fill"></i>${mostRecent.rainfall.toFixed(1)}mm</span> &bull;
+                 <span class="snowfall"><i class="bi bi-snow"></i>${mostRecent.snowfall_3hr.toFixed(1)}cm</span>
+               </div>
             `;
 
             weatherInfoWrapper.appendChild(weatherInfo);
