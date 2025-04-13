@@ -85,7 +85,7 @@ def main():
     if modified:
       print("Saving updated links.json file...")
       with open('links.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, ensure_ascii=False, indent=2, sort_keys=True)
       print("Saved links.json successfully")
     else:
       print("No changes to links.json")
