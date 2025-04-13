@@ -1614,6 +1614,12 @@
       }
 
       function getYoutubeId(url) {
+        const liveRegExp = /^(?:https?:\/\/)?(?:www\.)?youtube\.com\/live\/([^#&?]*).*/;
+        const liveMatch = url.match(liveRegExp);
+        if (liveMatch && liveMatch[1] && liveMatch[1].length === 11) {
+          return liveMatch[1];
+        }
+
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         const match = url.match(regExp);
         return (match && match[2].length === 11) ? match[2] : null;
