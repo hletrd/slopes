@@ -230,8 +230,10 @@
         }
 
         if (favorites.length === 0) {
-          favoritesContainer.style.display = 'none';
-          return;
+          const instruction = document.createElement('div');
+          instruction.className = 'instruction';
+          instruction.innerHTML = '<p>북마크된 영상이 없습니다. 영상 오른쪽 위의 북마크 버튼을 눌러 영상을 추가해 보세요.</p>';
+          favoritesContainer.appendChild(instruction);
         }
 
         favoritesContainer.style.display = 'block';

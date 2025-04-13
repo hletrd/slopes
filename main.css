@@ -899,13 +899,11 @@ b {
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.05);
 }
-
 .favorite-card {
   position: relative;
   cursor: grab;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border 0.15s ease;
 }
-
 .favorite-card.dragging {
   opacity: 0.7;
   cursor: grabbing;
@@ -913,20 +911,17 @@ b {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
-
 .favorite-card.drag-over {
   border: 2px solid #0069d9;
   box-shadow: 0 0 10px rgba(0, 105, 217, 0.5);
   position: relative;
   transform: translateY(4px);
 }
-
 .favorite-card.drop-target {
   border: 2px dashed rgba(0, 105, 217, 0.3);
   margin-top: 4px;
   margin-bottom: 4px;
 }
-
 .favorite-card.drop-target::before {
   content: '';
   position: absolute;
@@ -937,7 +932,6 @@ b {
   background: transparent;
   z-index: 5;
 }
-
 .favorite-card.drop-target::after {
   content: '';
   position: absolute;
@@ -948,7 +942,6 @@ b {
   background: transparent;
   z-index: 5;
 }
-
 .drag-handle {
   position: absolute;
   left: 8px;
@@ -959,14 +952,17 @@ b {
   cursor: grab;
   transition: color 0.2s ease;
 }
-
 .dragging .drag-handle {
   cursor: grabbing;
   color: #0069d9;
 }
-
 .favorites-header-container {
   padding-left: 20px;
+}
+.instruction {
+  font-size: 16px;
+  font-weight: 400;
+  color: #aaa;
 }
 
 @media all and (display-mode: standalone) {
