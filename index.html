@@ -262,7 +262,14 @@
 
         favorites.forEach((favorite, idx) => {
           const videoCard = document.createElement('div');
-          videoCard.className = 'video-card';
+          videoCard.className = 'video-card favorite-card';
+          videoCard.draggable = true;
+          videoCard.setAttribute('data-index', idx);
+
+          const dragHandle = document.createElement('div');
+          dragHandle.className = 'drag-handle';
+          dragHandle.innerHTML = '<i class="bi bi-grip-vertical"></i>';
+          videoCard.appendChild(dragHandle);
 
           const headerContainer = document.createElement('div');
           headerContainer.className = 'favorites-header-container';
@@ -311,9 +318,86 @@
             );
             if (player) activePlayers.push(player);
           }
+
+          videoCard.addEventListener('dragstart', handleDragStart);
+          videoCard.addEventListener('dragover', handleDragOver);
+          videoCard.addEventListener('dragenter', handleDragEnter);
+          videoCard.addEventListener('dragleave', handleDragLeave);
+          videoCard.addEventListener('drop', handleDrop);
+          videoCard.addEventListener('dragend', handleDragEnd);
         });
 
         updateAllResortsWeather();
+      }
+
+      let draggedItem = null;
+      let dragSourceIndex = -1;
+
+      function handleDragStart(e) {
+        draggedItem = this;
+        dragSourceIndex = parseInt(this.getAttribute('data-index'));
+
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', this.innerHTML);
+
+        this.classList.add('dragging');
+
+        // Create a visual indicator for all potential drop targets
+        document.querySelectorAll('.favorite-card').forEach(card => {
+          if (card !== this) {
+            card.classList.add('drop-target');
+          }
+        });
+      }
+
+      function handleDragOver(e) {
+        if (e.preventDefault) {
+          e.preventDefault();
+        }
+        e.dataTransfer.dropEffect = 'move';
+        return false;
+      }
+
+      function handleDragEnter(e) {
+        this.classList.add('drag-over');
+      }
+
+      function handleDragLeave(e) {
+        this.classList.remove('drag-over');
+      }
+
+      function handleDrop(e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        this.classList.remove('drag-over');
+
+        if (draggedItem === this) {
+          return false;
+        }
+
+        const dropTargetIndex = parseInt(this.getAttribute('data-index'));
+
+        if (dragSourceIndex !== -1 && dropTargetIndex !== -1) {
+          const itemToMove = favorites[dragSourceIndex];
+
+          favorites.splice(dragSourceIndex, 1);
+
+          favorites.splice(dropTargetIndex, 0, itemToMove);
+
+          saveFavorites();
+
+          updateFavoritesDisplay();
+        }
+
+        return false;
+      }
+
+      function handleDragEnd(e) {
+        const favoriteCards = document.querySelectorAll('.favorite-card');
+        favoriteCards.forEach(card => {
+          card.classList.remove('dragging', 'drag-over', 'drop-target');
+        });
       }
 
       function createLocationNameDiv(data, timestamp, displaySource = false) {
