@@ -43,7 +43,6 @@
 
   <meta name="mobile-web-app-capable" content="yes">
 
-  <script src="https://mice.sonohotelsresorts.com/js/webcam/WespJSSDKEncV4.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video-js.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/@videojs/themes@1/dist/forest/index.css" rel="stylesheet" />
@@ -1203,37 +1202,16 @@
 
         if (videoType === 'vivaldi') {
           const vivaldiContainerId = `vivaldi-player-${id}`;
-
           const vivaldiContainer = document.createElement('div');
-          vivaldiContainer.id = vivaldiContainerId;
-          vivaldiContainer.className = 'vivaldi-container';
-          container.appendChild(vivaldiContainer);
+          vivaldiContainer.className = 'iframe-container';
 
           const vivaldiParams = videoUrl.split(':');
           if (vivaldiParams.length === 2) {
             const channel = vivaldiParams[0];
             const serial = vivaldiParams[1];
 
-            const vivaldiPlayer = new Vivaldi(vivaldiContainerId);
-
-            setTimeout(() => {
-              try {
-                vivaldiPlayer.ctlUIStartSet(channel, serial);
-              } catch (e) {
-                console.error('Error setting vivaldi player:', e);
-                try {
-                  vivaldiPlayer.ctlUIStartSet(channel, serial);
-                } catch (e) {
-                  console.error('Error setting vivaldi player:', e);
-                  try {
-                    vivaldiPlayer.ctlUIStartSet(channel, serial);
-                  } catch (e) {
-                    console.error('Error setting vivaldi player:', e);
-                    container.innerHTML = '<div class="error-message">비디오 플레이어를 생성하는 중 오류가 발생했습니다.</div>';
-                  }
-                }
-              }
-            }, 2000);
+            vivaldiContainer.innerHTML = `<iframe src="vivaldi.html?channel=${channel}&serial=${serial}" allowfullscreen></iframe>`;
+            container.appendChild(vivaldiContainer);
 
             if (resortId && !isNaN(webcamIndex)) {
               addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 4);
@@ -1812,82 +1790,6 @@
 
       initializeApp();
     });
-
-    class Vivaldi {
-      constructor(viewportId) {
-        let siteInfo = {
-          channel : 8,
-          serial : 'TW0014A15451',
-          stream : 'sub',
-          text : ';b64707e34a200ee658255a03b96b6fb175ab8122aaed3462f8bb9f162ceab445e2ea8e66c0a0e7035c03354d7df4ff4b0a25a4519cbd8a11a5851fd6f71fef597d786574210744785c5bced6b51b7295da116039f706d42e87001761f1ba197ba91707dfb5f8ef49643e10ca4510cdcdbbfe7dbca96af5961b7265c27533c0fde1bbb7d09fe329b921da6b36a37ded7851cd4e1c7ed48db6e7a08f693331782c'
-        };
-
-        const Logger = WespJSSDK.Logger;
-        Logger.useDefaults();
-        const Wesp = WespJSSDK.Wesp;
-        const MonitorUIController = WespJSSDK.MonitorUIController;
-
-        this.viewportId = viewportId;
-        this.siteInfo = siteInfo;
-        this.maxChannel = 0;
-        this.MonitorUIController = MonitorUIController;
-        this.monUiCtl = new MonitorUIController(viewportId, siteInfo);
-        this.initialized = false;
-
-        this.init();
-      }
-
-      init() {
-        if (this.initialized) return;
-
-        this.monUiCtl.init(() => {
-          this.maxChannel = this.monUiCtl.getMaxChannel();
-          this.initialized = true;
-        });
-      }
-
-      ctlUIInit(channel, serial) {
-        this.siteInfo.channel = channel;
-        this.siteInfo.serial = serial;
-        this.monUiCtl = new this.MonitorUIController(this.viewportId, this.siteInfo);
-      }
-
-      ctlUIDispose() {
-        this.monUiCtl.dispose();
-        this.monUiCtl.init();
-      }
-
-      ctlUIStart(channel) {
-        this.monUiCtl.changeLayout(1, channel - 1);
-      }
-
-      ctlUIStartSet(channel, serial) {
-        const channelNum = parseInt(channel);
-
-        this.siteInfo.channel = channelNum;
-        this.siteInfo.serial = serial;
-
-        this.ctlUIInit(channelNum, serial);
-        this.ctlUIDispose();
-        this.ctlUIStart(channelNum);
-
-        setTimeout(() => {
-          if (this.initialized) {
-            this.monUiCtl.changeLayout(1, channelNum - 1);
-          } else {
-            console.error('Vivaldi player not initialized yet');
-          }
-          document.getElementById('msg_videoM'+channel).style.top = '0';
-          document.getElementById('img_videoM'+channel).style.display = 'none';
-          document.getElementById('time_videoM'+channel).style.top = '0';
-          document.getElementById('time_videoM'+channel).style.left = '0';
-          document.getElementById('videotable').style.height = '100%';
-          document.getElementById('__tabletd_videoM'+channel).style.backgroundColor = '#000';
-
-          document.getElementById('tp_videoM'+channel).style.display = 'none';
-        }, 300);
-      }
-    }
   </script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">

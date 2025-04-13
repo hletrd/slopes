@@ -172,7 +172,6 @@ h2 {
 }
 .video-container .error-message {
   height: 0;
-  padding-top: 56.25%;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -281,7 +280,6 @@ h2 {
 .bookmark-button-vivaldi {
   top: 8px;
   right: 8px;
-  display: none;
 }
 .vivaldi-container {
   width: 100%;
@@ -382,6 +380,8 @@ h2 {
   height: 0;
   padding-top: 56.25%;
 }
+.video-card .error-message {
+}
 .video-card .iframe-container {
   height: 0;
   padding-top: 56.25%;
@@ -447,8 +447,13 @@ h2 {
   line-height: 1.5;
 }
 .link-container {
-  height: 100px;
-  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+  background-color: #242424;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 .link-container a {
   position: absolute;
