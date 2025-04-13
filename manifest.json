@@ -1,14 +1,16 @@
 {
-  "name": "Slopes cam",
+  "id": "slopes-cam",
+  "name": "Slopes cam - 전국 스키장 실시간 웹캠 및 날씨",
   "short_name": "Slopes cam",
   "description": "전국 스키장 실시간 웹캠 및 날씨",
-  "start_url": "./",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#121212",
   "theme_color": "#121212",
-  "scope": "./",
+  "scope": "/",
   "lang": "ko-KR",
   "display_override": ["standalone", "window-controls-overlay"],
+  "categories": ["weather", "sports", "travel"],
   "prefer_related_applications": false,
   "icons": [
     {
