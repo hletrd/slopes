@@ -38,5 +38,12 @@
       "purpose": "maskable"
     }
   ],
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "screenshots": [
+    {
+      "src": "screenshot_desktop.png",
+      "sizes": "3840x2160",
+      "type": "image/png"
+    }
+  ]
 }
