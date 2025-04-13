@@ -110,19 +110,19 @@ def generate_preview_image(weather_data, resorts):
 
   margin_x = int(width * 0.083)
   margin_y = int(height * 0.048)
-  title_y = int(height * 0.085)
-  date_y = int(height * 0.145)
-  separator_y = int(height * 0.19)
-  content_start_y = int(height * 0.235)
-  row_height = int(height * 0.147)
+  title_y = int(height * 0.07)
+  date_y = int(height * 0.135)
+  separator_y = int(height * 0.183)
+  content_start_y = int(height * 0.215)
+  row_height = int(height * 0.125)
 
   bold_font_path = os.path.join(os.path.dirname(__file__), "NotoSansKR-Bold.ttf")
   regular_font_path = os.path.join(os.path.dirname(__file__), "NotoSansKR-Regular.ttf")
 
-  title_size = int(width * 0.033)
-  header_size = int(width * 0.019)
-  label_size = int(width * 0.014)
-  small_size = int(width * 0.011)
+  title_size = int(width * 0.03)
+  header_size = int(width * 0.016)
+  label_size = int(width * 0.0125)
+  small_size = int(width * 0.0105)
 
   try:
     title_font = ImageFont.truetype(bold_font_path, title_size)
@@ -147,7 +147,9 @@ def generate_preview_image(weather_data, resorts):
 
   base_areas = []
   for resort in resorts:
-    resort_name = resort.get("name", "Unknown Resort")
+    resort_name = resort.get("name", "")
+    if resort_name == "정선 알파인 경기장":
+      continue
     base_area = next((w for w in weather_data if w["resort"] == resort_name and w["name"] == "스키하우스"), None)
 
     if base_area and base_area.get("data") and len(base_area["data"]) > 0:
@@ -164,7 +166,7 @@ def generate_preview_image(weather_data, resorts):
   base_areas.sort(key=lambda x: x["temperature"])
 
   columns = 2
-  max_resorts = min(10, len(base_areas))
+  max_resorts = min(12, len(base_areas))
   col_width = (width - 2 * margin_x) / columns
 
   for i, resort in enumerate(base_areas[:max_resorts]):
@@ -418,7 +420,7 @@ def main():
   if updated_weather_data:
     output_file = "weather.json"
     with open(output_file, "w", encoding="utf-8") as f:
-      json.dump(updated_weather_data, f, ensure_ascii=False, indent=2)
+      json.dump(updated_weather_data, f, ensure_ascii=False, indent=2, sort_keys=True)
 
     print(
       f"Successfully saved weather data for {len(updated_weather_data)} "
