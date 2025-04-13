@@ -1478,10 +1478,52 @@
           const ctx = canvas.getContext('2d');
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+          const playerId = player.el().id;
+          let resortId, webcamIndex;
+
+          if (playerId) {
+            const idParts = playerId.replace('webcam-player-', '').split('-');
+            if (idParts.length >= 2) {
+              if (idParts[1] === 'grid') {
+                resortId = idParts[0];
+                webcamIndex = parseInt(idParts[2]);
+              } else {
+                resortId = idParts[0];
+                webcamIndex = parseInt(idParts[1]);
+              }
+
+              const resort = data.find(r => r.id === resortId);
+              if (resort && !isNaN(webcamIndex)) {
+                const webcams = resort.links || resort.webcams || [];
+                if (webcams[webcamIndex]) {
+                  const resortName = sanitizeForFilename(resort.name);
+                  const webcamName = sanitizeForFilename(webcams[webcamIndex].name);
+                  const timestamp = formatTimestamp();
+                  const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`;
+
+                  const dataURL = canvas.toDataURL('image/jpeg');
+                  downloadImage(dataURL, filename);
+
+                  const container = player.el().parentNode;
+                  const successMsg = document.createElement('div');
+                  successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
+                  successMsg.textContent = '캡처 완료!';
+                  container.appendChild(successMsg);
+
+                  setTimeout(() => {
+                    successMsg.remove();
+                  }, 2000);
+
+                  return;
+                }
+              }
+            }
+          }
+
           const resortName = getResortNameForCapture();
           const webcamName = getWebcamNameForCapture(player.el());
           const timestamp = formatTimestamp();
-          const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`
+          const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`;
 
           const dataURL = canvas.toDataURL('image/jpeg');
           downloadImage(dataURL, filename);
@@ -1510,8 +1552,53 @@
             return;
           }
 
-          const resortName = getResortNameForCapture();
-          const webcamName = getWebcamNameForCapture(container);
+          const parentSection = container.closest('.content-section');
+          let resortName, webcamName;
+
+          if (parentSection) {
+            const parentId = parentSection.id;
+            const idParts = parentId.split('-');
+
+            if (idParts.length >= 3 && idParts[1] === 'webcam') {
+              const resortId = idParts[0];
+              const webcamIndex = parseInt(idParts[2]);
+
+              const resort = data.find(r => r.id === resortId);
+              if (resort && !isNaN(webcamIndex)) {
+                const webcams = resort.links || resort.webcams || [];
+                if (webcams[webcamIndex]) {
+                  resortName = sanitizeForFilename(resort.name);
+                  webcamName = sanitizeForFilename(webcams[webcamIndex].name);
+                }
+              }
+            }
+          }
+
+          if (!resortName || !webcamName) {
+            const hash = window.location.hash.substring(1);
+            const parts = hash.split('/');
+            if (parts.length > 1) {
+              const resortId = parts[0];
+              const webcamIdx = parseInt(parts[1]);
+
+              const resort = data.find(r => r.id === resortId);
+              if (resort && !isNaN(webcamIdx)) {
+                const webcams = resort.links || resort.webcams || [];
+                if (webcams[webcamIdx]) {
+                  resortName = sanitizeForFilename(resort.name);
+                  webcamName = sanitizeForFilename(webcams[webcamIdx].name);
+                }
+              }
+            }
+          }
+
+          if (!resortName) {
+            resortName = getResortNameForCapture();
+          }
+          if (!webcamName) {
+            webcamName = getWebcamNameForCapture(container);
+          }
+
           const timestamp = formatTimestamp();
           const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`;
 
@@ -1578,6 +1665,33 @@
           }
         }
 
+        const playerElement = videoContainer.querySelector('.vjs-tech') ||
+                             videoContainer.querySelector('iframe') ||
+                             videoContainer.querySelector('.vivaldi-container');
+
+        if (playerElement && playerElement.id) {
+          const idMatch = playerElement.id.match(/player-([^-]+)-(\d+)/) ||
+                         playerElement.id.match(/player-([^-]+)-grid-(\d+)/);
+
+          if (idMatch && idMatch.length >= 3) {
+            const resortId = idMatch[1];
+            const webcamIndex = parseInt(idMatch[2]);
+
+            const resort = data.find(r => r.id === resortId);
+            if (resort) {
+              const webcams = resort.links || resort.webcams || [];
+              if (webcams[webcamIndex]) {
+                return sanitizeForFilename(webcams[webcamIndex].name);
+              }
+            }
+          }
+        }
+
+        const activeSubmenuItem = document.querySelector('.submenu-item.active');
+        if (activeSubmenuItem && !activeSubmenuItem.classList.contains('submenu-item-status')) {
+          return sanitizeForFilename(activeSubmenuItem.textContent.trim());
+        }
+
         const inlineTitle = document.querySelector('.content-section.active .inline-title.inline-title-submenu');
         if (inlineTitle && inlineTitle.textContent) {
           return sanitizeForFilename(inlineTitle.textContent.trim());
@@ -1602,11 +1716,6 @@
           }
         }
 
-        const activeSubmenuItem = document.querySelector('.submenu-item.active');
-        if (activeSubmenuItem) {
-          return sanitizeForFilename(activeSubmenuItem.textContent.trim());
-        }
-
         const card = element.closest('.video-card');
         if (card) {
           const cardTitle = card.querySelector('h3');
@@ -1615,7 +1724,7 @@
           }
         }
 
-        return 'unknown';
+        return 'webcam';
       }
 
       function formatTimestamp() {
