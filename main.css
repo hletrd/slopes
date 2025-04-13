@@ -159,7 +159,7 @@ h2 {
 .error-message {
   color: #ff6b6b;
   padding: 0;
-  margin: 0 0;
+  margin: 0;
   background-color: rgba(255, 107, 107, 0.1);
   border-radius: 5px;
   font-weight: 550;
@@ -172,15 +172,20 @@ h2 {
 }
 .video-container .error-message {
   height: 0;
+  padding-top: 56.25%;
+  position: relative;
   box-sizing: border-box;
-  overflow: hidden;
+  background-color: rgba(255, 107, 107, 0.1);
+  overflow: visible;
+  width: 100%;
+  display: block;
 }
 .video-container .error-message p {
   position: absolute;
   top: 50%;
   left: 0;
   width: 100%;
-  transform: translateY(calc(-50% - 16px));
+  transform: translateY(-50%);
   text-align: center;
   padding: 0 16px;
   margin: 0;
@@ -190,7 +195,7 @@ h2 {
   top: 50%;
   left: 0;
   width: 100%;
-  transform: translateY(calc(-50% + 10px));
+  transform: translateY(10px);
   text-align: center;
   padding: 0 16px;
   margin: 0;
@@ -381,6 +386,14 @@ h2 {
   padding-top: 56.25%;
 }
 .video-card .error-message {
+  height: 0;
+  padding-top: 56.25%;
+  position: relative;
+  box-sizing: border-box;
+  background-color: rgba(255, 107, 107, 0.1);
+  overflow: visible;
+  width: 100%;
+  display: block;
 }
 .video-card .iframe-container {
   height: 0;
