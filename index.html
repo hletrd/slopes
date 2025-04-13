@@ -99,7 +99,7 @@
   </div>
 
   <div class="main-content">
-    <div id="default-message" class="content-section content-section-default active">
+    <div id="default-message" class="content-section content-section-default">
       <div class="text-center p-4">
         <h2>전국 스키장 실시간 웹캠 모음</h2>
         <p class="lead" style="font-size: 1.1rem;">왼쪽 메뉴에서 스키장 또는 카메라를 선택하세요.</p>
@@ -154,6 +154,7 @@
       const sidebar = document.querySelector('.sidebar');
       const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
       const mainContent = document.querySelector('.main-content');
+      const basicTitle = "Slopes cam";
       let activePlayers = [];
       let activeResort = null;
       let activeWebcam = null;
@@ -612,6 +613,34 @@
         const url = new URL(window.location);
         url.hash = newHash;
         history.replaceState(null, '', url);
+        updatePageTitle(resort, webcam);
+      }
+
+      function updatePageTitle(resortId, webcamId) {
+        if (!resortId) {
+          document.title = basicTitle;
+          return;
+        }
+
+        const resort = data.find(r => r.id === resortId);
+        if (!resort) {
+          document.title = basicTitle;
+          return;
+        }
+
+        if (webcamId !== undefined && webcamId !== null) {
+          const webcamIndex = parseInt(webcamId);
+          const webcams = resort.links || resort.webcams || [];
+
+          if (!isNaN(webcamIndex) && webcams[webcamIndex]) {
+            const webcamName = webcams[webcamIndex].name;
+            document.title = `${basicTitle} - ${webcamName} - ${resort.name}`;
+          } else {
+            document.title = `${basicTitle} - ${resort.name}`;
+          }
+        } else {
+          document.title = `${basicTitle} - ${resort.name}`;
+        }
       }
 
       function disposeAllPlayers() {
@@ -694,6 +723,7 @@
           defaultMessage.classList.add('active');
           defaultMessage.style.display = 'block';
           updateFavoritesDisplay();
+          document.title = basicTitle;
           return;
         }
 
@@ -704,6 +734,8 @@
           const parts = hash.split('/');
           const resortId = parts[0];
           const webcamId = parts[1];
+
+          updatePageTitle(resortId, webcamId);
 
           const defaultMessage = document.getElementById('default-message');
           defaultMessage.classList.remove('active');
@@ -1018,6 +1050,7 @@
                 activeWebcam = webcamIndex;
 
                 updateUrlHash(resortId, webcamIndex);
+                updatePageTitle(resortId, webcamIndex);
 
                 document.querySelectorAll('.submenu-item').forEach(item => {
                   item.classList.remove('active');
@@ -1072,6 +1105,7 @@
             }
 
             updateUrlHash(target);
+            updatePageTitle(target, null);
 
             document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
             this.classList.add('active');
