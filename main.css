@@ -278,6 +278,29 @@ h2 {
   top: 8px;
   right: 8px;
 }
+.vivaldi-container {
+  width: 100%;
+  padding-bottom: 56.25%;
+  position: relative;
+  background-color: #111;
+}
+.bookmark-button-vivaldi {
+  top: 8px;
+  right: 8px;
+}
+.__video-caption {
+  display: none !important;
+}
+.__video-timestamp {
+  bottom: 8px !important;
+}
+#videotable {
+  background-color: rgba(0, 0, 0, 0);
+}
+.__transparent-panel {
+  border: none !important;
+  top: 0 !important;
+}
 .favorites-section {
   margin-top: 0;
   padding: 15px;
@@ -423,13 +446,8 @@ h2 {
   line-height: 1.5;
 }
 .link-container {
-  height: 0;
-  padding-top: 56.25%;
-  background-color: #242424;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  height: 100px;
+  width: 100%;
 }
 .link-container a {
   position: absolute;
