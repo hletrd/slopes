@@ -1145,8 +1145,18 @@
             document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
             this.classList.add('active');
 
-            if (!hasSubmenu) {
-              hideAllSubmenus();
+            hideAllSubmenus();
+
+            if (hasSubmenu) {
+              const submenu = document.getElementById(`${target}-submenu`);
+              if (submenu) {
+                submenu.classList.add('active');
+
+                const dropdownToggle = this.querySelector('.dropdown-toggle');
+                if (dropdownToggle) {
+                  dropdownToggle.innerHTML = '<i class="bi bi-chevron-up"></i>';
+                }
+              }
             }
 
             disposeAllPlayers();
