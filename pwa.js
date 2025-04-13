@@ -69,4 +69,105 @@ document.addEventListener('DOMContentLoaded', function() {
       infoModal.style.display = 'none';
     }
   });
+
+  if ('serviceWorker' in navigator) {
+    function checkForUpdates() {
+      navigator.serviceWorker.getRegistration().then(registration => {
+        if (registration) {
+          registration.update()
+            .then(() => {
+              console.log('Service worker updated');
+            })
+            .catch(err => {
+              console.error('Service worker update failed:', err);
+            });
+        }
+      });
+    }
+
+    function activateUpdate() {
+      navigator.serviceWorker.getRegistration().then(registration => {
+        if (registration && registration.waiting) {
+          registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+        }
+      });
+    }
+
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        refreshing = true;
+        console.log('Service worker updated, reloading page');
+        window.location.reload();
+      }
+    });
+
+    checkForUpdates();
+    setInterval(checkForUpdates, 60 * 60 * 1000);
+
+    if (isStandalone) {
+      const createUpdateNotification = () => {
+        const notificationContainer = document.createElement('div');
+        notificationContainer.className = 'update-notification';
+        notificationContainer.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 20px;
+          border-radius: 4px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          min-width: 250px;
+          font-size: 14px;
+        `;
+
+        const message = document.createElement('span');
+        message.textContent = '업데이트가 준비되었습니다.';
+
+        const updateButton = document.createElement('button');
+        updateButton.textContent = '지금 적용';
+        updateButton.style.cssText = `
+          background-color: white;
+          color: #4CAF50;
+          border: none;
+          padding: 5px 10px;
+          border-radius: 4px;
+          margin-left: 10px;
+          cursor: pointer;
+        `;
+
+        updateButton.addEventListener('click', () => {
+          activateUpdate();
+          notificationContainer.remove();
+        });
+
+        notificationContainer.appendChild(message);
+        notificationContainer.appendChild(updateButton);
+        document.body.appendChild(notificationContainer);
+      };
+
+      navigator.serviceWorker.getRegistration().then(registration => {
+        if (registration) {
+          if (registration.waiting) {
+            createUpdateNotification();
+          }
+
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                createUpdateNotification();
+              }
+            });
+          });
+        }
+      });
+    }
+  }
 });
