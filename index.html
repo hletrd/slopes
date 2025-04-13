@@ -27,6 +27,8 @@
 
   <meta name="theme-color" content="#121212">
 
+  <meta name="application-name" content="Slopes cam">
+  <meta name="msapplication-TileColor" content="#121212">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Slopes cam">
@@ -149,6 +151,18 @@
 
   <script src="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video.min.js"></script>
   <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('ServiceWorker registration failed: ', error);
+          });
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const toggleMenu = document.querySelector('.toggle-menu');
       const sidebar = document.querySelector('.sidebar');

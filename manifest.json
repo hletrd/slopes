@@ -6,6 +6,10 @@
   "display": "standalone",
   "background_color": "#121212",
   "theme_color": "#121212",
+  "scope": "./",
+  "lang": "ko-KR",
+  "display_override": ["standalone", "window-controls-overlay"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "icons/skiing-192x192.png",
