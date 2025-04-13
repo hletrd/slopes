@@ -5,8 +5,9 @@ import cairosvg
 from PIL import Image, ImageOps, ImageDraw
 
 sizes = {
-    "regular": [16, 32, 180, 192, 512],
-    "maskable": [192, 512]
+    "regular": [16, 32, 64, 128, 180, 192, 512],
+    "maskable": [192, 512],
+    "favicon": [64]
 }
 
 if not os.path.exists('icons'):
@@ -80,6 +81,8 @@ def create_regular_icon(svg_file, size):
     os.remove("icons/temp_raw.png")
     print(f"Created {output_file}")
 
+    return result
+
 
 def create_maskable_icon(svg_file, size):
     base_name = os.path.splitext(svg_file)[0]
@@ -119,6 +122,49 @@ def create_maskable_icon(svg_file, size):
     print(f"Created {output_file}")
 
 
+def create_favicon(svg_file):
+    output_file = "favicon.ico"
+
+    favicon_images = []
+    for size in sizes["favicon"]:
+        padding_ratio = 0.05
+        icon_size = int(size * (1 - padding_ratio * 2))
+
+        svg_content = get_white_svg_content(svg_file)
+
+        cairosvg.svg2png(
+            bytestring=svg_content,
+            write_to="icons/temp_raw.png",
+            output_width=icon_size,
+            output_height=icon_size,
+            background_color="transparent"
+        )
+
+        icon = Image.open("icons/temp_raw.png")
+        icon = ImageOps.mirror(icon)
+
+        background = create_gradient_background(size, size)
+
+        padding = int(size * padding_ratio)
+        result = Image.new('RGBA', (size, size), (0, 0, 0, 0))
+        result.paste(background, (0, 0), background)
+        result.paste(icon, (padding, padding), icon)
+
+        favicon_images.append(result)
+
+    favicon_images[0].save(
+        output_file,
+        format="ICO",
+        sizes=[(img.width, img.height) for img in favicon_images],
+        append_images=favicon_images[1:]
+    )
+
+    if os.path.exists("icons/temp_raw.png"):
+        os.remove("icons/temp_raw.png")
+
+    print(f"Created {output_file}")
+
+
 for svg_file in svg_files:
     print(f"\nGenerating icons from {svg_file}:")
     for size in sizes["regular"]:
@@ -127,4 +173,6 @@ for svg_file in svg_files:
     for size in sizes["maskable"]:
         create_maskable_icon(svg_file, size)
 
-print("\nAll PWA icons generated successfully!")
+    create_favicon(svg_file)
+
+print("\nAll PWA icons and favicon generated successfully!")
