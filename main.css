@@ -365,12 +365,11 @@ h2 {
   top: 0;
   left: 0;
   right: 0;
-  background-color: #222;
+  background-color: #282828;
   color: #fff;
   height: 60px;
   z-index: 100;
   padding: 0 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 .mobile-nav-inner {
   display: flex;
@@ -674,6 +673,9 @@ h2 {
   .menu-item-container:hover .submenu.active {
     display: block;
     max-height: 1000px;
+  }
+  .content-section {
+    border-radius: 0;
   }
   .content-section-default {
     padding: 0;
