@@ -3,14 +3,13 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
-import time
 
 
 def extract_m3u8_from_url(url):
   headers = {
     'User-Agent': ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-                   'AppleWebKit/537.36 (KHTML, like Gecko) '
-                   'Chrome/135.0.0.0 Safari/537.36')
+             'AppleWebKit/537.36 (KHTML, like Gecko) '
+             'Chrome/135.0.0.0 Safari/537.36')
   }
 
   try:
@@ -90,6 +89,31 @@ def main():
       print("Saved links.json successfully")
     else:
       print("No changes to links.json")
+
+    print("Generating sitemap.xml...")
+    site_url = "http://ski.atik.kr"
+
+    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+
+    sitemap += f'  <url>\n  <loc>{site_url}/</loc>\n  <priority>1.0</priority>\n  <changefreq>monthly</changefreq>\n  </url>\n'
+
+    for resort in data:
+      resort_id = resort.get('id')
+      if resort_id:
+        sitemap += (f'  <url>\n  '
+               f'<loc>{site_url}/#{resort_id}</loc>\n  <priority>0.7</priority>\n  <changefreq>monthly</changefreq>\n  </url>\n')
+
+        if 'links' in resort:
+          for i in range(len(resort['links'])):
+            sitemap += (f'  <url>\n  '
+                   f'<loc>{site_url}/#{resort_id}/{i}</loc>\n  <priority>0.2</priority>\n  <changefreq>monthly</changefreq>\n  </url>\n')
+
+    sitemap += '</urlset>'
+
+    with open('sitemap.xml', 'w', encoding='utf-8') as f:
+      f.write(sitemap)
+    print("Generated sitemap.xml successfully")
 
   except Exception as e:
     print(f"Error processing links.json: {e}")
