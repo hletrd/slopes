@@ -32,7 +32,11 @@ const externalResources = [
   'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css'
 ];
 
+const isLocalhost = self.location.hostname === 'localhost' || self.location.hostname === '127.0.0.1';
+
 self.addEventListener('install', event => {
+  if (isLocalhost) return;
+
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -56,6 +60,10 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
+  if (isLocalhost) {
+    return;
+  }
+
   const requestUrl = new URL(event.request.url);
 
   if (requestUrl.hostname.includes('googletagmanager.com') ||
@@ -110,7 +118,7 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('activate', event => {
-  const cacheAllowlist = [CACHE_NAME];
+  const cacheAllowlist = isLocalhost ? [] : [CACHE_NAME];
 
   event.waitUntil(
     caches.keys().then(cacheNames => {
