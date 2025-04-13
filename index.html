@@ -50,7 +50,7 @@
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-  <link rel="stylesheet" href="main.css?v=2025041402">
+  <link rel="stylesheet" href="main.css?v=2025041403">
 </head>
 <body>
   <div class="mobile-nav">
@@ -360,7 +360,6 @@
 
         this.classList.add('dragging');
 
-        // Create a visual indicator for all potential drop targets
         document.querySelectorAll('.favorite-card').forEach(card => {
           if (card !== this) {
             card.classList.add('drop-target');
@@ -1218,7 +1217,7 @@
 
             setTimeout(() => {
               vivaldiPlayer.ctlUIStartSet(channel, serial);
-            }, 100);
+            }, 2000);
 
             if (resortId && !isNaN(webcamIndex)) {
               addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 4);
