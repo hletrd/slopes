@@ -618,10 +618,8 @@
         document.querySelectorAll('.submenu').forEach(submenu => {
           submenu.classList.remove('active');
         });
-        document.querySelectorAll('.menu-item').forEach(item => {
-          if (item.getAttribute('data-has-submenu') === 'true') {
-            item.classList.remove('active');
-          }
+        document.querySelectorAll('.menu-item[data-has-submenu="true"]').forEach(item => {
+          item.classList.remove('active');
         });
         document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
           toggle.innerHTML = '<i class="bi bi-chevron-down"></i>';
@@ -771,6 +769,8 @@
             resortMenuItem.classList.add('active');
 
             hideAllSubmenus();
+
+            resortMenuItem.classList.add('active');
 
             disposeAllPlayers();
 
@@ -1151,6 +1151,7 @@
               const submenu = document.getElementById(`${target}-submenu`);
               if (submenu) {
                 submenu.classList.add('active');
+                this.classList.add('active');
 
                 const dropdownToggle = this.querySelector('.dropdown-toggle');
                 if (dropdownToggle) {
