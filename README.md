@@ -2,6 +2,10 @@
 
 * 링크: [http://ski.atik.kr](http://ski.atik.kr)
 
+[![배포](https://github.com/hletrd/slopes/actions/workflows/static.yml/badge.svg)](https://github.com/hletrd/slopes/actions/workflows/static.yml)
+[![날씨 업데이트](https://github.com/hletrd/slopes/actions/workflows/fetch_weather.yml/badge.svg)](https://github.com/hletrd/slopes/actions/workflows/fetch_weather.yml)
+[![웹캠 링크 업데이트](https://github.com/hletrd/slopes/actions/workflows/webcam-scraper.yml/badge.svg)](https://github.com/hletrd/slopes/actions/workflows/webcam-scraper.yml)
+
 ![preview](preview.png)
 
 * 전국 스키장의 실시간 웹캠 뷰를 제공합니다.
