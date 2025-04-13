@@ -758,5 +758,67 @@
         "longitude": 128.597952
       }
     ]
+  },
+  {
+    "id": "hokkaido",
+    "name": "홋카이도",
+    "links": [
+      {
+        "name": "니세코 빌리지 곤돌라 베이스",
+        "video": "https://www.youtube.com/watch?v=w_173GPVnwA",
+        "video_type": "youtube"
+      },
+      {
+        "name": "니세코 빌리지 그린 리프",
+        "video": "https://www.youtube.com/watch?v=T8kCz-CoybY",
+        "video_type": "youtube"
+      },
+      {
+        "name": "니세코 하나조노 베이스",
+        "video": "https://www.youtube.com/watch?v=1ksmiy6EsDo",
+        "video_type": "youtube"
+      },
+      {
+        "name": "키로로 베이스",
+        "video": "https://www.youtube.com/watch?v=9HZKY9PtaWI",
+        "video_type": "youtube"
+      }
+    ]
+  },
+  {
+    "id": "nagano",
+    "name": "나가노",
+    "links": [
+      {
+        "name": "시가코겐 구마노유 베이스",
+        "video": "https://www.youtube.com/live/n4G4iQTme1g",
+        "video_type": "youtube"
+      },
+      {
+        "name": "시가코겐 야마노에키 베이스",
+        "video": "https://www.youtube.com/watch?v=SZAawoS2wUE",
+        "video_type": "youtube"
+      },
+      {
+        "name": "하쿠바 하포네 우사기다이라",
+        "video": "https://www.youtube.com/watch?v=SZAawoS2wUE",
+        "video_type": "youtube"
+      },
+      {
+        "name": "하쿠바 하포네 파노라마",
+        "video": "https://www.youtube.com/watch?v=uz5OuB-evfk",
+        "video_type": "youtube"
+      },
+      {
+        "name": "하쿠바 하포네 시라카바 하단",
+        "video": "https://www.youtube.com/watch?v=hMY3VnL4Pyk",
+        "video_type": "youtube"
+      },
+      {
+        "name": "하쿠바 하포네 제3주차장",
+        "video": "https://www.youtube.com/watch?v=BHo4tHKIDow",
+        "video_type": "youtube"
+      }
+    ]
   }
 ]
