@@ -88,7 +88,8 @@
         "name": "실버 탑승장",
         "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan5.m3u8"
       }
-    ]
+    ],
+    "status": "https://www.jisanresort.co.kr/w/ski/slopes/info.asp"
   },
   {
     "id": "elysian",
@@ -121,7 +122,8 @@
         "video": "https://www.youtube.com/@11-lf8zw/streams",
         "video_type": "link"
       }
-    ]
+    ],
+    "status": "https://www.elysian.co.kr/gangchon/ski/ski_slope.asp"
   },
   {
     "id": "vivaldi",
@@ -153,7 +155,8 @@
         "name": "TODO",
         "video": ""
       }
-    ]
+    ],
+    "status": "https://www.sonohotelsresorts.com/skiboard/status"
   },
   {
     "id": "oakvalley",
@@ -248,7 +251,8 @@
         "name": "워터플래닛",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam07.stream/playlist.m3u8"
       }
-    ]
+    ],
+    "status": "https://m.wellihillipark.com/snowpark/schedule/open-slope"
   },
   {
     "id": "phoenix",
@@ -300,7 +304,8 @@
         "name": "스노우 빌리지",
         "video": "https://streaming.phoenixhnr.co.kr/hls/yh_01.m3u8"
       }
-    ]
+    ],
+    "status": "https://phoenixhnr.co.kr/static/pyeongchang/snowpark/slope-lift?tabId=2"
   },
   {
     "id": "alpensia",
@@ -328,7 +333,8 @@
         "video": "https://www.youtube.com/watch?v=fStEQyg7SWc",
         "video_type": "youtube"
       }
-    ]
+    ],
+    "status": "https://m.alpensia.com/ski/slope-now.do?lang=ko"
   },
   {
     "id": "mona",
@@ -429,7 +435,8 @@
         "name": "피크 아일랜드",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam11.stream/playlist.m3u8"
       }
-    ]
+    ],
+    "status": "https://www.yongpyong.co.kr/kor/skiNboard/slope/openStatusBoard.do"
   },
   {
     "id": "high1",
@@ -557,7 +564,8 @@
         "link": "https://www.high1.com/webcam/pop_webcam.do?ch=18",
         "video": "http://59.30.12.195:1935/live/_definst_/ch18.stream/playlist.m3u8"
       }
-    ]
+    ],
+    "status": "https://www.high1.com/ski/slopeView.do?key=748&mode=p"
   },
   {
     "id": "o2resort",
@@ -610,7 +618,8 @@
         "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3",
         "video": "http://118.46.149.144:8080/ramdisk/cam3.m3u8"
       }
-    ]
+    ],
+    "status": "https://www.o2resort.com/SKI/slopeOpen.jsp"
   },
   {
     "id": "muju",
@@ -708,7 +717,8 @@
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=01",
         "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam01.stream/playlist.m3u8?e=1744566431&h=8e319aa4065e4f8ed7ba66c8c475a4ea"
       }
-    ]
+    ],
+    "status": "https://www.mdysresort.com/convert_main_slope_221207.asp"
   },
   {
     "id": "edenvalley",
