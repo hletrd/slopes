@@ -1172,6 +1172,90 @@
         updateAllResortsWeather();
       }
 
+      function createLocationNameDiv(data, timestamp, displaySource = false) {
+        const locationNameDiv = document.createElement('div');
+        locationNameDiv.className = 'location-name';
+        if (data.name.startsWith('리조트_')) {
+          locationNameDiv.textContent = data.name.replace('리조트_', '');
+        } else {
+          locationNameDiv.textContent = data.name;
+        }
+
+        if (timestamp) {
+          const date = new Date(timestamp);
+          month = date.getMonth() + 1;
+          day = date.getDate();
+          hours = date.getHours().toString().padStart(2, '0');
+          minutes = date.getMinutes().toString().padStart(2, '0');
+
+          const timeSpan = document.createElement('span');
+          timeSpan.className = 'weather-update-time';
+          timeSpan.textContent = `${month}월 ${day}일 ${hours}:${minutes} 기준`;
+          if (displaySource) {
+            if (data.name.startsWith('리조트_')) {
+              timeSpan.textContent += ` (리조트 제공)`;
+            } else {
+              timeSpan.textContent += ` (기상청 제공)`;
+            }
+          }
+          locationNameDiv.appendChild(timeSpan);
+        }
+
+        return locationNameDiv;
+      }
+
+      function createWeatherDataDiv(data) {
+        const weatherDataDiv = document.createElement('div');
+        weatherDataDiv.className = 'weather-data';
+
+        class WeatherMetric {
+          constructor(className, iconClass, value, unit, decimals = 1) {
+            this.span = document.createElement('span');
+            this.span.className = className;
+
+            const icon = document.createElement('i');
+            icon.className = iconClass;
+            this.span.appendChild(icon);
+
+            const formattedValue = Number(value).toFixed(decimals);
+            this.span.appendChild(document.createTextNode(`${formattedValue}${unit}`));
+
+            return this.span;
+          }
+        }
+
+        if (data.temperature !== null) {
+          const tempMetric = new WeatherMetric('temperature', 'bi bi-thermometer-half', data.temperature, '°C');
+          weatherDataDiv.appendChild(tempMetric);
+        }
+
+        if (data.humidity !== null) {
+          weatherDataDiv.appendChild(document.createTextNode(' • '));
+          const humidityMetric = new WeatherMetric('humidity', 'bi bi-moisture', data.humidity, '%', 0);
+          weatherDataDiv.appendChild(humidityMetric);
+        }
+
+        if (data.wind_speed !== null) {
+          weatherDataDiv.appendChild(document.createTextNode(' • '));
+          const windMetric = new WeatherMetric('wind-speed', 'bi bi-wind', data.wind_speed, 'm/s');
+          weatherDataDiv.appendChild(windMetric);
+        }
+
+        if (data.rainfall !== null) {
+          weatherDataDiv.appendChild(document.createTextNode(' • '));
+          const rainfallMetric = new WeatherMetric('rainfall', 'bi bi-droplet-fill', data.rainfall, 'mm');
+          weatherDataDiv.appendChild(rainfallMetric);
+        }
+
+        if (data.snowfall_3hr !== null) {
+          weatherDataDiv.appendChild(document.createTextNode(' • '));
+          const snowfallMetric = new WeatherMetric('snowfall', 'bi bi-snow', data.snowfall_3hr, 'cm');
+          weatherDataDiv.appendChild(snowfallMetric);
+        }
+
+        return weatherDataDiv;
+      }
+
       function updateAllResortsWeather() {
         if (!weatherData || weatherData.length === 0) return;
         if (!data || data.length === 0) return;
@@ -1203,78 +1287,8 @@
 
             const mostRecent = baseAreaWeather.data[baseAreaWeather.data.length - 1];
 
-            let updateTime = '';
-            let month = '';
-            let day = '';
-            let hours = '';
-            let minutes = '';
-            if (baseAreaWeather.timestamp) {
-              const date = new Date(baseAreaWeather.timestamp);
-              month = date.getMonth() + 1;
-              day = date.getDate();
-              hours = date.getHours().toString().padStart(2, '0');
-              minutes = date.getMinutes().toString().padStart(2, '0');
-              updateTime = `<span class="weather-update-time">${month}월 ${day}일 ${hours}:${minutes} 기준</span>`;
-            }
-
-            const locationNameDiv = document.createElement('div');
-            locationNameDiv.className = 'location-name';
-            locationNameDiv.textContent = resortName;
-
-            if (updateTime) {
-              const timeSpan = document.createElement('span');
-              timeSpan.className = 'weather-update-time';
-              timeSpan.textContent = `${month}월 ${day}일 ${hours}:${minutes} 기준`;
-              locationNameDiv.appendChild(timeSpan);
-            }
-
-            const weatherDataDiv = document.createElement('div');
-            weatherDataDiv.className = 'weather-data';
-
-            class WeatherMetric {
-              constructor(className, iconClass, value, unit, decimals = 1) {
-                this.span = document.createElement('span');
-                this.span.className = className;
-
-                const icon = document.createElement('i');
-                icon.className = iconClass;
-                this.span.appendChild(icon);
-
-                const formattedValue = Number(value).toFixed(decimals);
-                this.span.appendChild(document.createTextNode(`${formattedValue}${unit}`));
-
-                return this.span;
-              }
-            }
-
-            if (mostRecent.temperature !== null) {
-              const tempMetric = new WeatherMetric('temperature', 'bi bi-thermometer-half', mostRecent.temperature, '°C');
-              weatherDataDiv.appendChild(tempMetric);
-            }
-
-            if (mostRecent.humidity !== null) {
-              weatherDataDiv.appendChild(document.createTextNode(' • '));
-              const humidityMetric = new WeatherMetric('humidity', 'bi bi-moisture', mostRecent.humidity, '%', 0);
-              weatherDataDiv.appendChild(humidityMetric);
-            }
-
-            if (mostRecent.wind_speed !== null) {
-              weatherDataDiv.appendChild(document.createTextNode(' • '));
-              const windMetric = new WeatherMetric('wind-speed', 'bi bi-wind', mostRecent.wind_speed, 'm/s');
-              weatherDataDiv.appendChild(windMetric);
-            }
-
-            if (mostRecent.rainfall !== null) {
-              weatherDataDiv.appendChild(document.createTextNode(' • '));
-              const rainfallMetric = new WeatherMetric('rainfall', 'bi bi-droplet-fill', mostRecent.rainfall, 'mm');
-              weatherDataDiv.appendChild(rainfallMetric);
-            }
-
-            if (mostRecent.snowfall_3hr !== null) {
-              weatherDataDiv.appendChild(document.createTextNode(' • '));
-              const snowfallMetric = new WeatherMetric('snowfall', 'bi bi-snow', mostRecent.snowfall_3hr, 'cm');
-              weatherDataDiv.appendChild(snowfallMetric);
-            }
+            const locationNameDiv = createLocationNameDiv(resort, baseAreaWeather.timestamp, false);
+            const weatherDataDiv = createWeatherDataDiv(mostRecent);
 
             weatherInfo.appendChild(locationNameDiv);
             weatherInfo.appendChild(weatherDataDiv);
@@ -1323,78 +1337,8 @@
 
               const mostRecent = baseAreaWeather.data[baseAreaWeather.data.length - 1];
 
-              let updateTime = '';
-              let month = '';
-              let day = '';
-              let hours = '';
-              let minutes = '';
-              if (baseAreaWeather.timestamp) {
-                const date = new Date(baseAreaWeather.timestamp);
-                month = date.getMonth() + 1;
-                day = date.getDate();
-                hours = date.getHours().toString().padStart(2, '0');
-                minutes = date.getMinutes().toString().padStart(2, '0');
-                updateTime = `<span class="weather-update-time">${month}월 ${day}일 ${hours}:${minutes} 기준</span>`;
-              }
-
-              const locationNameDiv = document.createElement('div');
-              locationNameDiv.className = 'location-name';
-              locationNameDiv.textContent = resortName + ' (' + baseAreaWeather.name.replace('리조트_', '') + ')';
-
-              if (updateTime) {
-                const timeSpan = document.createElement('span');
-                timeSpan.className = 'weather-update-time';
-                timeSpan.textContent = `${month}월 ${day}일 ${hours}:${minutes} 기준`;
-                locationNameDiv.appendChild(timeSpan);
-              }
-
-              const weatherDataDiv = document.createElement('div');
-              weatherDataDiv.className = 'weather-data';
-
-              class WeatherMetric {
-                constructor(className, iconClass, value, unit, decimals = 1) {
-                  this.span = document.createElement('span');
-                  this.span.className = className;
-
-                  const icon = document.createElement('i');
-                  icon.className = iconClass;
-                  this.span.appendChild(icon);
-
-                  const formattedValue = Number(value).toFixed(decimals);
-                  this.span.appendChild(document.createTextNode(`${formattedValue}${unit}`));
-
-                  return this.span;
-                }
-              }
-
-              if (mostRecent.temperature !== null) {
-                const tempMetric = new WeatherMetric('temperature', 'bi bi-thermometer-half', mostRecent.temperature, '°C');
-                weatherDataDiv.appendChild(tempMetric);
-              }
-
-              if (mostRecent.humidity !== null) {
-                weatherDataDiv.appendChild(document.createTextNode(' • '));
-                const humidityMetric = new WeatherMetric('humidity', 'bi bi-moisture', mostRecent.humidity, '%', 0);
-                weatherDataDiv.appendChild(humidityMetric);
-              }
-
-              if (mostRecent.wind_speed !== null) {
-                weatherDataDiv.appendChild(document.createTextNode(' • '));
-                const windMetric = new WeatherMetric('wind-speed', 'bi bi-wind', mostRecent.wind_speed, 'm/s');
-                weatherDataDiv.appendChild(windMetric);
-              }
-
-              if (mostRecent.rainfall !== null) {
-                weatherDataDiv.appendChild(document.createTextNode(' • '));
-                const rainfallMetric = new WeatherMetric('rainfall', 'bi bi-droplet-fill', mostRecent.rainfall, 'mm');
-                weatherDataDiv.appendChild(rainfallMetric);
-              }
-
-              if (mostRecent.snowfall_3hr !== null) {
-                weatherDataDiv.appendChild(document.createTextNode(' • '));
-                const snowfallMetric = new WeatherMetric('snowfall', 'bi bi-snow', mostRecent.snowfall_3hr, 'cm');
-                weatherDataDiv.appendChild(snowfallMetric);
-              }
+              const locationNameDiv = createLocationNameDiv(resort, baseAreaWeather.timestamp, false);
+              const weatherDataDiv = createWeatherDataDiv(mostRecent);
 
               weatherInfo.appendChild(locationNameDiv);
               weatherInfo.appendChild(weatherDataDiv);
@@ -1482,86 +1426,8 @@
             const weatherInfo = document.createElement('div');
             weatherInfo.className = 'weather-info';
 
-            let updateTime = '';
-            let month = '';
-            let day = '';
-            let hours = '';
-            let minutes = '';
-            if (locationData.timestamp) {
-              const date = new Date(locationData.timestamp);
-              month = date.getMonth() + 1;
-              day = date.getDate();
-              hours = date.getHours().toString().padStart(2, '0');
-              minutes = date.getMinutes().toString().padStart(2, '0');
-              updateTime = `<span class="weather-update-time">${month}월 ${day}일 ${hours}:${minutes} 기준</span>`;
-            }
-
-            const locationNameDiv = document.createElement('div');
-            locationNameDiv.className = 'location-name';
-            if (locationData.name.startsWith('리조트_')) {
-              locationNameDiv.textContent = locationData.name.replace('리조트_', '');
-            } else {
-              locationNameDiv.textContent = locationData.name;
-            }
-
-            if (updateTime) {
-              const timeSpan = document.createElement('span');
-              timeSpan.className = 'weather-update-time';
-              if (locationData.name.startsWith('리조트_')) {
-                timeSpan.textContent = `${month}월 ${day}일 ${hours}:${minutes} 기준 (리조트 제공)`;
-              } else {
-                timeSpan.textContent = `${month}월 ${day}일 ${hours}:${minutes} 기준 (기상청 제공)`;
-              }
-              locationNameDiv.appendChild(timeSpan);
-            }
-
-            const weatherDataDiv = document.createElement('div');
-            weatherDataDiv.className = 'weather-data';
-
-            class WeatherMetric {
-              constructor(className, iconClass, value, unit, decimals = 1) {
-                this.span = document.createElement('span');
-                this.span.className = className;
-
-                const icon = document.createElement('i');
-                icon.className = iconClass;
-                this.span.appendChild(icon);
-
-                const formattedValue = Number(value).toFixed(decimals);
-                this.span.appendChild(document.createTextNode(`${formattedValue}${unit}`));
-
-                return this.span;
-              }
-            }
-
-            if (mostRecent.temperature !== null) {
-              const tempMetric = new WeatherMetric('temperature', 'bi bi-thermometer-half', mostRecent.temperature, '°C');
-              weatherDataDiv.appendChild(tempMetric);
-            }
-
-            if (mostRecent.humidity !== null) {
-              weatherDataDiv.appendChild(document.createTextNode(' • '));
-              const humidityMetric = new WeatherMetric('humidity', 'bi bi-moisture', mostRecent.humidity, '%', 0);
-              weatherDataDiv.appendChild(humidityMetric);
-            }
-
-            if (mostRecent.wind_speed !== null) {
-              weatherDataDiv.appendChild(document.createTextNode(' • '));
-              const windMetric = new WeatherMetric('wind-speed', 'bi bi-wind', mostRecent.wind_speed, 'm/s');
-              weatherDataDiv.appendChild(windMetric);
-            }
-
-            if (mostRecent.rainfall !== null) {
-              weatherDataDiv.appendChild(document.createTextNode(' • '));
-              const rainfallMetric = new WeatherMetric('rainfall', 'bi bi-droplet-fill', mostRecent.rainfall, 'mm');
-              weatherDataDiv.appendChild(rainfallMetric);
-            }
-
-            if (mostRecent.snowfall_3hr !== null) {
-              weatherDataDiv.appendChild(document.createTextNode(' • '));
-              const snowfallMetric = new WeatherMetric('snowfall', 'bi bi-snow', mostRecent.snowfall_3hr, 'cm');
-              weatherDataDiv.appendChild(snowfallMetric);
-            }
+            const locationNameDiv = createLocationNameDiv(locationData, locationData.timestamp, true);
+            const weatherDataDiv = createWeatherDataDiv(mostRecent);
 
             weatherInfo.appendChild(locationNameDiv);
             weatherInfo.appendChild(weatherDataDiv);
