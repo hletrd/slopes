@@ -61,6 +61,8 @@ def process_link(item, resort_id):
       result["modified"] = True
     else:
       m3u8_link = extract_m3u8_from_url(link)
+      if resort_id == 'o2resort':
+        m3u8_link = m3u8_link.replace('http://', '/stream_proxy/http/')
       if m3u8_link:
         item['video'] = m3u8_link
         print(f"[{resort_id}] Found m3u8 link: {m3u8_link}")
@@ -108,7 +110,7 @@ def main():
     with open('links.json', 'r', encoding='utf-8') as f:
       data = json.load(f)
 
-    max_workers_per_resort = 1
+    max_workers_per_resort = 5
     max_total_workers = 20
 
     modified = False

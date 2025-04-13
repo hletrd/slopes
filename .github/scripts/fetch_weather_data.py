@@ -45,7 +45,7 @@ def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_k
   url = base_url + params
 
   try:
-    response = requests.get(url, timeout=30)
+    response = requests.get(url, timeout=10)
 
     if response.status_code == 403:
       print(f"Received 403 Forbidden from API for {location_name}")
