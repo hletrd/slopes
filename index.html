@@ -1942,12 +1942,10 @@
             const error = player.error();
             console.error('Video player error:', error);
 
-            // Get the direct link for the webcam
             let directLink = null;
             if (resort && resort.webcam) {
               directLink = resort.webcam.link || null;
             } else {
-              // Try to find the direct link from data
               const resortData = data.find(r => r.id === resortId);
               if (resortData) {
                 const webcams = resortData.links || resortData.webcams || [];
@@ -1957,7 +1955,6 @@
               }
             }
 
-            // Create error message with button
             let errorHtml = '<div class="error-message"><p>비디오 재생 중 오류가 발생했습니다.</p>';
 
             if (directLink) {
@@ -2054,13 +2051,18 @@
           const ctx = canvas.getContext('2d');
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+          const resortName = getResortNameForCapture();
+          const webcamName = getWebcamNameForCapture(player.el());
+          const timestamp = formatTimestamp();
+          const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`
+
           const dataURL = canvas.toDataURL('image/jpeg');
-          downloadImage(dataURL, 'capture.jpg');
+          downloadImage(dataURL, filename);
 
           const container = player.el().parentNode;
           const successMsg = document.createElement('div');
           successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
-          successMsg.textContent = '캡처에 성공했습니다.';
+          successMsg.textContent = '캡처 완료!';
           container.appendChild(successMsg);
 
           setTimeout(() => {
@@ -2077,13 +2079,18 @@
         try {
           const iframe = container.querySelector('iframe');
           if (!iframe) {
-            alert('캡처할 콘텐츠를 찾을 수 없습니다.');
+            alert('캡처할 영상을 찾을 수 없습니다.');
             return;
           }
 
+          const resortName = getResortNameForCapture();
+          const webcamName = getWebcamNameForCapture(container);
+          const timestamp = formatTimestamp();
+          const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`;
+
           html2canvas(container).then(canvas => {
-            const dataURL = canvas.toDataURL('image/png');
-            downloadImage(dataURL, 'webcam-capture.png');
+            const dataURL = canvas.toDataURL('image/jpeg');
+            downloadImage(dataURL, filename);
 
             const successMsg = document.createElement('div');
             successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
@@ -2098,6 +2105,106 @@
           console.error('Error capturing screenshot:', e);
           alert('캡처 중 오류가 발생했습니다.');
         }
+      }
+
+      function getResortNameForCapture() {
+        const videoContainer = document.querySelector('.video-container');
+        const favoriteCard = videoContainer?.closest('.video-card');
+        if (favoriteCard && document.getElementById('default-message').classList.contains('active')) {
+          const favoriteResort = favoriteCard.querySelector('.favorite-resort');
+          if (favoriteResort && favoriteResort.textContent) {
+            return sanitizeForFilename(favoriteResort.textContent.trim());
+          }
+        }
+
+        const resortLabel = document.querySelector('.content-section.active .resort-label');
+        if (resortLabel && resortLabel.textContent) {
+          return sanitizeForFilename(resortLabel.textContent.trim());
+        }
+
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+          const parts = hash.split('/');
+          const resortId = parts[0];
+          const resort = data.find(r => r.id === resortId);
+          if (resort) {
+            return sanitizeForFilename(resort.name);
+          }
+        }
+
+        const activeMenuItem = document.querySelector('.menu-item.active');
+        if (activeMenuItem) {
+          const menuText = activeMenuItem.textContent.trim().split('\n')[0];
+          return sanitizeForFilename(menuText);
+        }
+
+        return 'unknown';
+      }
+
+      function getWebcamNameForCapture(element) {
+        const videoContainer = element.closest('.video-container');
+        const favoriteCard = videoContainer?.closest('.video-card');
+        if (favoriteCard && document.getElementById('default-message').classList.contains('active')) {
+          const favoriteLocation = favoriteCard.querySelector('.favorite-location');
+          if (favoriteLocation && favoriteLocation.textContent) {
+            return sanitizeForFilename(favoriteLocation.textContent.trim());
+          }
+        }
+
+        const inlineTitle = document.querySelector('.content-section.active .inline-title.inline-title-submenu');
+        if (inlineTitle && inlineTitle.textContent) {
+          return sanitizeForFilename(inlineTitle.textContent.trim());
+        }
+
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+          const parts = hash.split('/');
+          if (parts.length > 1) {
+            const resortId = parts[0];
+            const webcamId = parts[1];
+            if (resortId && webcamId && !isNaN(parseInt(webcamId))) {
+              const resort = data.find(r => r.id === resortId);
+              if (resort) {
+                const webcams = resort.links || resort.webcams || [];
+                const webcamIndex = parseInt(webcamId);
+                if (webcams[webcamIndex]) {
+                  return sanitizeForFilename(webcams[webcamIndex].name);
+                }
+              }
+            }
+          }
+        }
+
+        const activeSubmenuItem = document.querySelector('.submenu-item.active');
+        if (activeSubmenuItem) {
+          return sanitizeForFilename(activeSubmenuItem.textContent.trim());
+        }
+
+        const card = element.closest('.video-card');
+        if (card) {
+          const cardTitle = card.querySelector('h3');
+          if (cardTitle) {
+            return sanitizeForFilename(cardTitle.textContent.trim());
+          }
+        }
+
+        return 'unknown';
+      }
+
+      function formatTimestamp() {
+        const now = new Date();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return `${month}-${day}_${hours}:${minutes}:${seconds}`;
+      }
+
+      function sanitizeForFilename(name) {
+        return name
+          .replace(/[^가-힣\w\s,()-]/g, '')
+          .replace(/\s+/g, '_')
       }
 
       function downloadImage(dataURL, filename) {
