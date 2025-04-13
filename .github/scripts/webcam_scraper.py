@@ -3,13 +3,17 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
+import threading
+from concurrent.futures import ThreadPoolExecutor
 
 
 def extract_m3u8_from_url(url):
   headers = {
-    'User-Agent': ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-             'AppleWebKit/537.36 (KHTML, like Gecko) '
-             'Chrome/135.0.0.0 Safari/537.36')
+    'User-Agent': (
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+      'AppleWebKit/537.36 (KHTML, like Gecko) '
+      'Chrome/135.0.0.0 Safari/537.36'
+    )
   }
 
   try:
@@ -43,44 +47,91 @@ def extract_m3u8_from_url(url):
     return None
 
 
+def process_link(item, resort_id):
+  link = item.get('link')
+  video = item.get('video')
+  result = {"modified": False, "item": item}
+
+  if link:
+    print(f"[{resort_id}] Processing link: {link}")
+
+    if link.endswith('.m3u8'):
+      item['video'] = link
+      print(f"[{resort_id}] Link is already an m3u8 link: {link}")
+      result["modified"] = True
+    else:
+      m3u8_link = extract_m3u8_from_url(link)
+      if m3u8_link:
+        item['video'] = m3u8_link
+        print(f"[{resort_id}] Found m3u8 link: {m3u8_link}")
+        result["modified"] = True
+      else:
+        print(f"[{resort_id}] No m3u8 link found for {link}")
+  else:
+    if video:
+      print(f"[{resort_id}] Already has video link: {video}")
+    else:
+      print(f"[{resort_id}] No link available")
+
+  return result
+
+
+def process_resort(resort, max_workers):
+  resort_id = resort.get('id', 'unknown')
+  print(f"Processing resort: {resort_id}")
+
+  if 'links' not in resort:
+    return False
+
+  links = resort.get('links', [])
+  modified = False
+
+  if not links:
+    return modified
+
+  with ThreadPoolExecutor(max_workers=max_workers) as executor:
+    futures = [
+      executor.submit(process_link, item, resort_id) for item in links
+    ]
+
+    for future in futures:
+      result = future.result()
+      if result["modified"]:
+        modified = True
+
+  return modified
+
+
 def main():
   try:
     print("Reading links.json file...")
     with open('links.json', 'r', encoding='utf-8') as f:
       data = json.load(f)
 
+    max_workers_per_resort = 1
+    max_total_workers = 20
+
     modified = False
+    resort_threads = []
+    resort_results = [False] * len(data)
 
-    for resort in data:
-      resort_id = resort.get('id', 'unknown')
-      print(f"Processing resort: {resort_id}")
+    for i, resort in enumerate(data):
+      target_fn = lambda idx=i, r=resort: resort_results.__setitem__(
+        idx, process_resort(r, max_workers_per_resort)
+      )
 
-      if 'links' in resort:
-        links = resort.get('links', [])
-        for item in links:
-          link = item.get('link')
-          video = item.get('video')
+      thread = threading.Thread(target=target_fn)
+      resort_threads.append(thread)
+      thread.start()
 
-          if link:
-            print(f"Processing link: {link}")
+      if len(resort_threads) >= max_total_workers:
+        resort_threads[0].join()
+        resort_threads.pop(0)
 
-            if link.endswith('.m3u8'):
-              item['video'] = link
-              print(f"Link is already an m3u8 link: {link}")
-              modified = True
-            else:
-              m3u8_link = extract_m3u8_from_url(link)
-              if m3u8_link:
-                item['video'] = m3u8_link
-                print(f"Found m3u8 link: {m3u8_link}")
-                modified = True
-              else:
-                print(f"No m3u8 link found for {link}")
-          else:
-            if video:
-              print(f"Already has video link: {video}")
-            else:
-              print("No link available")
+    for thread in resort_threads:
+      thread.join()
+
+    modified = any(resort_results)
 
     if modified:
       print("Saving updated links.json file...")
@@ -96,18 +147,34 @@ def main():
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 
-    sitemap += f'  <url>\n  <loc>{site_url}/</loc>\n  <priority>1.0</priority>\n  <changefreq>monthly</changefreq>\n  </url>\n'
+    sitemap += (
+      f'  <url>\n'
+      f'  <loc>{site_url}/</loc>\n'
+      f'  <priority>1.0</priority>\n'
+      f'  <changefreq>monthly</changefreq>\n'
+      f'  </url>\n'
+    )
 
     for resort in data:
       resort_id = resort.get('id')
       if resort_id:
-        sitemap += (f'  <url>\n  '
-               f'<loc>{site_url}/#{resort_id}</loc>\n  <priority>0.7</priority>\n  <changefreq>monthly</changefreq>\n  </url>\n')
+        sitemap += (
+          f'  <url>\n'
+          f'  <loc>{site_url}/#{resort_id}</loc>\n'
+          f'  <priority>0.7</priority>\n'
+          f'  <changefreq>monthly</changefreq>\n'
+          f'  </url>\n'
+        )
 
         if 'links' in resort:
           for i in range(len(resort['links'])):
-            sitemap += (f'  <url>\n  '
-                   f'<loc>{site_url}/#{resort_id}/{i}</loc>\n  <priority>0.2</priority>\n  <changefreq>monthly</changefreq>\n  </url>\n')
+            sitemap += (
+              f'  <url>\n'
+              f'  <loc>{site_url}/#{resort_id}/{i}</loc>\n'
+              f'  <priority>0.2</priority>\n'
+              f'  <changefreq>monthly</changefreq>\n'
+              f'  </url>\n'
+            )
 
     sitemap += '</urlset>'
 
