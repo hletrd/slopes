@@ -1,4 +1,4 @@
-name: Deploy to Server
+name: 배포
 
 on:
   workflow_dispatch:

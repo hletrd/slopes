@@ -1,4 +1,4 @@
-name: Fetch Weather Data
+name: 날씨 업데이트
 
 on:
   schedule:
