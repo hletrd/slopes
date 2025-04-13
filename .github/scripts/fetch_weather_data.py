@@ -10,6 +10,8 @@ import os.path
 import threading
 from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
+import re
+from bs4 import BeautifulSoup
 
 HOURS = 1
 INTERVAL = 60
@@ -203,6 +205,103 @@ def generate_preview_image(weather_data, resorts):
   except Exception as e:
     print(f"Error saving preview image: {e}")
 
+def fetch_weather_data_from_resort(resort_name):
+  try:
+    # 지산 포레스트 리조트: 케이웨더 정보 제공
+    # 엘리시안 강촌: 기상청 정보 제공
+    # 비발디파크: 제공 여부 불명
+    # 오크밸리: 제공 여부 불명
+    # 웰리힐리파크: 기상청 정보 제공으로 추정
+    # 휘닉스 파크: 확인 예정
+    # 알펜시아 리조트: 기상청 정보 제공
+    # 모나 용평: 웨더아이 정보 제공
+    # 하이원 리조트: 웨더아이 정보 제공
+    # 오투리조트: 제공 여부 붕명
+    # 에덴밸리리조트: 웨더아이 정보 제공
+    links = {
+      "곤지암리조트": "https://m.konjiamresort.co.kr/contact/weather.dev",
+      "무주 덕유산 리조트": "https://www.mdysresort.com/guide/weather_1.asp"
+    }
+    print(resort_name)
+
+    kst = pytz.timezone('Asia/Seoul')
+    now = datetime.now(kst)
+
+    template = {
+      "name": "",
+      "resort": resort_name,
+      "location": {
+        "latitude": None,
+        "longitude": None
+      },
+      "timestamp": now.isoformat(),
+      "data": [
+        {
+          "time": now.isoformat(),
+          "temperature": None,
+          "weather_condition": None,
+          "humidity": None,
+          "wind_speed": None,
+          "rainfall": None,
+        "snow_cover": None,
+          "snowfall_3hr": None
+        }
+      ]
+    }
+
+    if resort_name not in links:
+      print(f"No weather link found for {resort_name}")
+      return None
+
+    response = requests.get(links[resort_name], timeout=10)
+
+    if response.status_code != 200:
+      print(f"Failed to fetch weather data from {resort_name}: {response.status_code}")
+      return None
+
+    results = []
+
+    if resort_name == "곤지암리조트":
+      temperature = None
+      try:
+        temperature_part = response.text.split('<span class="cur-tprt"><span class="system">')[1].split("<")[0].strip()
+        temperature = float(temperature_part)
+        print(f"Found temperature for {resort_name}: {temperature}°C")
+      except (IndexError, ValueError) as e:
+        print(f"Error parsing temperature for {resort_name}: {e}")
+
+      if temperature is not None:
+        result = template.copy()
+        result["name"] = "리조트_베이스"
+        result["data"][0]["temperature"] = temperature
+        results.append(result)
+
+    elif resort_name == "무주 덕유산 리조트":
+      soup = BeautifulSoup(response.text, 'html.parser')
+      try:
+        table = soup.select_one("table")
+        if table:
+          tbody = table.select_one("tbody")
+          if tbody:
+            index = tbody.select_one("tr").select("th")[1:]
+            print(index)
+            data = tbody.select("tr")[1:]
+            for k, v in enumerate(index):
+              result = json.loads(json.dumps(template))  # deep copy
+              result["name"] = "리조트_" + v.text.strip()
+              result["data"][0]["temperature"] = float(data[0].select("td")[k].text.strip())
+              result["data"][0]["humidity"] = float(data[1].select("td")[k].text.strip())
+              result["data"][0]["wind_speed"] = float(data[2].select("td")[k].text.strip())
+              results.append(result)
+      except Exception as e:
+        print(f"Error parsing data for {resort_name}: {e}")
+    return results if results else None
+
+  except Exception as e:
+    print(f"Error fetching weather data from link for {resort_name}: {e}")
+
+  return None
+
 def main():
   auth_key = os.environ.get("KMA_API_KEY")
   if not auth_key:
@@ -242,6 +341,8 @@ def main():
       location_name = location.get("name", "")
       valid_keys.add(f"{resort_name}:{location_name}")
 
+    valid_keys.add(f"{resort_name}:리조트")
+
   keys_to_remove = []
   for key in weather_data_dict:
     if key not in valid_keys:
@@ -255,8 +356,21 @@ def main():
 
   fetch_tasks = []
   for resort in resorts:
-    resort_name = resort.get("name", "Unknown Resort")
+    resort_name = resort.get("name", "")
+    resort_id = resort.get("id", "")
     coordinates = resort.get("coordinates", [])
+    weather_link = resort.get("weather_link")
+
+    resort_weathers = fetch_weather_data_from_resort(resort_name)
+    if resort_weathers and len(resort_weathers) > 0:
+      for resort_weather in resort_weathers:
+        key = f"{resort_name}:{resort_weather['name']}"
+        if key in weather_data_dict:
+          weather_data_dict[key] = resort_weather
+          updated_locations += 1
+        else:
+          weather_data_dict[key] = resort_weather
+          new_locations += 1
 
     if not coordinates:
       print(f"No coordinates found for {resort_name}, skipping")
