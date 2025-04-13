@@ -25,19 +25,19 @@
         "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam01.stream/playlist.m3u8"
       },
       {
-        "name": "정상부 슬로프",
+        "name": "정상부 슬로프 (씽큐, 그램)",
         "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam02.stream/playlist.m3u8"
       },
       {
-        "name": "중간 슬로프",
+        "name": "중간 슬로프 (와이낫 상단)",
         "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam05.stream/playlist.m3u8"
       },
       {
-        "name": "초중급 베이스",
+        "name": "초중급 베이스 (휘센)",
         "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam03.stream/playlist.m3u8"
       },
       {
-        "name": "중상급 베이스",
+        "name": "중상급 베이스 (와이낫, CNP)",
         "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam04.stream/playlist.m3u8"
       }
     ]
@@ -182,7 +182,7 @@
     ],
     "links": [
       {
-        "name": "스키광장",
+        "name": "베이스",
         "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch2.stream/chunklist.m3u8"
       },
       {
@@ -190,15 +190,15 @@
         "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch9.stream/chunklist.m3u8"
       },
       {
-        "name": "G 슬로프",
+        "name": "G 슬로프 하단",
         "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch7.stream/chunklist.m3u8"
       },
       {
-        "name": "F 슬로프",
+        "name": "F 슬로프 상단",
         "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch6.stream/chunklist.m3u8"
       },
       {
-        "name": "플라워리프트 하차장",
+        "name": "플라워 휴게소",
         "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch5.stream/chunklist.m3u8"
       }
     ]
@@ -233,7 +233,7 @@
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam03.stream/playlist.m3u8"
       },
       {
-        "name": "브라보",
+        "name": "슬로프 광장 / 전경",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam04.stream/playlist.m3u8"
       },
       {
@@ -241,7 +241,7 @@
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam05.stream/playlist.m3u8"
       },
       {
-        "name": "패밀리",
+        "name": "슬로프 전경",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam06.stream/playlist.m3u8"
       },
       {
@@ -410,11 +410,11 @@
         "video": "https://live.yongpyong.co.kr/Ycam1/cam01.stream/playlist.m3u8"
       },
       {
-        "name": "골드 슬로프 전경",
+        "name": "골드 베이스",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam06.stream/playlist.m3u8"
       },
       {
-        "name": "골드 슬로프 정상",
+        "name": "골드 정상",
         "video": "https://live.yongpyong.co.kr/Ycam1/cam04.stream/playlist.m3u8"
       },
       {
@@ -659,7 +659,7 @@
         "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam07.stream/playlist.m3u8?e=1744544609&h=1d6933df96e136c6e7a1bfd37c4d1b3a"
       },
       {
-        "name": "설천상단슬로프",
+        "name": "설천 상단 슬로프",
         "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=06",
         "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam06.stream/playlist.m3u8?e=1744544610&h=ecbc4949b1d7a9aa8138bea8bc8e5eed"
       },
