@@ -360,6 +360,7 @@
 
         this.classList.add('dragging');
 
+        // Create a visual indicator for all potential drop targets
         document.querySelectorAll('.favorite-card').forEach(card => {
           if (card !== this) {
             card.classList.add('drop-target');
@@ -775,11 +776,6 @@
                 submenu.classList.add('active');
               }
 
-              const resort = data.find(r => r.id === resortId);
-              if (resort && submenu) {
-                createWebcamSubmenuItems(resort, resortId, submenu);
-              }
-
               if (webcamId) {
                 const webcamIndex = parseInt(webcamId);
                 if (!isNaN(webcamIndex)) {
@@ -955,8 +951,6 @@
             return;
           }
 
-          const hasVivaldiWebcams = webcams.some(webcam => webcam.video_type === 'vivaldi');
-
           const menuItemContainer = document.createElement('div');
           menuItemContainer.className = 'menu-item-container';
 
@@ -977,26 +971,6 @@
             dropdownToggle.setAttribute('aria-label', 'Toggle submenu');
             menuItem.appendChild(dropdownToggle);
 
-            const submenu = document.createElement('div');
-            submenu.className = 'submenu';
-            submenu.id = `${resortId}-submenu`;
-            menuItemContainer.appendChild(submenu);
-
-            if (resort.status) {
-              const statusItem = document.createElement('div');
-              statusItem.className = 'submenu-item submenu-item-status';
-              statusItem.innerHTML = '오픈현황 <i class="bi bi-box-arrow-up-right me-1"></i>';
-              submenu.appendChild(statusItem);
-
-              statusItem.addEventListener('click', function() {
-                window.open(resort.status, '_blank', 'noopener,noreferrer');
-              });
-            }
-
-            if (hasVivaldiWebcams) {
-              createWebcamSubmenuItems(resort, resortId, submenu);
-            }
-
             dropdownToggle.addEventListener('click', function(e) {
               e.preventDefault();
               e.stopPropagation();
@@ -1010,10 +984,6 @@
                   submenu.classList.add('active');
                   menuItem.classList.add('active');
                   this.innerHTML = '<i class="bi bi-chevron-up"></i>';
-
-                  if (!hasVivaldiWebcams && submenu.querySelectorAll('.submenu-item:not(.submenu-item-status)').length === 0) {
-                    createWebcamSubmenuItems(resort, resortId, submenu);
-                  }
                 }
               }
 
@@ -1052,6 +1022,99 @@
           contentSection.appendChild(contentTitle);
 
           mainContent.appendChild(contentSection);
+
+          if (hasSubmenu) {
+            const submenu = document.createElement('div');
+            submenu.className = 'submenu';
+            submenu.id = `${resortId}-submenu`;
+            menuItemContainer.appendChild(submenu);
+
+            if (resort.status) {
+              const statusItem = document.createElement('div');
+              statusItem.className = 'submenu-item submenu-item-status';
+              statusItem.innerHTML = '오픈현황 <i class="bi bi-box-arrow-up-right me-1"></i>';
+              submenu.appendChild(statusItem);
+
+              statusItem.addEventListener('click', function() {
+                window.open(resort.status, '_blank', 'noopener,noreferrer');
+              });
+            }
+
+            webcams.forEach((webcam, index) => {
+              const webcamName = webcam.name;
+              if (!webcamName) return;
+
+              const submenuItem = document.createElement('div');
+              submenuItem.className = 'submenu-item';
+              submenuItem.setAttribute('data-target', `${resortId}-webcam-${index}`);
+              submenuItem.setAttribute('data-webcam-index', index);
+              submenuItem.textContent = webcamName;
+              submenu.appendChild(submenuItem);
+
+              const webcamSection = document.createElement('div');
+              webcamSection.className = 'content-section';
+              webcamSection.id = `${resortId}-webcam-${index}`;
+
+              const webcamTitle = document.createElement('h2');
+              webcamTitle.textContent = webcamName;
+              webcamTitle.className = 'inline-title inline-title-submenu';
+              webcamSection.appendChild(webcamTitle);
+
+              const resortLabel = document.createElement('span');
+              resortLabel.textContent = resortName;
+              resortLabel.className = 'resort-label';
+              webcamSection.appendChild(resortLabel);
+
+              const videoContainer = document.createElement('div');
+              videoContainer.className = 'video-container';
+              webcamSection.appendChild(videoContainer);
+
+              mainContent.appendChild(webcamSection);
+
+              submenuItem.addEventListener('click', function() {
+                const webcamIndex = this.getAttribute('data-webcam-index');
+                activeWebcam = webcamIndex;
+
+                updateUrlHash(resortId, webcamIndex);
+                updatePageTitle(resortId, webcamIndex);
+
+                document.querySelectorAll('.submenu-item').forEach(item => {
+                  item.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                document.querySelectorAll('.content-section').forEach(section => {
+                  section.classList.remove('active');
+                });
+
+                const defaultMessage = document.getElementById('default-message');
+                defaultMessage.classList.remove('active');
+                defaultMessage.style.display = 'none';
+
+                const targetSection = document.getElementById(this.getAttribute('data-target'));
+                if (targetSection) {
+                  targetSection.classList.add('active');
+
+                  disposeAllPlayers();
+
+                  const videoContainer = targetSection.querySelector('.video-container');
+                  if (videoContainer && webcams[webcamIndex]) {
+                    const videoUrl = webcams[webcamIndex].video || webcams[webcamIndex].link;
+                    if (videoUrl) {
+                      const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-${webcamIndex}`, webcams[webcamIndex].video_type);
+                      if (player) activePlayers.push(player);
+
+                      updateWeatherDisplay(resortId);
+                    } else {
+                      videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
+                    }
+                  }
+                }
+
+                closeSidebar();
+              });
+            });
+          }
 
           menuItem.addEventListener('click', function(e) {
             if (e.target.classList.contains('dropdown-toggle') || e.target.closest('.dropdown-toggle')) {
@@ -1114,94 +1177,6 @@
         if (window.location.hash) {
           handleHashChange();
         }
-      }
-
-      function createWebcamSubmenuItems(resort, resortId, submenu) {
-        const webcams = resort.links || resort.webcams || [];
-        const resortName = resort.name;
-
-        webcams.forEach((webcam, index) => {
-          const webcamName = webcam.name;
-          if (!webcamName) return;
-
-          if (submenu.querySelector(`[data-webcam-index="${index}"]`)) {
-            return;
-          }
-
-          const submenuItem = document.createElement('div');
-          submenuItem.className = 'submenu-item';
-          submenuItem.setAttribute('data-target', `${resortId}-webcam-${index}`);
-          submenuItem.setAttribute('data-webcam-index', index);
-          submenuItem.textContent = webcamName;
-          submenu.appendChild(submenuItem);
-
-          let webcamSection = document.getElementById(`${resortId}-webcam-${index}`);
-
-          if (!webcamSection) {
-            webcamSection = document.createElement('div');
-            webcamSection.className = 'content-section';
-            webcamSection.id = `${resortId}-webcam-${index}`;
-
-            const webcamTitle = document.createElement('h2');
-            webcamTitle.textContent = webcamName;
-            webcamTitle.className = 'inline-title inline-title-submenu';
-            webcamSection.appendChild(webcamTitle);
-
-            const resortLabel = document.createElement('span');
-            resortLabel.textContent = resortName;
-            resortLabel.className = 'resort-label';
-            webcamSection.appendChild(resortLabel);
-
-            const videoContainer = document.createElement('div');
-            videoContainer.className = 'video-container';
-            webcamSection.appendChild(videoContainer);
-
-            mainContent.appendChild(webcamSection);
-          }
-
-          submenuItem.addEventListener('click', function() {
-            const webcamIndex = this.getAttribute('data-webcam-index');
-            activeWebcam = webcamIndex;
-
-            updateUrlHash(resortId, webcamIndex);
-            updatePageTitle(resortId, webcamIndex);
-
-            document.querySelectorAll('.submenu-item').forEach(item => {
-              item.classList.remove('active');
-            });
-            this.classList.add('active');
-
-            document.querySelectorAll('.content-section').forEach(section => {
-              section.classList.remove('active');
-            });
-
-            const defaultMessage = document.getElementById('default-message');
-            defaultMessage.classList.remove('active');
-            defaultMessage.style.display = 'none';
-
-            const targetSection = document.getElementById(this.getAttribute('data-target'));
-            if (targetSection) {
-              targetSection.classList.add('active');
-
-              disposeAllPlayers();
-
-              const videoContainer = targetSection.querySelector('.video-container');
-              if (videoContainer && webcams[webcamIndex]) {
-                const videoUrl = webcams[webcamIndex].video || webcams[webcamIndex].link;
-                if (videoUrl) {
-                  const player = createVideoPlayer(videoUrl, videoContainer, `${resortId}-${webcamIndex}`, webcams[webcamIndex].video_type);
-                  if (player) activePlayers.push(player);
-
-                  updateWeatherDisplay(resortId);
-                } else {
-                  videoContainer.innerHTML = '<div class="error-message">No video stream available</div>';
-                }
-              }
-            }
-
-            closeSidebar();
-          });
-        });
       }
 
       function createVideoPlayer(videoUrl, container, id, videoType) {
@@ -1891,7 +1866,6 @@
           document.getElementById('img_videoM'+channel).style.display = 'none';
           document.getElementById('time_videoM'+channel).style.top = '0';
           document.getElementById('videotable').style.height = '100%';
-          document.getElementById('__tabletd_videoM'+channel).style.backgroundColor = '#000';
 
           document.getElementById('tp_videoM'+channel).style.display = 'none';
         }, 300);
