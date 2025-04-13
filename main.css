@@ -243,7 +243,7 @@ h2 {
 .bookmark-button {
   position: absolute;
   right: 8px;
-  top: 44px;
+  top: 80px;
   z-index: 50;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
@@ -271,6 +271,10 @@ h2 {
   right: 8px;
 }
 .bookmark-button-link {
+  top: 8px;
+  right: 8px;
+}
+.bookmark-button-youtube {
   top: 8px;
   right: 8px;
 }
