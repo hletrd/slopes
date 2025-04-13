@@ -1217,7 +1217,22 @@
             const vivaldiPlayer = new Vivaldi(vivaldiContainerId);
 
             setTimeout(() => {
-              vivaldiPlayer.ctlUIStartSet(channel, serial);
+              try {
+                vivaldiPlayer.ctlUIStartSet(channel, serial);
+              } catch (e) {
+                console.error('Error setting vivaldi player:', e);
+                try {
+                  vivaldiPlayer.ctlUIStartSet(channel, serial);
+                } catch (e) {
+                  console.error('Error setting vivaldi player:', e);
+                  try {
+                    vivaldiPlayer.ctlUIStartSet(channel, serial);
+                  } catch (e) {
+                    console.error('Error setting vivaldi player:', e);
+                    container.innerHTML = '<div class="error-message">비디오 플레이어를 생성하는 중 오류가 발생했습니다.</div>';
+                  }
+                }
+              }
             }, 2000);
 
             if (resortId && !isNaN(webcamIndex)) {
