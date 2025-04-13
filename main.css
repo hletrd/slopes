@@ -631,108 +631,6 @@ h2 {
 .btn-lg {
   font-size: 1.1rem;
 }
-@media (max-width: 991px) {
-  .videos-grid, .favorites-grid {
-    grid-template-columns: 1fr;
-    width: 100%;
-  }
-  .video-js, .iframe-container {
-    max-width: 100%;
-  }
-}
-@media (max-width: 768px) {
-  .mobile-nav {
-    display: block;
-  }
-  .sidebar {
-    width: 0;
-    padding-top: 16px;
-    top: 60px;
-    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
-    padding-bottom: 100px;
-  }
-  .main-content {
-    margin-left: 0;
-    margin-top: 60px;
-    padding: 0;
-    padding-bottom: 40px;
-  }
-  .sidebar.active {
-    width: 250px;
-  }
-  .toggle-menu {
-    display: block;
-  }
-  .site-title {
-    display: none;
-  }
-  .sidebar-backdrop.active {
-    display: block;
-  }
-  .menu-item-container:hover .submenu {
-    display: none;
-    max-height: 0;
-  }
-  .menu-item-container:hover .submenu.active {
-    display: block;
-    max-height: 1000px;
-  }
-  .content-section {
-    border-radius: 0;
-  }
-  .content-section-default {
-    padding: 0;
-  }
-  .footer {
-    font-size: 0.75rem;
-    padding: 8px;
-    height: auto;
-    min-height: 36px;
-  }
-  .info-button {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-  }
-}
-@media (max-width: 576px) {
-  .main-content {
-    padding-bottom: 44px;
-  }
-  .inline-title {
-    display: block;
-    margin-bottom: 12px;
-  }
-  .inline-title-submenu {
-    margin-bottom: 2px;
-  }
-  .resort-label {
-    display: block;
-    margin-bottom: 12px;
-  }
-}
-@media (max-width: 480px) {
-  .wind-speed::after {
-    content: "";
-    display: block;
-    margin-bottom: 2px;
-  }
-  #default-message p.lead {
-    font-size: 0.95rem !important;
-  }
-}
-@media (min-width: 1024px) {
-  .weather-info-wrapper {
-    width: 50%;
-  }
-}
-@media (min-width: 1400px) {
-  .weather-info-wrapper {
-    width: 33.33%;
-  }
-}
-
 .weather-info {
   display: inline-block;
   font-size: 0.9rem;
@@ -969,7 +867,107 @@ b {
   font-weight: 400;
   color: #aaa;
 }
-
+@media (max-width: 991px) {
+  .videos-grid, .favorites-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  .video-js, .iframe-container {
+    max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: block;
+  }
+  .sidebar {
+    width: 0;
+    padding-top: 16px;
+    top: 60px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+    padding-bottom: 100px;
+  }
+  .main-content {
+    margin-left: 0;
+    margin-top: 60px;
+    padding: 0;
+    padding-bottom: 40px;
+  }
+  .sidebar.active {
+    width: 250px;
+  }
+  .toggle-menu {
+    display: block;
+  }
+  .site-title {
+    display: none;
+  }
+  .sidebar-backdrop.active {
+    display: block;
+  }
+  .menu-item-container:hover .submenu {
+    display: none;
+    max-height: 0;
+  }
+  .menu-item-container:hover .submenu.active {
+    display: block;
+    max-height: 1000px;
+  }
+  .content-section {
+    border-radius: 0;
+  }
+  .content-section-default {
+    padding: 0;
+  }
+  .footer {
+    font-size: 0.75rem;
+    padding: 8px;
+    height: auto;
+    min-height: 36px;
+  }
+  .info-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+  }
+}
+@media (max-width: 576px) {
+  .main-content {
+    padding-bottom: 44px;
+  }
+  .inline-title {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .inline-title-submenu {
+    margin-bottom: 2px;
+  }
+  .resort-label {
+    display: block;
+    margin-bottom: 12px;
+  }
+}
+@media (max-width: 480px) {
+  .wind-speed::after {
+    content: "";
+    display: block;
+    margin-bottom: 2px;
+  }
+  #default-message p.lead {
+    font-size: 0.95rem !important;
+  }
+}
+@media (min-width: 1024px) {
+  .weather-info-wrapper {
+    width: 50%;
+  }
+}
+@media (min-width: 1400px) {
+  .weather-info-wrapper {
+    width: 33.33%;
+  }
+}
 @media all and (display-mode: standalone) {
   .footer {
     padding-bottom: calc(8px + env(safe-area-inset-bottom, 0));
