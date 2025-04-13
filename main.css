@@ -243,7 +243,7 @@ h2 {
 .bookmark-button {
   position: absolute;
   right: 8px;
-  top: 80px;
+  top: 44px;
   z-index: 50;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
@@ -267,12 +267,12 @@ h2 {
   font-weight: 650;
 }
 .bookmark-button-error {
-  top: 16px;
-  right: 16px;
+  top: 8px;
+  right: 8px;
 }
 .bookmark-button-link {
-  top: 16px;
-  right: 16px;
+  top: 8px;
+  right: 8px;
 }
 .favorites-section {
   margin-top: 0;
