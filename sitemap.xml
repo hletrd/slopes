@@ -6,6 +6,16 @@
   <changefreq>monthly</changefreq>
   </url>
   <url>
+  <loc>http://ski.atik.kr/#seoul</loc>
+  <priority>0.7</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#starhill</loc>
+  <priority>0.7</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
   <loc>http://ski.atik.kr/#konjiam</loc>
   <priority>0.7</priority>
   <changefreq>monthly</changefreq>
@@ -33,6 +43,16 @@
   <url>
   <loc>http://ski.atik.kr/#konjiam/4</loc>
   <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#bearstown</loc>
+  <priority>0.7</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#pine</loc>
+  <priority>0.7</priority>
   <changefreq>monthly</changefreq>
   </url>
   <url>
@@ -261,6 +281,11 @@
   <changefreq>monthly</changefreq>
   </url>
   <url>
+  <loc>http://ski.atik.kr/#eaglevalley</loc>
+  <priority>0.7</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
   <loc>http://ski.atik.kr/#alpensia</loc>
   <priority>0.7</priority>
   <changefreq>monthly</changefreq>
@@ -453,6 +478,11 @@
   <url>
   <loc>http://ski.atik.kr/#o2resort/3</loc>
   <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#alps</loc>
+  <priority>0.7</priority>
   <changefreq>monthly</changefreq>
   </url>
   <url>
