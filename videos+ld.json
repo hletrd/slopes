@@ -1,0 +1,2358 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam01.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 곤지암리조트 정상 휴게소",
+    "embedUrl": "http://ski.atik.kr/#konjiam/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "곤지암리조트 정상 휴게소",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam02.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 곤지암리조트 정상부 슬로프 (씽큐, 그램)",
+    "embedUrl": "http://ski.atik.kr/#konjiam/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "곤지암리조트 정상부 슬로프 (씽큐, 그램)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam05.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 곤지암리조트 중간 슬로프 (와이낫 상단)",
+    "embedUrl": "http://ski.atik.kr/#konjiam/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "곤지암리조트 중간 슬로프 (와이낫 상단)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam03.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 곤지암리조트 초중급 베이스 (휘센)",
+    "embedUrl": "http://ski.atik.kr/#konjiam/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "곤지암리조트 초중급 베이스 (휘센)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam04.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 곤지암리조트 중상급 베이스 (와이낫, CNP)",
+    "embedUrl": "http://ski.atik.kr/#konjiam/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "곤지암리조트 중상급 베이스 (와이낫, CNP)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan1.m3u8",
+    "description": "스키장 웹캠 - 지산 포레스트 리조트 레몬 탑승장",
+    "embedUrl": "http://ski.atik.kr/#jisan/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "지산 포레스트 리조트 레몬 탑승장",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan2.m3u8",
+    "description": "스키장 웹캠 - 지산 포레스트 리조트 오렌지 / 뉴오렌지 탑승장",
+    "embedUrl": "http://ski.atik.kr/#jisan/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "지산 포레스트 리조트 오렌지 / 뉴오렌지 탑승장",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan3.m3u8",
+    "description": "스키장 웹캠 - 지산 포레스트 리조트 5번 / 6번 슬로프",
+    "embedUrl": "http://ski.atik.kr/#jisan/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "지산 포레스트 리조트 5번 / 6번 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan4.m3u8",
+    "description": "스키장 웹캠 - 지산 포레스트 리조트 블루 탑승장",
+    "embedUrl": "http://ski.atik.kr/#jisan/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "지산 포레스트 리조트 블루 탑승장",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan5.m3u8",
+    "description": "스키장 웹캠 - 지산 포레스트 리조트 실버 탑승장",
+    "embedUrl": "http://ski.atik.kr/#jisan/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "지산 포레스트 리조트 실버 탑승장",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/@11-lf8zw/streams",
+    "description": "스키장 웹캠 - 엘리시안 강촌 유튜브 채널",
+    "embedUrl": "http://ski.atik.kr/#elysian/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "엘리시안 강촌 유튜브 채널",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "8:TW0014A15451",
+    "description": "스키장 웹캠 - 비발디파크 슬로프 전경",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 슬로프 전경",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "11:TD0314A17496",
+    "description": "스키장 웹캠 - 비발디파크 발라드 상단",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 발라드 상단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "2:TW0014A15451",
+    "description": "스키장 웹캠 - 비발디파크 발라드 하단",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 발라드 하단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "4:XU0121A37907",
+    "description": "스키장 웹캠 - 비발디파크 재즈 상단",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 재즈 상단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "1:TW0014A15451",
+    "description": "스키장 웹캠 - 비발디파크 재즈 하단",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 재즈 하단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "2:XU0121A37904",
+    "description": "스키장 웹캠 - 비발디파크 테크노 상단",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/5",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 테크노 상단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "5:XU0121A37904",
+    "description": "스키장 웹캠 - 비발디파크 테크노 하단",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/6",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 테크노 하단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "4:TW0014A15451",
+    "description": "스키장 웹캠 - 비발디파크 블루스",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/7",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 블루스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "10:TD0314A17496",
+    "description": "스키장 웹캠 - 비발디파크 클래식",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/8",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 클래식",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "10:TD0314A17496",
+    "description": "스키장 웹캠 - 비발디파크 레게",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/9",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 레게",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "5:TW0014A15451",
+    "description": "스키장 웹캠 - 비발디파크 펑키 상단",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/10",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 펑키 상단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "8:XU0121A37904",
+    "description": "스키장 웹캠 - 비발디파크 펑키 하단",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/11",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 펑키 하단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "6:TW0014A15451",
+    "description": "스키장 웹캠 - 비발디파크 힙합",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/12",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 힙합",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "9:TW0014A15451",
+    "description": "스키장 웹캠 - 비발디파크 스키월드 정상",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/13",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 스키월드 정상",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "16:TD0314A17496",
+    "description": "스키장 웹캠 - 비발디파크 스노위랜드1",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/14",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 스노위랜드1",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "12:TD0314A17496",
+    "description": "스키장 웹캠 - 비발디파크 스노위랜드2",
+    "embedUrl": "http://ski.atik.kr/#vivaldi/15",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "비발디파크 스노위랜드2",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://cctv-oak9.ktcdn.co.kr/cctv/ch2.stream/chunklist.m3u8",
+    "description": "스키장 웹캠 - 오크밸리 베이스",
+    "embedUrl": "http://ski.atik.kr/#oakvalley/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "오크밸리 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://cctv-oak9.ktcdn.co.kr/cctv/ch9.stream/chunklist.m3u8",
+    "description": "스키장 웹캠 - 오크밸리 I 슬로프",
+    "embedUrl": "http://ski.atik.kr/#oakvalley/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "오크밸리 I 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://cctv-oak9.ktcdn.co.kr/cctv/ch7.stream/chunklist.m3u8",
+    "description": "스키장 웹캠 - 오크밸리 G 슬로프 하단",
+    "embedUrl": "http://ski.atik.kr/#oakvalley/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "오크밸리 G 슬로프 하단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://cctv-oak9.ktcdn.co.kr/cctv/ch6.stream/chunklist.m3u8",
+    "description": "스키장 웹캠 - 오크밸리 F 슬로프 상단",
+    "embedUrl": "http://ski.atik.kr/#oakvalley/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "오크밸리 F 슬로프 상단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://cctv-oak9.ktcdn.co.kr/cctv/ch5.stream/chunklist.m3u8",
+    "description": "스키장 웹캠 - 오크밸리 플라워 휴게소",
+    "embedUrl": "http://ski.atik.kr/#oakvalley/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "오크밸리 플라워 휴게소",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.wellihillipark.com/wellihillipark/_definst_/cam02.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 웰리힐리파크 알파",
+    "embedUrl": "http://ski.atik.kr/#wellihilli/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "웰리힐리파크 알파",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.wellihillipark.com/wellihillipark/_definst_/cam03.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 웰리힐리파크 베이스",
+    "embedUrl": "http://ski.atik.kr/#wellihilli/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "웰리힐리파크 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.wellihillipark.com/wellihillipark/_definst_/cam04.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 웰리힐리파크 슬로프 광장 / 전경",
+    "embedUrl": "http://ski.atik.kr/#wellihilli/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "웰리힐리파크 슬로프 광장 / 전경",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.wellihillipark.com/wellihillipark/_definst_/cam05.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 웰리힐리파크 정상 광장",
+    "embedUrl": "http://ski.atik.kr/#wellihilli/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "웰리힐리파크 정상 광장",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.wellihillipark.com/wellihillipark/_definst_/cam06.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 웰리힐리파크 슬로프 전경",
+    "embedUrl": "http://ski.atik.kr/#wellihilli/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "웰리힐리파크 슬로프 전경",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.wellihillipark.com/wellihillipark/_definst_/cam07.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 웰리힐리파크 워터플래닛",
+    "embedUrl": "http://ski.atik.kr/#wellihilli/5",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "웰리힐리파크 워터플래닛",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://streaming.phoenixhnr.co.kr/hls/yh_02.m3u8",
+    "description": "스키장 웹캠 - 휘닉스 파크 호크 / 스패로우",
+    "embedUrl": "http://ski.atik.kr/#phoenix/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "휘닉스 파크 호크 / 스패로우",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://streaming.phoenixhnr.co.kr/hls/sp_01.m3u8",
+    "description": "스키장 웹캠 - 휘닉스 파크 도도",
+    "embedUrl": "http://ski.atik.kr/#phoenix/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "휘닉스 파크 도도",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://streaming.phoenixhnr.co.kr/hls/ht_01.m3u8",
+    "description": "스키장 웹캠 - 휘닉스 파크 불새마루",
+    "embedUrl": "http://ski.atik.kr/#phoenix/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "휘닉스 파크 불새마루",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://streaming.phoenixhnr.co.kr/hls/bc_02.m3u8",
+    "description": "스키장 웹캠 - 휘닉스 파크 베이스",
+    "embedUrl": "http://ski.atik.kr/#phoenix/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "휘닉스 파크 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://streaming.phoenixhnr.co.kr/hls/bc_01.m3u8",
+    "description": "스키장 웹캠 - 휘닉스 파크 펭귄",
+    "embedUrl": "http://ski.atik.kr/#phoenix/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "휘닉스 파크 펭귄",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://streaming.phoenixhnr.co.kr/hls/yh_01.m3u8",
+    "description": "스키장 웹캠 - 휘닉스 파크 스노우 빌리지",
+    "embedUrl": "http://ski.atik.kr/#phoenix/5",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "휘닉스 파크 스노우 빌리지",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=fStEQyg7SWc",
+    "description": "스키장 웹캠 - 알펜시아 리조트 알펜시아 리조트 라이브캠",
+    "embedUrl": "http://ski.atik.kr/#alpensia/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "알펜시아 리조트 알펜시아 리조트 라이브캠",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam14.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 발왕산 氣 스카이워크",
+    "embedUrl": "http://ski.atik.kr/#mona/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 발왕산 氣 스카이워크",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam15.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 발왕산 천년주목숲길",
+    "embedUrl": "http://ski.atik.kr/#mona/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 발왕산 천년주목숲길",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam10.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 베이스 전경 / 레드 슬로프",
+    "embedUrl": "http://ski.atik.kr/#mona/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 베이스 전경 / 레드 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam05.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 모나 용평 진입로",
+    "embedUrl": "http://ski.atik.kr/#mona/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 모나 용평 진입로",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam03.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 옐로우 슬로프",
+    "embedUrl": "http://ski.atik.kr/#mona/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 옐로우 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam07.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 핑크 슬로프",
+    "embedUrl": "http://ski.atik.kr/#mona/5",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 핑크 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam01.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 메가그린 슬로프",
+    "embedUrl": "http://ski.atik.kr/#mona/6",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 메가그린 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam06.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 골드 베이스",
+    "embedUrl": "http://ski.atik.kr/#mona/7",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 골드 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam04.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 골드 정상",
+    "embedUrl": "http://ski.atik.kr/#mona/8",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 골드 정상",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam08.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 레인보우 전경",
+    "embedUrl": "http://ski.atik.kr/#mona/9",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 레인보우 전경",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam09.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 레인보우 파라다이스 입구",
+    "embedUrl": "http://ski.atik.kr/#mona/10",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 레인보우 파라다이스 입구",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://live.yongpyong.co.kr/Ycam1/cam11.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 모나 용평 피크 아일랜드",
+    "embedUrl": "http://ski.atik.kr/#mona/11",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "모나 용평 피크 아일랜드",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch1.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 하이원탑 (제우스1 입구)",
+    "embedUrl": "http://ski.atik.kr/#high1/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 하이원탑 (제우스1 입구)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch2.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 하이원탑 (헤라2 입구)",
+    "embedUrl": "http://ski.atik.kr/#high1/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 하이원탑 (헤라2 입구)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch3.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 하이원탑 (아폴로1 입구)",
+    "embedUrl": "http://ski.atik.kr/#high1/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 하이원탑 (아폴로1 입구)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch4.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 마운틴허브 (스노우월드 입구)",
+    "embedUrl": "http://ski.atik.kr/#high1/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 마운틴허브 (스노우월드 입구)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch5.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 마운틴허브 (아폴로3 입구)",
+    "embedUrl": "http://ski.atik.kr/#high1/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 마운틴허브 (아폴로3 입구)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch6.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 마운틴허브 (아테나2 입구)",
+    "embedUrl": "http://ski.atik.kr/#high1/5",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 마운틴허브 (아테나2 입구)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch7.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 마운틴 베이스 (아테나 리프트)",
+    "embedUrl": "http://ski.atik.kr/#high1/6",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 마운틴 베이스 (아테나 리프트)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch8.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 아테나2 하단",
+    "embedUrl": "http://ski.atik.kr/#high1/7",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 아테나2 하단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch9.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 밸리탑 (빅토리아1 입구)",
+    "embedUrl": "http://ski.atik.kr/#high1/8",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 밸리탑 (빅토리아1 입구)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch10.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 제우스2 합류구간",
+    "embedUrl": "http://ski.atik.kr/#high1/9",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 제우스2 합류구간",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch11.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 밸리허브 (헤라 리프트 입구)",
+    "embedUrl": "http://ski.atik.kr/#high1/10",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 밸리허브 (헤라 리프트 입구)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch12.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 밸리허브 (아폴로3 합류)",
+    "embedUrl": "http://ski.atik.kr/#high1/11",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 밸리허브 (아폴로3 합류)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch13.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 밸리허브 (제우스3)",
+    "embedUrl": "http://ski.atik.kr/#high1/12",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 밸리허브 (제우스3)",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch14.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 제우스3 중단",
+    "embedUrl": "http://ski.atik.kr/#high1/13",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 제우스3 중단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch15.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 아폴로4 중단",
+    "embedUrl": "http://ski.atik.kr/#high1/14",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 아폴로4 중단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch16.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 아폴로 베이스",
+    "embedUrl": "http://ski.atik.kr/#high1/15",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 아폴로 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch17.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 제우스3 하단",
+    "embedUrl": "http://ski.atik.kr/#high1/16",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 제우스3 하단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://59.30.12.195:1935/live/_definst_/ch18.stream/playlist.m3u8",
+    "description": "스키장 웹캠 - 하이원 리조트 밸리 베이스",
+    "embedUrl": "http://ski.atik.kr/#high1/17",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "하이원 리조트 밸리 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam0.m3u8",
+    "description": "스키장 웹캠 - 오투리조트 스키하우스",
+    "embedUrl": "http://ski.atik.kr/#o2resort/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "오투리조트 스키하우스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam1.m3u8",
+    "description": "스키장 웹캠 - 오투리조트 오렌지",
+    "embedUrl": "http://ski.atik.kr/#o2resort/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "오투리조트 오렌지",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam2.m3u8",
+    "description": "스키장 웹캠 - 오투리조트 버금마루",
+    "embedUrl": "http://ski.atik.kr/#o2resort/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "오투리조트 버금마루",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam3.m3u8",
+    "description": "스키장 웹캠 - 오투리조트 으뜸마루",
+    "embedUrl": "http://ski.atik.kr/#o2resort/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "오투리조트 으뜸마루",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam07.stream/playlist.m3u8?e=1744664162&h=db1a67f5283001e4fd0e379656941c28",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 설천봉 정상",
+    "embedUrl": "http://ski.atik.kr/#muju/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 설천봉 정상",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam06.stream/playlist.m3u8?e=1744664162&h=1e7b3a60fb012a59f855f2cb09a1f895",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 설천 상단 슬로프",
+    "embedUrl": "http://ski.atik.kr/#muju/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 설천 상단 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam08.stream/playlist.m3u8?e=1744664162&h=f8afa65a8f5313df6bf5537046300b33",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 모차르트, 미뉴에트",
+    "embedUrl": "http://ski.atik.kr/#muju/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 모차르트, 미뉴에트",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam09.stream/playlist.m3u8?e=1744664162&h=4e724a9c38d13f4ed82e05f6a5682fcb",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 폴카",
+    "embedUrl": "http://ski.atik.kr/#muju/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 폴카",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam10.stream/playlist.m3u8?e=1744664162&h=d749835da6cbb8765fd400e20e5f8ae4",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 실크로드, 미뉴에트 하단",
+    "embedUrl": "http://ski.atik.kr/#muju/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 실크로드, 미뉴에트 하단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam02.stream/playlist.m3u8?e=1744664163&h=387c2406341ccb126b95506507788312",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 만선봉 정상",
+    "embedUrl": "http://ski.atik.kr/#muju/5",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 만선봉 정상",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam03.stream/playlist.m3u8?e=1744664163&h=54f236bdefd0ea11ae4a559781e734b7",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 하이디하우스",
+    "embedUrl": "http://ski.atik.kr/#muju/6",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 하이디하우스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam04.stream/playlist.m3u8?e=1744664163&h=1320ba76688ea760e9817cc8517cd2a3",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 서역기행, 썬다운",
+    "embedUrl": "http://ski.atik.kr/#muju/7",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 서역기행, 썬다운",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam11.stream/playlist.m3u8?e=1744664163&h=a9b89b4d3147e18ce08a0778f003eb68",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 커넥션",
+    "embedUrl": "http://ski.atik.kr/#muju/8",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 커넥션",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam05.stream/playlist.m3u8?e=1744664163&h=6665cb97c9a8f89cf1c264bf7404f798",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 설천하우스",
+    "embedUrl": "http://ski.atik.kr/#muju/9",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 설천하우스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam01.stream/playlist.m3u8?e=1744664163&h=d61406ce3a2457da300fd0ee9fa0b524",
+    "description": "스키장 웹캠 - 무주 덕유산 리조트 만선하우스",
+    "embedUrl": "http://ski.atik.kr/#muju/10",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "무주 덕유산 리조트 만선하우스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://sn.rtsp.me/VMrT-qFWGFoEFoSi34NKKQ/1744635332/hls/2kTsKt35.m3u8?ip=20.42.10.166",
+    "description": "스키장 웹캠 - 에덴밸리리조트 베이직",
+    "embedUrl": "http://ski.atik.kr/#edenvalley/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "에덴밸리리조트 베이직",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://sn.rtsp.me/x6FKN3pGUrBsLb0uLn8WOA/1744635332/hls/ry9aTdQh.m3u8?ip=20.42.10.166",
+    "description": "스키장 웹캠 - 에덴밸리리조트 슬로프 광장",
+    "embedUrl": "http://ski.atik.kr/#edenvalley/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "에덴밸리리조트 슬로프 광장",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=w_173GPVnwA",
+    "description": "스키장 웹캠 - 홋카이도 니세코 빌리지 곤돌라 베이스",
+    "embedUrl": "http://ski.atik.kr/#hokkaido/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "홋카이도 니세코 빌리지 곤돌라 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=T8kCz-CoybY",
+    "description": "스키장 웹캠 - 홋카이도 니세코 빌리지 그린 리프",
+    "embedUrl": "http://ski.atik.kr/#hokkaido/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "홋카이도 니세코 빌리지 그린 리프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=1ksmiy6EsDo",
+    "description": "스키장 웹캠 - 홋카이도 니세코 하나조노 베이스",
+    "embedUrl": "http://ski.atik.kr/#hokkaido/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "홋카이도 니세코 하나조노 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=9HZKY9PtaWI",
+    "description": "스키장 웹캠 - 홋카이도 키로로 베이스",
+    "embedUrl": "http://ski.atik.kr/#hokkaido/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "홋카이도 키로로 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/live/n4G4iQTme1g",
+    "description": "스키장 웹캠 - 주부 시가코겐 구마노유 베이스",
+    "embedUrl": "http://ski.atik.kr/#chubu/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 시가코겐 구마노유 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=SZAawoS2wUE",
+    "description": "스키장 웹캠 - 주부 시가코겐 야마노에키 베이스",
+    "embedUrl": "http://ski.atik.kr/#chubu/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 시가코겐 야마노에키 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=jJFawjEWCr0",
+    "description": "스키장 웹캠 - 주부 하쿠바 하포네 우사기다이라",
+    "embedUrl": "http://ski.atik.kr/#chubu/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 하쿠바 하포네 우사기다이라",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=uz5OuB-evfk",
+    "description": "스키장 웹캠 - 주부 하쿠바 하포네 파노라마",
+    "embedUrl": "http://ski.atik.kr/#chubu/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 하쿠바 하포네 파노라마",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=hMY3VnL4Pyk",
+    "description": "스키장 웹캠 - 주부 하쿠바 하포네 시라카바 하단",
+    "embedUrl": "http://ski.atik.kr/#chubu/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 하쿠바 하포네 시라카바 하단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=BHo4tHKIDow",
+    "description": "스키장 웹캠 - 주부 하쿠바 하포네 제3주차장",
+    "embedUrl": "http://ski.atik.kr/#chubu/5",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 하쿠바 하포네 제3주차장",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=FSnSF3OIHlU",
+    "description": "스키장 웹캠 - 주부 야치호코겐 2리프트",
+    "embedUrl": "http://ski.atik.kr/#chubu/6",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 야치호코겐 2리프트",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=03BYfh9kP24",
+    "description": "스키장 웹캠 - 주부 야치호코겐 4코스",
+    "embedUrl": "http://ski.atik.kr/#chubu/7",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 야치호코겐 4코스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=fqgXBt2ZzpE",
+    "description": "스키장 웹캠 - 주부 가루이자와 프린스 호텔 베이스",
+    "embedUrl": "http://ski.atik.kr/#chubu/8",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 가루이자와 프린스 호텔 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=nkIkBvvz1PA",
+    "description": "스키장 웹캠 - 주부 아라이 리조트 오케나시산 정상",
+    "embedUrl": "http://ski.atik.kr/#chubu/9",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 아라이 리조트 오케나시산 정상",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=OGFpbQqTHq0",
+    "description": "스키장 웹캠 - 주부 아라이 리조트 비프리, 앙코르 상단",
+    "embedUrl": "http://ski.atik.kr/#chubu/10",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 아라이 리조트 비프리, 앙코르 상단",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=UxKsXYcMehQ",
+    "description": "스키장 웹캠 - 주부 아라이 리조트 젠다나 스테이션",
+    "embedUrl": "http://ski.atik.kr/#chubu/11",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 아라이 리조트 젠다나 스테이션",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=kQskivhwAwE",
+    "description": "스키장 웹캠 - 주부 아라이 리조트 롯폰기 스테이션",
+    "embedUrl": "http://ski.atik.kr/#chubu/12",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 아라이 리조트 롯폰기 스테이션",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=rWO9PXZwahM",
+    "description": "스키장 웹캠 - 주부 다테야마 무로도",
+    "embedUrl": "http://ski.atik.kr/#chubu/13",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 다테야마 무로도",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=0avlmh_aUdY",
+    "description": "스키장 웹캠 - 주부 샤르만 화타 센터 하우스",
+    "embedUrl": "http://ski.atik.kr/#chubu/14",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 샤르만 화타 센터 하우스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=zH4d4dZCB7k",
+    "description": "스키장 웹캠 - 주부 나스파 뉴 오타니 베이스",
+    "embedUrl": "http://ski.atik.kr/#chubu/15",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "주부 나스파 뉴 오타니 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=cqvEOhOzN2o",
+    "description": "스키장 웹캠 - 간토 마루누마코겐 바이올렛 코스 1500m",
+    "embedUrl": "http://ski.atik.kr/#kanto/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "간토 마루누마코겐 바이올렛 코스 1500m",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=DUS5L5w3t3U",
+    "description": "스키장 웹캠 - 간토 마루누마코겐 옐로우 곤돌라 1400m",
+    "embedUrl": "http://ski.atik.kr/#kanto/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "간토 마루누마코겐 옐로우 곤돌라 1400m",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=Kg1Q-47xGJQ",
+    "description": "스키장 웹캠 - 간토 마루누마코겐 옐로우 코스 1400m",
+    "embedUrl": "http://ski.atik.kr/#kanto/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "간토 마루누마코겐 옐로우 코스 1400m",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=kS5SbE6rpFY",
+    "description": "스키장 웹캠 - 간토 오제이와쿠라 로맨스 / 챔피언 A",
+    "embedUrl": "http://ski.atik.kr/#kanto/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "간토 오제이와쿠라 로맨스 / 챔피언 A",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=nXojsEGVTyg",
+    "description": "스키장 웹캠 - 간토 오제이와쿠라 국제여자 / 리젠 / 엑스퍼트",
+    "embedUrl": "http://ski.atik.kr/#kanto/4",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "간토 오제이와쿠라 국제여자 / 리젠 / 엑스퍼트",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=cjxf_GCBO3s",
+    "description": "스키장 웹캠 - 간토 탐바라 전경",
+    "embedUrl": "http://ski.atik.kr/#kanto/5",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "간토 탐바라 전경",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=42FEEwaiN5w",
+    "description": "스키장 웹캠 - 간토 쿠사츠 온센 텐구야마 베이스",
+    "embedUrl": "http://ski.atik.kr/#kanto/6",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "간토 쿠사츠 온센 텐구야마 베이스",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=D4YiBKIsZVA",
+    "description": "스키장 웹캠 - 도호쿠 자오온센 JUPEER 슬로프",
+    "embedUrl": "http://ski.atik.kr/#tohoku/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "도호쿠 자오온센 JUPEER 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=416KwGEjTK4",
+    "description": "스키장 웹캠 - 도호쿠 자오온센 중앙 슬로프",
+    "embedUrl": "http://ski.atik.kr/#tohoku/1",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "도호쿠 자오온센 중앙 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=nzCGgWtfVg0",
+    "description": "스키장 웹캠 - 도호쿠 자오온센 파라다이스 슬로프",
+    "embedUrl": "http://ski.atik.kr/#tohoku/2",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "도호쿠 자오온센 파라다이스 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=RHfXwQ-rF24",
+    "description": "스키장 웹캠 - 도호쿠 자오온센 요코쿠라 슬로프",
+    "embedUrl": "http://ski.atik.kr/#tohoku/3",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "도호쿠 자오온센 요코쿠라 슬로프",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "contentURL": "https://www.youtube.com/watch?v=8Tc2jpzNHCA",
+    "description": "스키장 웹캠 - 간사이 하치코겐 900m",
+    "embedUrl": "http://ski.atik.kr/#kansai/0",
+    "expires": "2025-04-28T11:55:53.748051+00:00",
+    "name": "간사이 하치코겐 900m",
+    "publication": [
+      {
+        "@type": "BroadcastEvent",
+        "endDate": "2025-04-28T11:55:53.748051+00:00",
+        "isLiveBroadcast": true,
+        "startDate": "2025-04-14T11:55:53.748051+00:00"
+      }
+    ],
+    "thumbnailUrl": "/preview.png",
+    "uploadDate": "2025-04-14T11:55:53.748051+00:00"
+  }
+]
