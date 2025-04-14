@@ -38,7 +38,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add links.json sitemap.xml
+          git add links.json sitemap.xml videos+ld.json
           git diff --quiet && git diff --staged --quiet || git commit -m "[Bot] Update webcam links"
 
       - name: Push changes
