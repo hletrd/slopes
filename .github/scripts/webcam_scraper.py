@@ -122,9 +122,6 @@ def generate_video_ld_json(data):
     if not resort_id or 'links' not in resort:
       continue
 
-    if resort.get('fetch', True) == False:
-      continue
-
     for i, item in enumerate(resort.get('links', [])):
       video_url = item.get('video')
       if not video_url:
@@ -177,6 +174,10 @@ def main():
     resort_results = [False] * len(data)
 
     for i, resort in enumerate(data):
+      if resort.get('fetch', True) == False:
+        print(f"[{resort.get('id', 'unknown')}] Skipping fetch")
+        continue
+
       target_fn = lambda idx=i, r=resort: resort_results.__setitem__(
         idx, process_resort(r, max_workers_per_resort)
       )
