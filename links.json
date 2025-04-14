@@ -872,7 +872,7 @@
     "name": "홋카이도"
   },
   {
-    "id": "nagano",
+    "id": "chubu",
     "links": [
       {
         "name": "시가코겐 구마노유 베이스",
@@ -886,7 +886,7 @@
       },
       {
         "name": "하쿠바 하포네 우사기다이라",
-        "video": "https://www.youtube.com/watch?v=SZAawoS2wUE",
+        "video": "https://www.youtube.com/watch?v=jJFawjEWCr0",
         "video_type": "youtube"
       },
       {
@@ -903,8 +903,136 @@
         "name": "하쿠바 하포네 제3주차장",
         "video": "https://www.youtube.com/watch?v=BHo4tHKIDow",
         "video_type": "youtube"
+      },
+      {
+        "name": "야치호코겐 2리프트",
+        "video": "https://www.youtube.com/watch?v=FSnSF3OIHlU",
+        "video_type": "youtube"
+      },
+      {
+        "name": "야치호코겐 4코스",
+        "video": "https://www.youtube.com/watch?v=03BYfh9kP24",
+        "video_type": "youtube"
+      },
+      {
+        "name": "가루이자와 프린스 호텔 베이스",
+        "video": "https://www.youtube.com/watch?v=fqgXBt2ZzpE",
+        "video_type": "youtube"
+      },
+      {
+        "name": "아라이 리조트 오케나시산 정상",
+        "video": "https://www.youtube.com/watch?v=nkIkBvvz1PA",
+        "video_type": "youtube"
+      },
+      {
+        "name": "아라이 리조트 비프리, 앙코르 상단",
+        "video": "https://www.youtube.com/watch?v=OGFpbQqTHq0",
+        "video_type": "youtube"
+      },
+      {
+        "name": "아라이 리조트 젠다나 스테이션",
+        "video": "https://www.youtube.com/watch?v=UxKsXYcMehQ",
+        "video_type": "youtube"
+      },
+      {
+        "name": "아라이 리조트 롯폰기 스테이션",
+        "video": "https://www.youtube.com/watch?v=kQskivhwAwE",
+        "video_type": "youtube"
+      },
+      {
+        "name": "다테야마 무로도",
+        "video": "https://www.youtube.com/watch?v=rWO9PXZwahM",
+        "video_type": "youtube"
+      },
+      {
+        "name": "샤르만 화타 센터 하우스",
+        "video": "https://www.youtube.com/watch?v=0avlmh_aUdY",
+        "video_type": "youtube"
+      },
+      {
+        "name": "나스파 뉴 오타니 베이스",
+        "video": "https://www.youtube.com/watch?v=zH4d4dZCB7k",
+        "video_type": "youtube"
       }
     ],
-    "name": "나가노"
+    "name": "주부"
+  },
+  {
+    "id": "kanto",
+    "links": [
+      {
+        "name": "마루누마코겐 바이올렛 코스 1500m",
+        "video": "https://www.youtube.com/watch?v=cqvEOhOzN2o",
+        "video_type": "youtube"
+      },
+      {
+        "name": "마루누마코겐 옐로우 곤돌라 1400m",
+        "video": "https://www.youtube.com/watch?v=DUS5L5w3t3U",
+        "video_type": "youtube"
+      },
+      {
+        "name": "마루누마코겐 옐로우 코스 1400m",
+        "video": "https://www.youtube.com/watch?v=Kg1Q-47xGJQ",
+        "video_type": "youtube"
+      },
+      {
+        "name": "오제이와쿠라 로맨스 / 챔피언 A",
+        "video": "https://www.youtube.com/watch?v=kS5SbE6rpFY",
+        "video_type": "youtube"
+      },
+      {
+        "name": "오제이와쿠라 국제여자 / 리젠 / 엑스퍼트",
+        "video": "https://www.youtube.com/watch?v=nXojsEGVTyg",
+        "video_type": "youtube"
+      },
+      {
+        "name": "탐바라 전경",
+        "video": "https://www.youtube.com/watch?v=cjxf_GCBO3s",
+        "video_type": "youtube"
+      },
+      {
+        "name": "쿠사츠 온센 텐구야마 베이스",
+        "video": "https://www.youtube.com/watch?v=42FEEwaiN5w",
+        "video_type": "youtube"
+      }
+    ],
+    "name": "간토"
+  },
+  {
+    "id": "tohoku",
+    "links": [
+      {
+        "name": "자오온센 JUPEER 슬로프",
+        "video": "https://www.youtube.com/watch?v=D4YiBKIsZVA",
+        "video_type": "youtube"
+      },
+      {
+        "name": "자오온센 중앙 슬로프",
+        "video": "https://www.youtube.com/watch?v=416KwGEjTK4",
+        "video_type": "youtube"
+      },
+      {
+        "name": "자오온센 파라다이스 슬로프",
+        "video": "https://www.youtube.com/watch?v=nzCGgWtfVg0",
+        "video_type": "youtube"
+      },
+      {
+        "name": "자오온센 요코쿠라 슬로프",
+        "video": "https://www.youtube.com/watch?v=RHfXwQ-rF24",
+        "video_type": "youtube"
+      }
+    ],
+    "name": "도호쿠"
+  },
+  {
+    "id": "kansai",
+    "links": [
+      {
+        "name": "하치코겐 900m",
+        "video": "https://www.youtube.com/watch?v=8Tc2jpzNHCA",
+        "video_type": "youtube"
+      }
+    ],
+    "name": "간사이"
   }
 ]
