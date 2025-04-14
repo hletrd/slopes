@@ -5,6 +5,7 @@ import json
 import re
 import threading
 from concurrent.futures import ThreadPoolExecutor
+import datetime
 
 
 def extract_m3u8_from_url(url):
@@ -104,6 +105,61 @@ def process_resort(resort, max_workers):
   return modified
 
 
+def generate_video_ld_json(data):
+  print("Generating videos+ld.json...")
+  site_url = "http://ski.atik.kr"
+  now = datetime.datetime.now()
+  future_date = now + datetime.timedelta(days=14)
+  formatted_now = now.isoformat() + "+00:00"
+  formatted_future = future_date.isoformat() + "+00:00"
+
+  video_objects = []
+
+  for resort in data:
+    resort_id = resort.get('id')
+    resort_name = resort.get('name', '')
+
+    if not resort_id or 'links' not in resort:
+      continue
+
+    for i, item in enumerate(resort.get('links', [])):
+      video_url = item.get('video')
+      if not video_url:
+        continue
+
+      camera_name = item.get('name', '')
+
+      name = f"{resort_name} {camera_name}"
+      description = f"스키장 웹캠 - {name}"
+
+      video_object = {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "contentURL": video_url,
+        "description": description,
+        "embedUrl": f"{site_url}/#{resort_id}/{i}",
+        "expires": formatted_future,
+        "name": name,
+        "thumbnailUrl": "/preview.png",
+        "uploadDate": formatted_now,
+        "publication": [
+          {
+            "@type": "BroadcastEvent",
+            "isLiveBroadcast": True,
+            "startDate": formatted_now,
+            "endDate": formatted_future
+          }
+        ]
+      }
+
+      video_objects.append(video_object)
+
+  with open('videos+ld.json', 'w', encoding='utf-8') as f:
+    json.dump(video_objects, f, ensure_ascii=False, indent=2, sort_keys=True)
+
+  print(f"Generated videos+ld.json with {len(video_objects)} video objects")
+
+
 def main():
   try:
     print("Reading links.json file...")
@@ -142,6 +198,8 @@ def main():
       print("Saved links.json successfully")
     else:
       print("No changes to links.json")
+
+    generate_video_ld_json(data)
 
     print("Generating sitemap.xml...")
     site_url = "http://ski.atik.kr"
