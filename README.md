@@ -178,6 +178,14 @@
 
 ---
 
+### 로컬에서 돌리는 법
+
+```sh
+$ python3 server.py && open http://localhost:3001
+```
+
+---
+
 ### 앞으로 할 일
 
 #### 기능
