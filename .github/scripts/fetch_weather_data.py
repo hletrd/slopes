@@ -148,8 +148,9 @@ def generate_preview_image(weather_data, resorts):
   base_areas = []
   for resort in resorts:
     resort_name = resort.get("name", "")
-    if resort_name == "정선 알파인 경기장":
+    if 'hide_preview' in resort and resort['hide_preview']:
       continue
+
     base_area = next((w for w in weather_data if w["resort"] == resort_name and w["name"] == "스키하우스"), None)
 
     if base_area and base_area.get("data") and len(base_area["data"]) > 0:

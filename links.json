@@ -1,5 +1,29 @@
 [
   {
+    "id": "seoul",
+    "coordinates": [
+      {
+        "latitude": 37.649252,
+        "longitude": 127.257067,
+        "name": "스키하우스"
+      }
+    ],
+    "name": "서울리조트",
+    "hide_preview": true
+  },
+  {
+    "id": "starhill",
+    "coordinates": [
+      {
+        "latitude": 37.662544,
+        "longitude": 127.270042,
+        "name": "스키하우스"
+      }
+    ],
+    "name": "스타힐 리조트",
+    "hide_preview": true
+  },
+  {
     "coordinates": [
       {
         "latitude": 37.336926,
@@ -41,6 +65,30 @@
       }
     ],
     "name": "곤지암리조트"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.796762,
+        "longitude": 127.247262,
+        "name": "스키하우스"
+      }
+    ],
+    "id": "bearstown",
+    "name": "베어스타운 리조트",
+    "hide_preview": true
+  },
+  {
+    "id": "pine",
+    "coordinates": [
+      {
+        "latitude": 37.211926,
+        "longitude": 127.295119,
+        "name": "스키하우스"
+      }
+    ],
+    "name": "양지파인리조트",
+    "hide_preview": true
   },
   {
     "coordinates": [
@@ -384,6 +432,18 @@
     "status": "https://phoenixhnr.co.kr/static/pyeongchang/snowpark/slope-lift?tabId=2"
   },
   {
+    "id": "eaglevalley",
+    "coordinates": [
+      {
+        "latitude": 36.849602,
+        "longitude": 127.974005,
+        "name": "스키하우스"
+      }
+    ],
+    "name": "수안보 이글밸리 스키리조트",
+    "hide_preview": true
+  },
+  {
     "coordinates": [
       {
         "latitude": 37.656947,
@@ -698,6 +758,18 @@
     "status": "https://www.o2resort.com/SKI/slopeOpen.jsp"
   },
   {
+    "id": "alps",
+    "coordinates": [
+      {
+        "latitude": 38.264809,
+        "longitude": 128.378727,
+        "name": "스키하우스"
+      }
+    ],
+    "name": "알프스리조트",
+    "hide_preview": true
+  },
+  {
     "coordinates": [
       {
         "latitude": 35.890715,
@@ -843,7 +915,8 @@
       }
     ],
     "id": "alpine",
-    "name": "정선 알파인 경기장"
+    "name": "정선 알파인 경기장",
+    "hide_preview": true
   },
   {
     "id": "hokkaido",
