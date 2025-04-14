@@ -561,37 +561,162 @@
   <changefreq>monthly</changefreq>
   </url>
   <url>
-  <loc>http://ski.atik.kr/#nagano</loc>
+  <loc>http://ski.atik.kr/#chubu</loc>
   <priority>0.7</priority>
   <changefreq>monthly</changefreq>
   </url>
   <url>
-  <loc>http://ski.atik.kr/#nagano/0</loc>
+  <loc>http://ski.atik.kr/#chubu/0</loc>
   <priority>0.2</priority>
   <changefreq>monthly</changefreq>
   </url>
   <url>
-  <loc>http://ski.atik.kr/#nagano/1</loc>
+  <loc>http://ski.atik.kr/#chubu/1</loc>
   <priority>0.2</priority>
   <changefreq>monthly</changefreq>
   </url>
   <url>
-  <loc>http://ski.atik.kr/#nagano/2</loc>
+  <loc>http://ski.atik.kr/#chubu/2</loc>
   <priority>0.2</priority>
   <changefreq>monthly</changefreq>
   </url>
   <url>
-  <loc>http://ski.atik.kr/#nagano/3</loc>
+  <loc>http://ski.atik.kr/#chubu/3</loc>
   <priority>0.2</priority>
   <changefreq>monthly</changefreq>
   </url>
   <url>
-  <loc>http://ski.atik.kr/#nagano/4</loc>
+  <loc>http://ski.atik.kr/#chubu/4</loc>
   <priority>0.2</priority>
   <changefreq>monthly</changefreq>
   </url>
   <url>
-  <loc>http://ski.atik.kr/#nagano/5</loc>
+  <loc>http://ski.atik.kr/#chubu/5</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/6</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/7</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/8</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/9</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/10</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/11</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/12</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/13</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/14</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#chubu/15</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kanto</loc>
+  <priority>0.7</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kanto/0</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kanto/1</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kanto/2</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kanto/3</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kanto/4</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kanto/5</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kanto/6</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#tohoku</loc>
+  <priority>0.7</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#tohoku/0</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#tohoku/1</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#tohoku/2</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#tohoku/3</loc>
+  <priority>0.2</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kansai</loc>
+  <priority>0.7</priority>
+  <changefreq>monthly</changefreq>
+  </url>
+  <url>
+  <loc>http://ski.atik.kr/#kansai/0</loc>
   <priority>0.2</priority>
   <changefreq>monthly</changefreq>
   </url>
