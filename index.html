@@ -1371,6 +1371,7 @@
             liveui: true,
             responsive: true,
             fluid: false,
+            crossorigin: "anonymous",
             liveTracker: {
               trackingThreshold: 0,
               liveTolerance: 15
@@ -1494,7 +1495,6 @@
             videoType
           );
         });
-        container.appendChild(bookmarkBtn);
 
         if (type === 1) {
           bookmarkBtn.classList.add('bookmark-button-error');
@@ -1505,6 +1505,8 @@
         } else if (type === 4) {
           bookmarkBtn.classList.add('bookmark-button-vivaldi');
         }
+
+        container.appendChild(bookmarkBtn);
       }
 
       function captureVideoFrame(player) {
