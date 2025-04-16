@@ -285,7 +285,7 @@ h2 {
   right: 8px;
 }
 .bookmark-button-vivaldi {
-  top: 8px;
+  top: 44px;
   right: 8px;
 }
 .vivaldi-container {
@@ -482,6 +482,11 @@ h2 {
 .success-message {
   z-index: 100;
   font-weight: 550;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+.fade-out {
+  opacity: 0;
 }
 .bookmarks-title {
   font-size: 1.4rem;

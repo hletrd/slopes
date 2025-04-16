@@ -1258,6 +1258,15 @@
               addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 4);
             }
 
+            const captureBtn = document.createElement('button');
+            captureBtn.className = 'capture-button';
+            captureBtn.innerHTML = `
+              <i class="bi bi-camera"></i>
+              캡처
+              `;
+            captureBtn.addEventListener('click', () => captureScreenshot(container));
+            container.appendChild(captureBtn);
+
             return {
               dispose: function() {
                 container.innerHTML = '';
@@ -1634,18 +1643,14 @@
           const timestamp = formatTimestamp();
           const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`;
 
-          html2canvas(container).then(canvas => {
+          const iframeBody = iframe.contentDocument.body;
+          html2canvas(iframeBody, {
+            useCORS: false,
+          }).then(canvas => {
             const dataURL = canvas.toDataURL('image/jpeg');
             downloadImage(dataURL, filename);
 
-            const successMsg = document.createElement('div');
-            successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
-            successMsg.textContent = '캡처 완료!';
-            container.appendChild(successMsg);
-
-            setTimeout(() => {
-              successMsg.remove();
-            }, 2000);
+            showSuccessMessage(container);
           });
         } catch (e) {
           console.error('Error capturing screenshot:', e);
