@@ -981,6 +981,24 @@
     "name": "정선 알파인 경기장"
   },
   {
+    "coordinates": [
+      {
+        "latitude": 39.061944,
+        "longitude": 127.250833,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 39.044755,
+        "longitude": 127.236129,
+        "name": "정상"
+      }
+    ],
+    "fetch_weather": false,
+    "hide_preview": true,
+    "id": "masikryong",
+    "name": "마식령 스키장"
+  },
+  {
     "id": "hokkaido",
     "links": [
       {
