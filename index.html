@@ -1536,14 +1536,8 @@
                   downloadImage(dataURL, filename);
 
                   const container = player.el().parentNode;
-                  const successMsg = document.createElement('div');
-                  successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
-                  successMsg.textContent = '캡처 완료!';
-                  container.appendChild(successMsg);
 
-                  setTimeout(() => {
-                    successMsg.remove();
-                  }, 2000);
+                  showSuccessMessage(container);
 
                   return;
                 }
@@ -1560,19 +1554,26 @@
           downloadImage(dataURL, filename);
 
           const container = player.el().parentNode;
-          const successMsg = document.createElement('div');
-          successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
-          successMsg.textContent = '캡처 완료!';
-          container.appendChild(successMsg);
-
-          setTimeout(() => {
-            successMsg.remove();
-          }, 2000);
+          showSuccessMessage(container);
 
         } catch (e) {
           console.error('Error capturing frame:', e);
           alert('캡처 중 오류가 발생했습니다.');
         }
+      }
+
+      function showSuccessMessage(container) {
+        const successMsg = document.createElement('div');
+        successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
+        successMsg.textContent = '캡처 완료!';
+        container.appendChild(successMsg);
+
+        setTimeout(() => {
+          successMsg.classList.add('fade-out');
+          setTimeout(() => {
+            successMsg.remove();
+          }, 500);
+        }, 2000);
       }
 
       function captureScreenshot(container) {
@@ -1864,7 +1865,6 @@
             .then(weatherResult => {
               if (weatherResult) {
                 weatherData = weatherResult;
-                console.log('Weather data loaded:', weatherData.length, 'locations');
                 return weatherResult;
               }
               return null;
