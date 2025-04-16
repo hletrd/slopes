@@ -10,6 +10,7 @@ import os.path
 import threading
 from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
+import time
 import re
 from bs4 import BeautifulSoup
 
@@ -28,7 +29,7 @@ def convert_to_iso8601(time_str):
 
   return f"{year}-{month}-{day}T{hour}:{minute}:00+09:00"
 
-def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_key):
+def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_key, is_north_korea=False):
   kst = pytz.timezone('Asia/Seoul')
   now = datetime.now(kst)
   six_hours_ago = now - timedelta(hours=HOURS)
@@ -36,7 +37,10 @@ def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_k
   tm1 = format_datetime(six_hours_ago)
   tm2 = format_datetime(now)
 
-  base_url = "https://apihub.kma.go.kr/api/typ01/url/sfc_nc_var.php"
+  if is_north_korea:
+    base_url = "https://apihub.kma.go.kr/api/typ01/url/nko_sfctm.php"
+  else:
+    base_url = "https://apihub.kma.go.kr/api/typ01/url/sfc_nc_var.php"
   params = (
     f"?tm1={tm1}&tm2={tm2}&lon={lon}&lat={lat}"
     f"&obs=ta,hm,ws_10m,rn_60m,sd_tot,sd_3hr&itv={INTERVAL}&help=0"
@@ -116,8 +120,8 @@ def generate_preview_image(weather_data, resorts):
   content_start_y = int(height * 0.215)
   row_height = int(height * 0.125)
 
-  bold_font_path = os.path.join(os.path.dirname(__file__), "NotoSansKR-Bold.ttf")
-  regular_font_path = os.path.join(os.path.dirname(__file__), "NotoSansKR-Regular.ttf")
+  bold_font_path = os.path.join(os.path.dirname(__file__), "Pretendard-Bold.ttf")
+  regular_font_path = os.path.join(os.path.dirname(__file__), "Pretendard-Regular.ttf")
 
   title_size = int(width * 0.03)
   header_size = int(width * 0.016)
@@ -208,7 +212,7 @@ def generate_preview_image(weather_data, resorts):
   except Exception as e:
     print(f"Error saving preview image: {e}")
 
-def fetch_weather_data_from_resort(resort_name):
+def fetch_weather_data_from_resort(resort_name, is_north_korea=False):
   try:
     # 지산 포레스트 리조트: 케이웨더 정보 제공
     # 엘리시안 강촌: 기상청 정보 제공
@@ -246,7 +250,7 @@ def fetch_weather_data_from_resort(resort_name):
           "humidity": None,
           "wind_speed": None,
           "rainfall": None,
-        "snow_cover": None,
+          "snow_cover": None,
           "snowfall_3hr": None
         }
       ]
@@ -363,8 +367,11 @@ def main():
     resort_id = resort.get("id", "")
     coordinates = resort.get("coordinates", [])
     weather_link = resort.get("weather_link")
+    is_north_korea = resort.get("is_north_korea", False)
+    if resort.get('fetch_weather', True) == False:
+      continue
 
-    resort_weathers = fetch_weather_data_from_resort(resort_name)
+    resort_weathers = fetch_weather_data_from_resort(resort_name, is_north_korea)
     if resort_weathers and len(resort_weathers) > 0:
       for resort_weather in resort_weathers:
         key = f"{resort_name}:{resort_weather['name']}"
@@ -395,9 +402,17 @@ def main():
 
   def fetch_location_data(resort_name, location_name, lat, lon, full_name):
     print(f"Fetching weather data for {full_name}")
-    result = fetch_weather_data_for_location(
-      lat, lon, location_name, resort_name, auth_key
-    )
+
+    result = None
+    for attempt in range(2):
+      result = fetch_weather_data_for_location(
+        lat, lon, location_name, resort_name, auth_key
+      )
+
+      if result:
+        break
+      elif attempt == 0:
+        print(f"Retrying to fetch weather data for {full_name}...")
 
     if result:
       key = f"{resort_name}:{location_name}"
@@ -411,10 +426,11 @@ def main():
           nonlocal new_locations
           new_locations += 1
 
-  with ThreadPoolExecutor(max_workers=20) as executor:
+  with ThreadPoolExecutor(max_workers=40) as executor:
     for task in fetch_tasks:
       resort_name, location_name, lat, lon, full_name = task
       executor.submit(fetch_location_data, resort_name, location_name, lat, lon, full_name)
+      time.sleep(0.1)
 
   updated_weather_data = list(weather_data_dict.values())
 
