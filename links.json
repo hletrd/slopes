@@ -999,6 +999,19 @@
     "name": "마식령 스키장"
   },
   {
+    "coordinates": [
+      {
+        "latitude": 39.198056,
+        "longitude": 126.831111,
+        "name": "스키하우스"
+      }
+    ],
+    "fetch_weather": false,
+    "hide_preview": true,
+    "id": "yangdok",
+    "name": "양덕온천문화휴양지"
+  },
+  {
     "id": "hokkaido",
     "links": [
       {
