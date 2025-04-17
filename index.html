@@ -1538,8 +1538,8 @@
               if (resort && !isNaN(webcamIndex)) {
                 const webcams = resort.links || resort.webcams || [];
                 if (webcams[webcamIndex]) {
-                  const resortName = sanitizeForFilename(resort.name);
-                  const webcamName = sanitizeForFilename(webcams[webcamIndex].name);
+                  const resortName = getResortNameForCapture(player.el());
+                  const webcamName = getWebcamNameForCapture(player.el());
                   const timestamp = formatTimestamp();
                   const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`;
 
@@ -1556,7 +1556,7 @@
             }
           }
 
-          const resortName = getResortNameForCapture();
+          const resortName = getResortNameForCapture(player.el());
           const webcamName = getWebcamNameForCapture(player.el());
           const timestamp = formatTimestamp();
           const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`;
@@ -1610,8 +1610,8 @@
               if (resort && !isNaN(webcamIndex)) {
                 const webcams = resort.links || resort.webcams || [];
                 if (webcams[webcamIndex]) {
-                  resortName = sanitizeForFilename(resort.name);
-                  webcamName = sanitizeForFilename(webcams[webcamIndex].name);
+                  resortName = getResortNameForCapture(container);
+                  webcamName = getWebcamNameForCapture(container);
                 }
               }
             }
@@ -1628,15 +1628,15 @@
               if (resort && !isNaN(webcamIdx)) {
                 const webcams = resort.links || resort.webcams || [];
                 if (webcams[webcamIdx]) {
-                  resortName = sanitizeForFilename(resort.name);
-                  webcamName = sanitizeForFilename(webcams[webcamIdx].name);
+                  resortName = getResortNameForCapture(container);
+                  webcamName = getWebcamNameForCapture(container);
                 }
               }
             }
           }
 
           if (!resortName) {
-            resortName = getResortNameForCapture();
+            resortName = getResortNameForCapture(container);
           }
           if (!webcamName) {
             webcamName = getWebcamNameForCapture(container);
@@ -1660,13 +1660,14 @@
         }
       }
 
-      function getResortNameForCapture() {
-        const videoContainer = document.querySelector('.video-container');
-        const favoriteCard = videoContainer?.closest('.video-card');
-        if (favoriteCard && document.getElementById('default-message').classList.contains('active')) {
-          const favoriteResort = favoriteCard.querySelector('.favorite-resort');
-          if (favoriteResort && favoriteResort.textContent) {
-            return sanitizeForFilename(favoriteResort.textContent.trim());
+      function getResortNameForCapture(element) {
+        if (element) {
+          const favoriteCard = element.closest('.favorite-card');
+          if (favoriteCard) {
+            const favoriteResort = favoriteCard.querySelector('.favorite-resort');
+            if (favoriteResort && favoriteResort.textContent) {
+              return sanitizeForFilename(favoriteResort.textContent.trim());
+            }
           }
         }
 
@@ -1696,8 +1697,8 @@
 
       function getWebcamNameForCapture(element) {
         const videoContainer = element.closest('.video-container');
-        const favoriteCard = videoContainer?.closest('.video-card');
-        if (favoriteCard && document.getElementById('default-message').classList.contains('active')) {
+        const favoriteCard = videoContainer?.closest('.favorite-card');
+        if (favoriteCard) {
           const favoriteLocation = favoriteCard.querySelector('.favorite-location');
           if (favoriteLocation && favoriteLocation.textContent) {
             return sanitizeForFilename(favoriteLocation.textContent.trim());
