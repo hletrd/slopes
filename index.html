@@ -837,6 +837,7 @@
                   }
                 }
               } else {
+                document.querySelectorAll('.submenu-item').forEach(smi => smi.classList.remove('active'));
                 const mainSection = document.getElementById(`${resortId}-main`);
                 if (mainSection) {
                   mainSection.classList.add('active');
@@ -1163,6 +1164,7 @@
             updatePageTitle(target, null);
 
             document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
+            document.querySelectorAll('.submenu-item').forEach(smi => smi.classList.remove('active'));
             this.classList.add('active');
 
             hideAllSubmenus();
