@@ -135,23 +135,27 @@
       const params = getUrlParams();
       if (params.channel && params.serial) {
         const vivaldiPlayer = new Vivaldi('vivaldi-player');
+        let retryCount = 0;
+        const maxRetries = 5;
 
-        setTimeout(() => {
+        function tryInitialize() {
           try {
             vivaldiPlayer.ctlUIStartSet(params.channel, params.serial);
           } catch (e) {
-            console.error('Error initializing Vivaldi player:', e);
-            setTimeout(() => {
-              try {
-                vivaldiPlayer.ctlUIStartSet(params.channel, params.serial);
-              } catch (e) {
-                console.error('Failed to initialize Vivaldi player after retry:', e);
-                document.getElementById('player-container').innerHTML =
-                  '<div style="color: white; padding: 20px; text-align: center;">비디오 플레이어를 생성하는 중 오류가 발생했습니다.</div>';
-              }
-            }, Math.random() * 3000);
+            console.error(`Error initializing Vivaldi player (attempt ${retryCount + 1}/${maxRetries}):`, e);
+            retryCount++;
+            
+            if (retryCount < maxRetries) {
+              // incremental delay
+              setTimeout(tryInitialize, Math.random() * 2000 + 1000 * retryCount);
+            } else {
+              document.getElementById('player-container').innerHTML =
+                '<div style="color: white; padding: 20px; text-align: center;">비디오 플레이어를 생성하는 중 오류가 발생했습니다.</div>';
+            }
           }
-        }, Math.random() * 3000);
+        }
+
+        setTimeout(tryInitialize, Math.random() * 2000 + 1000);
       } else {
         document.getElementById('player-container').innerHTML =
           '<div style="color: white; padding: 20px; text-align: center;">필요한 파라미터가 없습니다. (channel, serial)</div>';
