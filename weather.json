@@ -2,13 +2,22 @@
   {
     "data": [
       {
-        "humidity": 52.2,
+        "humidity": 46.4,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 22.1,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 22.9,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.0
+      },
+      {
+        "humidity": 41.9,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.3,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -17,18 +26,27 @@
     },
     "name": "스키하우스",
     "resort": "곤지암리조트",
-    "timestamp": "2025-04-20T14:21:16.720278+09:00"
+    "timestamp": "2025-04-20T15:29:24.557513+09:00"
   },
   {
     "data": [
       {
-        "humidity": 53.5,
+        "humidity": 46.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 22.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 22.9,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 42.3,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 24.0,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.8
       }
     ],
     "location": {
@@ -37,18 +55,27 @@
     },
     "name": "스키하우스",
     "resort": "지산 포레스트 리조트",
-    "timestamp": "2025-04-20T14:21:17.225673+09:00"
+    "timestamp": "2025-04-20T15:29:25.063435+09:00"
   },
   {
     "data": [
       {
-        "humidity": 53.2,
+        "humidity": 48.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 22.6,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 23.2,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 44.9,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -57,17 +84,26 @@
     },
     "name": "블루 정상",
     "resort": "지산 포레스트 리조트",
-    "timestamp": "2025-04-20T14:21:17.428150+09:00"
+    "timestamp": "2025-04-20T15:29:25.265710+09:00"
   },
   {
     "data": [
       {
-        "humidity": 43.9,
+        "humidity": 37.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 22.3,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 23.5,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 32.6,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 24.0,
+        "time": "2025-04-20T15:25:00+09:00",
         "wind_speed": 0.2
       }
     ],
@@ -77,18 +113,27 @@
     },
     "name": "스키하우스",
     "resort": "엘리시안 강촌",
-    "timestamp": "2025-04-20T14:21:17.629931+09:00"
+    "timestamp": "2025-04-20T15:29:25.468225+09:00"
   },
   {
     "data": [
       {
-        "humidity": 44.5,
+        "humidity": 34.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 23.0,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.1
+        "temperature": 23.6,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 25.9,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.4,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.2
       }
     ],
     "location": {
@@ -97,17 +142,26 @@
     },
     "name": "정상",
     "resort": "엘리시안 강촌",
-    "timestamp": "2025-04-20T14:21:17.730953+09:00"
+    "timestamp": "2025-04-20T15:29:25.569392+09:00"
   },
   {
     "data": [
       {
-        "humidity": 48.5,
+        "humidity": 43.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 20.5,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 22.9,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.5
+      },
+      {
+        "humidity": 42.0,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 21.7,
+        "time": "2025-04-20T15:25:00+09:00",
         "wind_speed": 0.5
       }
     ],
@@ -117,18 +171,27 @@
     },
     "name": "스키하우스",
     "resort": "비발디파크",
-    "timestamp": "2025-04-20T14:21:18.034291+09:00"
+    "timestamp": "2025-04-20T15:29:25.872945+09:00"
   },
   {
     "data": [
       {
-        "humidity": 57.1,
+        "humidity": 50.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 19.9,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 21.2,
+        "time": "2025-04-20T14:25:00+09:00",
         "wind_speed": 0.4
+      },
+      {
+        "humidity": 42.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 21.4,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.5
       }
     ],
     "location": {
@@ -137,18 +200,27 @@
     },
     "name": "정상",
     "resort": "비발디파크",
-    "timestamp": "2025-04-20T14:21:18.135419+09:00"
+    "timestamp": "2025-04-20T15:29:25.974138+09:00"
   },
   {
     "data": [
       {
-        "humidity": 53.0,
+        "humidity": 45.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 21.8,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.2
+        "temperature": 22.5,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.1
+      },
+      {
+        "humidity": 38.0,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.2,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.8
       }
     ],
     "location": {
@@ -157,18 +229,27 @@
     },
     "name": "스키하우스",
     "resort": "오크밸리",
-    "timestamp": "2025-04-20T14:21:18.438767+09:00"
+    "timestamp": "2025-04-20T15:29:26.277589+09:00"
   },
   {
     "data": [
       {
-        "humidity": 50.8,
+        "humidity": 45.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 21.5,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 22.3,
+        "time": "2025-04-20T14:25:00+09:00",
         "wind_speed": 1.2
+      },
+      {
+        "humidity": 41.7,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.0,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.8
       }
     ],
     "location": {
@@ -177,18 +258,27 @@
     },
     "name": "정상",
     "resort": "오크밸리",
-    "timestamp": "2025-04-20T14:21:18.539772+09:00"
+    "timestamp": "2025-04-20T15:29:26.378600+09:00"
   },
   {
     "data": [
       {
-        "humidity": 51.2,
+        "humidity": 47.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 21.1,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.0
+        "temperature": 21.2,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.4
+      },
+      {
+        "humidity": 52.1,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 20.6,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.9
       }
     ],
     "location": {
@@ -197,17 +287,26 @@
     },
     "name": "스키하우스",
     "resort": "웰리힐리파크",
-    "timestamp": "2025-04-20T14:21:18.842317+09:00"
+    "timestamp": "2025-04-20T15:29:26.682487+09:00"
   },
   {
     "data": [
       {
-        "humidity": 57.3,
+        "humidity": 56.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 19.4,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 20.2,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.5
+      },
+      {
+        "humidity": 56.9,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 20.2,
+        "time": "2025-04-20T15:25:00+09:00",
         "wind_speed": 1.0
       }
     ],
@@ -217,18 +316,27 @@
     },
     "name": "정상",
     "resort": "웰리힐리파크",
-    "timestamp": "2025-04-20T14:21:18.943313+09:00"
+    "timestamp": "2025-04-20T15:29:26.783624+09:00"
   },
   {
     "data": [
+      {
+        "humidity": 70.5,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 12.1,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 3.4
+      },
       {
         "humidity": 71.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 12.4,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.6
+        "temperature": 11.4,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 3.0
       }
     ],
     "location": {
@@ -237,18 +345,27 @@
     },
     "name": "스키하우스",
     "resort": "알펜시아 리조트",
-    "timestamp": "2025-04-20T14:21:19.645100+09:00"
+    "timestamp": "2025-04-20T15:29:27.491876+09:00"
   },
   {
     "data": [
       {
-        "humidity": 71.7,
+        "humidity": 70.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 12.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.6
+        "temperature": 12.2,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 3.4
+      },
+      {
+        "humidity": 71.6,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 11.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 3.0
       }
     ],
     "location": {
@@ -257,18 +374,27 @@
     },
     "name": "정상",
     "resort": "알펜시아 리조트",
-    "timestamp": "2025-04-20T14:21:19.745241+09:00"
+    "timestamp": "2025-04-20T15:29:27.592840+09:00"
   },
   {
     "data": [
       {
-        "humidity": 71.8,
+        "humidity": 69.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 13.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.5
+        "temperature": 13.6,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 3.3
+      },
+      {
+        "humidity": 70.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 13.0,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.9
       }
     ],
     "location": {
@@ -277,18 +403,27 @@
     },
     "name": "스키하우스",
     "resort": "모나 용평",
-    "timestamp": "2025-04-20T14:21:19.945547+09:00"
+    "timestamp": "2025-04-20T15:29:27.795086+09:00"
   },
   {
     "data": [
       {
-        "humidity": 72.5,
+        "humidity": 70.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 13.7,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.1
+        "temperature": 14.1,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 2.8
+      },
+      {
+        "humidity": 69.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 14.0,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.6
       }
     ],
     "location": {
@@ -297,18 +432,27 @@
     },
     "name": "레인보우 베이스",
     "resort": "모나 용평",
-    "timestamp": "2025-04-20T14:21:20.045664+09:00"
+    "timestamp": "2025-04-20T15:29:27.896314+09:00"
   },
   {
     "data": [
       {
-        "humidity": 81.9,
+        "humidity": 72.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 11.4,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.9
+        "temperature": 12.3,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 2.5
+      },
+      {
+        "humidity": 74.0,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 12.6,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.4
       }
     ],
     "location": {
@@ -317,18 +461,27 @@
     },
     "name": "레인보우 정상",
     "resort": "모나 용평",
-    "timestamp": "2025-04-20T14:21:20.146008+09:00"
+    "timestamp": "2025-04-20T15:29:27.997527+09:00"
   },
   {
     "data": [
       {
-        "humidity": 68.3,
+        "humidity": 66.3,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 14.2,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.3
+        "temperature": 15.0,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 3.0
+      },
+      {
+        "humidity": 69.0,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 13.9,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.7
       }
     ],
     "location": {
@@ -337,18 +490,27 @@
     },
     "name": "실버 정상",
     "resort": "모나 용평",
-    "timestamp": "2025-04-20T14:21:20.247304+09:00"
+    "timestamp": "2025-04-20T15:29:28.098745+09:00"
   },
   {
     "data": [
       {
-        "humidity": 71.2,
+        "humidity": 70.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 12.9,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.4
+        "temperature": 13.5,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 3.0
+      },
+      {
+        "humidity": 71.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 13.2,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.7
       }
     ],
     "location": {
@@ -357,18 +519,27 @@
     },
     "name": "레드 정상",
     "resort": "모나 용평",
-    "timestamp": "2025-04-20T14:21:20.450144+09:00"
+    "timestamp": "2025-04-20T15:29:28.301185+09:00"
   },
   {
     "data": [
       {
-        "humidity": 71.8,
+        "humidity": 70.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 12.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.4
+        "temperature": 12.6,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 3.1
+      },
+      {
+        "humidity": 72.3,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 12.2,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.8
       }
     ],
     "location": {
@@ -377,18 +548,27 @@
     },
     "name": "골드 베이스",
     "resort": "모나 용평",
-    "timestamp": "2025-04-20T14:21:20.651956+09:00"
+    "timestamp": "2025-04-20T15:29:28.938910+09:00"
   },
   {
     "data": [
       {
-        "humidity": 75.7,
+        "humidity": 74.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 12.9,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.1
+        "temperature": 13.0,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 2.7
+      },
+      {
+        "humidity": 72.3,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 13.3,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.4
       }
     ],
     "location": {
@@ -397,18 +577,27 @@
     },
     "name": "골드 정상",
     "resort": "모나 용평",
-    "timestamp": "2025-04-20T14:21:20.753166+09:00"
+    "timestamp": "2025-04-20T15:29:29.609863+09:00"
   },
   {
     "data": [
       {
-        "humidity": 87.6,
+        "humidity": 83.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 11.8,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.9
+        "temperature": 12.7,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.4
+      },
+      {
+        "humidity": 74.1,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 12.8,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.5
       }
     ],
     "location": {
@@ -417,18 +606,27 @@
     },
     "name": "스키하우스",
     "resort": "오투리조트",
-    "timestamp": "2025-04-20T14:21:21.458258+09:00"
+    "timestamp": "2025-04-20T15:29:30.264388+09:00"
   },
   {
     "data": [
       {
-        "humidity": 86.9,
+        "humidity": 81.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 12.0,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.0
+        "temperature": 12.7,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.3
+      },
+      {
+        "humidity": 74.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 12.9,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.5
       }
     ],
     "location": {
@@ -437,18 +635,27 @@
     },
     "name": "글로리 정상 (콘도)",
     "resort": "오투리조트",
-    "timestamp": "2025-04-20T14:21:21.558410+09:00"
+    "timestamp": "2025-04-20T15:29:30.443838+09:00"
   },
   {
     "data": [
       {
-        "humidity": 94.3,
+        "humidity": 92.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 8.4,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.3
+        "temperature": 9.3,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.6
+      },
+      {
+        "humidity": 79.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 12.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.8
       }
     ],
     "location": {
@@ -457,18 +664,27 @@
     },
     "name": "버금마루",
     "resort": "오투리조트",
-    "timestamp": "2025-04-20T14:21:21.658816+09:00"
+    "timestamp": "2025-04-20T15:29:30.892839+09:00"
   },
   {
     "data": [
       {
-        "humidity": 89.8,
+        "humidity": 86.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 10.7,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.7
+        "temperature": 11.4,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.0
+      },
+      {
+        "humidity": 85.7,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 11.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.1
       }
     ],
     "location": {
@@ -477,17 +693,26 @@
     },
     "name": "으뜸마루",
     "resort": "오투리조트",
-    "timestamp": "2025-04-20T14:21:21.760275+09:00"
+    "timestamp": "2025-04-20T15:29:30.904841+09:00"
   },
   {
     "data": [
       {
-        "humidity": 100.0,
+        "humidity": 99.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 10.7,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 10.9,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.6
+      },
+      {
+        "humidity": 97.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 10.9,
+        "time": "2025-04-20T15:25:00+09:00",
         "wind_speed": 1.4
       }
     ],
@@ -497,18 +722,27 @@
     },
     "name": "스키하우스",
     "resort": "에덴밸리리조트",
-    "timestamp": "2025-04-20T14:21:22.766324+09:00"
+    "timestamp": "2025-04-20T15:29:31.937754+09:00"
   },
   {
     "data": [
       {
-        "humidity": 100.0,
+        "humidity": 99.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 10.7,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.4
+        "temperature": 10.9,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.6
+      },
+      {
+        "humidity": 98.0,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 10.9,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.3
       }
     ],
     "location": {
@@ -517,18 +751,27 @@
     },
     "name": "정상",
     "resort": "에덴밸리리조트",
-    "timestamp": "2025-04-20T14:21:22.866442+09:00"
+    "timestamp": "2025-04-20T15:29:31.941765+09:00"
   },
   {
     "data": [
       {
-        "humidity": 57.0,
+        "humidity": 49.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 19.4,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 21.7,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.1
+      },
+      {
+        "humidity": 45.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 20.9,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -537,18 +780,27 @@
     },
     "name": "정상",
     "resort": "곤지암리조트",
-    "timestamp": "2025-04-20T14:21:16.821450+09:00"
+    "timestamp": "2025-04-20T15:29:24.658653+09:00"
   },
   {
     "data": [
       {
-        "humidity": 53.1,
+        "humidity": 48.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 22.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 23.2,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 44.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.4,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -557,18 +809,27 @@
     },
     "name": "뉴오렌지 정상",
     "resort": "지산 포레스트 리조트",
-    "timestamp": "2025-04-20T14:21:17.326934+09:00"
+    "timestamp": "2025-04-20T15:29:25.164580+09:00"
   },
   {
     "data": [
       {
-        "humidity": 53.1,
+        "humidity": 48.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 22.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 23.2,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 44.7,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -577,18 +838,27 @@
     },
     "name": "실버 정상",
     "resort": "지산 포레스트 리조트",
-    "timestamp": "2025-04-20T14:21:17.528952+09:00"
+    "timestamp": "2025-04-20T15:29:25.367127+09:00"
   },
   {
     "data": [
       {
-        "humidity": 44.5,
+        "humidity": 34.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 23.0,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.1
+        "temperature": 23.6,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 25.9,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.4,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.2
       }
     ],
     "location": {
@@ -597,18 +867,27 @@
     },
     "name": "래빗 상단",
     "resort": "엘리시안 강촌",
-    "timestamp": "2025-04-20T14:21:17.832048+09:00"
+    "timestamp": "2025-04-20T15:29:25.670591+09:00"
   },
   {
     "data": [
       {
-        "humidity": 44.5,
+        "humidity": 34.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 23.0,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.1
+        "temperature": 23.6,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 25.9,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.4,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.2
       }
     ],
     "location": {
@@ -617,18 +896,27 @@
     },
     "name": "레퍼드 상단",
     "resort": "엘리시안 강촌",
-    "timestamp": "2025-04-20T14:21:17.933171+09:00"
+    "timestamp": "2025-04-20T15:29:25.771758+09:00"
   },
   {
     "data": [
       {
-        "humidity": 53.8,
+        "humidity": 48.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 20.2,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 21.8,
+        "time": "2025-04-20T14:25:00+09:00",
         "wind_speed": 0.5
+      },
+      {
+        "humidity": 42.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 21.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.6
       }
     ],
     "location": {
@@ -637,18 +925,27 @@
     },
     "name": "재즈 상단",
     "resort": "비발디파크",
-    "timestamp": "2025-04-20T14:21:18.236590+09:00"
+    "timestamp": "2025-04-20T15:29:26.075314+09:00"
   },
   {
     "data": [
       {
-        "humidity": 55.0,
+        "humidity": 49.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 20.1,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 21.6,
+        "time": "2025-04-20T14:25:00+09:00",
         "wind_speed": 0.4
+      },
+      {
+        "humidity": 42.7,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 21.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.5
       }
     ],
     "location": {
@@ -657,18 +954,27 @@
     },
     "name": "힙합 상단",
     "resort": "비발디파크",
-    "timestamp": "2025-04-20T14:21:18.337601+09:00"
+    "timestamp": "2025-04-20T15:29:26.176511+09:00"
   },
   {
     "data": [
       {
-        "humidity": 51.7,
+        "humidity": 47.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 21.7,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 21.8,
+        "time": "2025-04-20T14:25:00+09:00",
         "wind_speed": 1.2
+      },
+      {
+        "humidity": 39.2,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 22.6,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.8
       }
     ],
     "location": {
@@ -677,18 +983,27 @@
     },
     "name": "버드 정상",
     "resort": "오크밸리",
-    "timestamp": "2025-04-20T14:21:18.640610+09:00"
+    "timestamp": "2025-04-20T15:29:26.479816+09:00"
   },
   {
     "data": [
       {
-        "humidity": 51.5,
+        "humidity": 47.4,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 21.6,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 21.8,
+        "time": "2025-04-20T14:25:00+09:00",
         "wind_speed": 1.2
+      },
+      {
+        "humidity": 39.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 22.6,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.8
       }
     ],
     "location": {
@@ -697,17 +1012,26 @@
     },
     "name": "플라워 휴게소",
     "resort": "오크밸리",
-    "timestamp": "2025-04-20T14:21:18.740895+09:00"
+    "timestamp": "2025-04-20T15:29:26.581284+09:00"
   },
   {
     "data": [
       {
-        "humidity": 58.0,
+        "humidity": 57.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 19.2,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 20.1,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.4
+      },
+      {
+        "humidity": 57.5,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 20.1,
+        "time": "2025-04-20T15:25:00+09:00",
         "wind_speed": 1.0
       }
     ],
@@ -717,18 +1041,27 @@
     },
     "name": "뉴브라보 정상",
     "resort": "웰리힐리파크",
-    "timestamp": "2025-04-20T14:21:19.043448+09:00"
+    "timestamp": "2025-04-20T15:29:26.884749+09:00"
   },
   {
     "data": [
       {
-        "humidity": 71.5,
+        "humidity": 69.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 12.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.5
+        "temperature": 12.3,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 3.3
+      },
+      {
+        "humidity": 71.3,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 11.6,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 3.0
       }
     ],
     "location": {
@@ -737,18 +1070,27 @@
     },
     "name": "알파 상단",
     "resort": "알펜시아 리조트",
-    "timestamp": "2025-04-20T14:21:19.845357+09:00"
+    "timestamp": "2025-04-20T15:29:27.694012+09:00"
   },
   {
     "data": [
       {
-        "humidity": 70.6,
+        "humidity": 69.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 13.0,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.4
+        "temperature": 13.5,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 3.1
+      },
+      {
+        "humidity": 71.1,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 13.2,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.8
       }
     ],
     "location": {
@@ -757,18 +1099,27 @@
     },
     "name": "메가그린 상단",
     "resort": "모나 용평",
-    "timestamp": "2025-04-20T14:21:20.348816+09:00"
+    "timestamp": "2025-04-20T15:29:28.199963+09:00"
   },
   {
     "data": [
       {
-        "humidity": 69.1,
+        "humidity": 67.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 14.4,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 2.3
+        "temperature": 15.0,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 2.9
+      },
+      {
+        "humidity": 70.3,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 13.8,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.6
       }
     ],
     "location": {
@@ -777,18 +1128,27 @@
     },
     "name": "뉴골드 상단",
     "resort": "모나 용평",
-    "timestamp": "2025-04-20T14:21:20.550684+09:00"
+    "timestamp": "2025-04-20T15:29:28.557092+09:00"
   },
   {
     "data": [
       {
-        "humidity": 94.1,
+        "humidity": 91.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 8.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.4
+        "temperature": 9.4,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.7
+      },
+      {
+        "humidity": 79.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 12.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.8
       }
     ],
     "location": {
@@ -797,18 +1157,27 @@
     },
     "name": "드림 상단",
     "resort": "오투리조트",
-    "timestamp": "2025-04-20T14:21:21.861475+09:00"
+    "timestamp": "2025-04-20T15:29:30.915134+09:00"
   },
   {
     "data": [
       {
-        "humidity": 99.9,
+        "humidity": 98.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 10.9,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.4
+        "temperature": 11.0,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.6
+      },
+      {
+        "humidity": 97.9,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 11.0,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.3
       }
     ],
     "location": {
@@ -817,18 +1186,27 @@
     },
     "name": "에덴리프트 상단",
     "resort": "에덴밸리리조트",
-    "timestamp": "2025-04-20T14:21:22.966555+09:00"
+    "timestamp": "2025-04-20T15:29:31.949643+09:00"
   },
   {
     "data": [
       {
-        "humidity": 59.2,
+        "humidity": 55.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 19.5,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.3
+      },
+      {
+        "humidity": 59.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
         "temperature": 18.7,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.2
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -837,17 +1215,26 @@
     },
     "name": "스키하우스",
     "resort": "정선 알파인 경기장",
-    "timestamp": "2025-04-20T14:21:23.066766+09:00"
+    "timestamp": "2025-04-20T15:29:32.047065+09:00"
   },
   {
     "data": [
       {
-        "humidity": 77.2,
+        "humidity": 68.3,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 13.1,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 14.3,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.2
+      },
+      {
+        "humidity": 67.7,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 15.5,
+        "time": "2025-04-20T15:25:00+09:00",
         "wind_speed": 0.5
       }
     ],
@@ -857,18 +1244,27 @@
     },
     "name": "정상",
     "resort": "정선 알파인 경기장",
-    "timestamp": "2025-04-20T14:21:23.166844+09:00"
+    "timestamp": "2025-04-20T15:29:32.055674+09:00"
   },
   {
     "data": [
       {
-        "humidity": 51.0,
+        "humidity": 42.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 19.6,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 22.3,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.1
+      },
+      {
+        "humidity": 39.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 21.3,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -877,18 +1273,27 @@
     },
     "name": "스톰 정상",
     "resort": "곤지암리조트",
-    "timestamp": "2025-04-20T14:21:16.922606+09:00"
+    "timestamp": "2025-04-20T15:29:24.759833+09:00"
   },
   {
     "data": [
       {
-        "humidity": 53.9,
+        "humidity": 53.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 20.0,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.6
+        "temperature": 20.2,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.8
+      },
+      {
+        "humidity": 59.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 19.3,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.9
       }
     ],
     "location": {
@@ -897,18 +1302,27 @@
     },
     "name": "스키하우스",
     "resort": "휘닉스 파크",
-    "timestamp": "2025-04-20T14:21:19.143530+09:00"
+    "timestamp": "2025-04-20T15:29:26.985970+09:00"
   },
   {
     "data": [
       {
-        "humidity": 56.4,
+        "humidity": 49.3,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 17.8,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.6
+        "temperature": 19.5,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.8
+      },
+      {
+        "humidity": 48.7,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 19.3,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.8
       }
     ],
     "location": {
@@ -917,18 +1331,27 @@
     },
     "name": "불새마루",
     "resort": "휘닉스 파크",
-    "timestamp": "2025-04-20T14:21:19.243666+09:00"
+    "timestamp": "2025-04-20T15:29:27.087175+09:00"
   },
   {
     "data": [
       {
-        "humidity": 54.8,
+        "humidity": 52.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 17.6,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 18.9,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.7
+      },
+      {
+        "humidity": 51.2,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 19.0,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.7
       }
     ],
     "location": {
@@ -937,18 +1360,27 @@
     },
     "name": "몽블랑 정상",
     "resort": "휘닉스 파크",
-    "timestamp": "2025-04-20T14:21:19.343971+09:00"
+    "timestamp": "2025-04-20T15:29:27.188359+09:00"
   },
   {
     "data": [
       {
-        "humidity": 55.3,
+        "humidity": 51.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 17.4,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 19.0,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.7
+      },
+      {
+        "humidity": 49.9,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 19.1,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.8
       }
     ],
     "location": {
@@ -957,18 +1389,27 @@
     },
     "name": "스패로우 상단",
     "resort": "휘닉스 파크",
-    "timestamp": "2025-04-20T14:21:19.444854+09:00"
+    "timestamp": "2025-04-20T15:29:27.289569+09:00"
   },
   {
     "data": [
       {
-        "humidity": 80.2,
+        "humidity": 77.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 13.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 14.1,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.3
+      },
+      {
+        "humidity": 71.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 14.2,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -977,18 +1418,27 @@
     },
     "name": "스키하우스",
     "resort": "하이원 리조트",
-    "timestamp": "2025-04-20T14:21:20.854389+09:00"
+    "timestamp": "2025-04-20T15:29:29.612171+09:00"
   },
   {
     "data": [
       {
-        "humidity": 89.8,
+        "humidity": 84.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 10.1,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.2
+        "temperature": 11.3,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.9
+      },
+      {
+        "humidity": 74.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 14.1,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.5
       }
     ],
     "location": {
@@ -997,18 +1447,27 @@
     },
     "name": "마운틴허브",
     "resort": "하이원 리조트",
-    "timestamp": "2025-04-20T14:21:20.955657+09:00"
+    "timestamp": "2025-04-20T15:29:29.621985+09:00"
   },
   {
     "data": [
       {
-        "humidity": 91.1,
+        "humidity": 85.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 10.3,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.0
+        "temperature": 11.5,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 81.1,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 13.2,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.4
       }
     ],
     "location": {
@@ -1017,18 +1476,27 @@
     },
     "name": "마운틴탑",
     "resort": "하이원 리조트",
-    "timestamp": "2025-04-20T14:21:21.056824+09:00"
+    "timestamp": "2025-04-20T15:29:29.837702+09:00"
   },
   {
     "data": [
       {
-        "humidity": 79.3,
+        "humidity": 71.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 14.2,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 15.5,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.2
+      },
+      {
+        "humidity": 70.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 15.6,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -1037,18 +1505,27 @@
     },
     "name": "밸리 스키하우스",
     "resort": "하이원 리조트",
-    "timestamp": "2025-04-20T14:21:21.157880+09:00"
+    "timestamp": "2025-04-20T15:29:29.862791+09:00"
   },
   {
     "data": [
       {
-        "humidity": 90.4,
+        "humidity": 86.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 9.8,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.2
+        "temperature": 11.0,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.9
+      },
+      {
+        "humidity": 75.6,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 13.9,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.5
       }
     ],
     "location": {
@@ -1057,18 +1534,27 @@
     },
     "name": "밸리허브",
     "resort": "하이원 리조트",
-    "timestamp": "2025-04-20T14:21:21.258011+09:00"
+    "timestamp": "2025-04-20T15:29:30.216353+09:00"
   },
   {
     "data": [
       {
-        "humidity": 92.3,
+        "humidity": 87.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 10.8,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.2
+        "temperature": 11.6,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.8
+      },
+      {
+        "humidity": 88.6,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 12.0,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.5
       }
     ],
     "location": {
@@ -1077,18 +1563,27 @@
     },
     "name": "밸리탑",
     "resort": "하이원 리조트",
-    "timestamp": "2025-04-20T14:21:21.358135+09:00"
+    "timestamp": "2025-04-20T15:29:30.239513+09:00"
   },
   {
     "data": [
       {
-        "humidity": 71.4,
+        "humidity": 66.0,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 18.6,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 19.8,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.7
+      },
+      {
+        "humidity": 67.0,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 19.9,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.8
       }
     ],
     "location": {
@@ -1097,18 +1592,27 @@
     },
     "name": "스키하우스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:22.063001+09:00"
+    "timestamp": "2025-04-20T15:29:30.953054+09:00"
   },
   {
     "data": [
       {
-        "humidity": 69.5,
+        "humidity": 65.1,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 19.6,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.4
+        "temperature": 20.6,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.7
+      },
+      {
+        "humidity": 68.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 20.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.8
       }
     ],
     "location": {
@@ -1117,18 +1621,27 @@
     },
     "name": "설천 베이스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:22.163576+09:00"
+    "timestamp": "2025-04-20T15:29:31.014133+09:00"
   },
   {
     "data": [
       {
-        "humidity": 81.5,
+        "humidity": 77.8,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 18.1,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 17.8,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.7
+      },
+      {
+        "humidity": 80.2,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 18.0,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -1137,18 +1650,27 @@
     },
     "name": "돌체 휴게소",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:22.264666+09:00"
+    "timestamp": "2025-04-20T15:29:31.029879+09:00"
   },
   {
     "data": [
       {
-        "humidity": 79.7,
+        "humidity": 77.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 14.8,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.6
+        "temperature": 15.6,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.7
+      },
+      {
+        "humidity": 78.6,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 15.2,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.8
       }
     ],
     "location": {
@@ -1157,18 +1679,27 @@
     },
     "name": "설천봉 정상",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:22.364833+09:00"
+    "timestamp": "2025-04-20T15:29:31.031836+09:00"
   },
   {
     "data": [
       {
-        "humidity": 91.6,
+        "humidity": 84.2,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 16.7,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.6
+        "temperature": 17.6,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.7
+      },
+      {
+        "humidity": 80.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 18.2,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.9
       }
     ],
     "location": {
@@ -1177,18 +1708,27 @@
     },
     "name": "하이디 하우스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:22.465105+09:00"
+    "timestamp": "2025-04-20T15:29:31.036134+09:00"
   },
   {
     "data": [
       {
-        "humidity": 85.5,
+        "humidity": 80.7,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 17.5,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.6
+        "temperature": 17.7,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.7
+      },
+      {
+        "humidity": 80.3,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 18.1,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.8
       }
     ],
     "location": {
@@ -1197,18 +1737,27 @@
     },
     "name": "만선봉 정상",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:22.566142+09:00"
+    "timestamp": "2025-04-20T15:29:31.433842+09:00"
   },
   {
     "data": [
       {
-        "humidity": 91.8,
+        "humidity": 84.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 16.6,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.5
+        "temperature": 17.5,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.7
+      },
+      {
+        "humidity": 81.2,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 18.1,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.8
       }
     ],
     "location": {
@@ -1217,18 +1766,27 @@
     },
     "name": "스피츠하단 상단",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:22.666234+09:00"
+    "timestamp": "2025-04-20T15:29:31.515731+09:00"
   },
   {
     "data": [
       {
-        "humidity": 49.6,
+        "humidity": 41.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 21.2,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.3
+        "temperature": 21.9,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.2
+      },
+      {
+        "humidity": 36.4,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 22.4,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.0
       }
     ],
     "location": {
@@ -1237,18 +1795,27 @@
     },
     "name": "스키하우스",
     "resort": "서울리조트",
-    "timestamp": "2025-04-20T14:21:16.517860+09:00"
+    "timestamp": "2025-04-20T15:29:24.355168+09:00"
   },
   {
     "data": [
       {
-        "humidity": 48.0,
+        "humidity": 38.5,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 21.9,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.3
+        "temperature": 22.4,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.2
+      },
+      {
+        "humidity": 32.8,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 22.9,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.1
       }
     ],
     "location": {
@@ -1257,17 +1824,26 @@
     },
     "name": "스키하우스",
     "resort": "스타힐 리조트",
-    "timestamp": "2025-04-20T14:21:16.619108+09:00"
+    "timestamp": "2025-04-20T15:29:24.456342+09:00"
   },
   {
     "data": [
       {
-        "humidity": 51.3,
+        "humidity": 43.9,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 21.1,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 23.0,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.4
+      },
+      {
+        "humidity": 41.2,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 22.5,
+        "time": "2025-04-20T15:25:00+09:00",
         "wind_speed": 0.4
       }
     ],
@@ -1277,18 +1853,27 @@
     },
     "name": "스키하우스",
     "resort": "양지파인리조트",
-    "timestamp": "2025-04-20T14:21:17.124382+09:00"
+    "timestamp": "2025-04-20T15:29:24.962240+09:00"
   },
   {
     "data": [
       {
-        "humidity": 46.6,
+        "humidity": 36.4,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 22.2,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 0.9
+        "temperature": 22.7,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 0.4
+      },
+      {
+        "humidity": 31.2,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 23.4,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 0.6
       }
     ],
     "location": {
@@ -1297,18 +1882,27 @@
     },
     "name": "스키하우스",
     "resort": "베어스타운 리조트",
-    "timestamp": "2025-04-20T14:21:17.023862+09:00"
+    "timestamp": "2025-04-20T15:29:24.861024+09:00"
   },
   {
     "data": [
       {
-        "humidity": 71.8,
+        "humidity": 68.6,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 20.2,
-        "time": "2025-04-20T13:20:00+09:00",
-        "wind_speed": 1.5
+        "temperature": 21.7,
+        "time": "2025-04-20T14:25:00+09:00",
+        "wind_speed": 1.4
+      },
+      {
+        "humidity": 69.2,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 20.5,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 1.7
       }
     ],
     "location": {
@@ -1317,18 +1911,27 @@
     },
     "name": "스키하우스",
     "resort": "수안보 이글밸리 스키리조트",
-    "timestamp": "2025-04-20T14:21:19.544987+09:00"
+    "timestamp": "2025-04-20T15:29:27.390764+09:00"
   },
   {
     "data": [
       {
-        "humidity": 62.8,
+        "humidity": 62.3,
         "rainfall": 0.0,
         "snow_cover": 0.0,
         "snowfall_3hr": 0.0,
-        "temperature": 15.6,
-        "time": "2025-04-20T13:20:00+09:00",
+        "temperature": 15.7,
+        "time": "2025-04-20T14:25:00+09:00",
         "wind_speed": 1.9
+      },
+      {
+        "humidity": 61.6,
+        "rainfall": 0.0,
+        "snow_cover": 0.0,
+        "snowfall_3hr": 0.0,
+        "temperature": 15.4,
+        "time": "2025-04-20T15:25:00+09:00",
+        "wind_speed": 2.0
       }
     ],
     "location": {
@@ -1337,7 +1940,7 @@
     },
     "name": "스키하우스",
     "resort": "알프스리조트",
-    "timestamp": "2025-04-20T14:21:21.961804+09:00"
+    "timestamp": "2025-04-20T15:29:30.946072+09:00"
   },
   {
     "data": [
@@ -1346,8 +1949,8 @@
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 20.6,
-        "time": "2025-04-20T14:21:14.018420+09:00",
+        "temperature": 22.5,
+        "time": "2025-04-20T15:29:22.075231+09:00",
         "weather_condition": null,
         "wind_speed": null
       }
@@ -1358,19 +1961,19 @@
     },
     "name": "리조트_베이스",
     "resort": "곤지암리조트",
-    "timestamp": "2025-04-20T14:21:14.018420+09:00"
+    "timestamp": "2025-04-20T15:29:22.075231+09:00"
   },
   {
     "data": [
       {
-        "humidity": 61.0,
+        "humidity": 56.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 19.8,
-        "time": "2025-04-20T14:21:15.140959+09:00",
+        "temperature": 21.0,
+        "time": "2025-04-20T15:29:23.118114+09:00",
         "weather_condition": null,
-        "wind_speed": 0.4
+        "wind_speed": 0.6
       }
     ],
     "location": {
@@ -1379,19 +1982,19 @@
     },
     "name": "리조트_만선베이스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:15.140959+09:00"
+    "timestamp": "2025-04-20T15:29:23.118114+09:00"
   },
   {
     "data": [
       {
-        "humidity": 77.0,
+        "humidity": 75.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 19.2,
-        "time": "2025-04-20T14:21:15.140959+09:00",
+        "temperature": 19.5,
+        "time": "2025-04-20T15:29:23.118114+09:00",
         "weather_condition": null,
-        "wind_speed": 1.9
+        "wind_speed": 2.4
       }
     ],
     "location": {
@@ -1400,19 +2003,19 @@
     },
     "name": "리조트_설천베이스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:15.140959+09:00"
+    "timestamp": "2025-04-20T15:29:23.118114+09:00"
   },
   {
     "data": [
       {
-        "humidity": 84.0,
+        "humidity": 79.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 17.3,
-        "time": "2025-04-20T14:21:15.140959+09:00",
+        "temperature": 18.2,
+        "time": "2025-04-20T15:29:23.118114+09:00",
         "weather_condition": null,
-        "wind_speed": 1.2
+        "wind_speed": 2.1
       }
     ],
     "location": {
@@ -1421,17 +2024,17 @@
     },
     "name": "리조트_미드피크",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:15.140959+09:00"
+    "timestamp": "2025-04-20T15:29:23.118114+09:00"
   },
   {
     "data": [
       {
-        "humidity": 99.0,
+        "humidity": 92.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 15.0,
-        "time": "2025-04-20T14:21:15.140959+09:00",
+        "temperature": 18.0,
+        "time": "2025-04-20T15:29:23.118114+09:00",
         "weather_condition": null,
         "wind_speed": 0.8
       }
@@ -1442,7 +2045,7 @@
     },
     "name": "리조트_만선봉",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:15.140959+09:00"
+    "timestamp": "2025-04-20T15:29:23.118114+09:00"
   },
   {
     "data": [
@@ -1452,7 +2055,7 @@
         "snow_cover": null,
         "snowfall_3hr": null,
         "temperature": 12.5,
-        "time": "2025-04-20T14:21:15.140959+09:00",
+        "time": "2025-04-20T15:29:23.118114+09:00",
         "weather_condition": null,
         "wind_speed": 0.5
       }
@@ -1463,6 +2066,6 @@
     },
     "name": "리조트_설천봉",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-20T14:21:15.140959+09:00"
+    "timestamp": "2025-04-20T15:29:23.118114+09:00"
   }
 ]
