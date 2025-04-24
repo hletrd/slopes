@@ -255,3 +255,11 @@ $ python3 server.py && open http://localhost:3001
 
 * [ ] TypeScript / Next.js로 포팅
   * 최대한 간단하고 가볍게 만들려고 했는데 이미 일이 너무 커져버림
+
+---
+
+### Credits
+
+* [SkiWatch](https://paulkim-xr.github.io/SkiWatch/)와 [ski-resort.kr](https://ski-resort.kr/)의 링크를 참고했습니다.
+* Special thanks to: [Claude 3.7 Sonnet](https://www.anthropic.com/claude/sonnet), [GitHub Copilot](https://github.com/features/copilot), [GPT-4o](https://openai.com/index/hello-gpt-4o/)
+  * 많은 코드를 작성해 주었습니다.
