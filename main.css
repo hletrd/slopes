@@ -830,7 +830,13 @@ h2 {
 }
 a {
   font-weight: 500;
+  color: #78a4d4;
 }
+
+a:hover {
+  color: #8ab5e6;
+}
+
 strong {
   font-weight: 700;
 }
