@@ -14,6 +14,12 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           persist-credentials: true
+          lfs: true
+
+      - name: Setup Git LFS
+        run: |
+          git lfs install
+          git lfs pull
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -36,10 +42,15 @@ jobs:
         run: |
           git config --local user.email "hletrd@users.noreply.github.com"
           git config --local user.name "hletrd-bot"
+          # Ensure Git LFS tracking is set up for the preview image
+          git lfs track "preview.png" || true
+          git add .gitattributes
 
       - name: Commit changes
         run: |
-          git add weather.json preview.png
+          # Add files to LFS if needed
+          git add weather.json 
+          git add preview.png
           git diff --quiet && git diff --staged --quiet || git commit -m "[Bot] Update weather data"
 
       - name: Push changes
