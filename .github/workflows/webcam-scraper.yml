@@ -33,15 +33,25 @@ jobs:
       - name: Run scraper
         run: python .github/scripts/webcam_scraper.py
 
+      - name: Import GPG key
+        run: |
+          echo "${{ secrets.GPG_KEY }}" > private.key
+          gpg --batch --import private.key
+          rm private.key
+          KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d'/' -f2)
+          echo "GPG_KEY_ID=$KEY_ID" >> $GITHUB_ENV
+
       - name: Configure Git
         run: |
           git config --local user.email "hletrd@users.noreply.github.com"
           git config --local user.name "hletrd-bot"
+          git config --local user.signingkey ${{ env.GPG_KEY_ID }}
+          git config --local commit.gpgsign true
 
       - name: Commit changes
         run: |
           git add links.json sitemap.xml videos+ld.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "[Bot] Update webcam links"
+          git diff --quiet && git diff --staged --quiet || git commit -S -m "[Bot] Update webcam links"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
