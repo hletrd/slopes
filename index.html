@@ -1121,29 +1121,6 @@
                   this.innerHTML = '<i class="bi bi-chevron-up"></i>';
                 }
               }
-
-              const resortId = menuItem.getAttribute('data-target');
-              if (resortId) {
-                updateUrlHash(resortId);
-                document.querySelectorAll('.content-section').forEach(section => {
-                  section.classList.remove('active');
-                });
-                const defaultMessage = document.getElementById('default-message');
-                defaultMessage.classList.remove('active');
-                defaultMessage.style.display = 'none';
-
-                const mainSection = document.getElementById(`${resortId}-main`);
-                if (mainSection) {
-                  mainSection.classList.add('active');
-
-                  disposeAllPlayers();
-                  loadAllWebcams(resortId);
-                }
-
-                if (window.innerWidth > 768) {
-                  closeSidebar();
-                }
-              }
             });
           }
 
