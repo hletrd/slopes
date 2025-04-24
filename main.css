@@ -1085,7 +1085,9 @@ input:checked + .toggle-slider:before {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s;
 }
-
+.add-to-home:hover {
+  background-color: #0053aa;
+}
 @media (max-width: 991px) {
   .videos-grid, .favorites-grid {
     grid-template-columns: 1fr;
