@@ -65,6 +65,10 @@
     <i class="bi bi-file-earmark-text"></i>
   </button>
 
+  <button id="settingsButton" class="settings-button">
+    <i class="bi bi-gear"></i>
+  </button>
+
   <div id="infoModal" class="info-modal">
     <div class="info-content">
       <button class="info-close" id="closeInfoModal"><i class="bi bi-x"></i></button>
@@ -92,6 +96,22 @@
           <li>스키장 공식 홈페이지에서 제공하는 영상은 모바일에서 보기가 불편했습니다. 스키를 타면서 노트북을 들고 다니지는 않잖아요?</li>
           <li><a target="_blank" href="https://ski-resort.kr/">ski-resort.kr</a>와 <a target="_blank" href="https://paulkim-xr.github.io/SkiWatch/">SkiWatch</a>도 참고했습니다만, 원하는 영상을 모아볼 수 있는 기능이 없고 비발디파크를 제대로 지원하지 않아 직접 만들었습니다.</li>
         </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="settingsModal" class="settings-modal">
+    <div class="settings-content">
+      <button class="settings-close" id="closeSettingsModal"><i class="bi bi-x"></i></button>
+      <h4 class="settings-title">설정</h4>
+      <div class="settings-options">
+        <div class="setting-item">
+          <label for="autoplayToggle">동영상 자동 재생</label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="autoplayToggle">
+            <span class="toggle-slider"></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -189,6 +209,57 @@
       let weatherData = [];
       let isMobile = window.innerWidth <= 768;
       let favorites = loadFavorites();
+      let settings = loadSettings();
+
+      function loadSettings() {
+        try {
+          const settingsData = localStorage.getItem('webcamSettings');
+          if (settingsData) {
+            return JSON.parse(settingsData);
+          }
+        } catch (e) {
+          console.error('Error loading settings:', e);
+        }
+        
+        // Default settings
+        return {
+          autoplay: !isMobile // Default: enabled on desktop, disabled on mobile
+        };
+      }
+
+      function saveSettings() {
+        try {
+          localStorage.setItem('webcamSettings', JSON.stringify(settings));
+        } catch (e) {
+          console.error('Error saving settings:', e);
+        }
+      }
+
+      const settingsButton = document.getElementById('settingsButton');
+      const settingsModal = document.getElementById('settingsModal');
+      const closeSettingsModal = document.getElementById('closeSettingsModal');
+      const autoplayToggle = document.getElementById('autoplayToggle');
+
+      autoplayToggle.checked = settings.autoplay;
+
+      autoplayToggle.addEventListener('change', function() {
+        settings.autoplay = this.checked;
+        saveSettings();
+      });
+
+      settingsButton.addEventListener('click', function() {
+        settingsModal.style.display = 'block';
+      });
+
+      closeSettingsModal.addEventListener('click', function() {
+        settingsModal.style.display = 'none';
+      });
+
+      window.addEventListener('click', function(event) {
+        if (event.target === settingsModal) {
+          settingsModal.style.display = 'none';
+        }
+      });
 
       function loadFavorites() {
         try {
@@ -1304,7 +1375,8 @@
 
           const youtubeId = getYoutubeId(videoUrl);
           if (youtubeId) {
-            youtubeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1" allowfullscreen></iframe>`;
+            const autoplayParam = settings.autoplay ? '1' : '0';
+            youtubeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${youtubeId}?autoplay=${autoplayParam}&mute=1" allowfullscreen></iframe>`;
             container.appendChild(youtubeContainer);
 
             if (resortId && !isNaN(webcamIndex)) {
@@ -1358,7 +1430,7 @@
             id="webcam-player-${id}"
             class="video-js vjs-theme-forest vjs-big-play-centered"
             controls
-            autoplay
+            ${settings.autoplay ? 'autoplay' : ''}
             muted
             playsinline
           >
