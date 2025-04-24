@@ -856,7 +856,9 @@ b {
 .favorite-card {
   position: relative;
   cursor: grab;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border 0.15s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, top 0.3s ease, left 0.3s ease;
+  transform-origin: center center;
+  will-change: transform, position;
 }
 .favorite-card.dragging {
   opacity: 0.7;
@@ -864,12 +866,14 @@ b {
   transform: scale(0.98);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   z-index: 10;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .favorite-card.drag-over {
   border: 2px solid #0069d9;
   box-shadow: 0 0 10px rgba(0, 105, 217, 0.5);
   position: relative;
   transform: translateY(4px);
+  transition: transform 0.25s cubic-bezier(0.2, 0.6, 0.4, 1);
 }
 .favorite-card.drop-target {
   border: 2px dashed rgba(0, 105, 217, 0.3);
@@ -938,7 +942,7 @@ b {
   background-color: #0069d9;
   color: white;
   border: none;
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
   z-index: 100;
   display: flex;
