@@ -33,8 +33,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --local user.email "01@0101010101.com"
-          git config --local user.name "Jiyong Youn"
+          git config --local user.email "hletrd@users.noreply.github.com"
+          git config --local user.name "hletrd-bot"
 
       - name: Commit changes
         run: |
