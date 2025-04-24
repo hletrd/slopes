@@ -2,7 +2,7 @@ name: 웹캠 링크 업데이트
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */3 * * *'
   workflow_dispatch:
 
 permissions:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   scrape:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, ARM64]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

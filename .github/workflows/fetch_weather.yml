@@ -2,12 +2,12 @@ name: 날씨 업데이트
 
 on:
   schedule:
-    - cron: '3 * * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch:
 
 jobs:
   fetch-data:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, ARM64]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
