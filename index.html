@@ -1257,7 +1257,7 @@
             container.appendChild(vivaldiContainer);
 
             if (resortId && !isNaN(webcamIndex)) {
-              addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 4);
+              addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.VIVALDI);
             }
 
             const captureBtn = document.createElement('button');
@@ -1287,7 +1287,7 @@
           container.appendChild(iframeContainer);
 
           if (resortId && !isNaN(webcamIndex)) {
-            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 2);
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.LINK);
           }
 
           return {
@@ -1307,7 +1307,7 @@
             container.appendChild(youtubeContainer);
 
             if (resortId && !isNaN(webcamIndex)) {
-              addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 3);
+              addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.YOUTUBE);
             }
 
             return {
@@ -1336,7 +1336,7 @@
           container.appendChild(linkContainer);
 
           if (resortId && !isNaN(webcamIndex)) {
-            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 2);
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.LINK);
           }
 
           return {
@@ -1401,7 +1401,7 @@
           }
 
           if (resortId && !isNaN(webcamIndex)) {
-            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType);
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.DEFAULT);
           }
 
           player.on('error', function() {
@@ -1436,7 +1436,7 @@
             container.innerHTML = errorHtml;
 
             if (resortId && !isNaN(webcamIndex)) {
-              addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 1);
+              addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.ERROR);
             }
           });
 
@@ -1446,7 +1446,7 @@
           container.innerHTML = '<div class="error-message">비디오 플레이어를 생성하는 중 오류가 발생했습니다.</div>';
 
           if (resortId && !isNaN(webcamIndex)) {
-            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, 1);
+            addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.ERROR);
           }
 
           return null;
@@ -1471,7 +1471,15 @@
         }
       }
 
-      function addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, type = 0) {
+      const BookmarkButtonType = {
+        ERROR: 1,
+        LINK: 2,
+        YOUTUBE: 3,
+        VIVALDI: 4,
+        DEFAULT: 0
+      };
+
+      function addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, type = BookmarkButtonType.DEFAULT) {
         if (typeof resortId === 'string' && resortId.includes('favorite-player')) {
           return;
         }
@@ -1498,13 +1506,13 @@
           );
         });
 
-        if (type === 1) {
+        if (type === BookmarkButtonType.ERROR) {
           bookmarkBtn.classList.add('bookmark-button-error');
-        } else if (type === 2) {
+        } else if (type === BookmarkButtonType.LINK) {
           bookmarkBtn.classList.add('bookmark-button-link');
-        } else if (type === 3) {
+        } else if (type === BookmarkButtonType.YOUTUBE) {
           bookmarkBtn.classList.add('bookmark-button-youtube');
-        } else if (type === 4) {
+        } else if (type === BookmarkButtonType.VIVALDI) {
           bookmarkBtn.classList.add('bookmark-button-vivaldi');
         }
 
