@@ -221,7 +221,6 @@
           console.error('Error loading settings:', e);
         }
         
-        // Default settings
         return {
           autoplay: !isMobile // Default: enabled on desktop, disabled on mobile
         };
@@ -258,6 +257,48 @@
       window.addEventListener('click', function(event) {
         if (event.target === settingsModal) {
           settingsModal.style.display = 'none';
+        }
+      });
+
+      const infoButton = document.getElementById('infoButton');
+      const infoModal = document.getElementById('infoModal');
+      const closeInfoModal = document.getElementById('closeInfoModal');
+
+      infoButton.addEventListener('click', function() {
+        infoModal.style.display = 'flex';
+      });
+
+      closeInfoModal.addEventListener('click', function() {
+        infoModal.style.display = 'none';
+      });
+
+      window.addEventListener('click', function(event) {
+        if (event.target === infoModal) {
+          infoModal.style.display = 'none';
+        }
+      });
+
+      const addToHomeButton = document.getElementById('addToHomeButton');
+      const installationModal = document.getElementById('installationModal');
+      const closeModal = document.getElementById('closeModal');
+
+      addToHomeButton.addEventListener('click', function() {
+        installationModal.style.display = 'block';
+        setTimeout(function() {
+          installationModal.classList.add('active');
+        }, 10);
+      });
+
+      closeModal.addEventListener('click', function() {
+        installationModal.classList.remove('active');
+        setTimeout(function() {
+          installationModal.style.display = 'none';
+        }, 400);
+      });
+
+      installationModal.addEventListener('click', function(event) {
+        if (event.target === installationModal) {
+          closeModal.click();
         }
       });
 

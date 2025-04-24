@@ -555,6 +555,9 @@ h2 {
   z-index: 1000;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: fadeIn 0.3s forwards;
 }
 .info-content {
   background-color: #222;
@@ -566,6 +569,7 @@ h2 {
   overflow-y: auto;
   position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s forwards;
 }
 .info-close {
   position: absolute;
@@ -640,6 +644,11 @@ h2 {
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
   padding-top: 20px;
   text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.0);
+}
+.installation-modal.active {
+  transform: translateY(0);
 }
 .installation-modal h4 {
   font-size: 1.2rem;
