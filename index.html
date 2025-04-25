@@ -752,7 +752,7 @@
 
         const url = new URL(window.location);
         url.hash = newHash;
-        history.replaceState(null, '', url);
+        history.pushState(null, '', url);
         updatePageTitle(resort, webcam);
       }
 
