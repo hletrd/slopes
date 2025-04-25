@@ -1949,8 +1949,8 @@
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 4.4,
-        "time": "2025-04-26T05:53:44.694258+09:00",
+        "temperature": 3.3,
+        "time": "2025-04-26T06:13:08.275658+09:00",
         "weather_condition": null,
         "wind_speed": null
       }
@@ -1961,17 +1961,17 @@
     },
     "name": "리조트_베이스",
     "resort": "곤지암리조트",
-    "timestamp": "2025-04-26T05:53:44.694258+09:00"
+    "timestamp": "2025-04-26T06:13:08.275658+09:00"
   },
   {
     "data": [
       {
-        "humidity": 14.0,
+        "humidity": 15.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 6.8,
-        "time": "2025-04-26T05:53:44.743462+09:00",
+        "temperature": 6.0,
+        "time": "2025-04-26T06:13:08.324307+09:00",
         "weather_condition": null,
         "wind_speed": 0.4
       }
@@ -1982,19 +1982,19 @@
     },
     "name": "리조트_만선베이스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-26T05:53:44.743462+09:00"
+    "timestamp": "2025-04-26T06:13:08.324307+09:00"
   },
   {
     "data": [
       {
-        "humidity": 37.0,
+        "humidity": 41.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 4.8,
-        "time": "2025-04-26T05:53:44.743462+09:00",
+        "temperature": 4.3,
+        "time": "2025-04-26T06:13:08.324307+09:00",
         "weather_condition": null,
-        "wind_speed": 1.6
+        "wind_speed": 1.5
       }
     ],
     "location": {
@@ -2003,19 +2003,19 @@
     },
     "name": "리조트_설천베이스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-26T05:53:44.743462+09:00"
+    "timestamp": "2025-04-26T06:13:08.324307+09:00"
   },
   {
     "data": [
       {
-        "humidity": 25.0,
+        "humidity": 23.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 4.7,
-        "time": "2025-04-26T05:53:44.743462+09:00",
+        "temperature": 5.0,
+        "time": "2025-04-26T06:13:08.324307+09:00",
         "weather_condition": null,
-        "wind_speed": 1.4
+        "wind_speed": 1.7
       }
     ],
     "location": {
@@ -2024,19 +2024,19 @@
     },
     "name": "리조트_미드피크",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-26T05:53:44.743462+09:00"
+    "timestamp": "2025-04-26T06:13:08.324307+09:00"
   },
   {
     "data": [
       {
-        "humidity": 34.0,
+        "humidity": 30.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 3.1,
-        "time": "2025-04-26T05:53:44.743462+09:00",
+        "temperature": 3.5,
+        "time": "2025-04-26T06:13:08.324307+09:00",
         "weather_condition": null,
-        "wind_speed": 2.3
+        "wind_speed": 2.1
       }
     ],
     "location": {
@@ -2045,19 +2045,19 @@
     },
     "name": "리조트_만선봉",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-26T05:53:44.743462+09:00"
+    "timestamp": "2025-04-26T06:13:08.324307+09:00"
   },
   {
     "data": [
       {
-        "humidity": 31.0,
+        "humidity": 28.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 0.7,
-        "time": "2025-04-26T05:53:44.743462+09:00",
+        "temperature": 1.0,
+        "time": "2025-04-26T06:13:08.324307+09:00",
         "weather_condition": null,
-        "wind_speed": 3.5
+        "wind_speed": 4.0
       }
     ],
     "location": {
@@ -2066,6 +2066,6 @@
     },
     "name": "리조트_설천봉",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-26T05:53:44.743462+09:00"
+    "timestamp": "2025-04-26T06:13:08.324307+09:00"
   }
 ]
