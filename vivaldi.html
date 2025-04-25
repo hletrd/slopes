@@ -44,11 +44,41 @@
     #videotable {
       border: none !important;
     }
+
+    .play-button {
+      position: absolute;
+      z-index: 20;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: background-color 0.3s ease;
+    }
+    .play-button:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    .play-button svg {
+      width: 88px;
+      height: 88px;
+      fill: white;
+    }
   </style>
 </head>
 <body>
   <div id="player-container">
     <div id="vivaldi-player" class="vivaldi-container"></div>
+    <div id="play-button" class="play-button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="48px" height="48px">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </div>
   </div>
 
   <script>
@@ -127,7 +157,8 @@
       const urlParams = new URLSearchParams(queryString);
       return {
         channel: urlParams.get('channel'),
-        serial: urlParams.get('serial')
+        serial: urlParams.get('serial'),
+        autoplay: urlParams.get('autoplay') === 'true',
       };
     }
 
@@ -135,6 +166,7 @@
       const params = getUrlParams();
       if (params.channel && params.serial) {
         const vivaldiPlayer = new Vivaldi('vivaldi-player');
+        const playButton = document.getElementById('play-button');
         let retryCount = 0;
         const maxRetries = 5;
 
@@ -155,7 +187,15 @@
           }
         }
 
-        setTimeout(tryInitialize, Math.random() * 2000 + 1000);
+        if (params.autoplay) {
+          playButton.style.display = 'none';
+          setTimeout(tryInitialize, Math.random() * 2000 + 1000);
+        } else {
+          playButton.addEventListener('click', function() {
+            playButton.style.display = 'none';
+            setTimeout(tryInitialize, Math.random() * 2000 + 1000);
+          });
+        }
       } else {
         document.getElementById('player-container').innerHTML =
           '<div style="color: white; padding: 20px; text-align: center;">필요한 파라미터가 없습니다. (channel, serial)</div>';

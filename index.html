@@ -752,7 +752,7 @@
 
         const url = new URL(window.location);
         url.hash = newHash;
-        history.replaceState(null, '', url);
+        history.pushState(null, '', url);
         updatePageTitle(resort, webcam);
       }
 
@@ -1343,7 +1343,7 @@
             const channel = vivaldiParams[0];
             const serial = vivaldiParams[1];
 
-            vivaldiContainer.innerHTML = `<iframe src="vivaldi.html?channel=${channel}&serial=${serial}" allowfullscreen></iframe>`;
+            vivaldiContainer.innerHTML = `<iframe src="vivaldi.html?channel=${channel}&serial=${serial}&autoplay=${settings.autoplay}" allowfullscreen></iframe>`;
             container.appendChild(vivaldiContainer);
 
             if (resortId && !isNaN(webcamIndex)) {
