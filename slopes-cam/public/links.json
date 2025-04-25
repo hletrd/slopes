@@ -1,0 +1,1204 @@
+[
+  {
+    "coordinates": [
+      {
+        "latitude": 37.649252,
+        "longitude": 127.257067,
+        "name": "스키하우스"
+      }
+    ],
+    "hide_preview": true,
+    "id": "seoul",
+    "name": "서울리조트"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.662544,
+        "longitude": 127.270042,
+        "name": "스키하우스"
+      }
+    ],
+    "hide_preview": true,
+    "id": "starhill",
+    "name": "스타힐 리조트"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.336926,
+        "longitude": 127.293508,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.328921,
+        "longitude": 127.281187,
+        "name": "정상"
+      },
+      {
+        "latitude": 37.329382,
+        "longitude": 127.287927,
+        "name": "스톰 정상"
+      }
+    ],
+    "fetch": false,
+    "id": "konjiam",
+    "links": [
+      {
+        "link": "https://m.konjiamresort.co.kr/ski/skiLveCam.dev",
+        "name": "정상 휴게소",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam01.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://m.konjiamresort.co.kr/ski/skiLveCam.dev",
+        "name": "정상부 슬로프 (씽큐, 그램)",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam02.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://m.konjiamresort.co.kr/ski/skiLveCam.dev",
+        "name": "중간 슬로프 (와이낫 상단)",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam05.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://m.konjiamresort.co.kr/ski/skiLveCam.dev",
+        "name": "초중급 베이스 (휘센)",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam03.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://m.konjiamresort.co.kr/ski/skiLveCam.dev",
+        "name": "중상급 베이스 (와이낫, CNP)",
+        "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam04.stream/playlist.m3u8"
+      }
+    ],
+    "name": "곤지암리조트"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.796762,
+        "longitude": 127.247262,
+        "name": "스키하우스"
+      }
+    ],
+    "hide_preview": true,
+    "id": "bearstown",
+    "name": "베어스타운 리조트"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.211926,
+        "longitude": 127.295119,
+        "name": "스키하우스"
+      }
+    ],
+    "hide_preview": true,
+    "id": "pine",
+    "name": "양지파인리조트"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.217222,
+        "longitude": 127.344901,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.209838,
+        "longitude": 127.343431,
+        "name": "뉴오렌지 정상"
+      },
+      {
+        "latitude": 37.211455,
+        "longitude": 127.339681,
+        "name": "블루 정상"
+      },
+      {
+        "latitude": 37.213011,
+        "longitude": 127.339173,
+        "name": "실버 정상"
+      }
+    ],
+    "fetch": false,
+    "id": "jisan",
+    "links": [
+      {
+        "link": "https://www.jisanresort.co.kr/m/ski/slopes/webcam.asp",
+        "name": "레몬 탑승장",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan1.m3u8"
+      },
+      {
+        "link": "https://www.jisanresort.co.kr/m/ski/slopes/webcam.asp",
+        "name": "오렌지 / 뉴오렌지 탑승장",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan2.m3u8"
+      },
+      {
+        "link": "https://www.jisanresort.co.kr/m/ski/slopes/webcam.asp",
+        "name": "5번 / 6번 슬로프",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan3.m3u8"
+      },
+      {
+        "link": "https://www.jisanresort.co.kr/m/ski/slopes/webcam.asp",
+        "name": "블루 탑승장",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan4.m3u8"
+      },
+      {
+        "link": "https://www.jisanresort.co.kr/m/ski/slopes/webcam.asp",
+        "name": "실버 탑승장",
+        "video": "https://ant.livecity.co.kr:5443/jisancam/streams/jisan5.m3u8"
+      }
+    ],
+    "name": "지산 포레스트 리조트",
+    "status": "https://www.jisanresort.co.kr/w/ski/slopes/info.asp"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.820268,
+        "longitude": 127.590066,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.815248,
+        "longitude": 127.58271,
+        "name": "정상"
+      },
+      {
+        "latitude": 37.81424,
+        "longitude": 127.587458,
+        "name": "래빗 상단"
+      },
+      {
+        "latitude": 37.818119,
+        "longitude": 127.584561,
+        "name": "레퍼드 상단"
+      }
+    ],
+    "id": "elysian",
+    "links": [
+      {
+        "name": "유튜브 채널",
+        "video": "https://www.youtube.com/@11-lf8zw/streams",
+        "video_type": "link"
+      }
+    ],
+    "name": "엘리시안 강촌",
+    "status": "https://www.elysian.co.kr/gangchon/ski/ski_slope.asp"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.64481,
+        "longitude": 127.68212,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.63745,
+        "longitude": 127.690009,
+        "name": "정상"
+      },
+      {
+        "latitude": 37.64246,
+        "longitude": 127.692647,
+        "name": "재즈 상단"
+      },
+      {
+        "latitude": 37.639005,
+        "longitude": 127.684443,
+        "name": "힙합 상단"
+      }
+    ],
+    "fetch": false,
+    "id": "vivaldi",
+    "links": [
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "슬로프 전경",
+        "video": "8:TW0014A15451",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "발라드 상단",
+        "video": "11:TD0314A17496",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "발라드 하단",
+        "video": "2:TW0014A15451",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "재즈 상단",
+        "video": "4:XU0121A37907",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "재즈 하단",
+        "video": "1:TW0014A15451",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "테크노 상단",
+        "video": "2:XU0121A37904",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "테크노 하단",
+        "video": "5:XU0121A37904",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "블루스",
+        "video": "4:TW0014A15451",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "클래식",
+        "video": "10:TD0314A17496",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "레게",
+        "video": "10:TD0314A17496",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "펑키 상단",
+        "video": "5:TW0014A15451",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "펑키 하단",
+        "video": "8:XU0121A37904",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "힙합",
+        "video": "6:TW0014A15451",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "스키월드 정상",
+        "video": "9:TW0014A15451",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "스노위랜드1",
+        "video": "16:TD0314A17496",
+        "video_type": "vivaldi"
+      },
+      {
+        "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
+        "name": "스노위랜드2",
+        "video": "12:TD0314A17496",
+        "video_type": "vivaldi"
+      }
+    ],
+    "name": "비발디파크",
+    "status": "https://www.sonohotelsresorts.com/skiboard/status"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.407486,
+        "longitude": 127.807955,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.402345,
+        "longitude": 127.819064,
+        "name": "정상"
+      },
+      {
+        "latitude": 37.402541,
+        "longitude": 127.812239,
+        "name": "버드 정상"
+      },
+      {
+        "latitude": 37.408135,
+        "longitude": 127.814674,
+        "name": "플라워 휴게소"
+      }
+    ],
+    "fetch": false,
+    "id": "oakvalley",
+    "links": [
+      {
+        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
+        "name": "베이스",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch2.stream/chunklist.m3u8"
+      },
+      {
+        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
+        "name": "I 슬로프",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch9.stream/chunklist.m3u8"
+      },
+      {
+        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
+        "name": "G 슬로프 하단",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch7.stream/chunklist.m3u8"
+      },
+      {
+        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
+        "name": "F 슬로프 상단",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch6.stream/chunklist.m3u8"
+      },
+      {
+        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
+        "name": "플라워 휴게소",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch5.stream/chunklist.m3u8"
+      }
+    ],
+    "name": "오크밸리"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.490504,
+        "longitude": 128.249569,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.480179,
+        "longitude": 128.243631,
+        "name": "정상"
+      },
+      {
+        "latitude": 37.481028,
+        "longitude": 128.248959,
+        "name": "뉴브라보 정상"
+      }
+    ],
+    "fetch": false,
+    "id": "wellihilli",
+    "links": [
+      {
+        "link": "https://m.wellihillipark.com/customer/webcam",
+        "name": "알파",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam02.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://m.wellihillipark.com/customer/webcam",
+        "name": "베이스",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam03.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://m.wellihillipark.com/customer/webcam",
+        "name": "슬로프 광장 / 전경",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam04.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://m.wellihillipark.com/customer/webcam",
+        "name": "정상 광장",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam05.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://m.wellihillipark.com/customer/webcam",
+        "name": "슬로프 전경",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam06.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://m.wellihillipark.com/customer/webcam",
+        "name": "워터플래닛",
+        "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam07.stream/playlist.m3u8"
+      }
+    ],
+    "name": "웰리힐리파크",
+    "status": "https://m.wellihillipark.com/snowpark/schedule/open-slope"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.583297,
+        "longitude": 128.325111,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.573736,
+        "longitude": 128.322129,
+        "name": "불새마루"
+      },
+      {
+        "latitude": 37.57409,
+        "longitude": 128.310128,
+        "name": "몽블랑 정상"
+      },
+      {
+        "latitude": 37.581563,
+        "longitude": 128.312577,
+        "name": "스패로우 상단"
+      }
+    ],
+    "fetch": false,
+    "id": "phoenix",
+    "links": [
+      {
+        "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
+        "name": "호크 / 스패로우",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/yh_02.m3u8"
+      },
+      {
+        "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
+        "name": "도도",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/sp_01.m3u8"
+      },
+      {
+        "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
+        "name": "불새마루",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/ht_01.m3u8"
+      },
+      {
+        "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
+        "name": "베이스",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/bc_02.m3u8"
+      },
+      {
+        "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
+        "name": "펭귄",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/bc_01.m3u8"
+      },
+      {
+        "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
+        "name": "스노우 빌리지",
+        "video": "https://streaming.phoenixhnr.co.kr/hls/yh_01.m3u8"
+      }
+    ],
+    "name": "휘닉스 파크",
+    "status": "https://phoenixhnr.co.kr/static/pyeongchang/snowpark/slope-lift?tabId=2"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 36.849602,
+        "longitude": 127.974005,
+        "name": "스키하우스"
+      }
+    ],
+    "hide_preview": true,
+    "id": "eaglevalley",
+    "name": "수안보 이글밸리 스키리조트"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.656947,
+        "longitude": 128.672346,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.650037,
+        "longitude": 128.673341,
+        "name": "정상"
+      },
+      {
+        "latitude": 37.651708,
+        "longitude": 128.668917,
+        "name": "알파 상단"
+      }
+    ],
+    "id": "alpensia",
+    "links": [
+      {
+        "name": "알펜시아 리조트 라이브캠",
+        "video": "https://www.youtube.com/watch?v=fStEQyg7SWc",
+        "video_type": "youtube"
+      }
+    ],
+    "name": "알펜시아 리조트",
+    "status": "https://m.alpensia.com/ski/slope-now.do?lang=ko"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.644475,
+        "longitude": 128.679931,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.622619,
+        "longitude": 128.663407,
+        "name": "레인보우 베이스"
+      },
+      {
+        "latitude": 37.611407,
+        "longitude": 128.671577,
+        "name": "레인보우 정상"
+      },
+      {
+        "latitude": 37.633116,
+        "longitude": 128.675128,
+        "name": "실버 정상"
+      },
+      {
+        "latitude": 37.636661,
+        "longitude": 128.673182,
+        "name": "메가그린 상단"
+      },
+      {
+        "latitude": 37.636119,
+        "longitude": 128.683102,
+        "name": "레드 정상"
+      },
+      {
+        "latitude": 37.631921,
+        "longitude": 128.685477,
+        "name": "뉴골드 상단"
+      },
+      {
+        "latitude": 37.638654,
+        "longitude": 128.686773,
+        "name": "골드 베이스"
+      },
+      {
+        "latitude": 37.623744,
+        "longitude": 128.686841,
+        "name": "골드 정상"
+      }
+    ],
+    "fetch": false,
+    "id": "mona",
+    "links": [
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "발왕산 氣 스카이워크",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam14.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "발왕산 천년주목숲길",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam15.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "베이스 전경 / 레드 슬로프",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam10.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "모나 용평 진입로",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam05.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "옐로우 슬로프",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam03.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "핑크 슬로프",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam07.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "메가그린 슬로프",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam01.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "골드 베이스",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam06.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "골드 정상",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam04.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "레인보우 전경",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam08.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "레인보우 파라다이스 입구",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam09.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
+        "name": "피크 아일랜드",
+        "video": "https://live.yongpyong.co.kr/Ycam1/cam11.stream/playlist.m3u8"
+      }
+    ],
+    "name": "모나 용평",
+    "status": "https://www.yongpyong.co.kr/kor/skiNboard/slope/openStatusBoard.do"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.207905,
+        "longitude": 128.825829,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.194318,
+        "longitude": 128.81989,
+        "name": "마운틴허브"
+      },
+      {
+        "latitude": 37.183029,
+        "longitude": 128.817148,
+        "name": "마운틴탑"
+      },
+      {
+        "latitude": 37.204624,
+        "longitude": 128.839496,
+        "name": "밸리 스키하우스"
+      },
+      {
+        "latitude": 37.190277,
+        "longitude": 128.827839,
+        "name": "밸리허브"
+      },
+      {
+        "latitude": 37.178382,
+        "longitude": 128.830052,
+        "name": "밸리탑"
+      }
+    ],
+    "id": "high1",
+    "links": [
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=1",
+        "name": "하이원탑 (제우스1 입구)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch1.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=2",
+        "name": "하이원탑 (헤라2 입구)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch2.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=3",
+        "name": "하이원탑 (아폴로1 입구)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch3.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=4",
+        "name": "마운틴허브 (스노우월드 입구)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch4.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=5",
+        "name": "마운틴허브 (아폴로3 입구)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch5.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=6",
+        "name": "마운틴허브 (아테나2 입구)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch6.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=7",
+        "name": "마운틴 베이스 (아테나 리프트)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch7.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=8",
+        "name": "아테나2 하단",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch8.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=9",
+        "name": "밸리탑 (빅토리아1 입구)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch9.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=10",
+        "name": "제우스2 합류구간",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch10.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=11",
+        "name": "밸리허브 (헤라 리프트 입구)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch11.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=12",
+        "name": "밸리허브 (아폴로3 합류)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch12.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=13",
+        "name": "밸리허브 (제우스3)",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch13.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=14",
+        "name": "제우스3 중단",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch14.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=15",
+        "name": "아폴로4 중단",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch15.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=16",
+        "name": "아폴로 베이스",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch16.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=17",
+        "name": "제우스3 하단",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch17.stream/playlist.m3u8"
+      },
+      {
+        "link": "https://www.high1.com/webcam/pop_webcam.do?ch=18",
+        "name": "밸리 베이스",
+        "video": "http://59.30.12.195:1935/live/_definst_/ch18.stream/playlist.m3u8"
+      }
+    ],
+    "name": "하이원 리조트",
+    "status": "https://www.high1.com/ski/slopeView.do?key=748&mode=p"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.177413,
+        "longitude": 128.947762,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.171071,
+        "longitude": 128.947326,
+        "name": "글로리 정상 (콘도)"
+      },
+      {
+        "latitude": 37.17106,
+        "longitude": 128.938784,
+        "name": "버금마루"
+      },
+      {
+        "latitude": 37.167622,
+        "longitude": 128.926934,
+        "name": "으뜸마루"
+      },
+      {
+        "latitude": 37.1763619,
+        "longitude": 128.930526,
+        "name": "드림 상단"
+      }
+    ],
+    "id": "o2resort",
+    "links": [
+      {
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=0",
+        "name": "스키하우스",
+        "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam0.m3u8"
+      },
+      {
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=1",
+        "name": "오렌지",
+        "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam1.m3u8"
+      },
+      {
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=2",
+        "name": "버금마루",
+        "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam2.m3u8"
+      },
+      {
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3",
+        "name": "으뜸마루",
+        "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam3.m3u8"
+      }
+    ],
+    "name": "오투리조트",
+    "status": "https://www.o2resort.com/SKI/slopeOpen.jsp"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 38.264809,
+        "longitude": 128.378727,
+        "name": "스키하우스"
+      }
+    ],
+    "hide_preview": true,
+    "id": "alps",
+    "name": "알프스리조트"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 35.890715,
+        "longitude": 127.736869,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 35.888912,
+        "longitude": 127.744951,
+        "name": "설천 베이스"
+      },
+      {
+        "latitude": 35.875487,
+        "longitude": 127.753471,
+        "name": "돌체 휴게소"
+      },
+      {
+        "latitude": 35.864571,
+        "longitude": 127.744477,
+        "name": "설천봉 정상"
+      },
+      {
+        "latitude": 35.882124,
+        "longitude": 127.730632,
+        "name": "하이디 하우스"
+      },
+      {
+        "latitude": 35.876809,
+        "longitude": 127.735373,
+        "name": "만선봉 정상"
+      },
+      {
+        "latitude": 35.881938,
+        "longitude": 127.744772,
+        "name": "스피츠하단 상단"
+      }
+    ],
+    "id": "muju",
+    "links": [
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=07",
+        "name": "설천봉 정상",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam07.stream/playlist.m3u8?e=1745627684&h=1df08766d4c5b87987d6af705a749c7c"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=06",
+        "name": "설천 상단 슬로프",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam06.stream/playlist.m3u8?e=1745627684&h=3c346c95a312d7f5f5019c08669148f0"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=08",
+        "name": "모차르트, 미뉴에트",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam08.stream/playlist.m3u8?e=1745627684&h=0795f081c4fdb50a9a46547dc8fb4ff7"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=09",
+        "name": "폴카",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam09.stream/playlist.m3u8?e=1745627684&h=a773e1dab1e41e26ea226a66a5c2bd84"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=10",
+        "name": "실크로드, 미뉴에트 하단",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam10.stream/playlist.m3u8?e=1745627684&h=96bc5910ab707cf3a869cb920b9cbf81"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=02",
+        "name": "만선봉 정상",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam02.stream/playlist.m3u8?e=1745627684&h=0879be3a1999afe3620028c4d959e504"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=03",
+        "name": "하이디하우스",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam03.stream/playlist.m3u8?e=1745627684&h=07667c853012dd9a3046a0b325347159"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=04",
+        "name": "서역기행, 썬다운",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam04.stream/playlist.m3u8?e=1745627684&h=8707772ee1b0bf63a24d6b3a9f2122d6"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=11",
+        "name": "커넥션",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam11.stream/playlist.m3u8?e=1745627684&h=8980eea5aacad5fd2ab9c408f8a4c680"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=05",
+        "name": "설천하우스",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam05.stream/playlist.m3u8?e=1745627684&h=dfef7ac208a1b36f51a4f1f166f90749"
+      },
+      {
+        "link": "http://www.mdysresort.com/guide/webcam_popup_jh.asp?cam_num=01",
+        "name": "만선하우스",
+        "video": "http://muju.cache.cdn.cloudn.co.kr/mujuresort/_definst_/cam01.stream/playlist.m3u8?e=1745627684&h=82fcf82a867d1317986c8eee102664de"
+      }
+    ],
+    "name": "무주 덕유산 리조트",
+    "status": "https://www.mdysresort.com/convert_main_slope_221207.asp"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 35.42875,
+        "longitude": 128.984464,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 35.419484,
+        "longitude": 128.983221,
+        "name": "정상"
+      },
+      {
+        "latitude": 35.419484,
+        "longitude": 128.98871,
+        "name": "에덴리프트 상단"
+      }
+    ],
+    "id": "edenvalley",
+    "links": [
+      {
+        "link": "https://rtsp.me/embed/2kTsKt35/",
+        "name": "베이직",
+        "video": "https://sn.rtsp.me/uQ8_MbqUy0lGMnaYUBHIpQ/1745598854/hls/2kTsKt35.m3u8?ip=130.162.144.168"
+      },
+      {
+        "link": "https://rtsp.me/embed/ry9aTdQh",
+        "name": "슬로프 광장",
+        "video": "https://sn.rtsp.me/Bfslg7Y39mqZDxPoyh6t4Q/1745176765/hls/ry9aTdQh.m3u8?ip=20.42.17.61"
+      }
+    ],
+    "name": "에덴밸리리조트"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 37.474014,
+        "longitude": 128.60972,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 37.444482,
+        "longitude": 128.597952,
+        "name": "정상"
+      }
+    ],
+    "hide_preview": true,
+    "id": "alpine",
+    "name": "정선 알파인 경기장"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 39.061944,
+        "longitude": 127.250833,
+        "name": "스키하우스"
+      },
+      {
+        "latitude": 39.044755,
+        "longitude": 127.236129,
+        "name": "정상"
+      }
+    ],
+    "fetch_weather": false,
+    "hide_preview": true,
+    "id": "masikryong",
+    "name": "마식령 스키장"
+  },
+  {
+    "coordinates": [
+      {
+        "latitude": 39.198056,
+        "longitude": 126.831111,
+        "name": "스키하우스"
+      }
+    ],
+    "fetch_weather": false,
+    "hide_preview": true,
+    "id": "yangdok",
+    "name": "양덕온천문화휴양지"
+  },
+  {
+    "id": "hokkaido",
+    "links": [
+      {
+        "name": "니세코 빌리지 곤돌라 베이스",
+        "video": "https://www.youtube.com/watch?v=w_173GPVnwA",
+        "video_type": "youtube"
+      },
+      {
+        "name": "니세코 빌리지 그린 리프",
+        "video": "https://www.youtube.com/watch?v=T8kCz-CoybY",
+        "video_type": "youtube"
+      },
+      {
+        "name": "니세코 하나조노 베이스",
+        "video": "https://www.youtube.com/watch?v=1ksmiy6EsDo",
+        "video_type": "youtube"
+      },
+      {
+        "name": "키로로 베이스",
+        "video": "https://www.youtube.com/watch?v=9HZKY9PtaWI",
+        "video_type": "youtube"
+      }
+    ],
+    "name": "홋카이도"
+  },
+  {
+    "id": "chubu",
+    "links": [
+      {
+        "name": "시가코겐 구마노유 베이스",
+        "video": "https://www.youtube.com/live/n4G4iQTme1g",
+        "video_type": "youtube"
+      },
+      {
+        "name": "시가코겐 야마노에키 베이스",
+        "video": "https://www.youtube.com/watch?v=SZAawoS2wUE",
+        "video_type": "youtube"
+      },
+      {
+        "name": "하쿠바 하포네 우사기다이라",
+        "video": "https://www.youtube.com/watch?v=jJFawjEWCr0",
+        "video_type": "youtube"
+      },
+      {
+        "name": "하쿠바 하포네 파노라마",
+        "video": "https://www.youtube.com/watch?v=uz5OuB-evfk",
+        "video_type": "youtube"
+      },
+      {
+        "name": "하쿠바 하포네 시라카바 하단",
+        "video": "https://www.youtube.com/watch?v=hMY3VnL4Pyk",
+        "video_type": "youtube"
+      },
+      {
+        "name": "하쿠바 하포네 제3주차장",
+        "video": "https://www.youtube.com/watch?v=BHo4tHKIDow",
+        "video_type": "youtube"
+      },
+      {
+        "name": "야치호코겐 2리프트",
+        "video": "https://www.youtube.com/watch?v=FSnSF3OIHlU",
+        "video_type": "youtube"
+      },
+      {
+        "name": "야치호코겐 4코스",
+        "video": "https://www.youtube.com/watch?v=03BYfh9kP24",
+        "video_type": "youtube"
+      },
+      {
+        "name": "가루이자와 프린스 호텔 베이스",
+        "video": "https://www.youtube.com/watch?v=fqgXBt2ZzpE",
+        "video_type": "youtube"
+      },
+      {
+        "name": "아라이 리조트 오케나시산 정상",
+        "video": "https://www.youtube.com/watch?v=nkIkBvvz1PA",
+        "video_type": "youtube"
+      },
+      {
+        "name": "아라이 리조트 비프리, 앙코르 상단",
+        "video": "https://www.youtube.com/watch?v=OGFpbQqTHq0",
+        "video_type": "youtube"
+      },
+      {
+        "name": "아라이 리조트 젠다나 스테이션",
+        "video": "https://www.youtube.com/watch?v=UxKsXYcMehQ",
+        "video_type": "youtube"
+      },
+      {
+        "name": "아라이 리조트 롯폰기 스테이션",
+        "video": "https://www.youtube.com/watch?v=kQskivhwAwE",
+        "video_type": "youtube"
+      },
+      {
+        "name": "다테야마 무로도",
+        "video": "https://www.youtube.com/watch?v=rWO9PXZwahM",
+        "video_type": "youtube"
+      },
+      {
+        "name": "샤르만 화타 센터 하우스",
+        "video": "https://www.youtube.com/watch?v=0avlmh_aUdY",
+        "video_type": "youtube"
+      },
+      {
+        "name": "나스파 뉴 오타니 베이스",
+        "video": "https://www.youtube.com/watch?v=zH4d4dZCB7k",
+        "video_type": "youtube"
+      }
+    ],
+    "name": "주부"
+  },
+  {
+    "id": "kanto",
+    "links": [
+      {
+        "name": "마루누마코겐 바이올렛 코스 1500m",
+        "video": "https://www.youtube.com/watch?v=cqvEOhOzN2o",
+        "video_type": "youtube"
+      },
+      {
+        "name": "마루누마코겐 옐로우 곤돌라 1400m",
+        "video": "https://www.youtube.com/watch?v=DUS5L5w3t3U",
+        "video_type": "youtube"
+      },
+      {
+        "name": "마루누마코겐 옐로우 코스 1400m",
+        "video": "https://www.youtube.com/watch?v=Kg1Q-47xGJQ",
+        "video_type": "youtube"
+      },
+      {
+        "name": "오제이와쿠라 로맨스 / 챔피언 A",
+        "video": "https://www.youtube.com/watch?v=kS5SbE6rpFY",
+        "video_type": "youtube"
+      },
+      {
+        "name": "오제이와쿠라 국제여자 / 리젠 / 엑스퍼트",
+        "video": "https://www.youtube.com/watch?v=nXojsEGVTyg",
+        "video_type": "youtube"
+      },
+      {
+        "name": "탐바라 전경",
+        "video": "https://www.youtube.com/watch?v=cjxf_GCBO3s",
+        "video_type": "youtube"
+      },
+      {
+        "name": "쿠사츠 온센 텐구야마 베이스",
+        "video": "https://www.youtube.com/watch?v=42FEEwaiN5w",
+        "video_type": "youtube"
+      }
+    ],
+    "name": "간토"
+  },
+  {
+    "id": "tohoku",
+    "links": [
+      {
+        "name": "자오온센 JUPEER 슬로프",
+        "video": "https://www.youtube.com/watch?v=D4YiBKIsZVA",
+        "video_type": "youtube"
+      },
+      {
+        "name": "자오온센 중앙 슬로프",
+        "video": "https://www.youtube.com/watch?v=416KwGEjTK4",
+        "video_type": "youtube"
+      },
+      {
+        "name": "자오온센 파라다이스 슬로프",
+        "video": "https://www.youtube.com/watch?v=nzCGgWtfVg0",
+        "video_type": "youtube"
+      },
+      {
+        "name": "자오온센 요코쿠라 슬로프",
+        "video": "https://www.youtube.com/watch?v=RHfXwQ-rF24",
+        "video_type": "youtube"
+      }
+    ],
+    "name": "도호쿠"
+  },
+  {
+    "id": "kansai",
+    "links": [
+      {
+        "name": "하치코겐 900m",
+        "video": "https://www.youtube.com/watch?v=8Tc2jpzNHCA",
+        "video_type": "youtube"
+      }
+    ],
+    "name": "간사이"
+  }
+]
