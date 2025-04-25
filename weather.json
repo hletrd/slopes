@@ -1346,8 +1346,8 @@
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 18.6,
-        "time": "2025-04-25T15:53:05.588544+09:00",
+        "temperature": 17.8,
+        "time": "2025-04-25T16:17:57.472072+09:00",
         "weather_condition": null,
         "wind_speed": null
       }
@@ -1358,19 +1358,19 @@
     },
     "name": "리조트_베이스",
     "resort": "곤지암리조트",
-    "timestamp": "2025-04-25T15:53:05.588544+09:00"
+    "timestamp": "2025-04-25T16:17:57.472072+09:00"
   },
   {
     "data": [
       {
-        "humidity": 9.0,
+        "humidity": 8.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 14.1,
-        "time": "2025-04-25T15:53:05.631386+09:00",
+        "temperature": 13.7,
+        "time": "2025-04-25T16:17:57.514166+09:00",
         "weather_condition": null,
-        "wind_speed": 0.5
+        "wind_speed": 0.7
       }
     ],
     "location": {
@@ -1379,19 +1379,19 @@
     },
     "name": "리조트_만선베이스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-25T15:53:05.631386+09:00"
+    "timestamp": "2025-04-25T16:17:57.514166+09:00"
   },
   {
     "data": [
       {
-        "humidity": 22.0,
+        "humidity": 20.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 12.9,
-        "time": "2025-04-25T15:53:05.631386+09:00",
+        "temperature": 12.5,
+        "time": "2025-04-25T16:17:57.514166+09:00",
         "weather_condition": null,
-        "wind_speed": 2.6
+        "wind_speed": 4.0
       }
     ],
     "location": {
@@ -1400,19 +1400,19 @@
     },
     "name": "리조트_설천베이스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-25T15:53:05.631386+09:00"
+    "timestamp": "2025-04-25T16:17:57.514166+09:00"
   },
   {
     "data": [
       {
-        "humidity": 22.0,
+        "humidity": 20.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 11.3,
-        "time": "2025-04-25T15:53:05.631386+09:00",
+        "temperature": 9.8,
+        "time": "2025-04-25T16:17:57.514166+09:00",
         "weather_condition": null,
-        "wind_speed": 1.9
+        "wind_speed": 3.9
       }
     ],
     "location": {
@@ -1421,28 +1421,7 @@
     },
     "name": "리조트_미드피크",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-25T15:53:05.631386+09:00"
-  },
-  {
-    "data": [
-      {
-        "humidity": 31.0,
-        "rainfall": null,
-        "snow_cover": null,
-        "snowfall_3hr": null,
-        "temperature": 9.7,
-        "time": "2025-04-25T15:53:05.631386+09:00",
-        "weather_condition": null,
-        "wind_speed": 1.7
-      }
-    ],
-    "location": {
-      "latitude": null,
-      "longitude": null
-    },
-    "name": "리조트_만선봉",
-    "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-25T15:53:05.631386+09:00"
+    "timestamp": "2025-04-25T16:17:57.514166+09:00"
   },
   {
     "data": [
@@ -1451,10 +1430,31 @@
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 6.5,
-        "time": "2025-04-25T15:53:05.631386+09:00",
+        "temperature": 9.4,
+        "time": "2025-04-25T16:17:57.514166+09:00",
         "weather_condition": null,
-        "wind_speed": 5.1
+        "wind_speed": 2.4
+      }
+    ],
+    "location": {
+      "latitude": null,
+      "longitude": null
+    },
+    "name": "리조트_만선봉",
+    "resort": "무주 덕유산 리조트",
+    "timestamp": "2025-04-25T16:17:57.514166+09:00"
+  },
+  {
+    "data": [
+      {
+        "humidity": 30.0,
+        "rainfall": null,
+        "snow_cover": null,
+        "snowfall_3hr": null,
+        "temperature": 6.4,
+        "time": "2025-04-25T16:17:57.514166+09:00",
+        "weather_condition": null,
+        "wind_speed": 4.7
       }
     ],
     "location": {
@@ -1463,6 +1463,6 @@
     },
     "name": "리조트_설천봉",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-25T15:53:05.631386+09:00"
+    "timestamp": "2025-04-25T16:17:57.514166+09:00"
   }
 ]
