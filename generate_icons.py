@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import os
 import re
+import shutil
+
 import cairosvg
 from PIL import Image, ImageOps, ImageDraw
 
@@ -99,6 +101,7 @@ def create_regular_icon(svg_file, size):
   result = round_corners(result, int(size * 0.1))
 
   result.save(output_file, format="PNG")
+  shutil.copy(output_file, f"slopes-cam/public/icons/{base_name}-regular-{size}x{size}.png")
   os.remove("icons/temp_raw.png")
   print(f"Created {output_file}")
 
@@ -141,6 +144,7 @@ def create_maskable_icon(svg_file, size):
   result = round_corners(result, int(size * 0.1))
 
   result.save(output_file, format="PNG")
+  shutil.copy(output_file, f"slopes-cam/public/icons/{base_name}-maskable-{size}x{size}.png")
   os.remove("icons/temp_raw.png")
   print(f"Created {output_file}")
 
@@ -183,6 +187,8 @@ def create_favicon(svg_file):
     sizes=[(img.width, img.height) for img in favicon_images],
     append_images=favicon_images[1:]
   )
+
+  shutil.copy(output_file, "slopes-cam/public/favicon.ico")
 
   if os.path.exists("icons/temp_raw.png"):
     os.remove("icons/temp_raw.png")
