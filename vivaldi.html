@@ -19,6 +19,7 @@
       width: 100%;
       height: 100%;
       border: none;
+      position: relative;
     }
     .vivaldi-container {
       width: 100%;
@@ -45,7 +46,7 @@
       border: none !important;
     }
 
-    .play-button {
+    .play-button, .pause-button {
       position: absolute;
       z-index: 20;
       background-color: rgba(0, 0, 0, 0.7);
@@ -61,19 +62,34 @@
       transform: translate(-50%, -50%);
       transition: background-color 0.3s ease;
     }
-    .play-button:hover {
+    .play-button:hover, .pause-button:hover {
       background-color: rgba(0, 0, 0, 0.9);
     }
-    .play-button svg {
+    .play-button svg, .pause-button svg {
       width: 88px;
       height: 88px;
       fill: white;
+    }
+    .pause-button {
+      display: none;
+      opacity: 0.6;
+    }
+    #vivaldi-player:hover + .pause-button, .pause-button:hover {
+      display: none;
+    }
+    .playing #vivaldi-player:hover + .pause-button, .playing .pause-button:hover {
+      display: flex;
     }
   </style>
 </head>
 <body>
   <div id="player-container">
     <div id="vivaldi-player" class="vivaldi-container"></div>
+    <div id="pause-button" class="pause-button">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="48px" height="48px">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+      </svg>
+    </div>
     <div id="play-button" class="play-button">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="48px" height="48px">
         <path d="M8 5v14l11-7z" />
@@ -167,12 +183,17 @@
       if (params.channel && params.serial) {
         const vivaldiPlayer = new Vivaldi('vivaldi-player');
         const playButton = document.getElementById('play-button');
+        const pauseButton = document.getElementById('pause-button');
+        const playerContainer = document.getElementById('player-container');
+        let isPlaying = false;
         let retryCount = 0;
         const maxRetries = 5;
 
         function tryInitialize() {
           try {
             vivaldiPlayer.ctlUIStartSet(params.channel, params.serial);
+            isPlaying = true;
+            playerContainer.classList.add('playing');
           } catch (e) {
             console.error(`Error initializing Vivaldi player (attempt ${retryCount + 1}/${maxRetries}):`, e);
             retryCount++;
@@ -186,6 +207,25 @@
             }
           }
         }
+
+        playerContainer.addEventListener('touchstart', function() {
+          if (isPlaying) {
+            pauseButton.style.display = 'flex';
+            setTimeout(() => {
+              pauseButton.style.display = 'none';
+            }, 3000);
+          }
+        });
+
+        pauseButton.addEventListener('click', function() {
+          if (isPlaying) {
+            vivaldiPlayer.ctlUIDispose();
+            isPlaying = false;
+            playerContainer.classList.remove('playing');
+            playButton.style.display = 'flex';
+            pauseButton.style.display = 'none';
+          }
+        });
 
         if (params.autoplay) {
           playButton.style.display = 'none';
