@@ -1,6 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import videojs from 'video.js';
+import 'video.js/dist/video-js.css';
+import type Player from 'video.js/dist/types/player';
 import { VideoLink } from '../utils/links';
 
 interface VideoPlayerProps {
@@ -9,95 +12,92 @@ interface VideoPlayerProps {
   webcamIndex: number;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ webcam, resortId, webcamIndex }) => {
+export const VideoPlayer = ({ webcam, resortId, webcamIndex }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLDivElement>(null);
-  const playerRef = useRef<any>(null);
+  const playerRef = useRef<Player | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
 
   useEffect(() => {
-    // Dynamically import videojs to avoid SSR issues
-    const loadVideoJS = async () => {
-      const videojs = (await import('video.js')).default;
+    // Check if this webcam is already bookmarked
+    try {
+      const existingBookmarks = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const bookmarkExists = existingBookmarks.some(
+        (bookmark: any) => bookmark.resortId === resortId && bookmark.webcamIndex === webcamIndex
+      );
+      setIsBookmarked(bookmarkExists);
+    } catch (e) {
+      console.error('Error checking bookmarks:', e);
+    }
 
-      // Import CSS
-      await import('video.js/dist/video-js.css');
+    if (!videoRef.current || webcam.video_type !== 'hls') return;
 
-      if (!videoRef.current) return;
+    // Clean up previous player instance
+    if (playerRef.current) {
+      playerRef.current.dispose();
+      playerRef.current = null;
+    }
 
-      // Clean up previous player instance
-      if (playerRef.current) {
-        playerRef.current.dispose();
-        playerRef.current = null;
-      }
+    // Create new video element
+    const videoElement = document.createElement('video');
+    videoElement.className = 'video-js vjs-big-play-centered';
+    videoElement.controls = true;
+    videoElement.preload = 'auto';
+    videoElement.setAttribute('playsinline', '');
+    videoRef.current.innerHTML = '';
+    videoRef.current.appendChild(videoElement);
 
-      // Handle different video types
-      let videoElement: HTMLVideoElement | null = null;
-
-      if (webcam.video_type === 'link') {
-        // For link type, we don't use videojs
-        return;
-      } else if (webcam.video_type === 'vivaldi') {
-        // For vivaldi type, we don't use videojs
-        return;
-      } else if (webcam.video_type === 'youtube') {
-        // For YouTube, we don't use videojs
-        return;
-      } else {
-        // For HLS streams and other video types
-        videoElement = document.createElement('video');
-        videoElement.className = 'video-js vjs-big-play-centered';
-        videoElement.controls = true;
-        videoElement.preload = 'auto';
-        videoElement.setAttribute('playsinline', '');
-
-        // Clear container and append new video element
-        if (videoRef.current) {
-          videoRef.current.innerHTML = '';
-          videoRef.current.appendChild(videoElement);
-        }
-
-        const options = {
-          autoplay: false,
-          preload: 'auto',
-          controls: true,
-          responsive: true,
-          fluid: true,
-          sources: [{
-            src: webcam.video,
-            type: webcam.video.includes('.m3u8') ? 'application/x-mpegURL' : 'video/mp4'
-          }]
-        };
-
-        // Initialize player
-        playerRef.current = videojs(videoElement, options);
-
-        // Create capture button
-        const captureButton = document.createElement('button');
-        captureButton.className = 'capture-button';
-        captureButton.innerHTML = '<i class="bi bi-camera"></i> 캡쳐';
-        captureButton.onclick = captureScreenshot;
-
-        // Create PiP button
-        const pipButton = document.createElement('button');
-        pipButton.className = 'pip-button';
-        pipButton.innerHTML = '<i class="bi bi-pip"></i> PiP';
-        pipButton.onclick = togglePictureInPicture;
-
-        // Create bookmark button
-        const bookmarkButton = document.createElement('button');
-        bookmarkButton.className = 'bookmark-button';
-        bookmarkButton.innerHTML = '<i class="bi bi-bookmark"></i> 북마크';
-        bookmarkButton.onclick = toggleBookmark;
-
-        // Add buttons to container
-        if (videoRef.current) {
-          videoRef.current.appendChild(captureButton);
-          videoRef.current.appendChild(pipButton);
-          videoRef.current.appendChild(bookmarkButton);
+    // Initialize video.js player
+    const player = playerRef.current = videojs(videoElement, {
+      autoplay: false,
+      controls: true,
+      responsive: true,
+      fluid: true,
+      sources: [{
+        src: webcam.video,
+        type: webcam.video.includes('.m3u8') ? 'application/x-mpegURL' : 'video/mp4'
+      }],
+      controlBar: {
+        pictureInPictureToggle: false,
+        fullscreenToggle: true,
+        volumePanel: {
+          inline: false
         }
       }
-    };
+    });
 
-    loadVideoJS();
+    player.on('error', () => {
+      const errorCode = player.error()?.code || 0;
+      const errorMessage = getErrorMessage(errorCode);
+      setError(errorMessage);
+    });
+
+    // Create custom control buttons
+    const captureButton = document.createElement('button');
+    captureButton.className = 'capture-button';
+    captureButton.innerHTML = '<i class="bi bi-camera"></i> 캡쳐';
+    captureButton.onclick = captureScreenshot;
+
+    const pipButton = document.createElement('button');
+    pipButton.className = 'pip-button';
+    pipButton.innerHTML = '<i class="bi bi-pip"></i> PiP';
+    pipButton.onclick = togglePictureInPicture;
+
+    const bookmarkButton = document.createElement('button');
+    bookmarkButton.className = isBookmarked
+      ? 'bookmark-button active'
+      : 'bookmark-button';
+    bookmarkButton.innerHTML = isBookmarked
+      ? '<i class="bi bi-bookmark-fill"></i> 북마크됨'
+      : '<i class="bi bi-bookmark"></i> 북마크';
+    bookmarkButton.onclick = toggleBookmark;
+
+    // Add buttons to container if videoRef is available
+    if (videoRef.current) {
+      videoRef.current.appendChild(captureButton);
+      videoRef.current.appendChild(pipButton);
+      videoRef.current.appendChild(bookmarkButton);
+    }
 
     return () => {
       if (playerRef.current) {
@@ -105,7 +105,22 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ webcam, resortId, webcamIndex
         playerRef.current = null;
       }
     };
-  }, [webcam]);
+  }, [webcam, resortId, webcamIndex, isBookmarked]);
+
+  const getErrorMessage = (code: number): string => {
+    switch (code) {
+      case 1:
+        return "Fetching of the video failed.";
+      case 2:
+        return "The video playback was aborted.";
+      case 3:
+        return "The video could not be decoded.";
+      case 4:
+        return "The video format is not supported.";
+      default:
+        return "An unknown error occurred.";
+    }
+  };
 
   const captureScreenshot = () => {
     if (!playerRef.current) return;
@@ -169,6 +184,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ webcam, resortId, webcamIndex
           (bookmark: any) => !(bookmark.resortId === resortId && bookmark.webcamIndex === webcamIndex)
         );
         localStorage.setItem('favorites', JSON.stringify(filteredBookmarks));
+        setIsBookmarked(false);
 
         // Update button state
         const bookmarkButton = videoRef.current?.querySelector('.bookmark-button');
@@ -179,6 +195,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ webcam, resortId, webcamIndex
       } else {
         existingBookmarks.push(bookmarkData);
         localStorage.setItem('favorites', JSON.stringify(existingBookmarks));
+        setIsBookmarked(true);
 
         // Update button state
         const bookmarkButton = videoRef.current?.querySelector('.bookmark-button');
@@ -192,6 +209,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ webcam, resortId, webcamIndex
     }
   };
 
+  if (error) {
+    return (
+      <div className="placeholder-container">
+        Error: {error}
+      </div>
+    );
+  }
+
   // Render different player types based on video_type
   if (webcam.video_type === 'link') {
     return (
@@ -201,8 +226,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ webcam, resortId, webcamIndex
             <i className="bi bi-box-arrow-up-right"></i> {webcam.name}
           </a>
         </div>
-        <button className="bookmark-button bookmark-button-link" onClick={toggleBookmark}>
-          <i className="bi bi-bookmark"></i> 북마크
+        <button
+          className={`bookmark-button bookmark-button-link ${isBookmarked ? 'active' : ''}`}
+          onClick={toggleBookmark}
+        >
+          <i className={`bi bi-bookmark${isBookmarked ? '-fill' : ''}`}></i> {isBookmarked ? '북마크됨' : '북마크'}
         </button>
       </div>
     );
@@ -219,8 +247,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ webcam, resortId, webcamIndex
             allowFullScreen
           ></iframe>
         </div>
-        <button className="bookmark-button bookmark-button-vivaldi" onClick={toggleBookmark}>
-          <i className="bi bi-bookmark"></i> 북마크
+        <button
+          className={`bookmark-button bookmark-button-vivaldi ${isBookmarked ? 'active' : ''}`}
+          onClick={toggleBookmark}
+        >
+          <i className={`bi bi-bookmark${isBookmarked ? '-fill' : ''}`}></i> {isBookmarked ? '북마크됨' : '북마크'}
         </button>
       </div>
     );
@@ -236,8 +267,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ webcam, resortId, webcamIndex
             allowFullScreen
           ></iframe>
         </div>
-        <button className="bookmark-button bookmark-button-youtube" onClick={toggleBookmark}>
-          <i className="bi bi-bookmark"></i> 북마크
+        <button
+          className={`bookmark-button bookmark-button-youtube ${isBookmarked ? 'active' : ''}`}
+          onClick={toggleBookmark}
+        >
+          <i className={`bi bi-bookmark${isBookmarked ? '-fill' : ''}`}></i> {isBookmarked ? '북마크됨' : '북마크'}
         </button>
       </div>
     );
@@ -245,7 +279,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ webcam, resortId, webcamIndex
     // Standard video player with videojs
     return (
       <div className="video-container">
-        <div ref={videoRef} className="video-js"></div>
+        <div ref={videoRef} className="standard-video-container"></div>
       </div>
     );
   }

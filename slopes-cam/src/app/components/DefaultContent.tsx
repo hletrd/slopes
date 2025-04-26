@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Resort } from '../utils/links';
 import VideoPlayer from './VideoPlayer';
+import DraggableBookmarks from './DraggableBookmarks';
 
 interface DefaultContentProps {
   isActive: boolean;
@@ -80,6 +81,12 @@ const DefaultContent: React.FC<DefaultContentProps> = ({ isActive }) => {
       return resort.links[bookmark.webcamIndex];
     }
     return null;
+  };
+
+  const handleBookmarkReorder = (newOrder: number[]) => {
+    const reorderedFavorites = newOrder.map(index => favorites[index]);
+    setFavorites(reorderedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(reorderedFavorites));
   };
 
   return (
@@ -164,6 +171,9 @@ const DefaultContent: React.FC<DefaultContentProps> = ({ isActive }) => {
               );
             })}
           </div>
+
+          {/* Add drag and drop functionality */}
+          <DraggableBookmarks onReorder={handleBookmarkReorder} />
         </div>
       ) : null}
     </div>

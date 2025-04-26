@@ -120,10 +120,44 @@ h2 {
   font-weight: 800;
 }
 .video-container {
-  width: 100%;
-  margin-bottom: 16px;
   position: relative;
-  max-width: 100%;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background-color: #000;
+}
+.video-container iframe,
+.video-container object,
+.video-container embed,
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.controls-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  background-color: var(--bg-color);
+}
+.control-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+.control-button:hover {
+  background-color: var(--hover-color);
+}
+.control-button i {
+  margin-right: 4px;
 }
 .video-js {
   width: 100%;
@@ -174,9 +208,8 @@ h2 {
 }
 .loading {
   text-align: center;
-  padding: 50px;
-  font-size: 18px;
-  font-weight: 500;
+  padding: 2rem;
+  color: var(--text-muted);
 }
 .error-message {
   color: #ff6b6b;
@@ -327,98 +360,118 @@ h2 {
   top: 0 !important;
 }
 .favorites-section {
-  margin-top: 0;
-  padding: 15px;
-  background-color: #1e1e1e;
-  border-radius: 5px;
-}
-.favorites-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-  gap: 20px;
-  width: 100%;
-  max-width: 100%;
+  padding: 1rem;
 }
 .favorites-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 15px 0 0;
+  margin-bottom: 1rem;
+}
+.bookmarks-title {
+  margin: 0;
+  font-size: 1.5rem;
 }
 .favorites-remove-button {
-  padding: 0;
-  font-size: 16px;
-  line-height: 1;
-  background-color: transparent;
+  background: none;
   border: none;
-  color: #ddd;
-  font-weight: 400;
+  color: #dc3545;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: all 0.2s;
 }
 .favorites-remove-button:hover {
-  color: #fff;
-  background-color: transparent;
-  font-weight: 500;
+  background-color: rgba(220, 53, 69, 0.1);
 }
-.site-title {
-  padding: 15px;
-  font-size: 24px;
-  font-weight: 800;
-  color: #fff;
-  background-color: #222;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px;
-  z-index: 100;
-  text-align: center;
+.drag-instructions {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
 }
-.site-title a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 800;
-}
-.videos-grid {
+.favorites-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-  gap: 20px;
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
 }
 .video-card {
-  background-color: #2a2a2a;
-  border-radius: 5px;
+  border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 0p;
-  width: 100%;
-  max-width: 100%;
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-.video-card h3 {
-  padding: 15px;
-  margin: 0;
-  font-size: 16px;
-  font-weight: 650;
+.video-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
-.video-card .video-container {
-  margin-bottom: 0;
+.favorite-card {
+  cursor: grab;
 }
-.video-card .video-js {
-  height: 0;
-  padding-top: 56.25%;
-}
-.video-card .error-message {
-  height: 0;
-  padding-top: 56.25%;
+.favorite-card.dragging {
+  cursor: grabbing;
+  opacity: 0.8;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
   position: relative;
-  box-sizing: border-box;
-  background-color: rgba(255, 107, 107, 0.1);
-  overflow: visible;
-  width: 100%;
-  display: block;
 }
-.video-card .iframe-container {
-  height: 0;
-  padding-top: 56.25%;
+.favorite-header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+.drag-handle {
+  cursor: grab;
+  margin-right: 0.5rem;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.drag-handle:hover {
+  opacity: 1;
+}
+.favorite-location {
+  font-weight: 600;
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.favorite-resort {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-left: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dropdown-toggle {
+  cursor: pointer;
+  padding: 4px;
+  margin-right: 0.5rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.dropdown-toggle:hover {
+  opacity: 1;
+}
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+}
+.placeholder-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  color: #666;
+  font-size: 0.9rem;
+  padding: 2rem;
 }
 .mobile-nav {
   display: none;
@@ -506,11 +559,6 @@ h2 {
 }
 .fade-out {
   opacity: 0;
-}
-.bookmarks-title {
-  font-size: 1.4rem;
-  margin-bottom: 16px;
-  font-weight: 800;
 }
 .all-resorts-weather {
   margin-top: 16px;
@@ -779,55 +827,6 @@ h2 {
 .snowfall {
   color: #d0ebff;
   font-weight: 600;
-}
-.dropdown-toggle {
-  position: absolute;
-  right: 16px;
-  top: 16px;
-  color: #aaa;
-  font-size: 18px;
-  cursor: pointer;
-  transition: color 0.2s;
-  background: transparent;
-  border: none;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  padding: 0;
-  z-index: 5;
-}
-.dropdown-toggle:hover {
-  color: #fff;
-}
-.dropdown-toggle i {
-  display: block;
-  margin-top: -2px;
-  font-weight: 550;
-}
-.dropdown-toggle::after {
-  display: none !important;
-  content: none !important;
-}
-.dropdown-toggle::before {
-  display: none !important;
-  content: none !important;
-}
-.favorite-header {
-  display: block;
-  margin: 0;
-  padding: 15px;
-  font-size: 16px;
-}
-.favorite-location {
-  font-weight: 800;
-  display: inline;
-}
-.favorite-resort {
-  font-size: 0.85em;
-  color: #999;
-  font-weight: 350;
-  margin-left: 10px;
-  display: inline;
 }
 .disclaimer a {
   color: inherit;
