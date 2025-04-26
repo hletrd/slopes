@@ -60,7 +60,9 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, opacity 0.5s ease, visibility 0.5s ease;
+      opacity: 1;
+      visibility: visible;
     }
     .play-button:hover, .pause-button:hover {
       background-color: rgba(0, 0, 0, 0.9);
@@ -71,13 +73,15 @@
       fill: white;
     }
     .pause-button {
-      display: none;
-      opacity: 0.6;
+      opacity: 0;
+      visibility: hidden;
     }
     #vivaldi-player:hover + .pause-button, .pause-button:hover {
       display: none;
     }
     .playing #vivaldi-player:hover + .pause-button, .playing .pause-button:hover {
+      opacity: 0.7;
+      visibility: visible;
       display: flex;
     }
   </style>
@@ -194,6 +198,11 @@
             vivaldiPlayer.ctlUIStartSet(params.channel, params.serial);
             isPlaying = true;
             playerContainer.classList.add('playing');
+            playButton.style.opacity = '0';
+            playButton.style.visibility = 'hidden';
+            setTimeout(() => {
+              playButton.style.display = 'none';
+            }, 500);
           } catch (e) {
             console.error(`Error initializing Vivaldi player (attempt ${retryCount + 1}/${maxRetries}):`, e);
             retryCount++;
@@ -211,8 +220,14 @@
         playerContainer.addEventListener('touchstart', function() {
           if (isPlaying) {
             pauseButton.style.display = 'flex';
+            pauseButton.style.opacity = '1';
+            pauseButton.style.visibility = 'visible';
             setTimeout(() => {
-              pauseButton.style.display = 'none';
+              pauseButton.style.opacity = '0';
+              pauseButton.style.visibility = 'hidden';
+              setTimeout(() => {
+                pauseButton.style.display = 'none';
+              }, 500);
             }, 3000);
           }
         });
@@ -222,18 +237,34 @@
             vivaldiPlayer.ctlUIDispose();
             isPlaying = false;
             playerContainer.classList.remove('playing');
+
             playButton.style.display = 'flex';
-            pauseButton.style.display = 'none';
+            setTimeout(() => {
+              playButton.style.opacity = '1';
+              playButton.style.visibility = 'visible';
+            }, 10);
+
+            pauseButton.style.opacity = '0';
+            pauseButton.style.visibility = 'hidden';
+            setTimeout(() => {
+              pauseButton.style.display = 'none';
+            }, 500);
           }
         });
 
         if (params.autoplay) {
           playButton.style.display = 'none';
+          playButton.style.opacity = '0';
+          playButton.style.visibility = 'hidden';
           setTimeout(tryInitialize, Math.random() * 3000 + 1000);
         } else {
           playButton.addEventListener('click', function() {
-            playButton.style.display = 'none';
-            setTimeout(tryInitialize, 1000);
+            playButton.style.opacity = '0';
+            playButton.style.visibility = 'hidden';
+            setTimeout(() => {
+              playButton.style.display = 'none';
+              setTimeout(tryInitialize, 1000);
+            }, 500);
           });
         }
       } else {
