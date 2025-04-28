@@ -38,6 +38,14 @@ jobs:
           KMA_API_KEY: ${{ secrets.KMA_API_KEY }}
         run: python .github/scripts/fetch_weather_data.py
 
+      - name: Upload weather data artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: weather-data
+          path: |
+            weather.json
+            preview.png
+
       - name: Import GPG key
         run: |
           echo "${{ secrets.GPG_KEY }}" > private.key
