@@ -33,13 +33,25 @@ jobs:
       - name: Run scraper
         run: python .github/scripts/webcam_scraper.py
 
-      - name: Upload webcam data artifacts
+      - name: Upload webcam links
         uses: actions/upload-artifact@v4
         with:
-          name: webcam-data
+          name: links.json
           path: |
             links.json
+
+      - name: Upload sitemap
+        uses: actions/upload-artifact@v4
+        with:
+          name: sitemap.xml
+          path: |
             sitemap.xml
+
+      - name: Upload links+ld.json
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos+ld.json
+          path: |
             videos+ld.json
 
       - name: Import GPG key
