@@ -1346,8 +1346,8 @@
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 19.3,
-        "time": "2025-04-28T18:05:09.196040+09:00",
+        "temperature": 17.6,
+        "time": "2025-04-28T19:54:22.030949+09:00",
         "weather_condition": null,
         "wind_speed": null
       }
@@ -1358,19 +1358,19 @@
     },
     "name": "리조트_베이스",
     "resort": "곤지암리조트",
-    "timestamp": "2025-04-28T18:05:09.196040+09:00"
+    "timestamp": "2025-04-28T19:54:22.030949+09:00"
   },
   {
     "data": [
       {
-        "humidity": 10.0,
+        "humidity": 21.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 15.1,
-        "time": "2025-04-28T18:05:09.268574+09:00",
+        "temperature": 11.1,
+        "time": "2025-04-28T19:54:22.076102+09:00",
         "weather_condition": null,
-        "wind_speed": 1.1
+        "wind_speed": 0.4
       }
     ],
     "location": {
@@ -1379,19 +1379,19 @@
     },
     "name": "리조트_만선베이스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-28T18:05:09.268574+09:00"
+    "timestamp": "2025-04-28T19:54:22.076102+09:00"
   },
   {
     "data": [
       {
-        "humidity": 24.0,
+        "humidity": 38.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 14.1,
-        "time": "2025-04-28T18:05:09.268574+09:00",
+        "temperature": 9.9,
+        "time": "2025-04-28T19:54:22.076102+09:00",
         "weather_condition": null,
-        "wind_speed": 2.7
+        "wind_speed": 0.8
       }
     ],
     "location": {
@@ -1400,38 +1400,17 @@
     },
     "name": "리조트_설천베이스",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-28T18:05:09.268574+09:00"
+    "timestamp": "2025-04-28T19:54:22.076102+09:00"
   },
   {
     "data": [
       {
-        "humidity": 26.0,
+        "humidity": 47.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 11.6,
-        "time": "2025-04-28T18:05:09.268574+09:00",
-        "weather_condition": null,
-        "wind_speed": 2.7
-      }
-    ],
-    "location": {
-      "latitude": null,
-      "longitude": null
-    },
-    "name": "리조트_미드피크",
-    "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-28T18:05:09.268574+09:00"
-  },
-  {
-    "data": [
-      {
-        "humidity": 37.0,
-        "rainfall": null,
-        "snow_cover": null,
-        "snowfall_3hr": null,
-        "temperature": 10.1,
-        "time": "2025-04-28T18:05:09.268574+09:00",
+        "temperature": 6.9,
+        "time": "2025-04-28T19:54:22.076102+09:00",
         "weather_condition": null,
         "wind_speed": 1.9
       }
@@ -1440,21 +1419,42 @@
       "latitude": null,
       "longitude": null
     },
-    "name": "리조트_만선봉",
+    "name": "리조트_미드피크",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-28T18:05:09.268574+09:00"
+    "timestamp": "2025-04-28T19:54:22.076102+09:00"
   },
   {
     "data": [
       {
-        "humidity": 35.0,
+        "humidity": 62.0,
         "rainfall": null,
         "snow_cover": null,
         "snowfall_3hr": null,
-        "temperature": 7.3,
-        "time": "2025-04-28T18:05:09.268574+09:00",
+        "temperature": 4.7,
+        "time": "2025-04-28T19:54:22.076102+09:00",
         "weather_condition": null,
-        "wind_speed": 5.2
+        "wind_speed": 1.2
+      }
+    ],
+    "location": {
+      "latitude": null,
+      "longitude": null
+    },
+    "name": "리조트_만선봉",
+    "resort": "무주 덕유산 리조트",
+    "timestamp": "2025-04-28T19:54:22.076102+09:00"
+  },
+  {
+    "data": [
+      {
+        "humidity": 58.0,
+        "rainfall": null,
+        "snow_cover": null,
+        "snowfall_3hr": null,
+        "temperature": 2.5,
+        "time": "2025-04-28T19:54:22.076102+09:00",
+        "weather_condition": null,
+        "wind_speed": 2.8
       }
     ],
     "location": {
@@ -1463,6 +1463,6 @@
     },
     "name": "리조트_설천봉",
     "resort": "무주 덕유산 리조트",
-    "timestamp": "2025-04-28T18:05:09.268574+09:00"
+    "timestamp": "2025-04-28T19:54:22.076102+09:00"
   }
 ]
