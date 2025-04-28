@@ -256,8 +256,9 @@ $ python3 server.py && open http://localhost:3001
 * [ ] 스키장 타임랩스 영상 수집
   * 시간대별 혼잡도 분석을 할 수 있을지 고민 중
 
-* [ ] TypeScript / Next.js로 포팅
+* ~~[ ] TypeScript / Next.js로 포팅~~
   * 최대한 간단하고 가볍게 만들려고 했는데 이미 일이 너무 커져버림
+  * 일단 Next를 쓰는 순간 용량이 꽤 커지기 때문에 페이지 용량이 500kB가 넘기 전까지는 보류 예정
 
 ---
 
