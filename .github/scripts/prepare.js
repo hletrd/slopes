@@ -123,12 +123,14 @@ async function addCacheBusting(htmlFilePath) {
   try {
     let content = await readFile(htmlFilePath, 'utf8');
 
-    content = content.replace(/(src=["'])([^"']*\.js)(["'])/g, `$1$2?v=${CACHE_BUSTER}$3`);
+    // Only apply cache busting to local JS files (not starting with http://, https:// or //)
+    content = content.replace(/(src=["'])(?!https?:\/\/|\/\/)([^"']*\.js)(["'])/g, `$1$2?v=${CACHE_BUSTER}$3`);
 
-    content = content.replace(/(href=["'])([^"']*\.css)(["'])/g, `$1$2?v=${CACHE_BUSTER}$3`);
+    // Only apply cache busting to local CSS files (not starting with http://, https:// or //)
+    content = content.replace(/(href=["'])(?!https?:\/\/|\/\/)([^"']*\.css)(["'])/g, `$1$2?v=${CACHE_BUSTER}$3`);
 
     await writeFile(htmlFilePath, content, 'utf8');
-    console.log(`  Added cache busting to: ${path.basename(htmlFilePath)}`);
+    console.log(`  Added cache busting to local files in: ${path.basename(htmlFilePath)}`);
   } catch (error) {
     console.error(`Error adding cache busting to ${htmlFilePath}:`, error);
   }
