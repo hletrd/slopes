@@ -186,6 +186,18 @@ $ python3 server.py && open http://localhost:3001
 
 ---
 
+### Release notes
+
+#### 04-30
+* 전반적인 사이트 코드 구조 개선 및 최적화
+* Git에서 고치면 알아서 minify 후 deploy되는 액션 작성 완료.
+* 날씨랑 웹캠 링크 정보는 서버에서 불러와서 저장함. (`links.json`, `preview.png`, `weather.json`, `videos+ld.json`, `sitemap.xml`)
+  * 현재 전체 페이지 로드 용량 993kB, 리소스 포함 시 2.3MB 정도.
+  * 무거운 리소스들
+    * Pretendard font (484kB)
+    * Video.js (202kB)
+    * bootstrap-icons (131kB)
+
 ### 앞으로 할 일
 
 #### 기능
