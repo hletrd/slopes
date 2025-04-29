@@ -38,20 +38,6 @@ jobs:
           KMA_API_KEY: ${{ secrets.KMA_API_KEY }}
         run: python .github/scripts/fetch_weather_data.py
 
-      - name: Upload weather data
-        uses: actions/upload-artifact@v4
-        with:
-          name: weather.json
-          path: |
-            weather.json
-
-      - name: Upload preview image
-        uses: actions/upload-artifact@v4
-        with:
-          name: preview.png
-          path: |
-            preview.png
-
       - name: Deploy to server
         uses: easingthemes/ssh-deploy@main
         env:
