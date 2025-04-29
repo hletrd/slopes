@@ -1,0 +1,30 @@
+{
+  "name": "slopes-cam",
+  "version": "1.0.0",
+  "description": "Slopes cam - 전국 스키장 실시간 웹캠 모음",
+  "main": "main.js",
+  "scripts": {
+    "build": "node .github/scripts/prepare.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hletrd/slopes.git"
+  },
+  "keywords": [
+    "ski",
+    "webcam",
+    "weather",
+    "korea"
+  ],
+  "author": "hletrd",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "terser": "^5.27.0"
+  },
+  "dependencies": {
+    "dependencies": "^0.0.1"
+  }
+}
