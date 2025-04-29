@@ -437,7 +437,7 @@ def main():
   if updated_weather_data:
     output_file = "weather.json"
     with open(output_file, "w", encoding="utf-8") as f:
-      json.dump(updated_weather_data, f, ensure_ascii=False, indent=2, sort_keys=True)
+      json.dump(updated_weather_data, f, ensure_ascii=False, sort_keys=True)
 
     print(
       f"Successfully saved weather data for {len(updated_weather_data)} "

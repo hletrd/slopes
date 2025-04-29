@@ -155,7 +155,7 @@ def generate_video_ld_json(data):
       video_objects.append(video_object)
 
   with open('videos+ld.json', 'w', encoding='utf-8') as f:
-    json.dump(video_objects, f, ensure_ascii=False, indent=2, sort_keys=True)
+    json.dump(video_objects, f, ensure_ascii=False, sort_keys=True)
 
   print(f"Generated videos+ld.json with {len(video_objects)} video objects")
 
@@ -198,7 +198,7 @@ def main():
     if modified:
       print("Saving updated links.json file...")
       with open('links.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2, sort_keys=True)
+        json.dump(data, f, ensure_ascii=False, sort_keys=True)
       print("Saved links.json successfully")
     else:
       print("No changes to links.json")
