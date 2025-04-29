@@ -52,31 +52,12 @@ jobs:
           path: |
             preview.png
 
-      - name: Import GPG key
-        run: |
-          echo "${{ secrets.GPG_KEY }}" > private.key
-          gpg --batch --import private.key
-          rm private.key
-          KEY_ID=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d'/' -f2)
-          echo "GPG_KEY_ID=$KEY_ID" >> $GITHUB_ENV
-
-      - name: Configure Git
-        run: |
-          git config --local user.email "hletrd@users.noreply.github.com"
-          git config --local user.name "hletrd-bot"
-          git config --local user.signingkey ${{ env.GPG_KEY_ID }}
-          git config --local commit.gpgsign true
-          git lfs track "preview.png" || true
-          git add .gitattributes
-
-      - name: Commit changes
-        run: |
-          git add weather.json
-          git add preview.png
-          git diff --quiet && git diff --staged --quiet || git commit -S -m "[Bot] Update weather data"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.PAT }}
-          branch: ${{ github.ref }}
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "weather.json preview.png"
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          TARGET: ${{ secrets.SSH_TARGET }}
