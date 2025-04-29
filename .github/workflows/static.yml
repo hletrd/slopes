@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -57,10 +57,12 @@ jobs:
           git config --local user.name "hletrd-bot"
           git config --local user.signingkey ${{ env.GPG_KEY_ID }}
           git config --local commit.gpgsign true
+          git lfs track "dist/preview.png" || true
+          git add .gitattributes
 
       - name: Commit changes
         run: |
-          git add .
+          git add dist/
           git diff --quiet && git diff --staged --quiet || git commit -S -m "[Bot] minify for production"
 
       - name: Push changes
