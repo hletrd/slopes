@@ -862,6 +862,9 @@ b {
 .vjs-control-bar {
   font-weight: 550 !important;
 }
+.vjs-subs-caps-button {
+  display: none;
+}
 .drag-instructions {
   width: 100%;
   text-align: center;
