@@ -6,7 +6,7 @@
 [![날씨 업데이트](https://github.com/hletrd/slopes/actions/workflows/fetch_weather.yml/badge.svg)](https://github.com/hletrd/slopes/actions/workflows/fetch_weather.yml)
 [![웹캠 링크 업데이트](https://github.com/hletrd/slopes/actions/workflows/webcam-scraper.yml/badge.svg)](https://github.com/hletrd/slopes/actions/workflows/webcam-scraper.yml)
 
-![preview](preview.png)
+![preview](http://ski.atik.kr/preview.png)
 
 * 전국 스키장의 실시간 웹캠 뷰를 제공합니다.
 * 전국 스키장의 실시간 날씨 정보를 제공합니다.
