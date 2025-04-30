@@ -84,7 +84,7 @@ async function minifyJsFile(sourcePath, destPath) {
       return;
     }
 
-    const result = execSync(`"${TERSER_PATH}" "${sourcePath}" --compress --source-map --output "${destPath}"`);
+    const result = execSync(`"${TERSER_PATH}" "${sourcePath}" -m --compress --source-map --output "${destPath}"`);
     console.log(`  Minified: ${path.basename(sourcePath)}`);
   } catch (error) {
     console.error(`Error minifying ${sourcePath}:`, error);
