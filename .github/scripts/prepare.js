@@ -105,8 +105,25 @@ async function minifyCssFile(sourcePath, destPath) {
   }
 }
 
+async function addCommitHash(htmlFilePath) {
+  const content = await readFile(htmlFilePath, 'utf8');
+  if (htmlFilePath.includes('index.html') && content.includes('{commit}')) {
+    try {
+      const gitCommit = execSync('git rev-parse HEAD').toString().trim();
+      const shortCommit = gitCommit.substring(0, 7);
+      content = content.replace(/<a target="_blank" href="https:\/\/github\.com\/hletrd\/slopes\/commit\/\{commit\}"><\/a>/g,
+        `<a target="_blank" href="https://github.com/hletrd/slopes/commit/${gitCommit}">${shortCommit}</a>`);
+      console.log(`  Replaced {commit} with git commit hash: ${shortCommit}`);
+    } catch (error) {
+      console.error('Error getting git commit hash:', error);
+    }
+  }
+  await writeFile(htmlFilePath, updatedContent, 'utf8');
+}
+
 async function minifyHtmlFile(sourcePath, destPath) {
   try {
+    await addCommitHash(sourcePath);
     execSync(`"${HTML_MINIFIER_PATH}" --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true -o "${destPath}" "${sourcePath}"`);
     console.log(`  Minified HTML: ${path.basename(sourcePath)}`);
 
@@ -128,18 +145,6 @@ async function addCacheBusting(htmlFilePath) {
 
     // Only apply cache busting to local CSS files (not starting with http://, https:// or //)
     content = content.replace(/(href=["'])(?!https?:\/\/|\/\/)([^"']*\.css)(["'])/g, `$1$2?v=${CACHE_BUSTER}$3`);
-
-    if (htmlFilePath.includes('index.html') && content.includes('{commit}')) {
-      try {
-        const gitCommit = execSync('git rev-parse HEAD').toString().trim();
-        const shortCommit = gitCommit.substring(0, 7);
-        content = content.replace(/<a target="_blank" href="https:\/\/github\.com\/hletrd\/slopes\/commit\/\{commit\}"><\/a>/g,
-          `<a target="_blank" href="https://github.com/hletrd/slopes/commit/${gitCommit}">${shortCommit}</a>`);
-        console.log(`  Replaced {commit} with git commit hash: ${shortCommit}`);
-      } catch (error) {
-        console.error('Error getting git commit hash:', error);
-      }
-    }
 
     await writeFile(htmlFilePath, content, 'utf8');
     console.log(`  Added cache busting to local files in: ${path.basename(htmlFilePath)}`);
