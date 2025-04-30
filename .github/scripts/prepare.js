@@ -106,7 +106,7 @@ async function minifyCssFile(sourcePath, destPath) {
 }
 
 async function addCommitHash(htmlFilePath) {
-  const content = await readFile(htmlFilePath, 'utf8');
+  let content = await readFile(htmlFilePath, 'utf8');
   if (htmlFilePath.includes('index.html') && content.includes('{commit}')) {
     try {
       const gitCommit = execSync('git rev-parse HEAD').toString().trim();
@@ -118,7 +118,7 @@ async function addCommitHash(htmlFilePath) {
       console.error('Error getting git commit hash:', error);
     }
   }
-  await writeFile(htmlFilePath, updatedContent, 'utf8');
+  await writeFile(htmlFilePath, content, 'utf8');
 }
 
 async function minifyHtmlFile(sourcePath, destPath) {
