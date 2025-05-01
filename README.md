@@ -188,6 +188,9 @@ $ python3 server.py && open http://localhost:3001
 
 ### Release notes
 
+#### 05-01
+* Video.js 및 Bootstrap Icon 경량화
+
 #### 04-30
 * 전반적인 사이트 코드 구조 개선 및 최적화
 * Git에서 고치면 알아서 minify 후 deploy되는 액션 작성 완료.
