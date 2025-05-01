@@ -3,7 +3,9 @@ const urlsToCache = [
   './',
   './index.html',
   './main.css',
+  './main.js',
   './pwa.js',
+  './analytics.js',
   './manifest.json',
   './favicon.ico',
   './icons/skiing-16x16.png',
@@ -18,18 +20,17 @@ const urlsToCache = [
   './preview.png',
   './vivaldi.html',
   './WespJSSDKEncV4.min.js',
-  './links.json',
-  './weather.json'
 ];
 
 const externalResources = [
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css',
-  'https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video-js.min.css',
+  'https://cdn.jsdelivr.net/npm/video.js@8.23.3/dist/video-js.min.css',
   'https://cdn.jsdelivr.net/npm/@videojs/themes@1/dist/forest/index.css',
   'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css',
   'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
-  'https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video.min.js',
-  'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css'
+  'https://cdn.jsdelivr.net/npm/video.js@8.23.3/dist/alt/video.novtt.min.js',
+  'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css',
+  'https://buttons.github.io/buttons.js'
 ];
 
 const isLocalhost = self.location.hostname === 'localhost' || self.location.hostname === '127.0.0.1';
