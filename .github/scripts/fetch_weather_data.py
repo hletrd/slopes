@@ -13,6 +13,7 @@ from threading import Lock
 import time
 import re
 from bs4 import BeautifulSoup
+import math
 
 HOURS = 1
 INTERVAL = 60
@@ -309,6 +310,132 @@ def fetch_weather_data_from_resort(resort_name, is_north_korea=False):
 
   return None
 
+# KMA API
+def process_grid(grid_text):
+  results = []
+
+  lines = [line for line in grid_text.strip().splitlines() if line.strip()]
+
+  PI = 3.141592
+  RE = 6371.00877
+  GRID = 5.0
+  SLAT1, SLAT2 = 30.0, 60.0
+  OLON, OLAT = 126.0, 38.0
+  XO, YO = 210.0/GRID, 675.0/GRID
+
+  DEGRAD = PI / 180.0
+  RADDEG = 180.0 / PI
+
+  re  = RE / GRID                              # scaled Earth radius
+  slat1 = SLAT1 * DEGRAD
+  slat2 = SLAT2 * DEGRAD
+  olon  = OLON  * DEGRAD
+  olat  = OLAT  * DEGRAD
+
+  sn = math.log(math.cos(slat1) / math.cos(slat2)) / \
+      math.log(math.tan(PI*0.25 + slat2*0.5) / math.tan(PI*0.25 + slat1*0.5))
+
+  sf = (math.tan(PI*0.25 + slat1*0.5) ** sn) * math.cos(slat1) / sn
+
+  ro = re * sf / (math.tan(PI*0.25 + olat*0.5) ** sn)
+
+  for j, line in enumerate(lines):
+    for i, token in enumerate(line.split()):
+      value = float(token)
+      if value == -99.0:
+        continue  # skip invalid data
+
+      # 1-based grid coordinates
+      x = i + 1
+      y = j + 1
+
+      # Inverse LCC (as above)
+      dx = x - XO
+      dy = ro - (y - YO)
+      ra = math.hypot(dx, dy)
+      if sn < 0:
+        ra = -ra
+      alat = 2.0 * math.atan((re * sf / ra)**(1.0/sn)) - PI*0.5
+      theta = math.atan2(dx, dy)
+      alon  = theta/sn + olon
+
+      # Degrees
+      lat = alat * RADDEG
+      lng = alon * RADDEG
+
+      results.append({"lat": lat, "lng": lng, "tmp": value})
+
+  return results
+
+# KMA API
+def fetch_weather_grid(auth_key):
+  kst = pytz.timezone('Asia/Seoul')
+  now = datetime.now(kst)
+
+  target_hours = [2, 5, 8, 11, 14, 17, 20, 23]
+
+  # if now.minute >= 10:
+  #   return
+
+  # if now.hour not in target_hours:
+  #   return
+
+  grid_data = {"weathers": [], "last_fetch_time": None}
+
+  current_hour = now.hour
+  most_recent_target = None
+
+  for hour in target_hours:
+    if current_hour >= hour:
+      most_recent_target = hour
+    else:
+      break
+
+  if most_recent_target is None:
+    most_recent_target = target_hours[-1]
+
+  target_time = now.replace(hour=most_recent_target, minute=0, second=0, microsecond=0)
+  if most_recent_target > current_hour:
+    target_time = target_time - timedelta(days=1)
+
+  print(f"Fetching weather grid data for {target_time}")
+
+  time1 = target_time.strftime("%Y%m%d%H")
+
+  forecast_times = []
+  for hour_offset in range(49):
+    forecast_time = target_time + timedelta(hours=hour_offset)
+    forecast_times.append(forecast_time.strftime("%Y%m%d%H"))
+
+  weathers = []
+  for time2 in forecast_times:
+    url = f"https://apihub.kma.go.kr/api/typ01/cgi-bin/url/nph-dfs_shrt_grd?tmfc={time1}&tmef={time2}&vars=TMP&authKey={auth_key}"
+
+    try:
+      response = requests.get(url, timeout=30)
+
+      if response.status_code != 200:
+        print(f"Error fetching weather grid data: HTTP {response.status_code} for url {url}")
+        continue
+
+      weathers.append({
+        "time": time2,
+        "data": response.text
+      })
+
+    except Exception as e:
+      print(f"Error fetching weather grid data for time {time2}: {e}")
+
+  grid_data = {
+    "weathers": weathers,
+    "last_fetch_time": target_time.isoformat()
+  }
+
+  with open('weather.grid.json', 'w', encoding='utf-8') as f:
+    json.dump(grid_data, f, ensure_ascii=False, indent=2)
+
+  print(f"Successfully saved weather grid data with {len(weathers)} time points")
+
 def main():
   auth_key = os.environ.get("KMA_API_KEY")
   if not auth_key:
@@ -448,6 +575,7 @@ def main():
     generate_preview_image(updated_weather_data, resorts)
   else:
     print("No weather data collected")
+
 
 if __name__ == "__main__":
   main()
