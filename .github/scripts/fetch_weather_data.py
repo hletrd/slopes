@@ -14,6 +14,9 @@ import time
 import re
 from bs4 import BeautifulSoup
 import math
+import dotenv
+
+dotenv.load_dotenv()
 
 HOURS = 1
 INTERVAL = 60
@@ -431,9 +434,112 @@ def fetch_weather_grid(auth_key):
   }
 
   with open('weather.grid.json', 'w', encoding='utf-8') as f:
-    json.dump(grid_data, f, ensure_ascii=False, indent=2)
+    json.dump(grid_data, f, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
 
   print(f"Successfully saved weather grid data with {len(weathers)} time points")
+
+def fetch_forecast_openweather(resorts):
+  api_key = os.environ.get("OPENWEATHER_API_KEY")
+
+  kst = pytz.timezone('Asia/Seoul')
+  now = datetime.now(kst)
+
+  if not api_key:
+    print("OPENWEATHER_API_KEY environment variable not set")
+    return
+
+  if os.environ.get("RUN_LOCAL") is None:
+    gmt = datetime.now(pytz.timezone('GMT'))
+    gmt_hour = gmt.hour
+
+    if gmt_hour not in [0, 3, 6, 9, 12, 15, 18, 21]:
+      print(f"Data for current hour is not available, skipping OpenWeatherMap fetch")
+      return
+
+    if now.minute >= 10:
+      print("Current minute is >= 10, skipping OpenWeatherMap fetch")
+      return
+
+  print(f"Fetching weather data from OpenWeatherMap")
+
+  locations = []
+  for resort in resorts:
+    resort_name = resort.get("name", "")
+    coordinates = resort.get("coordinates", [])
+
+    for location in coordinates:
+      lat = location.get("latitude")
+      lon = location.get("longitude")
+      location_name = location.get("name", "Unknown")
+
+      if lat is not None and lon is not None:
+        locations.append({
+          "resort": resort_name,
+          "name": location_name,
+          "lat": lat,
+          "lon": lon
+        })
+
+  weathers = []
+  for location in locations:
+    url = f"https://api.openweathermap.org/data/2.5/forecast?lat={location['lat']}&lon={location['lon']}&units=metric&appid={api_key}"
+
+    try:
+      print(f'Fetching OpenWeatherMap data for {location["resort"]} - {location["name"]}')
+      response = requests.get(url, timeout=30)
+
+      if response.status_code != 200:
+        print(f"Error fetching OpenWeatherMap data for {location['resort']} - {location['name']}: HTTP {response.status_code}")
+        continue
+
+      data = response.json()
+
+      location_data = {
+        "resort": location["resort"],
+        "name": location["name"],
+        "location": {
+          "latitude": location["lat"],
+          "longitude": location["lon"]
+        },
+        "forecasts": []
+      }
+
+      for item in data.get("list", []):
+        if 'main' not in item or 'dt' not in item:
+          continue
+
+        timestamp = item['dt']
+        main = item['main']
+        wind = item.get("wind", {})
+        snow = item.get("snow", {})
+        rain = item.get("rain", {})
+
+        forecast = {
+          "timestamp": timestamp,
+          "temp": main.get("temp"),
+          "feels_like": main.get("feels_like"),
+          "humidity": main.get("humidity"),
+          "wind_speed": wind.get("speed", 0),
+          "snow_3h": snow.get("3h", 0),
+          "rain_3h": rain.get("3h", 0)
+        }
+
+        location_data["forecasts"].append(forecast)
+
+      weathers.append(location_data)
+
+    except Exception as e:
+      print(f"Error fetching OpenWeatherMap data for {location['resort']} - {location['name']}: {e}")
+
+  result_data = {
+    "weathers": weathers,
+    "last_fetch_time": now.isoformat(),
+  }
+
+  with open('weather.grid.json', 'w', encoding='utf-8') as f:
+    json.dump(result_data, f, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+
+  print(f"Successfully saved OpenWeatherMap data for {len(weathers)} locations")
 
 def main():
   auth_key = os.environ.get("KMA_API_KEY")
@@ -447,6 +553,8 @@ def main():
   except Exception as e:
     print(f"Error reading links.json: {e}")
     sys.exit(1)
+
+  fetch_forecast_openweather(resorts)
 
   existing_weather_data = []
   try:
@@ -494,7 +602,7 @@ def main():
     coordinates = resort.get("coordinates", [])
     weather_link = resort.get("weather_link")
     is_north_korea = resort.get("is_north_korea", False)
-    if resort.get('fetch_weather', True) == False:
+    if resort.get('fetch_weather', True) is False:
       continue
 
     resort_weathers = fetch_weather_data_from_resort(resort_name, is_north_korea)
