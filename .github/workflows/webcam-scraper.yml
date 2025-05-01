@@ -2,7 +2,7 @@ name: 웹캠 링크 업데이트
 
 on:
   schedule:
-    - cron: '23 */3 * * *'
+    - cron: '23 */2 * * *'
   workflow_dispatch:
 
 permissions:
