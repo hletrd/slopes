@@ -1290,9 +1290,13 @@ document.addEventListener('DOMContentLoaded', function() {
         fluid: false,
         crossorigin: "anonymous",
         liveTracker: {
-          trackingThreshold: 0,
-          liveTolerance: 15
-        }
+          trackingThreshold: 0
+        },
+        controlBar: {
+          captionsButton: false,
+          pictureInPictureToggle: false
+        },
+        notSupportedMessage: '비디오 재생 중 오류가 발생했습니다.'
       });
 
       const captureBtn = document.createElement('button');
