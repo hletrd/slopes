@@ -292,7 +292,6 @@ def fetch_weather_data_from_resort(resort_name, is_north_korea=False):
           tbody = table.select_one("tbody")
           if tbody:
             index = tbody.select_one("tr").select("th")[1:]
-            print(index)
             data = tbody.select("tr")[1:]
             for k, v in enumerate(index):
               result = json.loads(json.dumps(template))  # deep copy
