@@ -30,7 +30,8 @@ const externalResources = [
   'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
   'https://cdn.jsdelivr.net/npm/video.js@8.23.3/dist/alt/video.novtt.min.js',
   'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css',
-  'https://buttons.github.io/buttons.js'
+  'https://buttons.github.io/buttons.js',
+  'https://www.googletagmanager.com/gtag/js',
 ];
 
 const isLocalhost = self.location.hostname === 'localhost' || self.location.hostname === '127.0.0.1';
@@ -97,7 +98,8 @@ self.addEventListener('fetch', event => {
               event.request.url.endsWith('.js') ||
               event.request.url.endsWith('.png') ||
               event.request.url.endsWith('.jpg') ||
-              event.request.url.endsWith('.svg')
+              event.request.url.endsWith('.svg') ||
+              event.request.url.endsWith('/js')
             );
 
             if (shouldCache) {
