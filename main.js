@@ -1060,7 +1060,6 @@ document.addEventListener('DOMContentLoaded', function() {
       document.title = `${basicTitle} - 일기예보`;
 
       updateAllResortsWeather();
-      initializeMap();
       closeSidebar();
     });
 
