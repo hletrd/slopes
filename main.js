@@ -695,6 +695,82 @@ document.addEventListener('DOMContentLoaded', function() {
     window.processingHashChange = true;
 
     try {
+      if (hash === 'misc') {
+        const defaultMessage = document.getElementById('default-message');
+        defaultMessage.classList.remove('active');
+        defaultMessage.style.display = 'none';
+
+        document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
+        const miscMenuItem = document.querySelector('.menu-item[data-target="misc"]');
+        if (miscMenuItem) {
+          miscMenuItem.classList.add('active');
+        }
+
+        hideAllSubmenus();
+        disposeAllPlayers();
+
+        document.querySelectorAll('.content-section').forEach(section => {
+          section.classList.remove('active');
+        });
+
+        const miscSection = document.getElementById('misc');
+        if (miscSection) {
+          miscSection.classList.add('active');
+        }
+
+        document.title = `${basicTitle} - 유용한 기능`;
+        return;
+      }
+
+      if (hash.startsWith('misc/')) {
+        const defaultMessage = document.getElementById('default-message');
+        defaultMessage.classList.remove('active');
+        defaultMessage.style.display = 'none';
+
+        document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
+        const miscMenuItem = document.querySelector('.menu-item[data-target="misc"]');
+        if (miscMenuItem) {
+          miscMenuItem.classList.add('active');
+        }
+
+        const submenu = document.getElementById('misc-submenu');
+        if (submenu) {
+          submenu.classList.add('active');
+
+          const dropdownToggle = miscMenuItem.querySelector('.dropdown-toggle');
+          if (dropdownToggle) {
+            dropdownToggle.innerHTML = '<i class="bi bi-chevron-up"></i>';
+          }
+        }
+
+        const submenuPart = hash.split('/')[1];
+        if (submenuPart === 'forecast') {
+          document.querySelectorAll('.submenu-item').forEach(item => {
+            item.classList.remove('active');
+          });
+
+          const forecastSubmenuItem = document.querySelector('.submenu-item[data-target="misc-forecast"]');
+          if (forecastSubmenuItem) {
+            forecastSubmenuItem.classList.add('active');
+          }
+
+          document.querySelectorAll('.content-section').forEach(section => {
+            section.classList.remove('active');
+          });
+
+          const forecastSection = document.getElementById('misc-forecast');
+          if (forecastSection) {
+            forecastSection.classList.add('active');
+          }
+
+          document.title = `${basicTitle} - 일기예보`;
+          updateAllResortsWeather();
+          closeSidebar();
+        }
+
+        return;
+      }
+
       const parts = hash.split('/');
       const resortId = parts[0];
       const webcamId = parts[1];
@@ -899,6 +975,156 @@ document.addEventListener('DOMContentLoaded', function() {
     const defaultContent = document.getElementById('default-message');
     const otherContent = Array.from(document.querySelectorAll('.content-section:not(#default-message)'));
     otherContent.forEach(el => el.remove());
+
+    const miscMenuItemContainer = document.createElement('div');
+    miscMenuItemContainer.className = 'menu-item-container';
+
+    const miscMenuItem = document.createElement('div');
+    miscMenuItem.className = 'menu-item';
+    miscMenuItem.setAttribute('data-target', 'misc');
+    miscMenuItem.setAttribute('data-has-submenu', 'true');
+    miscMenuItem.textContent = '유용한 기능';
+    miscMenuItemContainer.appendChild(miscMenuItem);
+
+    const dropdownToggle = document.createElement('span');
+    dropdownToggle.className = 'dropdown-toggle';
+    dropdownToggle.innerHTML = '<i class="bi bi-chevron-down"></i>';
+    dropdownToggle.setAttribute('aria-label', 'Toggle submenu');
+    miscMenuItem.appendChild(dropdownToggle);
+
+    dropdownToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const submenu = miscMenuItemContainer.querySelector('.submenu');
+      if (submenu) {
+        const isActive = submenu.classList.contains('active');
+
+        hideAllSubmenus();
+
+        if (!isActive) {
+          submenu.classList.add('active');
+          miscMenuItem.classList.add('active');
+          this.innerHTML = '<i class="bi bi-chevron-up"></i>';
+        }
+      }
+    });
+
+    const miscSubmenu = document.createElement('div');
+    miscSubmenu.className = 'submenu';
+    miscSubmenu.id = 'misc-submenu';
+    miscMenuItemContainer.appendChild(miscSubmenu);
+
+    const forecastSubmenuItem = document.createElement('div');
+    forecastSubmenuItem.className = 'submenu-item';
+    forecastSubmenuItem.setAttribute('data-target', 'misc-forecast');
+    forecastSubmenuItem.textContent = '일기예보';
+    miscSubmenu.appendChild(forecastSubmenuItem);
+
+    const forecastSection = document.createElement('div');
+    forecastSection.className = 'content-section';
+    forecastSection.id = 'misc-forecast';
+
+    const forecastTitle = document.createElement('h2');
+    forecastTitle.textContent = '일기예보';
+    forecastTitle.className = 'inline-title';
+    forecastSection.appendChild(forecastTitle);
+
+    const forecastContent = document.createElement('div');
+    forecastContent.className = 'misc-content';
+    forecastContent.innerHTML = `
+      <div class="forecast-container">
+        <div id="forecast"></div>
+      </div>
+    `;
+    forecastSection.appendChild(forecastContent);
+
+    mainContent.appendChild(forecastSection);
+
+    forecastSubmenuItem.addEventListener('click', function() {
+      document.querySelectorAll('.submenu-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      this.classList.add('active');
+
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      const defaultMessage = document.getElementById('default-message');
+      defaultMessage.classList.remove('active');
+      defaultMessage.style.display = 'none';
+
+      forecastSection.classList.add('active');
+
+      window.location.hash = 'misc/forecast';
+      document.title = `${basicTitle} - 일기예보`;
+
+      updateAllResortsWeather();
+      initializeMap();
+      closeSidebar();
+    });
+
+    sidebar.appendChild(miscMenuItemContainer);
+
+    const miscSection = document.createElement('div');
+    miscSection.className = 'content-section';
+    miscSection.id = 'misc';
+
+    const miscTitle = document.createElement('h2');
+    miscTitle.textContent = '유용한 기능';
+    miscTitle.className = 'inline-title';
+    miscSection.appendChild(miscTitle);
+
+    const miscContent = document.createElement('div');
+    miscContent.className = 'misc-content';
+    miscContent.innerHTML = `
+      <p>메뉴에서 기능을 선택하세요.</p>
+    `;
+    miscSection.appendChild(miscContent);
+
+    mainContent.appendChild(miscSection);
+
+    miscMenuItem.addEventListener('click', function(e) {
+      if (e.target.classList.contains('dropdown-toggle') || e.target.closest('.dropdown-toggle')) {
+        return;
+      }
+
+      document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
+      document.querySelectorAll('.submenu-item').forEach(smi => smi.classList.remove('active'));
+      this.classList.add('active');
+
+      hideAllSubmenus();
+      disposeAllPlayers();
+
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      const defaultMessage = document.getElementById('default-message');
+      defaultMessage.classList.remove('active');
+      defaultMessage.style.display = 'none';
+
+      const submenu = document.getElementById('misc-submenu');
+      if (submenu) {
+        submenu.classList.add('active');
+        this.classList.add('active');
+
+        const dropdownToggle = this.querySelector('.dropdown-toggle');
+        if (dropdownToggle) {
+          dropdownToggle.innerHTML = '<i class="bi bi-chevron-up"></i>';
+        }
+      }
+
+      const miscSection = document.getElementById('misc');
+      if (miscSection) {
+        miscSection.classList.add('active');
+      }
+
+      window.location.hash = 'misc';
+      document.title = `${basicTitle} - 유용한 기능`;
+
+      closeSidebar();
+    });
 
     resorts.forEach(resort => {
       const resortId = resort.id;
@@ -1275,6 +1501,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ${settings.autoplay ? 'autoplay' : ''}
         muted
         playsinline
+        preload="auto"
       >
         <source src="${videoUrl}" type="application/x-mpegURL">
         <p class="vjs-no-js">
