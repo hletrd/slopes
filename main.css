@@ -1114,6 +1114,72 @@ input:checked + .toggle-slider:before {
 .add-to-home:hover {
   background-color: #0053aa;
 }
+.forecast-header {
+  margin-bottom: 20px;
+}
+.forecast-header h4 {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.forecast-header h4 small {
+  font-size: 0.8em;
+  color: #aaa;
+  font-weight: normal;
+  margin-left: 10px;
+}
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 20px;
+}
+.chart-container {
+  position: relative;
+  height: 350px;
+  padding: 15px;
+  border-radius: 8px;
+}
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.chart-container h4 {
+  margin: 0;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.forecast-summary {
+  font-size: 13px;
+  color: #fff;
+  display: flex;
+  gap: 10px;
+}
+.temp-range {
+  color: rgb(255, 99, 132);
+}
+.total-snow {
+  color: rgb(153, 102, 255);
+}
+
+@media (max-width: 768px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .forecast-summary {
+    margin-top: 5px;
+  }
+}
 @media (max-width: 991px) {
   .videos-grid, .favorites-grid {
     grid-template-columns: 1fr;

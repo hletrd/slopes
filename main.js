@@ -765,6 +765,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           document.title = `${basicTitle} - 일기예보`;
           updateAllResortsWeather();
+          loadForecastCharts();
           closeSidebar();
         }
 
@@ -1060,10 +1061,12 @@ document.addEventListener('DOMContentLoaded', function() {
       document.title = `${basicTitle} - 일기예보`;
 
       updateAllResortsWeather();
+      loadForecastCharts();
       closeSidebar();
     });
 
-    sidebar.appendChild(miscMenuItemContainer);
+    // TODO: 일기예보 완성 후 메뉴 활성화
+    // sidebar.appendChild(miscMenuItemContainer);
 
     const miscSection = document.createElement('div');
     miscSection.className = 'content-section';
@@ -2099,6 +2102,275 @@ document.addEventListener('DOMContentLoaded', function() {
           mainContent.innerHTML = '<div class="error-message">리조트 정보를 불러오지 못했습니다.</div>';
         }
       });
+  }
+
+  function loadForecastCharts() {
+    fetch('weather.grid.json?v=' + new Date().getTime())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to load forecast data');
+        }
+        return response.json();
+      })
+      .then(gridData => {
+        createForecastCharts(gridData);
+      })
+      .catch(error => {
+        console.error('Error loading forecast data:', error);
+        const forecastDiv = document.getElementById('forecast');
+        if (forecastDiv) {
+          forecastDiv.innerHTML = '<div class="alert alert-danger">일기예보 데이터를 불러오지 못했습니다.</div>';
+        }
+      });
+  }
+
+  function createForecastCharts(gridData) {
+    const forecastDiv = document.getElementById('forecast');
+    if (!forecastDiv) return;
+
+    forecastDiv.innerHTML = '';
+
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'forecast-header';
+    const updateTime = new Date(gridData.last_fetch_time);
+    headerDiv.innerHTML = `<h4>5일 예보 <small>(${updateTime.toLocaleDateString('ko-KR')} ${updateTime.toLocaleTimeString('ko-KR')} 업데이트)</small></h4>`;
+    forecastDiv.appendChild(headerDiv);
+
+    const chartColors = {
+      temperature: 'rgb(255, 99, 132)',
+      wind: 'rgb(54, 162, 235)',
+      snowfall: 'rgb(153, 102, 255)'
+    };
+
+    const now = new Date();
+    const timeLabels = [];
+    for (let i = 0; i <= 120; i += 3) {
+      const time = new Date(now.getTime() + i * 60 * 60 * 1000);
+      timeLabels.push(time);
+    }
+
+    const resorts = data.filter(resort => resort.name);
+
+    const chartGrid = document.createElement('div');
+    chartGrid.className = 'chart-grid';
+    forecastDiv.appendChild(chartGrid);
+
+    const forecastData = gridData.weathers;
+
+    resorts.forEach(resort => {
+      const resortName = resort.name;
+
+      const resortData = forecastData.find(item =>
+        item && typeof item === 'object' && item.resort === resortName
+      );
+
+      if (!resortData) {
+        console.error(`No forecast data found for resort ${resortName}`);
+        return;
+      }
+
+      const chartContainer = document.createElement('div');
+      chartContainer.className = 'chart-container';
+
+      const chartHeader = document.createElement('div');
+      chartHeader.className = 'chart-header';
+
+      const chartTitle = document.createElement('h4');
+      chartTitle.textContent = resortName;
+      chartHeader.appendChild(chartTitle);
+
+      if (!resortData.forecasts) {
+        console.error(`Invalid data format for resort ${resortName}:`, resortData);
+
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'alert alert-warning';
+        errorMessage.textContent = `${resortName}의 예보 데이터를 불러올 수 없습니다.`;
+        chartContainer.appendChild(errorMessage);
+        chartGrid.appendChild(chartContainer);
+        return;
+      }
+
+      const maxTemp = Math.max(...resortData.forecasts.map(d => d.temp || -Infinity));
+      const minTemp = Math.min(...resortData.forecasts.map(d => d.temp || Infinity));
+      const totalSnowfall = resortData.forecasts.reduce((sum, d) => sum + (d.snow_3h || 0), 0);
+
+      const forecastSummary = document.createElement('div');
+      forecastSummary.className = 'forecast-summary';
+      forecastSummary.innerHTML = `
+        <span class="temp-range">기온: ${minTemp.toFixed(1)}°C ~ ${maxTemp.toFixed(1)}°C</span>
+        <span class="total-snow">총 강설량: ${totalSnowfall.toFixed(1)}cm</span>
+      `;
+      chartHeader.appendChild(forecastSummary);
+
+      chartContainer.appendChild(chartHeader);
+
+      const canvas = document.createElement('canvas');
+      canvas.id = `chart-${resort.id}`;
+      chartContainer.appendChild(canvas);
+
+      chartGrid.appendChild(chartContainer);
+
+      const temperatureData = [];
+      const windData = [];
+      const snowfallData = [];
+
+      timeLabels.forEach(time => {
+        const timePoint = resortData.forecasts.find(d => {
+          const forecastTime = new Date(d.timestamp);
+          return Math.abs(forecastTime - time) < 3 * 60 * 60 * 1000; // Within 3 hours
+        });
+
+        if (timePoint) {
+          temperatureData.push(timePoint.temp);
+          windData.push(timePoint.wind_speed);
+          snowfallData.push(timePoint.snow_3hr || 0);
+        } else {
+          temperatureData.push(null);
+          windData.push(null);
+          snowfallData.push(null);
+        }
+      });
+
+      new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: timeLabels,
+          datasets: [
+            {
+              label: '기온 (°C)',
+              data: temperatureData,
+              borderColor: chartColors.temperature,
+              backgroundColor: chartColors.temperature + '33',
+              borderWidth: 2,
+              yAxisID: 'y',
+              tension: 0.3,
+              pointRadius: 3,
+              pointHoverRadius: 5
+            },
+            {
+              label: '풍속 (m/s)',
+              data: windData,
+              borderColor: chartColors.wind,
+              backgroundColor: chartColors.wind + '33',
+              borderWidth: 2,
+              yAxisID: 'y1',
+              tension: 0.3,
+              pointRadius: 3,
+              pointHoverRadius: 5
+            },
+            {
+              label: '강설량 (cm/3h)',
+              data: snowfallData,
+              borderColor: chartColors.snowfall,
+              backgroundColor: chartColors.snowfall + '33',
+              borderWidth: 2,
+              yAxisID: 'y2',
+              tension: 0.3,
+              pointRadius: 3,
+              pointHoverRadius: 5
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: function(context) {
+                  const date = new Date(context[0].parsed.x);
+                  return date.toLocaleDateString('ko-KR') + ' ' +
+                         date.toLocaleTimeString('ko-KR', {hour: '2-digit', minute: '2-digit'});
+                }
+              }
+            },
+            legend: {
+              position: 'top',
+              labels: {
+                usePointStyle: true,
+                padding: 15
+              }
+            }
+          },
+          scales: {
+            x: {
+              type: 'time',
+              time: {
+                unit: 'day',
+                displayFormats: {
+                  day: 'M/d'
+                },
+                tooltipFormat: 'yyyy년 MM월 dd일 HH:mm'
+              },
+              title: {
+                display: true,
+                text: '날짜/시간',
+                font: {
+                  weight: 'bold'
+                }
+              },
+              ticks: {
+                maxRotation: 0
+              }
+            },
+            y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: {
+                display: true,
+                text: '기온 (°C)',
+                font: {
+                  weight: 'bold'
+                }
+              },
+              suggestedMin: minTemp - 5,
+              suggestedMax: maxTemp + 5
+            },
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: {
+                display: true,
+                text: '풍속 (m/s)',
+                font: {
+                  weight: 'bold'
+                }
+              },
+              grid: {
+                drawOnChartArea: false
+              }
+            },
+            y2: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: {
+                display: true,
+                text: '강설량 (cm/3h)',
+                font: {
+                  weight: 'bold'
+                }
+              },
+              grid: {
+                drawOnChartArea: false
+              },
+              suggestedMin: 0,
+              suggestedMax: Math.max(...snowfallData) * 1.5 || 10
+            }
+          }
+        }
+      });
+    });
+
+    if (chartGrid.children.length === 0) {
+      forecastDiv.innerHTML = '<div class="alert alert-info">예보 데이터가 없습니다.</div>';
+    }
   }
 
   initializeApp();
