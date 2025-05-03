@@ -188,8 +188,12 @@ $ python3 server.py && open http://localhost:3001
 
 ### Release notes
 
+#### 05-02
+* OpenWeatherMap 기반 날씨 데이터 추가
+
 #### 05-01
 * Video.js 및 Bootstrap Icon 경량화
+* 모든 리소스 및 데이터에 gzip 또는 brotli 압축 적용 완료.
 
 #### 04-30
 * 전반적인 사이트 코드 구조 개선 및 최적화
@@ -213,6 +217,11 @@ $ python3 server.py && open http://localhost:3001
   * ~~SDK 자체가 한 페이지에서 여러 영상을 동시 재생하지 못하도록 되어 있음.~~
     * ~~iframe을 쓰면 되긴 하는데 나중에 하는걸로..~~
     * 완료
+* [ ] 비발디파크 리버스 엔지니어링 및 기능 구현
+  * Wesp JS SDK 웹소켓 프로토콜 분석 및 기능 구현
+  * `wss://skirds.daemyung.com:8081/wesp`로 binary websocket 연결을 날린 뒤 모종의 로그인을 함
+    * 로그인 요청이 없으면 서버가 웹소켓 연결을 닫아버림.
+  * 웹캠 스트리밍 영상은 JFIF 스트림으로 날아옴.
 * [x] 오투리조트 직접 스트리밍 지원
 * [ ] 날씨 지도 추가 (구상중)
   * [ ] 특정 지역에 핀을 추가해서 날씨를 확인할 수 있게
