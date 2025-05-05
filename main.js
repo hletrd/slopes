@@ -2157,6 +2157,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const forecastData = gridData.weathers;
 
+    console.log("Weather data structure:", {
+      lastFetchTime: gridData.last_fetch_time,
+      weathersCount: forecastData.length,
+      sampleData: forecastData[0] || null
+    });
+
     resorts.forEach(resort => {
       const resortName = resort.name;
 
@@ -2190,9 +2196,29 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
-      const maxTemp = Math.max(...resortData.forecasts.map(d => d.temp || -Infinity));
-      const minTemp = Math.min(...resortData.forecasts.map(d => d.temp || Infinity));
-      const totalSnowfall = resortData.forecasts.reduce((sum, d) => sum + (d.snow_3h || 0), 0);
+      // Ensure forecasts data is valid by filtering out null/undefined entries
+      const validForecasts = resortData.forecasts.filter(f => f && typeof f === 'object');
+
+      // Log the first forecast to debug
+      if (validForecasts.length > 0) {
+        console.log(`Sample forecast for ${resortName}:`, validForecasts[0]);
+      }
+
+      // Only proceed if we have valid forecasts
+      if (validForecasts.length === 0) {
+        console.error(`No valid forecasts for resort ${resortName}`);
+
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'alert alert-warning';
+        errorMessage.textContent = `${resortName}의 예보 데이터가 비어있습니다.`;
+        chartContainer.appendChild(errorMessage);
+        chartGrid.appendChild(chartContainer);
+        return;
+      }
+
+      const maxTemp = Math.max(...validForecasts.map(d => d.temp || -Infinity));
+      const minTemp = Math.min(...validForecasts.map(d => d.temp || Infinity));
+      const totalSnowfall = validForecasts.reduce((sum, d) => sum + (d.snow_3h || 0), 0);
 
       const forecastSummary = document.createElement('div');
       forecastSummary.className = 'forecast-summary';
@@ -2213,28 +2239,35 @@ document.addEventListener('DOMContentLoaded', function() {
       const temperatureData = [];
       const windData = [];
       const snowfallData = [];
+      const actualTimeLabels = [];
 
-      timeLabels.forEach(time => {
-        const timePoint = resortData.forecasts.find(d => {
-          const forecastTime = new Date(d.timestamp);
-          return Math.abs(forecastTime - time) < 3 * 60 * 60 * 1000; // Within 3 hours
-        });
+      // Sort forecasts by timestamp to ensure proper order
+      validForecasts.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
-        if (timePoint) {
-          temperatureData.push(timePoint.temp);
-          windData.push(timePoint.wind_speed);
-          snowfallData.push(timePoint.snow_3hr || 0);
-        } else {
-          temperatureData.push(null);
-          windData.push(null);
-          snowfallData.push(null);
+      // Use actual forecast timestamps instead of generating new ones
+      validForecasts.forEach(forecast => {
+        if (forecast && forecast.timestamp) {
+          const forecastTime = new Date(forecast.timestamp);
+
+          // Only include forecasts in the next 120 hours
+          if (forecastTime > now && forecastTime < new Date(now.getTime() + 120 * 60 * 60 * 1000)) {
+            actualTimeLabels.push(forecastTime);
+            temperatureData.push(forecast.temp);
+            windData.push(forecast.wind_speed);
+            snowfallData.push(forecast.snow_3h || 0);
+          }
         }
       });
 
+      // Configure chart theme for dark mode
+      Chart.defaults.color = '#e0e0e0';
+      Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+
+      // Create the chart
       new Chart(canvas, {
         type: 'line',
         data: {
-          labels: timeLabels,
+          labels: actualTimeLabels,
           datasets: [
             {
               label: '기온 (°C)',
@@ -2245,7 +2278,9 @@ document.addEventListener('DOMContentLoaded', function() {
               yAxisID: 'y',
               tension: 0.3,
               pointRadius: 3,
-              pointHoverRadius: 5
+              pointHoverRadius: 5,
+              fill: false,
+              spanGaps: true
             },
             {
               label: '풍속 (m/s)',
@@ -2256,7 +2291,9 @@ document.addEventListener('DOMContentLoaded', function() {
               yAxisID: 'y1',
               tension: 0.3,
               pointRadius: 3,
-              pointHoverRadius: 5
+              pointHoverRadius: 5,
+              fill: false,
+              spanGaps: true
             },
             {
               label: '강설량 (cm/3h)',
@@ -2267,7 +2304,9 @@ document.addEventListener('DOMContentLoaded', function() {
               yAxisID: 'y2',
               tension: 0.3,
               pointRadius: 3,
-              pointHoverRadius: 5
+              pointHoverRadius: 5,
+              fill: false,
+              spanGaps: true
             }
           ]
         },
@@ -2286,13 +2325,22 @@ document.addEventListener('DOMContentLoaded', function() {
                   return date.toLocaleDateString('ko-KR') + ' ' +
                          date.toLocaleTimeString('ko-KR', {hour: '2-digit', minute: '2-digit'});
                 }
-              }
+              },
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              titleColor: '#ffffff',
+              bodyColor: '#ffffff',
+              borderColor: 'rgba(255, 255, 255, 0.2)',
+              borderWidth: 1
             },
             legend: {
               position: 'top',
               labels: {
                 usePointStyle: true,
-                padding: 15
+                padding: 15,
+                color: '#e0e0e0',
+                font: {
+                  weight: 'bold'
+                }
               }
             }
           },
@@ -2309,12 +2357,18 @@ document.addEventListener('DOMContentLoaded', function() {
               title: {
                 display: true,
                 text: '날짜/시간',
+                color: '#e0e0e0',
                 font: {
                   weight: 'bold'
                 }
               },
               ticks: {
-                maxRotation: 0
+                maxRotation: 0,
+                color: '#e0e0e0'
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)',
+                borderColor: 'rgba(255, 255, 255, 0.2)'
               }
             },
             y: {
@@ -2324,12 +2378,20 @@ document.addEventListener('DOMContentLoaded', function() {
               title: {
                 display: true,
                 text: '기온 (°C)',
+                color: chartColors.temperature,
                 font: {
                   weight: 'bold'
                 }
               },
               suggestedMin: minTemp - 5,
-              suggestedMax: maxTemp + 5
+              suggestedMax: maxTemp + 5,
+              ticks: {
+                color: '#e0e0e0'
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)',
+                borderColor: 'rgba(255, 255, 255, 0.2)'
+              }
             },
             y1: {
               type: 'linear',
@@ -2338,12 +2400,18 @@ document.addEventListener('DOMContentLoaded', function() {
               title: {
                 display: true,
                 text: '풍속 (m/s)',
+                color: chartColors.wind,
                 font: {
                   weight: 'bold'
                 }
               },
               grid: {
-                drawOnChartArea: false
+                drawOnChartArea: false,
+                color: 'rgba(255, 255, 255, 0.1)',
+                borderColor: 'rgba(255, 255, 255, 0.2)'
+              },
+              ticks: {
+                color: '#e0e0e0'
               }
             },
             y2: {
@@ -2353,15 +2421,21 @@ document.addEventListener('DOMContentLoaded', function() {
               title: {
                 display: true,
                 text: '강설량 (cm/3h)',
+                color: chartColors.snowfall,
                 font: {
                   weight: 'bold'
                 }
               },
               grid: {
-                drawOnChartArea: false
+                drawOnChartArea: false,
+                color: 'rgba(255, 255, 255, 0.1)',
+                borderColor: 'rgba(255, 255, 255, 0.2)'
               },
               suggestedMin: 0,
-              suggestedMax: Math.max(...snowfallData) * 1.5 || 10
+              suggestedMax: Math.max(...snowfallData) * 1.5 || 10,
+              ticks: {
+                color: '#e0e0e0'
+              }
             }
           }
         }
