@@ -6,6 +6,7 @@ import re
 import threading
 from concurrent.futures import ThreadPoolExecutor
 import datetime
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 
 def extract_m3u8_from_url(url):
@@ -48,6 +49,219 @@ def extract_m3u8_from_url(url):
     return None
 
 
+def get_alpensia_youtube_embed_element(url='https://www.alpensia.com/guide/web-cam.do'):
+  headers = {
+    'User-Agent': (
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+      'AppleWebKit/537.36 (KHTML, like Gecko) '
+      'Chrome/135.0.0.0 Safari/537.36'
+    )
+  }
+
+  try:
+    response = requests.get(url, headers=headers, timeout=5)
+    response.raise_for_status()
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    iframe = soup.find('iframe', src=re.compile(r'youtube\.com/embed/'))
+
+    if iframe and iframe.get('src'):
+      print(f"[alpensia] Found YouTube embed iframe: {iframe.get('src')}")
+      return iframe
+
+    print(f"[alpensia] No YouTube iframe found on {url}")
+  except Exception as e:
+    print(f"[alpensia] Error fetching YouTube iframe: {e}")
+
+  return None
+
+
+def _is_live_video_renderer(video_renderer):
+  if not video_renderer:
+    return False
+
+  if video_renderer.get('isLiveNow') or video_renderer.get('isLive'):
+    return True
+
+  for badge in video_renderer.get('badges', []):
+    badge_renderer = badge.get('metadataBadgeRenderer', {})
+    label = badge_renderer.get('label', '').lower()
+    style = badge_renderer.get('style', '')
+    if label in ('live', '실시간') or style == 'BADGE_STYLE_TYPE_LIVE_NOW':
+      return True
+
+  for overlay in video_renderer.get('thumbnailOverlays', []):
+    overlay_renderer = overlay.get('thumbnailOverlayTimeStatusRenderer')
+    if overlay_renderer and overlay_renderer.get('style') == 'LIVE':
+      return True
+
+  return False
+
+
+def _find_live_video_id(contents):
+  fallback_id = None
+
+  for item in contents:
+    video_renderer = (
+      item.get('richItemRenderer', {})
+      .get('content', {})
+      .get('videoRenderer')
+    )
+
+    if not video_renderer:
+      continue
+
+    video_id = video_renderer.get('videoId')
+    if not video_id:
+      continue
+
+    if _is_live_video_renderer(video_renderer):
+      return video_id
+
+    if not fallback_id:
+      fallback_id = video_id
+
+  return fallback_id
+
+
+def get_youtube_live_video_id(channel_url):
+  headers = {
+    'User-Agent': (
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+      'AppleWebKit/537.36 (KHTML, like Gecko) '
+      'Chrome/135.0.0.0 Safari/537.36'
+    )
+  }
+
+  try:
+    response = requests.get(channel_url, headers=headers, timeout=10)
+    response.raise_for_status()
+
+    text = response.text
+    start_token = 'var ytInitialData = '
+    start_index = text.find(start_token)
+    if start_index == -1:
+      print(f"[youtube] ytInitialData not found on {channel_url}")
+      return None
+
+    start_index += len(start_token)
+    end_index = text.find(';</script>', start_index)
+    if end_index == -1:
+      print(f"[youtube] ytInitialData end tag not found on {channel_url}")
+      return None
+
+    json_text = text[start_index:end_index]
+    data = json.loads(json_text)
+
+    tabs = (
+      data.get('contents', {})
+      .get('twoColumnBrowseResultsRenderer', {})
+      .get('tabs', [])
+    )
+
+    def extract_contents(tab_renderer):
+      if not tab_renderer:
+        return []
+      content = tab_renderer.get('content', {})
+      rich_grid = content.get('richGridRenderer')
+      if not rich_grid:
+        return []
+      return rich_grid.get('contents', [])
+
+    for tab in tabs:
+      renderer = tab.get('tabRenderer')
+      if renderer and renderer.get('selected'):
+        contents = extract_contents(renderer)
+        live_video_id = _find_live_video_id(contents)
+        if live_video_id:
+          return live_video_id
+
+    for tab in tabs:
+      renderer = tab.get('tabRenderer')
+      contents = extract_contents(renderer)
+      if not contents:
+        continue
+      live_video_id = _find_live_video_id(contents)
+      if live_video_id:
+        return live_video_id
+
+    print(f"[youtube] No live video found on {channel_url}")
+  except Exception as e:
+    print(f"[youtube] Error fetching live video id from {channel_url}: {e}")
+
+  return None
+
+
+def build_proxied_url(stream_url, proxy_ip=None):
+  parsed = urlparse(stream_url)
+
+  query = dict(parse_qsl(parsed.query, keep_blank_values=True))
+  if proxy_ip:
+    query['ip'] = proxy_ip
+
+  new_query = urlencode(query, doseq=True)
+  normalized_url = urlunparse(parsed._replace(query=new_query))
+
+  proxy_base = f"/stream_proxy/{parsed.scheme}/{parsed.netloc}{parsed.path}"
+  if new_query:
+    proxy_url = f"{proxy_base}?{new_query}"
+  else:
+    proxy_url = proxy_base
+
+  return proxy_url, normalized_url
+
+
+def ensure_proxy_ip(video_url, proxy_ip):
+  if not video_url:
+    return None
+
+  if video_url.startswith('/stream_proxy/'):
+    base, sep, query = video_url.partition('?')
+    params = dict(parse_qsl(query, keep_blank_values=True)) if sep else {}
+    if proxy_ip:
+      params['ip'] = proxy_ip
+    new_query = urlencode(params, doseq=True)
+    return f"{base}?{new_query}" if new_query else base
+
+  proxy_url, _ = build_proxied_url(video_url, proxy_ip)
+  return proxy_url
+
+
+def get_rtsp_me_stream_url(embed_url, proxy_ip=None):
+  headers = {
+    'User-Agent': (
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+      'AppleWebKit/537.36 (KHTML, like Gecko) '
+      'Chrome/135.0.0.0 Safari/537.36'
+    )
+  }
+
+  try:
+    response = requests.get(embed_url, headers=headers, timeout=5)
+    response.raise_for_status()
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    pattern = re.compile(r"\$\.(?:get|post)\('([^']+\.m3u8[^']*)'\)")
+
+    for script in soup.find_all('script'):
+      script_text = script.string or script.get_text()
+      if not script_text:
+        continue
+
+      match = pattern.search(script_text)
+      if match:
+        stream_url = match.group(1)
+        proxy_url, normalized_url = build_proxied_url(stream_url, proxy_ip)
+        print(f"[rtsp.me] Found stream {normalized_url} -> {proxy_url}")
+        return proxy_url
+
+    print(f"[rtsp.me] No stream url found on {embed_url}")
+  except Exception as e:
+    print(f"[rtsp.me] Error fetching stream url from {embed_url}: {e}")
+
+  return None
+
+
 def process_link(item, resort_id):
   link = item.get('link')
   video = item.get('video')
@@ -55,6 +269,57 @@ def process_link(item, resort_id):
 
   if link:
     print(f"[{resort_id}] Processing link: {link}")
+
+    if resort_id == 'alpensia' and 'alpensia.com/guide/web-cam.do' in link:
+      iframe = get_alpensia_youtube_embed_element(link)
+      if iframe and iframe.get('src'):
+        embed_src = iframe.get('src')
+        if video != embed_src:
+          item['video'] = embed_src
+          print(f"[alpensia] Updated video link to {embed_src}")
+          result["modified"] = True
+        else:
+          print("[alpensia] Video link already up to date")
+      else:
+        print("[alpensia] Unable to locate YouTube embed iframe")
+
+      return result
+
+    if resort_id == 'elysian' and 'youtube.com/@11-lf8zw' in link:
+      live_video_id = get_youtube_live_video_id(link)
+      if live_video_id:
+        live_video_url = f"https://www.youtube.com/watch?v={live_video_id}"
+        if video != live_video_url:
+          item['video'] = live_video_url
+          print(f"[elysian] Updated video link to {live_video_url}")
+          result["modified"] = True
+
+        if item.get('video_type') != 'youtube':
+          item['video_type'] = 'youtube'
+          result["modified"] = True
+
+        if item.get('name') != '실시간 영상':
+          item['name'] = '실시간 영상'
+          result["modified"] = True
+      else:
+        print("[elysian] Unable to locate live YouTube video")
+
+      return result
+
+    if resort_id == 'edenvalley' and 'rtsp.me/embed' in link:
+      proxy_ip = '130.162.144.168'
+      proxied_url = get_rtsp_me_stream_url(link, proxy_ip=proxy_ip)
+      if not proxied_url and video:
+        proxied_url = ensure_proxy_ip(video, proxy_ip)
+      if proxied_url:
+        if video != proxied_url:
+          item['video'] = proxied_url
+          print(f"[edenvalley] Updated video link to {proxied_url}")
+          result["modified"] = True
+      else:
+        print(f"[edenvalley] Unable to fetch stream url for {link}")
+
+      return result
 
     if link.endswith('.m3u8'):
       item['video'] = link
