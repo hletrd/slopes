@@ -816,6 +816,26 @@
         "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3",
         "name": "으뜸마루",
         "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam3.m3u8"
+},
+      {
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=4",
+        "name": "카메라 4",
+        "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam4.m3u8"
+      },
+      {
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=5",
+        "name": "카메라 5",
+        "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam5.m3u8"
+      },
+      {
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=6",
+        "name": "카메라 6",
+        "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam6.m3u8"
+      },
+      {
+        "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=7",
+        "name": "카메라 7",
+        "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam7.m3u8"
       }
     ],
     "name": "오투리조트",
