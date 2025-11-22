@@ -178,7 +178,7 @@
     "links": [
       {
         "link": "https://www.youtube.com/@11-lf8zw/streams",
-"name": "실시간 영상",
+        "name": "실시간 영상",
         "video": "https://www.youtube.com/watch?v=O6_8VBu4FSA",
         "video_type": "youtube"
       }
@@ -514,7 +514,7 @@
     "id": "alpensia",
     "links": [
       {
-"link": "https://www.alpensia.com/guide/web-cam.do",
+        "link": "https://www.alpensia.com/guide/web-cam.do",
         "name": "알펜시아 리조트 라이브캠",
         "video": "https://www.youtube.com/embed/482p_sVR2sA",
         "video_type": "youtube"
@@ -816,7 +816,7 @@
         "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=3",
         "name": "으뜸마루",
         "video": "/stream_proxy/http/118.46.149.144:8080/ramdisk/cam3.m3u8"
-},
+      },
       {
         "link": "http://118.46.149.144:8080/streaming/streamhls.jsp?ch=4",
         "name": "카메라 4",
