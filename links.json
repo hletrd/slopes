@@ -177,9 +177,10 @@
     "id": "elysian",
     "links": [
       {
-        "name": "유튜브 채널",
-        "video": "https://www.youtube.com/@11-lf8zw/streams",
-        "video_type": "link"
+        "link": "https://www.youtube.com/@11-lf8zw/streams",
+"name": "실시간 영상",
+        "video": "https://www.youtube.com/watch?v=O6_8VBu4FSA",
+        "video_type": "youtube"
       }
     ],
     "name": "엘리시안 강촌",
