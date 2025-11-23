@@ -156,6 +156,9 @@ h2 {
   padding-top: 2px;
   padding-left: 8px;
 }
+body.light-mode .toggle-menu {
+  color: #1f2937;
+}
 .loading {
   text-align: center;
   padding: 50px;
@@ -436,6 +439,10 @@ h2 {
   color: #fff;
   text-decoration: none;
   font-weight: 800;
+}
+.mobile-nav.light-mode .mobile-title a,
+body.light-mode .mobile-title a {
+  color: #1f2937;
 }
 .sidebar-backdrop {
   display: none;
@@ -1033,75 +1040,73 @@ b {
 .quad-view-button:hover {
   background-color: #0053aa;
 }
-.quad-modal {
+.quad-view-container {
   display: none;
+}
+.quad-view-container.active {
+  display: block;
+}
+.quad-page {
   position: fixed;
-  z-index: 1000;
-  left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  transition: opacity 0.3s;
-  animation: fadeIn 0.3s forwards;
-  align-items: center;
-  justify-content: center;
-}
-.quad-content {
-  background-color: #2a2a2a;
-  padding: 20px;
-  border-radius: 10px;
-  width: min(1200px, 92%);
-  position: relative;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  animation: slideIn 0.3s forwards;
-}
-.quad-title {
-  margin-top: 0;
-  margin-bottom: 16px;
-  font-weight: 800;
-}
-.quad-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  color: #aaa;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 0;
-  width: 30px;
-  height: 30px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #141414;
+  z-index: 999;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  flex-direction: column;
+  padding: 16px;
 }
-.quad-close:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+.quad-page.light-mode {
+  background-color: #f3f5fb;
+}
+.quad-page-header {
+  margin-bottom: 12px;
+  color: #fefefe;
+}
+.quad-page.light-mode .quad-page-header {
+  color: #0f172a;
+}
+.quad-page-controls {
+  display: flex;
+  justify-content: flex-end;
+}
+.quad-select {
+  width: 100%;
+  padding: 8px 32px 8px 10px;
+  border-radius: 6px;
+  background-color: #252626;
+  color: #e5e7eb;
+  border: 1px solid #3b3b3b;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23e5e7eb' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px;
+  font-size: 0.85rem;
+}
+.quad-page.light-mode .quad-select {
+  background-color: #ffffff;
+  color: #0f172a;
+  border: 1px solid #d9e1ec;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%230f172a' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'/%3E%3C/svg%3E");
 }
 .quad-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  flex: 1;
 }
 .quad-slot {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  height: 100%;
 }
 .quad-label {
   font-weight: 650;
-}
-.quad-select {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 6px;
-  background-color: #1e1e1e;
-  color: #e0e0e0;
-  border: 1px solid #444;
 }
 .quad-select:focus {
   outline: none;
@@ -1110,18 +1115,25 @@ b {
 }
 .quad-video {
   position: relative;
-  padding-top: 56.25%;
+  flex: 1;
+  min-height: 0;
   background-color: #000;
   border-radius: 8px;
   overflow: hidden;
+  display: flex;
 }
 .quad-video .video-js,
 .quad-video iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+.quad-video .video-js {
+  height: 100% !important;
+  padding-top: 0 !important;
+}
+.quad-video .video-js .vjs-tech {
+  object-fit: cover;
 }
 @media (max-width: 900px) {
   .quad-grid {
@@ -1236,6 +1248,14 @@ input:checked + .toggle-slider:before {
 body.light-mode {
   background-color: #f6f8fb;
   color: #1b1b1b;
+}
+body.quad-view-open {
+  overflow: hidden;
+}
+body.quad-view-open .floating-button-group,
+body.quad-view-open .info-button {
+  opacity: 0;
+  pointer-events: none;
 }
 body.light-mode .sidebar {
   background-color: #ffffff;
@@ -1375,6 +1395,9 @@ body.light-mode input:checked + .toggle-slider {
 }
 body.light-mode .info-button {
   color: #0f172a;
+}
+body.light-mode .mobile-title {
+  color: #1f2937;
 }
 body.light-mode .footer {
   background-color: rgba(255, 255, 255, 0.9);
@@ -1609,4 +1632,34 @@ body.light-mode .location-name.clickable:hover {
   gap: 12px;
   z-index: 120;
   align-items: flex-end;
+}
+.quad-page-back {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(30, 30, 30, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s, transform 0.2s;
+  z-index: 100;
+}
+.quad-page-back:hover {
+  background-color: rgba(60, 60, 60, 0.9);
+  transform: translateY(-1px);
+}
+.quad-page.light-mode .quad-page-back {
+  background-color: rgba(210, 210, 210, 0.9);
+  color: #0f172a;
+}
+.quad-page.light-mode .quad-page-back:hover {
+  background-color: rgba(180, 180, 180, 0.9);
 }

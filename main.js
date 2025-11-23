@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let isMobile = window.innerWidth <= 768;
   let favorites = loadFavorites();
   let settings = loadSettings();
+  let quadSelections = loadQuadState();
 
   function loadSettings() {
     try {
@@ -67,6 +68,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function loadQuadState() {
+    try {
+      const stored = localStorage.getItem('quadViewSelections');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          while (parsed.length < 4) parsed.push('');
+          return parsed.slice(0, 4).map(item => (typeof item === 'string' ? item : ''));
+        }
+      }
+    } catch (e) {
+      console.error('Error loading quad selections:', e);
+    }
+    return ['', '', '', ''];
+  }
+
+  function saveQuadState() {
+    try {
+      localStorage.setItem('quadViewSelections', JSON.stringify(quadSelections));
+    } catch (e) {
+      console.error('Error saving quad selections:', e);
+    }
+  }
+
   function applyTheme() {
     if (settings.darkMode === false) {
       document.body.classList.add('light-mode');
@@ -75,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.body.classList.remove('light-mode');
       document.documentElement.setAttribute('data-theme', 'dark');
     }
+    updateQuadPageTheme();
   }
 
   const settingsButton = document.getElementById('settingsButton');
@@ -138,8 +164,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const installationModal = document.getElementById('installationModal');
   const closeModal = document.getElementById('closeModal');
   const quadViewButton = document.getElementById('quadViewButton');
-  const quadViewModal = document.getElementById('quadViewModal');
-  const closeQuadViewModal = document.getElementById('closeQuadViewModal');
+  const quadViewContainer = document.getElementById('quadViewContainer');
+  const quadBackButton = document.getElementById('quadBackButton');
   const quadSelects = Array.from(document.querySelectorAll('.quad-select'));
   const quadVideoContainers = Array.from(document.querySelectorAll('.quad-video'));
 
@@ -179,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  function loadQuadSlot(slotIndex, value) {
+  function loadQuadSlot(slotIndex, value, skipSave = false) {
     const container = quadVideoContainers[slotIndex];
     if (!container) return;
 
@@ -189,7 +215,13 @@ document.addEventListener('DOMContentLoaded', function() {
     quadPlayers[slotIndex] = null;
     container.innerHTML = '';
 
-    if (!value) return;
+    if (!value) {
+      quadSelections[slotIndex] = '';
+      if (!skipSave) {
+        saveQuadState();
+      }
+      return;
+    }
 
     const [resortId, webcamIndexStr] = value.split('||');
     const webcamIndex = parseInt(webcamIndexStr, 10);
@@ -206,6 +238,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const player = createVideoPlayer(videoUrl, container, `quad-${resortId}-${webcamIndex}`, webcam.video_type);
     if (player) {
       quadPlayers[slotIndex] = player;
+    }
+    quadSelections[slotIndex] = value;
+    if (!skipSave) {
+      saveQuadState();
+    }
+  }
+
+  function updateQuadPageTheme() {
+    const quadPage = document.getElementById('quadViewPage');
+    if (!quadPage) return;
+    if (settings.darkMode === false) {
+      quadPage.classList.add('light-mode');
+    } else {
+      quadPage.classList.remove('light-mode');
     }
   }
 
@@ -225,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
 
-    quadSelects.forEach(select => {
+    quadSelects.forEach((select, idx) => {
       const currentValue = select.value;
       select.innerHTML = '';
 
@@ -241,26 +287,37 @@ document.addEventListener('DOMContentLoaded', function() {
         select.appendChild(optionEl);
       });
 
-      if (currentValue && options.some(opt => opt.value === currentValue)) {
-        select.value = currentValue;
+      const savedValue = quadSelections[idx] || '';
+      const hasSavedOption = savedValue && options.some(opt => opt.value === savedValue);
+      if (hasSavedOption) {
+        select.value = savedValue;
+        loadQuadSlot(idx, savedValue, true);
+      } else {
+        select.value = '';
+        if (savedValue) {
+          quadSelections[idx] = '';
+          saveQuadState();
+        }
+        loadQuadSlot(idx, '', true);
       }
     });
   }
 
   function openQuadView(setHash = false) {
-    if (!quadViewModal) return;
-    quadViewModal.style.display = 'flex';
-    quadViewModal.classList.add('active');
+    if (!quadViewContainer) return;
+    quadViewContainer.classList.add('active');
+    document.body.classList.add('quad-view-open');
     populateQuadSelects();
+    updateQuadPageTheme();
     if (setHash) {
       window.location.hash = 'quad';
     }
   }
 
   function closeQuadView(updateHash = false) {
-    if (!quadViewModal) return;
-    quadViewModal.style.display = 'none';
-    quadViewModal.classList.remove('active');
+    if (!quadViewContainer) return;
+    quadViewContainer.classList.remove('active');
+    document.body.classList.remove('quad-view-open');
     disposeQuadPlayers();
     if (updateHash && window.location.hash === '#quad') {
       window.location.hash = '';
@@ -291,17 +348,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  if (closeQuadViewModal) {
-    closeQuadViewModal.addEventListener('click', function() {
+  if (quadBackButton) {
+    quadBackButton.addEventListener('click', function() {
       closeQuadView(true);
-    });
-  }
-
-  if (quadViewModal) {
-    quadViewModal.addEventListener('click', function(event) {
-      if (event.target === quadViewModal) {
-        closeQuadView(true);
-      }
     });
   }
 

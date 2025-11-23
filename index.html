@@ -104,7 +104,7 @@
           <li>스키장의 사정에 따라 영상이 제공되지 않거나 변경될 수 있습니다.</li>
           <li>스키장의 사정에 의해 영상이 일시적으로, 또는 영구적으로 서비스 중단될 수 있습니다.</li>
           <li>모바일에서는 동시에 재생 가능한 영상의 수에 제한이 있을 수 있으며, 전체보기가 되지 않을 수 있습니다.</li>
-          <li>에덴밸리는 영상 중계 서비스에 결제를 하지 않은 것 같습니다.</li>
+          <li>에덴밸리는 영상 중계 서비스에 <s>결제를 하지 않은 것 같습니다.</s>25-26시즌에 결제했습니다.</li>
           <li>지산은 24/25시즌 영상 서비스를 중단했습니다.</li>
         </ul>
         <p>Q. 날씨 정보가 정확하지 않습니다.</p>
@@ -146,28 +146,25 @@
     </div>
   </div>
 
-  <div id="quadViewModal" class="quad-modal">
-    <div class="quad-content">
-      <button class="quad-close" id="closeQuadViewModal"><i class="bi bi-x"></i></button>
-      <h4 class="quad-title">4분할 모드</h4>
+  <div id="quadViewContainer" class="quad-view-container">
+    <div id="quadViewPage" class="quad-page">
+      <button id="quadBackButton" class="quad-page-back" title="돌아가기">
+        <i class="bi bi-arrow-left"></i>
+      </button>
       <div class="quad-grid">
         <div class="quad-slot">
-          <label class="quad-label" for="quadSelect1">화면 1</label>
           <select id="quadSelect1" class="quad-select" data-slot="0"></select>
           <div class="quad-video" id="quadVideo1"></div>
         </div>
         <div class="quad-slot">
-          <label class="quad-label" for="quadSelect2">화면 2</label>
           <select id="quadSelect2" class="quad-select" data-slot="1"></select>
           <div class="quad-video" id="quadVideo2"></div>
         </div>
         <div class="quad-slot">
-          <label class="quad-label" for="quadSelect3">화면 3</label>
           <select id="quadSelect3" class="quad-select" data-slot="2"></select>
           <div class="quad-video" id="quadVideo3"></div>
         </div>
         <div class="quad-slot">
-          <label class="quad-label" for="quadSelect4">화면 4</label>
           <select id="quadSelect4" class="quad-select" data-slot="3"></select>
           <div class="quad-video" id="quadVideo4"></div>
         </div>
@@ -208,9 +205,11 @@
     이 서비스는 스키장에서 공식적으로 제공하는 서비스가 아닙니다. 관련하여 스키장에 문의하지 마세요.
   </div>
 
+  <!--
   <button id="addToHomeButton" class="add-to-home">
     <i class="bi bi-plus-square"></i>
   </button>
+  -->
 
   <div id="installationModal" class="installation-modal">
     <button class="modal-close" id="closeModal"><i class="bi bi-x"></i></button>
