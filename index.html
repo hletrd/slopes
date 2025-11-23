@@ -53,6 +53,22 @@
   <link rel="stylesheet" href="/main.css?v=2025041700">
 </head>
 <body>
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('webcamSettings');
+        if (saved) {
+          const settings = JSON.parse(saved);
+          if (settings && settings.darkMode === false) {
+            document.body.classList.add('light-mode');
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+        }
+      } catch (e) {
+        console.error('Theme init error:', e);
+      }
+    })();
+  </script>
   <div class="mobile-nav">
     <div class="mobile-nav-inner">
       <button class="toggle-menu btn">☰</button>
@@ -65,10 +81,17 @@
     <i class="bi bi-file-earmark-text"></i>
   </button>
 
-  <button id="settingsButton" class="settings-button">
-    <i class="bi bi-gear"></i>
-  </button>
-
+  <div class="floating-button-group">
+    <button id="addToHomeButton" class="add-to-home" title="홈 화면에 추가">
+      <i class="bi bi-house-add"></i>
+    </button>
+    <button id="settingsButton" class="settings-button">
+      <i class="bi bi-gear"></i>
+    </button>
+    <button id="quadViewButton" class="quad-view-button" title="4분할 모드" aria-label="4분할 모드">
+      <i class="bi bi-border-all"></i>
+    </button>
+  </div>
   <div id="infoModal" class="info-modal">
     <div class="info-content">
       <button class="info-close" id="closeInfoModal"><i class="bi bi-x"></i></button>
@@ -111,6 +134,42 @@
             <input type="checkbox" id="autoplayToggle">
             <span class="toggle-slider"></span>
           </div>
+        </div>
+        <div class="setting-item">
+          <label for="themeToggle">다크 모드</label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="toggle-slider"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="quadViewModal" class="quad-modal">
+    <div class="quad-content">
+      <button class="quad-close" id="closeQuadViewModal"><i class="bi bi-x"></i></button>
+      <h4 class="quad-title">4분할 모드</h4>
+      <div class="quad-grid">
+        <div class="quad-slot">
+          <label class="quad-label" for="quadSelect1">화면 1</label>
+          <select id="quadSelect1" class="quad-select" data-slot="0"></select>
+          <div class="quad-video" id="quadVideo1"></div>
+        </div>
+        <div class="quad-slot">
+          <label class="quad-label" for="quadSelect2">화면 2</label>
+          <select id="quadSelect2" class="quad-select" data-slot="1"></select>
+          <div class="quad-video" id="quadVideo2"></div>
+        </div>
+        <div class="quad-slot">
+          <label class="quad-label" for="quadSelect3">화면 3</label>
+          <select id="quadSelect3" class="quad-select" data-slot="2"></select>
+          <div class="quad-video" id="quadVideo3"></div>
+        </div>
+        <div class="quad-slot">
+          <label class="quad-label" for="quadSelect4">화면 4</label>
+          <select id="quadSelect4" class="quad-select" data-slot="3"></select>
+          <div class="quad-video" id="quadVideo4"></div>
         </div>
       </div>
     </div>
@@ -189,5 +248,3 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 </body>
 </html>
-
-

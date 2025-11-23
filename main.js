@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const mainContent = document.querySelector('.main-content');
   const basicTitle = "Slopes cam";
   let activePlayers = [];
+  let quadPlayers = [null, null, null, null];
   let activeResort = null;
   let activeWebcam = null;
   let data = [];
@@ -39,14 +40,22 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       const settingsData = localStorage.getItem('webcamSettings');
       if (settingsData) {
-        return JSON.parse(settingsData);
+        const parsed = JSON.parse(settingsData);
+        if (typeof parsed.autoplay === 'undefined') {
+          parsed.autoplay = !isMobile;
+        }
+        if (typeof parsed.darkMode === 'undefined') {
+          parsed.darkMode = true;
+        }
+        return parsed;
       }
     } catch (e) {
       console.error('Error loading settings:', e);
     }
 
     return {
-      autoplay: !isMobile // Default: enabled on desktop, disabled on mobile
+      autoplay: !isMobile, // Default: enabled on desktop, disabled on mobile
+      darkMode: true
     };
   }
 
@@ -58,17 +67,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function applyTheme() {
+    if (settings.darkMode === false) {
+      document.body.classList.add('light-mode');
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+      document.body.classList.remove('light-mode');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  }
+
   const settingsButton = document.getElementById('settingsButton');
   const settingsModal = document.getElementById('settingsModal');
   const closeSettingsModal = document.getElementById('closeSettingsModal');
   const autoplayToggle = document.getElementById('autoplayToggle');
+  const themeToggle = document.getElementById('themeToggle');
 
+  applyTheme();
   autoplayToggle.checked = settings.autoplay;
+  if (themeToggle) {
+    themeToggle.checked = settings.darkMode !== false;
+  }
 
   autoplayToggle.addEventListener('change', function() {
     settings.autoplay = this.checked;
     saveSettings();
   });
+
+  if (themeToggle) {
+    themeToggle.addEventListener('change', function() {
+      settings.darkMode = this.checked;
+      applyTheme();
+      saveSettings();
+    });
+  }
 
   settingsButton.addEventListener('click', function() {
     settingsModal.style.display = 'block';
@@ -105,6 +137,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const addToHomeButton = document.getElementById('addToHomeButton');
   const installationModal = document.getElementById('installationModal');
   const closeModal = document.getElementById('closeModal');
+  const quadViewButton = document.getElementById('quadViewButton');
+  const quadViewModal = document.getElementById('quadViewModal');
+  const closeQuadViewModal = document.getElementById('closeQuadViewModal');
+  const quadSelects = Array.from(document.querySelectorAll('.quad-select'));
+  const quadVideoContainers = Array.from(document.querySelectorAll('.quad-video'));
 
   addToHomeButton.addEventListener('click', function() {
     installationModal.style.display = 'block';
@@ -124,6 +161,154 @@ document.addEventListener('DOMContentLoaded', function() {
     if (event.target === installationModal) {
       closeModal.click();
     }
+  });
+
+  function disposeQuadPlayers() {
+    quadPlayers.forEach((player, idx) => {
+      if (player && typeof player.dispose === 'function') {
+        try {
+          player.dispose();
+        } catch (e) {
+          console.error('Error disposing quad player', e);
+        }
+      }
+      quadPlayers[idx] = null;
+    });
+    quadVideoContainers.forEach(container => {
+      container.innerHTML = '';
+    });
+  }
+
+  function loadQuadSlot(slotIndex, value) {
+    const container = quadVideoContainers[slotIndex];
+    if (!container) return;
+
+    if (quadPlayers[slotIndex] && typeof quadPlayers[slotIndex].dispose === 'function') {
+      quadPlayers[slotIndex].dispose();
+    }
+    quadPlayers[slotIndex] = null;
+    container.innerHTML = '';
+
+    if (!value) return;
+
+    const [resortId, webcamIndexStr] = value.split('||');
+    const webcamIndex = parseInt(webcamIndexStr, 10);
+    const resort = data.find(r => r.id === resortId);
+    if (!resort || isNaN(webcamIndex)) return;
+
+    const webcams = resort.links || resort.webcams || [];
+    const webcam = webcams[webcamIndex];
+    if (!webcam) return;
+
+    const videoUrl = webcam.video || webcam.link;
+    if (!videoUrl) return;
+
+    const player = createVideoPlayer(videoUrl, container, `quad-${resortId}-${webcamIndex}`, webcam.video_type);
+    if (player) {
+      quadPlayers[slotIndex] = player;
+    }
+  }
+
+  function populateQuadSelects() {
+    if (!quadSelects.length || !Array.isArray(data) || data.length === 0) return;
+
+    const options = [];
+    data.forEach(resort => {
+      const webcams = resort.links || resort.webcams || [];
+      webcams.forEach((webcam, index) => {
+        const videoUrl = webcam.video || webcam.link;
+        if (!videoUrl) return;
+        options.push({
+          value: `${resort.id}||${index}`,
+          label: `${resort.name} - ${webcam.name || `카메라 ${index + 1}`}`
+        });
+      });
+    });
+
+    quadSelects.forEach(select => {
+      const currentValue = select.value;
+      select.innerHTML = '';
+
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = '카메라 선택';
+      select.appendChild(placeholder);
+
+      options.forEach(opt => {
+        const optionEl = document.createElement('option');
+        optionEl.value = opt.value;
+        optionEl.textContent = opt.label;
+        select.appendChild(optionEl);
+      });
+
+      if (currentValue && options.some(opt => opt.value === currentValue)) {
+        select.value = currentValue;
+      }
+    });
+  }
+
+  function openQuadView(setHash = false) {
+    if (!quadViewModal) return;
+    quadViewModal.style.display = 'flex';
+    quadViewModal.classList.add('active');
+    populateQuadSelects();
+    if (setHash) {
+      window.location.hash = 'quad';
+    }
+  }
+
+  function closeQuadView(updateHash = false) {
+    if (!quadViewModal) return;
+    quadViewModal.style.display = 'none';
+    quadViewModal.classList.remove('active');
+    disposeQuadPlayers();
+    if (updateHash && window.location.hash === '#quad') {
+      window.location.hash = '';
+    }
+  }
+
+  function updateFloatingLayout() {
+    const buttons = [
+      document.getElementById('addToHomeButton'),
+      document.getElementById('settingsButton'),
+      document.getElementById('quadViewButton')
+    ];
+    const container = document.querySelector('.floating-button-group');
+    if (!container) return;
+
+    buttons.forEach(btn => {
+      if (btn) {
+        container.appendChild(btn);
+      }
+    });
+  }
+
+  updateFloatingLayout();
+
+  if (quadViewButton) {
+    quadViewButton.addEventListener('click', function() {
+      openQuadView(true);
+    });
+  }
+
+  if (closeQuadViewModal) {
+    closeQuadViewModal.addEventListener('click', function() {
+      closeQuadView(true);
+    });
+  }
+
+  if (quadViewModal) {
+    quadViewModal.addEventListener('click', function(event) {
+      if (event.target === quadViewModal) {
+        closeQuadView(true);
+      }
+    });
+  }
+
+  quadSelects.forEach((select, idx) => {
+    select.addEventListener('change', function() {
+      loadQuadSlot(idx, this.value);
+    });
   });
 
   function loadFavorites() {
@@ -680,6 +865,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function handleHashChange() {
     const hash = window.location.hash.substring(1);
     if (!hash) {
+      closeQuadView(false);
       document.querySelectorAll('.content-section').forEach(section => {
         section.classList.remove('active');
       });
@@ -695,6 +881,14 @@ document.addEventListener('DOMContentLoaded', function() {
     window.processingHashChange = true;
 
     try {
+      if (hash === 'quad') {
+        openQuadView(false);
+        document.title = `${basicTitle} - 4분할 모드`;
+        return;
+      }
+
+      closeQuadView(false);
+
       if (hash === 'misc') {
         const defaultMessage = document.getElementById('default-message');
         defaultMessage.classList.remove('active');
@@ -971,6 +1165,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function initializeResorts(resorts) {
     data = resorts;
+    populateQuadSelects();
 
     sidebar.innerHTML = '<div class="site-title"><a href="./">Slopes cam</a></div>';
     const defaultContent = document.getElementById('default-message');

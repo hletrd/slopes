@@ -5,6 +5,9 @@ body {
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   font-weight: 350;
 }
+h4 {
+  color: inherit;
+}
 h2 {
   margin-bottom: 24px;
   font-size: 1.6rem;
@@ -587,6 +590,20 @@ h2 {
   color: white;
   font-weight: 800;
 }
+.floating-button-group {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 120;
+  align-items: center;
+}
+.floating-button-group button {
+  position: relative;
+  bottom: auto;
+  right: auto;
+}
 .info-text {
   color: #ddd;
   margin-top: 15px;
@@ -603,15 +620,12 @@ h2 {
   font-weight: 425;
 }
 .add-to-home {
-  position: fixed;
-  bottom: 70px;
-  right: 20px;
-  background-color: #1b6abf;
+  background-color: #0069d9;
   color: white;
   border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  display: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
@@ -620,11 +634,14 @@ h2 {
   border: none;
   font-weight: 600;
   padding-top: 2px;
-  padding-left: 6.5px;
+  padding-left: 4px;
 }
 .add-to-home i {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 550;
+}
+.add-to-home:hover {
+  background-color: #0053aa;
 }
 .github-button-issue {
   display: inline-block;
@@ -694,20 +711,24 @@ h2 {
 .weather-info {
   display: inline-block;
   font-size: 0.9rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 5px 10px;
-  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #f7fbff;
+  padding: 8px 12px;
+  border-radius: 8px;
   margin-left: 6px;
   vertical-align: middle;
   margin-bottom: 3px;
   width: 100%;
-  font-weight: 425;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 .weather-data {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   display: block;
   margin-top: 3px;
-  font-weight: 425;
+  font-weight: 450;
+  color: #dce8ff;
 }
 .wind-speed::after {
   content: "";
@@ -729,13 +750,13 @@ h2 {
 .location-name {
   font-weight: 700;
   margin-bottom: 2px;
-  color: #ccc;
+  color: #fdfdff;
 }
 .weather-update-time {
-  font-size: 0.7rem;
-  color: #888;
+  font-size: 0.72rem;
+  color: #b7c5e4;
   margin-left: 8px;
-  font-weight: 250;
+  font-weight: 300;
 }
 .weather-info i {
   margin-right: 5px;
@@ -760,6 +781,12 @@ h2 {
 .snowfall {
   color: #d0ebff;
   font-weight: 600;
+}
+body.light-mode .humidity {
+  color: #5c73b3;
+}
+body.light-mode .snowfall {
+  color: #4a84a7;
 }
 .dropdown-toggle {
   position: absolute;
@@ -833,6 +860,17 @@ h2 {
 }
 .btn-primary {
   font-weight: 650;
+  background-color: #0b5ed7;
+  border-color: #0b5ed7;
+  color: #fff;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #0a53be;
+  border-color: #0a53be;
+  box-shadow: 0 6px 18px rgba(11, 94, 215, 0.35);
+  transform: translateY(-1px);
 }
 .btn-lg {
   font-weight: 700;
@@ -955,9 +993,6 @@ b {
   cursor: pointer;
 }
 .settings-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -978,6 +1013,120 @@ b {
 }
 .settings-button i {
   margin-top: 2px;
+}
+.quad-view-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #0069d9;
+  color: white;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s;
+}
+.quad-view-button:hover {
+  background-color: #0053aa;
+}
+.quad-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: fadeIn 0.3s forwards;
+  align-items: center;
+  justify-content: center;
+}
+.quad-content {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 10px;
+  width: min(1200px, 92%);
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: slideIn 0.3s forwards;
+}
+.quad-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+.quad-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #aaa;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.quad-close:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.quad-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.quad-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.quad-label {
+  font-weight: 650;
+}
+.quad-select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+.quad-select:focus {
+  outline: none;
+  border-color: #1b6abf;
+  box-shadow: 0 0 0 2px rgba(27, 106, 191, 0.25);
+}
+.quad-video {
+  position: relative;
+  padding-top: 56.25%;
+  background-color: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.quad-video .video-js,
+.quad-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 900px) {
+  .quad-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .settings-modal {
   display: none;
@@ -1084,6 +1233,183 @@ input:checked + .toggle-slider {
 input:checked + .toggle-slider:before {
   transform: translateX(26px);
 }
+body.light-mode {
+  background-color: #f6f8fb;
+  color: #1b1b1b;
+}
+body.light-mode .sidebar {
+  background-color: #ffffff;
+  color: #0f172a;
+  border-right: 1px solid #e1e6ef;
+  box-shadow: 1px 0 8px rgba(0, 0, 0, 0.04);
+}
+body.light-mode .site-title {
+  background-color: #ffffff;
+  color: #0f172a;
+  border-bottom: 1px solid #e1e6ef;
+}
+body.light-mode .site-title a {
+  color: #0f172a;
+}
+body.light-mode .menu-item.active {
+  background-color: #e7f0ff;
+  border-left-color: #1b6abf;
+}
+body.light-mode .submenu-item.active {
+  background-color: #eef3fb;
+  border-left-color: #1b6abf;
+}
+body.light-mode .submenu-item:hover {
+  background-color: #f2f6fd;
+}
+body.light-mode .content-section,
+body.light-mode .content-section-default {
+  color: #1b1b1b;
+  background-color: #ffffff;
+  border: 1px solid #e1e6ef;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+body.light-mode .installation-modal {
+  background-color: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  border-top: 1px solid #e1e6ef;
+}
+body.light-mode .installation-steps {
+  background-color: #f7f9fc;
+  color: #0f172a;
+  border: 1px solid #e1e6ef;
+}
+body.light-mode .modal-close {
+  color: #555;
+}
+body.light-mode .add-to-home {
+  background-color: #0069d9;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+body.light-mode .btn-primary {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.35);
+}
+body.light-mode .btn-primary:hover,
+body.light-mode .btn-primary:focus {
+  background-color: #1a43bf;
+  border-color: #1a43bf;
+}
+body.light-mode .weather-info {
+  background-color: #ffffff;
+  color: #0f1c36;
+  border: 1px solid #e1e6ef;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+body.light-mode .weather-data {
+  color: #1f2a44;
+}
+body.light-mode .location-name {
+  color: #0f172a;
+}
+body.light-mode .weather-update-time {
+  color: #4b5563;
+}
+body.light-mode .instruction {
+  color: #0f172a;
+}
+body.light-mode .video-card {
+  background-color: #ffffff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+body.light-mode .video-card h3 {
+  color: #0f172a;
+}
+body.light-mode .favorites-section {
+  background-color: #ffffff;
+  border: 1px solid #e1e6ef;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+body.light-mode .favorites-remove-button {
+  color: #4b5563;
+}
+body.light-mode .favorites-remove-button:hover {
+  color: #0f172a;
+}
+body.light-mode .video-card .error-message {
+  background-color: #ffecec;
+}
+body.light-mode .mobile-nav {
+  background-color: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+body.light-mode .info-content,
+body.light-mode .settings-content,
+body.light-mode .quad-content {
+  background-color: #ffffff;
+  color: #1b1b1b;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+body.light-mode .info-title {
+  color: #0f172a;
+}
+.body.light-mode .weather-info { ??? }
+body.light-mode .info-text {
+  color: #1f2937;
+}
+body.light-mode .settings-close,
+body.light-mode .info-close,
+body.light-mode .quad-close {
+  color: #555;
+}
+body.light-mode .toggle-slider {
+  background-color: #d0d5dd;
+}
+body.light-mode .toggle-slider:before {
+  background-color: #ffffff;
+}
+body.light-mode .disclaimer {
+  color: #0f172a;
+}
+body.light-mode input:checked + .toggle-slider {
+  background-color: #2196f3;
+}
+body.light-mode .info-button {
+  color: #0f172a;
+}
+body.light-mode .footer {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #1f2937;
+  border-top: 1px solid #e1e6ef;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+}
+body.light-mode .quad-select {
+  background-color: #f7f9fc;
+  color: #0f172a;
+  border: 1px solid #d9e1ec;
+}
+body.light-mode .quad-select:focus {
+  border-color: #1b6abf;
+  box-shadow: 0 0 0 2px rgba(27, 106, 191, 0.2);
+}
+body.light-mode a {
+  color: #0f62d6;
+}
+body.light-mode .capture-button,
+body.light-mode .pip-button,
+body.light-mode .bookmark-button {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #0f172a;
+  border: 1px solid #d9e1ec;
+}
+body.light-mode .capture-button:hover,
+body.light-mode .pip-button:hover,
+body.light-mode .bookmark-button:hover {
+  background-color: rgba(230, 236, 245, 0.95);
+}
+body.light-mode .location-name.clickable:hover {
+  color: #0f62d6;
+  text-decoration: underline;
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -1091,28 +1417,6 @@ input:checked + .toggle-slider:before {
 @keyframes slideIn {
   from { transform: translateY(-20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}
-.add-to-home {
-  position: fixed;
-  bottom: 20px;
-  right: 85px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #0069d9;
-  color: white;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s;
-}
-.add-to-home:hover {
-  background-color: #0053aa;
 }
 .forecast-header {
   margin-bottom: 20px;
@@ -1296,4 +1600,13 @@ input:checked + .toggle-slider:before {
     padding-bottom: calc(8px + env(safe-area-inset-bottom, 0));
     min-height: calc(36px + env(safe-area-inset-bottom, 0));
   }
+}
+.floating-button-group {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 120;
+  align-items: flex-end;
 }
