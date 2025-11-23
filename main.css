@@ -1138,6 +1138,15 @@ b {
 @media (max-width: 900px) {
   .quad-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: none;
+    overflow-y: auto;
+    gap: 16px;
+  }
+  .quad-slot {
+    height: auto;
+  }
+  .quad-video {
+    height: 42vh;
   }
 }
 .settings-modal {
