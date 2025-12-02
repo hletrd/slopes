@@ -1,0 +1,11 @@
+[project]
+name = "timelapse-capture"
+version = "0.1.0"
+description = "Per-minute webcam frame capture and MySQL storage"
+requires-python = ">=3.11"
+dependencies = [
+  "pymysql>=1.1.0",
+  "python-dotenv>=1.0.1"
+]
+
+[tool.uv]
