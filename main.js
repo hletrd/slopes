@@ -258,6 +258,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function populateQuadSelects() {
     if (!Array.isArray(data) || data.length === 0) return;
+    if (window.quadSelectsInitialized) return;
+    window.quadSelectsInitialized = true;
 
     const dropdowns = document.querySelectorAll('.custom-dropdown');
 
