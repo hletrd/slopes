@@ -56,7 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     return {
       autoplay: !isMobile, // Default: enabled on desktop, disabled on mobile
-      darkMode: true
+      darkMode: true,
+      quadViewOpen: false
     };
   }
 
@@ -415,10 +416,11 @@ document.addEventListener('DOMContentLoaded', function () {
     disposeAllPlayers();
     populateQuadSelects();
     updateQuadPageTheme();
-    document.title = 'Slopes cam - quadview';
     if (setHash) {
       window.location.hash = 'quad';
     }
+    settings.quadViewOpen = true;
+    saveSettings();
   }
 
   function closeQuadView(updateHash = false) {
@@ -426,10 +428,11 @@ document.addEventListener('DOMContentLoaded', function () {
     quadViewContainer.classList.remove('active');
     document.body.classList.remove('quad-view-open');
     disposeQuadPlayers();
-    document.title = 'Slopes cam - 전국 스키장 실시간 웹캠 모음';
     if (updateHash && window.location.hash === '#quad') {
       window.location.hash = '';
     }
+    settings.quadViewOpen = false;
+    saveSettings();
   }
 
   function updateFloatingLayout() {
@@ -449,6 +452,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   updateFloatingLayout();
+
+  if (settings.quadViewOpen) {
+    openQuadView(true);
+  }
 
   if (quadViewButton) {
     quadViewButton.addEventListener('click', function () {
@@ -1337,6 +1344,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function initializeResorts(resorts) {
+    console.log('initializeResorts called with', resorts.length, 'resorts');
     data = resorts;
     populateQuadSelects();
 
@@ -2461,6 +2469,7 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('hashchange', handleHashChange);
 
   function initializeApp() {
+    console.log('initializeApp function entered');
     let initialWeatherDataPromise = Promise.resolve(null);
 
     if (window.location.hash) {
@@ -2967,5 +2976,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  console.log('Calling initializeApp at end of DOMContentLoaded');
   initializeApp();
 });
