@@ -415,6 +415,7 @@ document.addEventListener('DOMContentLoaded', function () {
     disposeAllPlayers();
     populateQuadSelects();
     updateQuadPageTheme();
+    document.title = 'Slopes cam - quadview';
     if (setHash) {
       window.location.hash = 'quad';
     }
@@ -425,6 +426,7 @@ document.addEventListener('DOMContentLoaded', function () {
     quadViewContainer.classList.remove('active');
     document.body.classList.remove('quad-view-open');
     disposeQuadPlayers();
+    document.title = 'Slopes cam - 전국 스키장 실시간 웹캠 모음';
     if (updateHash && window.location.hash === '#quad') {
       window.location.hash = '';
     }
