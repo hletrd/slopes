@@ -1765,6 +1765,7 @@ document.addEventListener('DOMContentLoaded', function () {
         muted
         playsinline
         preload="auto"
+        crossorigin="anonymous"
       >
         <source src="${videoUrl}" type="application/x-mpegURL">
         <p class="vjs-no-js">
@@ -1775,12 +1776,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     try {
       const player = videojs(`webcam-player-${id}`, {
-        liveui: true,
-        responsive: true,
-        fluid: false,
-        crossorigin: "anonymous",
-        liveTracker: {
-          trackingThreshold: 0
+        autoplay: settings.autoplay,
+        muted: true,
+        controls: true,
+        preload: 'auto',
+        fluid: true,
+        html5: {
+          hls: {
+            enableLowInitialPlaylist: true,
+            smoothQualityChange: true,
+            overrideNative: true
+          },
+          nativeVideoTracks: false,
+          nativeAudioTracks: false
         },
         controlBar: {
           captionsButton: false,
@@ -2220,6 +2228,43 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function downloadImage(dataURL, filename) {
+    // Check if mobile (iOS/Android)
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    // Try Web Share API first (only for mobile devices)
+    if (isMobile && navigator.canShare && navigator.share) {
+      try {
+        const arr = dataURL.split(',');
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        const file = new File([u8arr], filename, { type: mime });
+
+        if (navigator.canShare({ files: [file] })) {
+          navigator.share({
+            files: [file],
+            title: filename
+          }).catch((error) => {
+            if (error.name !== 'AbortError') {
+              console.error('Sharing failed:', error);
+              fallbackDownload(dataURL, filename);
+            }
+          });
+          return;
+        }
+      } catch (e) {
+        console.error('Error preparing share:', e);
+      }
+    }
+
+    fallbackDownload(dataURL, filename);
+  }
+
+  function fallbackDownload(dataURL, filename) {
     const link = document.createElement('a');
     link.href = dataURL;
     link.download = filename;
