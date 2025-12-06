@@ -1955,7 +1955,7 @@ body.light-mode .location-name.clickable:hover {
   font-size: 24px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: background-color 0.2s, transform 0.2s;
-  z-index: 100;
+  z-index: 1100;
 }
 
 .quad-page-back:hover {
@@ -1980,7 +1980,7 @@ body.light-mode .location-name.clickable:hover {
   font-size: 24px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: background-color 0.2s;
-  z-index: 100;
+  z-index: 1100;
 }
 
 .quad-page-add-home:hover {
