@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html data-theme="dark">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,14 +48,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/video.js@8.23.3/dist/video-js.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/@videojs/themes@1/dist/forest/index.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
+  <link
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
   <link rel="stylesheet" href="/main.css?v=2025041700">
 </head>
+
 <body>
   <script>
-    (function() {
+    (function () {
       try {
         const saved = localStorage.getItem('webcamSettings');
         if (saved) {
@@ -108,7 +112,8 @@
           <li>지산은 24/25시즌 영상 서비스를 중단했습니다.</li>
         </ul>
         <p>Q. 날씨 정보가 정확하지 않습니다.</p>
-        <p>A. 날씨 정보는 실시간 관측 정보를 바탕으로 3차원 모델을 통해 계산된 정보입니다. 날씨 정보는 <a href="https://apihub.kma.go.kr/" target="_blank">기상청 API허브</a>에서 제공하는 융합기상 데이터를 공공누리 제1유형 라이센스로 사용하고 있습니다.</p>
+        <p>A. 날씨 정보는 실시간 관측 정보를 바탕으로 3차원 모델을 통해 계산된 정보입니다. 날씨 정보는 <a href="https://apihub.kma.go.kr/"
+            target="_blank">기상청 API허브</a>에서 제공하는 융합기상 데이터를 공공누리 제1유형 라이센스로 사용하고 있습니다.</p>
         <ul>
           <li>날씨 정보는 국지적인 정보를 정확히 반영하지 않을 수 있으며, 부정확한 정보를 포함할 수 있습니다.</li>
           <li>풍속은 10분 풍속, 강수량은 1시간 강수량이며, 적설량은 3시간 적설량입니다.</li>
@@ -117,7 +122,9 @@
         <p>A. 스키장 영상과 날씨를 바로 모아볼 수 있는 페이지가 없어서 만들었습니다.</p>
         <ul>
           <li>스키장 공식 홈페이지에서 제공하는 영상은 모바일에서 보기가 불편했습니다. 스키를 타면서 노트북을 들고 다니지는 않잖아요?</li>
-          <li><a target="_blank" href="https://ski-resort.kr/">ski-resort.kr</a>와 <a target="_blank" href="https://paulkim-xr.github.io/SkiWatch/">SkiWatch</a>도 참고했습니다만, 원하는 영상을 모아볼 수 있는 기능이 없고 비발디파크를 제대로 지원하지 않아 직접 만들었습니다.</li>
+          <li><a target="_blank" href="https://ski-resort.kr/">ski-resort.kr</a>와 <a target="_blank"
+              href="https://paulkim-xr.github.io/SkiWatch/">SkiWatch</a>도 참고했습니다만, 원하는 영상을 모아볼 수 있는 기능이 없고 비발디파크를 제대로
+            지원하지 않아 직접 만들었습니다.</li>
         </ul>
       </div>
     </div>
@@ -156,19 +163,51 @@
       </button>
       <div class="quad-grid">
         <div class="quad-slot">
-          <select id="quadSelect1" class="quad-select" data-slot="0"></select>
+          <div class="custom-dropdown" id="quadSelect1-dropdown" data-slot="0">
+            <div class="dropdown-trigger" tabindex="0">카메라 선택</div>
+            <div class="dropdown-menu">
+              <div class="dropdown-search-container">
+                <input type="text" class="dropdown-search" placeholder="리조트 또는 카메라 검색...">
+              </div>
+              <div class="dropdown-list"></div>
+            </div>
+          </div>
           <div class="quad-video" id="quadVideo1"></div>
         </div>
         <div class="quad-slot">
-          <select id="quadSelect2" class="quad-select" data-slot="1"></select>
+          <div class="custom-dropdown" id="quadSelect2-dropdown" data-slot="1">
+            <div class="dropdown-trigger" tabindex="0">카메라 선택</div>
+            <div class="dropdown-menu">
+              <div class="dropdown-search-container">
+                <input type="text" class="dropdown-search" placeholder="리조트 또는 카메라 검색...">
+              </div>
+              <div class="dropdown-list"></div>
+            </div>
+          </div>
           <div class="quad-video" id="quadVideo2"></div>
         </div>
         <div class="quad-slot">
-          <select id="quadSelect3" class="quad-select" data-slot="2"></select>
+          <div class="custom-dropdown" id="quadSelect3-dropdown" data-slot="2">
+            <div class="dropdown-trigger" tabindex="0">카메라 선택</div>
+            <div class="dropdown-menu">
+              <div class="dropdown-search-container">
+                <input type="text" class="dropdown-search" placeholder="리조트 또는 카메라 검색...">
+              </div>
+              <div class="dropdown-list"></div>
+            </div>
+          </div>
           <div class="quad-video" id="quadVideo3"></div>
         </div>
         <div class="quad-slot">
-          <select id="quadSelect4" class="quad-select" data-slot="3"></select>
+          <div class="custom-dropdown" id="quadSelect4-dropdown" data-slot="3">
+            <div class="dropdown-trigger" tabindex="0">카메라 선택</div>
+            <div class="dropdown-menu">
+              <div class="dropdown-search-container">
+                <input type="text" class="dropdown-search" placeholder="리조트 또는 카메라 검색...">
+              </div>
+              <div class="dropdown-list"></div>
+            </div>
+          </div>
           <div class="quad-video" id="quadVideo4"></div>
         </div>
       </div>
@@ -187,14 +226,23 @@
         <h2>전국 스키장 실시간 웹캠 모음</h2>
         <p class="lead" style="font-size: 1.1rem;">왼쪽 메뉴에서 스키장 또는 카메라를 선택하세요.</p>
         <p class="disclaimer mt-2" style="font-size: 0.8rem;">
-          사이트 오류 제보, 문의 및 기능 제안 <span class="github-button-issue"><a class="github-button github-button-issue" href="https://github.com/hletrd/slopes/issues" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-issue-opened" aria-label="Issue hletrd/slopes on GitHub">Issue</a></span>
+          사이트 오류 제보, 문의 및 기능 제안 <span class="github-button-issue"><a class="github-button github-button-issue"
+              href="https://github.com/hletrd/slopes/issues"
+              data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-issue-opened"
+              aria-label="Issue hletrd/slopes on GitHub">Issue</a></span>
         </p>
         <p class="lead github-buttons">
-          <a class="github-button" href="https://github.com/hletrd/slopes" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star hletrd/slopes on GitHub">Star</a>
-          <a class="github-button" href="https://github.com/hletrd" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-show-count="true" aria-label="Follow @hletrd on GitHub">Follow @hletrd</a>
+          <a class="github-button" href="https://github.com/hletrd/slopes"
+            data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star"
+            data-show-count="true" aria-label="Star hletrd/slopes on GitHub">Star</a>
+          <a class="github-button" href="https://github.com/hletrd"
+            data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-show-count="true"
+            aria-label="Follow @hletrd on GitHub">Follow @hletrd</a>
         </p>
         <p class="lead" style="font-size: 0.8rem; margin-top: 1rem;">
-          Current version: <a target="_blank" href="https://github.com/hletrd/slopes/commit/{commit}"></a><br>Special thanks to <a target="_blank" href="https://github.com/paulkim-xr">Paul Kim</a> and the <a target="_blank" href="https://paulkim-xr.github.io/SkiWatch/">SkiWatch</a> project.
+          Current version: <a target="_blank" href="https://github.com/hletrd/slopes/commit/{commit}"></a><br>Special
+          thanks to <a target="_blank" href="https://github.com/paulkim-xr">Paul Kim</a> and the <a target="_blank"
+            href="https://paulkim-xr.github.io/SkiWatch/">SkiWatch</a> project.
         </p>
       </div>
       <div id="favorites-container" class="favorites-section" style="display: none;">
@@ -242,11 +290,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <script src="/pwa.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Slopes cam - 전국 스키장 실시간 웹캠 모음","alternateName":["Slopes cam"],"url":"http://ski.atik.kr"}</script>
+  <script
+    type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Slopes cam - 전국 스키장 실시간 웹캠 모음","alternateName":["Slopes cam"],"url":"http://ski.atik.kr"}</script>
   <script type="application/ld+json" src="/videos+ld.json"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TDF3M6JH2R"></script>
   <script async src="/analytics.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 </body>
+
 </html>

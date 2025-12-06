@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const videoUrl = webcam.video || webcam.link;
     if (!videoUrl) return;
 
-    const player = createVideoPlayer(videoUrl, container, `quad-${resortId}-${webcamIndex}`, webcam.video_type);
+    const player = createVideoPlayer(videoUrl, container, `quad-${resortId}-${webcamIndex}`, webcam.video_type, true);
     if (player) {
       quadPlayers[slotIndex] = player;
     }
@@ -256,48 +256,153 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function populateQuadSelects() {
-    if (!quadSelects.length || !Array.isArray(data) || data.length === 0) return;
+    if (!Array.isArray(data) || data.length === 0) return;
 
-    const options = [];
-    data.forEach(resort => {
-      const webcams = resort.links || resort.webcams || [];
-      webcams.forEach((webcam, index) => {
-        const videoUrl = webcam.video || webcam.link;
-        if (!videoUrl) return;
-        options.push({
-          value: `${resort.id}||${index}`,
-          label: `${resort.name} - ${webcam.name || `카메라 ${index + 1}`}`
-        });
-      });
+    const dropdowns = document.querySelectorAll('.custom-dropdown');
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.custom-dropdown')) {
+        document.querySelectorAll('.custom-dropdown').forEach(d => d.classList.remove('active'));
+      }
     });
 
-    quadSelects.forEach((select, idx) => {
-      const currentValue = select.value;
-      select.innerHTML = '';
+    dropdowns.forEach((dropdown, idx) => {
+      const trigger = dropdown.querySelector('.dropdown-trigger');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      const searchInput = dropdown.querySelector('.dropdown-search');
+      const list = dropdown.querySelector('.dropdown-list');
+      const slotIndex = parseInt(dropdown.getAttribute('data-slot'));
 
-      const placeholder = document.createElement('option');
-      placeholder.value = '';
-      placeholder.textContent = '카메라 선택';
-      select.appendChild(placeholder);
+      // Toggle dropdown
+      trigger.addEventListener('click', function () {
+        const isActive = dropdown.classList.contains('active');
+        // Close others
+        document.querySelectorAll('.custom-dropdown').forEach(d => d.classList.remove('active'));
 
-      options.forEach(opt => {
-        const optionEl = document.createElement('option');
-        optionEl.value = opt.value;
-        optionEl.textContent = opt.label;
-        select.appendChild(optionEl);
+        if (!isActive) {
+          dropdown.classList.add('active');
+          searchInput.value = '';
+          filterItems('');
+          searchInput.focus();
+        }
       });
 
+      // Search functionality
+      searchInput.addEventListener('input', function (e) {
+        filterItems(e.target.value.toLowerCase());
+      });
+
+      function filterItems(query) {
+        const items = list.querySelectorAll('.dropdown-item');
+        const groups = list.querySelectorAll('.dropdown-group');
+
+        groups.forEach(group => {
+          let hasVisibleItems = false;
+          const groupItems = group.querySelectorAll('.dropdown-item');
+
+          groupItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(query)) {
+              item.style.display = 'flex';
+              hasVisibleItems = true;
+            } else {
+              item.style.display = 'none';
+            }
+          });
+
+          const header = group.querySelector('.dropdown-group-header');
+          if (header) {
+            // Check if resort name matches
+            if (header.textContent.toLowerCase().includes(query)) {
+              groupItems.forEach(item => {
+                item.style.display = 'flex';
+                hasVisibleItems = true;
+              });
+            }
+            header.style.display = hasVisibleItems ? 'block' : 'none';
+          }
+        });
+      }
+
+      // Populate list
+      list.innerHTML = '';
+
+      // Add "None" option
+      const noneGroup = document.createElement('div');
+      noneGroup.className = 'dropdown-group';
+      const noneItem = document.createElement('div');
+      noneItem.className = 'dropdown-item';
+      noneItem.textContent = '선택 안 함';
+      noneItem.dataset.value = '';
+      noneItem.addEventListener('click', () => selectItem('', '카메라 선택'));
+      noneGroup.appendChild(noneItem);
+      list.appendChild(noneGroup);
+
+      data.forEach(resort => {
+        const webcams = resort.links || resort.webcams || [];
+        if (webcams.length === 0) return;
+
+        const group = document.createElement('div');
+        group.className = 'dropdown-group';
+
+        const header = document.createElement('div');
+        header.className = 'dropdown-group-header';
+        header.textContent = resort.name;
+        group.appendChild(header);
+
+        webcams.forEach((webcam, webcamIndex) => {
+          const videoUrl = webcam.video || webcam.link;
+          if (!videoUrl) return;
+
+          const item = document.createElement('div');
+          item.className = 'dropdown-item';
+          item.innerHTML = `<i class="bi bi-camera-video"></i> ${webcam.name || `카메라 ${webcamIndex + 1}`}`;
+          item.dataset.value = `${resort.id}||${webcamIndex}`;
+
+          item.addEventListener('click', () => {
+            const label = `${resort.name} - ${webcam.name || `카메라 ${webcamIndex + 1}`}`;
+            selectItem(item.dataset.value, label);
+          });
+
+          group.appendChild(item);
+        });
+
+        list.appendChild(group);
+      });
+
+      function selectItem(value, label) {
+        trigger.textContent = label;
+        dropdown.classList.remove('active');
+
+        // Update selection state
+        list.querySelectorAll('.dropdown-item').forEach(i => i.classList.remove('selected'));
+        const selectedItem = list.querySelector(`.dropdown-item[data-value="${value}"]`);
+        if (selectedItem) selectedItem.classList.add('selected');
+
+        loadQuadSlot(slotIndex, value);
+      }
+
+      // Load saved state
       const savedValue = quadSelections[idx] || '';
-      const hasSavedOption = savedValue && options.some(opt => opt.value === savedValue);
-      if (hasSavedOption) {
-        select.value = savedValue;
-        loadQuadSlot(idx, savedValue, true);
-      } else {
-        select.value = '';
-        if (savedValue) {
-          quadSelections[idx] = '';
-          saveQuadState();
+      if (savedValue) {
+        const [rId, wIdx] = savedValue.split('||');
+        const resort = data.find(r => r.id === rId);
+        if (resort) {
+          const webcams = resort.links || resort.webcams || [];
+          const webcam = webcams[parseInt(wIdx)];
+          if (webcam) {
+            const label = `${resort.name} - ${webcam.name || `카메라 ${parseInt(wIdx) + 1}`}`;
+            trigger.textContent = label;
+            // Mark as selected
+            setTimeout(() => {
+              const item = list.querySelector(`.dropdown-item[data-value="${savedValue}"]`);
+              if (item) item.classList.add('selected');
+            }, 0);
+            loadQuadSlot(idx, savedValue, true);
+          }
         }
+      } else {
         loadQuadSlot(idx, '', true);
       }
     });
@@ -1624,7 +1729,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  function createVideoPlayer(videoUrl, container, id, videoType) {
+  function createVideoPlayer(videoUrl, container, id, videoType, autoplayOverride = null) {
     container.innerHTML = '';
 
     const idParts = id.split('-');
@@ -1656,7 +1761,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const channel = vivaldiParams[0];
         const serial = vivaldiParams[1];
 
-        vivaldiContainer.innerHTML = `<iframe src="vivaldi.html?channel=${channel}&serial=${serial}&autoplay=${settings.autoplay}" allowfullscreen></iframe>`;
+        const shouldAutoplay = autoplayOverride !== null ? autoplayOverride : settings.autoplay;
+        vivaldiContainer.innerHTML = `<iframe src="vivaldi.html?channel=${channel}&serial=${serial}&autoplay=${shouldAutoplay}" allowfullscreen></iframe>`;
         container.appendChild(vivaldiContainer);
 
         if (resortId && !isNaN(webcamIndex)) {
@@ -1706,7 +1812,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const youtubeId = getYoutubeId(videoUrl);
       if (youtubeId) {
-        const autoplayParam = settings.autoplay ? '1' : '0';
+        const shouldAutoplay = autoplayOverride !== null ? autoplayOverride : settings.autoplay;
+        const autoplayParam = shouldAutoplay ? '1' : '0';
         youtubeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${youtubeId}?autoplay=${autoplayParam}&mute=1" allowfullscreen></iframe>`;
         container.appendChild(youtubeContainer);
 
@@ -1775,8 +1882,9 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
 
     try {
+      const shouldAutoplay = autoplayOverride !== null ? autoplayOverride : settings.autoplay;
       const player = videojs(`webcam-player-${id}`, {
-        autoplay: settings.autoplay,
+        autoplay: shouldAutoplay,
         muted: true,
         controls: true,
         preload: 'auto',
@@ -1958,6 +2066,11 @@ document.addEventListener('DOMContentLoaded', function () {
       const canvas = document.createElement('canvas');
       const video = player.el().querySelector('video');
 
+      if (video.readyState < 2) {
+        showToastMessage(player.el(), '비디오가 로드되지 않았습니다.', 'warning');
+        return;
+      }
+
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
 
@@ -1970,7 +2083,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (playerId) {
         const idParts = playerId.replace('webcam-player-', '').split('-');
         if (idParts.length >= 2) {
-          if (idParts[1] === 'grid') {
+          if (idParts[0] === 'quad' && idParts.length >= 3) {
+            resortId = idParts[1];
+            webcamIndex = parseInt(idParts[2]);
+          } else if (idParts[1] === 'grid') {
             resortId = idParts[0];
             webcamIndex = parseInt(idParts[2]);
           } else {
@@ -1982,8 +2098,8 @@ document.addEventListener('DOMContentLoaded', function () {
           if (resort && !isNaN(webcamIndex)) {
             const webcams = resort.links || resort.webcams || [];
             if (webcams[webcamIndex]) {
-              const resortName = getResortNameForCapture(player.el());
-              const webcamName = getWebcamNameForCapture(player.el());
+              const resortName = sanitizeForFilename(resort.name);
+              const webcamName = sanitizeForFilename(webcams[webcamIndex].name || `Camera ${webcamIndex + 1}`);
               const timestamp = formatTimestamp();
               const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`;
 
@@ -1992,7 +2108,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
               const container = player.el().parentNode;
 
-              showSuccessMessage(container);
+              showToastMessage(container, '캡처 완료!', 'success');
 
               return;
             }
@@ -2017,16 +2133,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  function showSuccessMessage(container) {
-    const successMsg = document.createElement('div');
-    successMsg.className = 'alert alert-success position-absolute top-0 start-50 translate-middle-x mt-3 success-message';
-    successMsg.textContent = '캡처 완료!';
-    container.appendChild(successMsg);
+  function showToastMessage(container, message, type = 'success') {
+    const toastMsg = document.createElement('div');
+    toastMsg.className = `alert alert-${type} position-absolute top-0 start-50 translate-middle-x mt-3 toast-message`;
+    toastMsg.textContent = message;
+    container.appendChild(toastMsg);
 
     setTimeout(() => {
-      successMsg.classList.add('fade-out');
+      toastMsg.classList.add('fade-out');
       setTimeout(() => {
-        successMsg.remove();
+        toastMsg.remove();
       }, 500);
     }, 2000);
   }
@@ -2096,11 +2212,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const dataURL = canvas.toDataURL('image/jpeg');
         downloadImage(dataURL, filename);
 
-        showSuccessMessage(container);
+        showToastMessage(container, '캡처 완료!', 'success');
       });
     } catch (e) {
       console.error('Error capturing screenshot:', e);
-      alert('캡처 중 오류가 발생했습니다.');
+      showToastMessage(container, '캡처 중 오류가 발생했습니다.', 'danger');
     }
   }
 
@@ -2280,10 +2396,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const parts = id.split('-');
     if (parts.length < 2) return null;
 
-    const resortId = parts[0];
+    let resortId = parts[0];
     let webcamIndex = parseInt(parts[1]);
 
-    if (parts.length === 3 && parts[1] === 'grid') {
+    if (parts[0] === 'quad' && parts.length >= 3) {
+      resortId = parts[1];
+      webcamIndex = parseInt(parts[2]);
+    } else if (parts.length === 3 && parts[1] === 'grid') {
       webcamIndex = parseInt(parts[2]);
     }
 
