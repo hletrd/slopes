@@ -113,7 +113,12 @@ async function addCommitHash(htmlFilePath) {
       const shortCommit = gitCommit.substring(0, 7);
       content = content.replace(/<a target="_blank" href="https:\/\/github\.com\/hletrd\/slopes\/commit\/\{commit\}"><\/a>/g,
         `<a target="_blank" href="https://github.com/hletrd/slopes/commit/${gitCommit}">${shortCommit}</a>`);
+
+      const date = new Date().toISOString().split('T')[0];
+      content = content.replace('{date}', date);
+
       console.log(`  Replaced {commit} with git commit hash: ${shortCommit}`);
+      console.log(`  Replaced {date} with current date: ${date}`);
     } catch (error) {
       console.error('Error getting git commit hash:', error);
     }
