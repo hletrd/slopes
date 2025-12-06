@@ -1785,7 +1785,21 @@ document.addEventListener('DOMContentLoaded', function () {
           <i class="bi bi-camera"></i>
           캡처
           `;
-        captureBtn.addEventListener('click', () => captureScreenshot(container));
+        captureBtn.addEventListener('click', () => {
+          const iframe = container.querySelector('iframe');
+          if (iframe) {
+            try {
+              const playerContainer = iframe.contentDocument.getElementById('player-container');
+              if (playerContainer && !playerContainer.classList.contains('playing')) {
+                showToastMessage(container, '영상이 재생 중일 때만 캡처할 수 있습니다.', 'warning');
+                return;
+              }
+            } catch (e) {
+              console.error('Cannot check vivaldi playing state', e);
+            }
+          }
+          captureScreenshot(container);
+        });
         container.appendChild(captureBtn);
 
         return {
