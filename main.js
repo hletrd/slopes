@@ -2736,8 +2736,20 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', onScrollOrResize, { passive: true });
   window.addEventListener('resize', onScrollOrResize, { passive: true });
 
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      activePlayers.forEach(player => {
+        if (!player.paused()) {
+          player.pause();
+        }
+      });
+    } else {
+      manageVideoPlayback();
+    }
+  });
+
   function manageVideoPlayback() {
-    if (!settings.autoplay) return;
+    if (!settings.autoplay || document.hidden) return;
 
     // Filter out disposed players or those not in the DOM
     activePlayers = activePlayers.filter(player => {
