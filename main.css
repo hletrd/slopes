@@ -2117,9 +2117,9 @@ body.light-mode .location-name.clickable:hover {
   color: #888;
   background-color: #222;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 
 .dropdown-item {

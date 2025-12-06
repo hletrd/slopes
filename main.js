@@ -1346,7 +1346,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function initializeResorts(resorts) {
-    console.log('initializeResorts called with', resorts.length, 'resorts');
     data = resorts;
     populateQuadSelects();
 
@@ -2282,8 +2281,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function getWebcamNameForCapture(element) {
-    const videoContainer = element.closest('.video-container');
-    const favoriteCard = videoContainer?.closest('.favorite-card');
+    const videoContainer = element.closest('.video-container, .quad-video');
+    if (!videoContainer) return 'unknown';
+    const favoriteCard = videoContainer.closest('.favorite-card');
     if (favoriteCard) {
       const favoriteLocation = favoriteCard.querySelector('.favorite-location');
       if (favoriteLocation && favoriteLocation.textContent) {
@@ -2485,7 +2485,6 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('hashchange', handleHashChange);
 
   function initializeApp() {
-    console.log('initializeApp function entered');
     let initialWeatherDataPromise = Promise.resolve(null);
 
     if (window.location.hash) {
@@ -2992,6 +2991,5 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  console.log('Calling initializeApp at end of DOMContentLoaded');
   initializeApp();
 });
