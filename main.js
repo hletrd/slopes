@@ -1,26 +1,26 @@
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
+  window.addEventListener('load', function () {
     const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
     if (isLocalhost) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
         for (let registration of registrations) {
           registration.unregister();
         }
       });
     } else {
       navigator.serviceWorker.register('./service-worker.js')
-        .then(function(registration) {
+        .then(function (registration) {
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log('ServiceWorker registration failed: ', error);
         });
     }
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const toggleMenu = document.querySelector('.toggle-menu');
   const sidebar = document.querySelector('.sidebar');
   const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
@@ -115,28 +115,28 @@ document.addEventListener('DOMContentLoaded', function() {
     themeToggle.checked = settings.darkMode !== false;
   }
 
-  autoplayToggle.addEventListener('change', function() {
+  autoplayToggle.addEventListener('change', function () {
     settings.autoplay = this.checked;
     saveSettings();
   });
 
   if (themeToggle) {
-    themeToggle.addEventListener('change', function() {
+    themeToggle.addEventListener('change', function () {
       settings.darkMode = this.checked;
       applyTheme();
       saveSettings();
     });
   }
 
-  settingsButton.addEventListener('click', function() {
+  settingsButton.addEventListener('click', function () {
     settingsModal.style.display = 'block';
   });
 
-  closeSettingsModal.addEventListener('click', function() {
+  closeSettingsModal.addEventListener('click', function () {
     settingsModal.style.display = 'none';
   });
 
-  window.addEventListener('click', function(event) {
+  window.addEventListener('click', function (event) {
     if (event.target === settingsModal) {
       settingsModal.style.display = 'none';
     }
@@ -146,15 +146,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const infoModal = document.getElementById('infoModal');
   const closeInfoModal = document.getElementById('closeInfoModal');
 
-  infoButton.addEventListener('click', function() {
+  infoButton.addEventListener('click', function () {
     infoModal.style.display = 'flex';
   });
 
-  closeInfoModal.addEventListener('click', function() {
+  closeInfoModal.addEventListener('click', function () {
     infoModal.style.display = 'none';
   });
 
-  window.addEventListener('click', function(event) {
+  window.addEventListener('click', function (event) {
     if (event.target === infoModal) {
       infoModal.style.display = 'none';
     }
@@ -169,21 +169,21 @@ document.addEventListener('DOMContentLoaded', function() {
   const quadSelects = Array.from(document.querySelectorAll('.quad-select'));
   const quadVideoContainers = Array.from(document.querySelectorAll('.quad-video'));
 
-  addToHomeButton.addEventListener('click', function() {
+  addToHomeButton.addEventListener('click', function () {
     installationModal.style.display = 'block';
-    setTimeout(function() {
+    setTimeout(function () {
       installationModal.classList.add('active');
     }, 10);
   });
 
-  closeModal.addEventListener('click', function() {
+  closeModal.addEventListener('click', function () {
     installationModal.classList.remove('active');
-    setTimeout(function() {
+    setTimeout(function () {
       installationModal.style.display = 'none';
     }, 400);
   });
 
-  installationModal.addEventListener('click', function(event) {
+  installationModal.addEventListener('click', function (event) {
     if (event.target === installationModal) {
       closeModal.click();
     }
@@ -307,6 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!quadViewContainer) return;
     quadViewContainer.classList.add('active');
     document.body.classList.add('quad-view-open');
+    disposeAllPlayers();
     populateQuadSelects();
     updateQuadPageTheme();
     if (setHash) {
@@ -343,19 +344,32 @@ document.addEventListener('DOMContentLoaded', function() {
   updateFloatingLayout();
 
   if (quadViewButton) {
-    quadViewButton.addEventListener('click', function() {
+    quadViewButton.addEventListener('click', function () {
       openQuadView(true);
     });
   }
 
   if (quadBackButton) {
-    quadBackButton.addEventListener('click', function() {
+    quadBackButton.addEventListener('click', function () {
       closeQuadView(true);
     });
   }
 
+  const quadAddToHomeButton = document.getElementById('quadAddToHomeButton');
+  if (quadAddToHomeButton) {
+    quadAddToHomeButton.addEventListener('click', function () {
+      const installationModal = document.getElementById('installationModal');
+      if (installationModal) {
+        installationModal.style.display = 'block';
+        setTimeout(function () {
+          installationModal.classList.add('active');
+        }, 10);
+      }
+    });
+  }
+
   quadSelects.forEach((select, idx) => {
-    select.addEventListener('change', function() {
+    select.addEventListener('change', function () {
       loadQuadSlot(idx, this.value);
     });
   });
@@ -480,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const locationName = document.createElement('span');
       locationName.className = 'favorite-location cursor-pointer';
       locationName.textContent = favorite.webcamName;
-      locationName.addEventListener('click', function() {
+      locationName.addEventListener('click', function () {
         const hash = `${favorite.resortId}/${favorite.webcamIndex}`;
         window.location.hash = hash;
       });
@@ -497,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function() {
       removeButton.className = 'favorites-remove-button';
       removeButton.innerHTML = '<i class="bi bi-trash"></i>';
       removeButton.setAttribute('title', '북마크 제거');
-      removeButton.addEventListener('click', function(e) {
+      removeButton.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         toggleFavorite(favorite.resortId, favorite.webcamIndex);
@@ -759,9 +773,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const baseAreaWeathers = weatherData.filter(w => w.resort === resortName && w.name.startsWith('리조트_'));
 
       baseAreaWeathers.forEach(baseAreaWeather => {
-      if (baseAreaWeather && baseAreaWeather.data && baseAreaWeather.data.length > 0) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'weather-info-wrapper';
+        if (baseAreaWeather && baseAreaWeather.data && baseAreaWeather.data.length > 0) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'weather-info-wrapper';
 
           const weatherInfo = document.createElement('div');
           weatherInfo.className = 'weather-info';
@@ -1141,6 +1155,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(() => {
         window.processingHashChange = false;
         updateFavoriteButtons();
+        manageVideoPlayback();
       }, 100);
     }
   }
@@ -1180,7 +1195,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const cardTitle = document.createElement('h3');
       cardTitle.textContent = webcam.name;
       cardTitle.className = 'cursor-pointer';
-      cardTitle.addEventListener('click', function() {
+      cardTitle.addEventListener('click', function () {
         const submenuItem = document.querySelector(`#${resortId}-submenu .submenu-item[data-webcam-index="${index}"]`);
         if (submenuItem) {
           submenuItem.click();
@@ -1210,6 +1225,8 @@ document.addEventListener('DOMContentLoaded', function() {
     updateFavoriteButtons();
 
     updateWeatherDisplay(resortId);
+
+    setTimeout(manageVideoPlayback, 500); // Give some time for DOM to settle
   }
 
   function initializeResorts(resorts) {
@@ -1237,7 +1254,7 @@ document.addEventListener('DOMContentLoaded', function() {
     dropdownToggle.setAttribute('aria-label', 'Toggle submenu');
     miscMenuItem.appendChild(dropdownToggle);
 
-    dropdownToggle.addEventListener('click', function(e) {
+    dropdownToggle.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
       const submenu = miscMenuItemContainer.querySelector('.submenu');
@@ -1285,7 +1302,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     mainContent.appendChild(forecastSection);
 
-    forecastSubmenuItem.addEventListener('click', function() {
+    forecastSubmenuItem.addEventListener('click', function () {
       document.querySelectorAll('.submenu-item').forEach(item => {
         item.classList.remove('active');
       });
@@ -1330,7 +1347,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     mainContent.appendChild(miscSection);
 
-    miscMenuItem.addEventListener('click', function(e) {
+    miscMenuItem.addEventListener('click', function (e) {
       if (e.target.classList.contains('dropdown-toggle') || e.target.closest('.dropdown-toggle')) {
         return;
       }
@@ -1402,7 +1419,7 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdownToggle.setAttribute('aria-label', 'Toggle submenu');
         menuItem.appendChild(dropdownToggle);
 
-        dropdownToggle.addEventListener('click', function(e) {
+        dropdownToggle.addEventListener('click', function (e) {
           e.preventDefault();
           e.stopPropagation();
           const submenu = menuItemContainer.querySelector('.submenu');
@@ -1445,7 +1462,7 @@ document.addEventListener('DOMContentLoaded', function() {
           statusItem.innerHTML = '오픈현황 <i class="bi bi-box-arrow-up-right me-1"></i>';
           submenu.appendChild(statusItem);
 
-          statusItem.addEventListener('click', function() {
+          statusItem.addEventListener('click', function () {
             window.open(resort.status, '_blank', 'noopener,noreferrer');
           });
         }
@@ -1468,7 +1485,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const webcamTitle = document.createElement('h2');
           webcamTitle.textContent = webcamName;
           webcamTitle.className = 'inline-title inline-title-submenu cursor-pointer';
-          webcamTitle.addEventListener('click', function() {
+          webcamTitle.addEventListener('click', function () {
             const submenuItem = document.querySelector(`#${resortId}-submenu .submenu-item[data-webcam-index="${index}"]`);
             if (submenuItem) {
               submenuItem.click();
@@ -1487,7 +1504,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           mainContent.appendChild(webcamSection);
 
-          submenuItem.addEventListener('click', function() {
+          submenuItem.addEventListener('click', function () {
             const webcamIndex = this.getAttribute('data-webcam-index');
             activeWebcam = webcamIndex;
 
@@ -1532,7 +1549,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
 
-      menuItem.addEventListener('click', function(e) {
+      menuItem.addEventListener('click', function (e) {
         if (e.target.classList.contains('dropdown-toggle') || e.target.closest('.dropdown-toggle')) {
           return;
         }
@@ -1656,7 +1673,7 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(captureBtn);
 
         return {
-          dispose: function() {
+          dispose: function () {
             container.innerHTML = '';
           }
         };
@@ -1677,7 +1694,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       return {
-        dispose: function() {
+        dispose: function () {
           container.innerHTML = '';
         }
       };
@@ -1698,7 +1715,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         return {
-          dispose: function() {
+          dispose: function () {
             container.innerHTML = '';
           }
         };
@@ -1727,7 +1744,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       return {
-        dispose: function() {
+        dispose: function () {
           container.innerHTML = '';
         }
       };
@@ -1796,7 +1813,7 @@ document.addEventListener('DOMContentLoaded', function() {
         addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.DEFAULT);
       }
 
-      player.on('error', function() {
+      player.on('error', function () {
         const error = player.error();
         console.error('Video player error:', error);
 
@@ -1815,20 +1832,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let errorHtml = '<div class="error-message"><p>비디오 재생 중 오류가 발생했습니다.</p>';
 
+        errorHtml += '<div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">';
+
         if (directLink) {
-          errorHtml += `<div class="mt-3">
+          errorHtml += `
             <a href="${directLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
               <i class="bi bi-box-arrow-up-right me-2"></i>
-              원본 링크에서 보기
-            </a>
-          </div>`;
+              원본 링크
+            </a>`;
         }
 
+        errorHtml += `
+          <button class="btn btn-secondary retry-button">
+            <i class="bi bi-arrow-clockwise me-2"></i>
+            재시도
+          </button>`;
+
+        errorHtml += '</div>';
         errorHtml += '</div>';
         container.innerHTML = errorHtml;
 
         if (resortId && !isNaN(webcamIndex)) {
           addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.ERROR);
+        }
+
+        const retryBtn = container.querySelector('.retry-button');
+        if (retryBtn) {
+          retryBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log('Retrying video load:', id);
+            createVideoPlayer(videoUrl, container, id, videoType);
+          });
         }
       });
 
@@ -1888,7 +1922,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <span class="bookmark-icon"><i class="bi bi-bookmark"></i></span>
       북마크
     `;
-    bookmarkBtn.addEventListener('click', function() {
+    bookmarkBtn.addEventListener('click', function () {
       toggleFavorite(
         resortId,
         webcamIndex,
@@ -2108,12 +2142,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const playerElement = videoContainer.querySelector('.vjs-tech') ||
-                         videoContainer.querySelector('iframe') ||
-                         videoContainer.querySelector('.vivaldi-container');
+      videoContainer.querySelector('iframe') ||
+      videoContainer.querySelector('.vivaldi-container');
 
     if (playerElement && playerElement.id) {
       const idMatch = playerElement.id.match(/player-([^-]+)-(\d+)/) ||
-                     playerElement.id.match(/player-([^-]+)-grid-(\d+)/);
+        playerElement.id.match(/player-([^-]+)-grid-(\d+)/);
 
       if (idMatch && idMatch.length >= 3) {
         const resortId = idMatch[1];
@@ -2250,7 +2284,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   sidebarBackdrop.addEventListener('click', closeSidebar);
 
-  window.addEventListener('resize', function() {
+  window.addEventListener('resize', function () {
     isMobile = window.innerWidth <= 768;
     if (window.innerWidth > 768) {
       sidebar.classList.remove('active');
@@ -2564,10 +2598,10 @@ document.addEventListener('DOMContentLoaded', function() {
           plugins: {
             tooltip: {
               callbacks: {
-                title: function(context) {
+                title: function (context) {
                   const date = new Date(context[0].parsed.x);
                   return date.toLocaleDateString('ko-KR') + ' ' +
-                         date.toLocaleTimeString('ko-KR', {hour: '2-digit', minute: '2-digit'});
+                    date.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
                 }
               },
               backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -2689,6 +2723,70 @@ document.addEventListener('DOMContentLoaded', function() {
     if (chartGrid.children.length === 0) {
       forecastDiv.innerHTML = '<div class="alert alert-info">예보 데이터가 없습니다.</div>';
     }
+  }
+
+  let scrollTimeout;
+  function onScrollOrResize() {
+    if (scrollTimeout) {
+      cancelAnimationFrame(scrollTimeout);
+    }
+    scrollTimeout = requestAnimationFrame(manageVideoPlayback);
+  }
+
+  window.addEventListener('scroll', onScrollOrResize, { passive: true });
+  window.addEventListener('resize', onScrollOrResize, { passive: true });
+
+  function manageVideoPlayback() {
+    if (!settings.autoplay) return;
+
+    // Filter out disposed players or those not in the DOM
+    activePlayers = activePlayers.filter(player => {
+      const el = player.el();
+      return el && document.body.contains(el);
+    });
+
+    const playersWithPosition = activePlayers.map(player => {
+      const el = player.el();
+      const rect = el.getBoundingClientRect();
+
+      const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+      const visibleRatio = rect.height > 0 ? Math.max(0, visibleHeight) / rect.height : 0;
+
+      const visible = visibleRatio > 0.3;
+
+      return {
+        player,
+        rect,
+        visible,
+        top: rect.top
+      };
+    });
+
+    const visiblePlayers = playersWithPosition.filter(p => p.visible);
+    visiblePlayers.sort((a, b) => a.top - b.top);
+
+    const MAX_CONCURRENT = 4;
+    const playersToPlay = visiblePlayers.slice(0, MAX_CONCURRENT).map(p => p.player);
+
+    activePlayers.forEach(player => {
+      if (playersToPlay.includes(player)) {
+        // Should play
+        if (player.paused()) {
+          const playPromise = player.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              // Auto-play was prevented
+              // console.log('Auto-play prevented');
+            });
+          }
+        }
+      } else {
+        // Should pause
+        if (!player.paused()) {
+          player.pause();
+        }
+      }
+    });
   }
 
   initializeApp();
