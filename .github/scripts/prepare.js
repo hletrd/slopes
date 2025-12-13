@@ -42,7 +42,7 @@ const CACHE_BUSTER = Date.now().toString();
 console.log(`Using cache buster: ${CACHE_BUSTER}`);
 
 const filesToCopy = {
-  js: ['analytics.js', 'main.js', 'pwa.js', 'service-worker.js'],
+  js: ['analytics.js', 'main.js', 'pwa.js', 'service-worker.js', 'i18n.js'],
   html: ['index.html', 'vivaldi.html'],
   css: ['main.css'],
   json: ['manifest.json'],
@@ -70,6 +70,12 @@ async function createDistDir() {
     if (!fs.existsSync(iconsDir)) {
       await mkdir(iconsDir, { recursive: true });
       console.log(`Created icons directory: ${iconsDir}`);
+    }
+
+    const langDir = path.join(DIST_DIR, 'lang');
+    if (!fs.existsSync(langDir)) {
+      await mkdir(langDir, { recursive: true });
+      console.log(`Created lang directory: ${langDir}`);
     }
   } catch (error) {
     console.error('Error creating directories:', error);
@@ -209,6 +215,35 @@ async function copyIcons() {
   }
 }
 
+async function copyLangFiles() {
+  const sourceLangDir = path.join(ROOT_DIR, 'lang');
+  const destLangDir = path.join(DIST_DIR, 'lang');
+
+  try {
+    if (fs.existsSync(sourceLangDir)) {
+      const langFiles = fs.readdirSync(sourceLangDir);
+
+      for (const langFile of langFiles) {
+        const sourcePath = path.join(sourceLangDir, langFile);
+        const destPath = path.join(destLangDir, langFile);
+
+        if (fs.statSync(sourcePath).isDirectory()) continue;
+
+        if (langFile.endsWith('.json')) {
+          await minifyJsonFile(sourcePath, destPath);
+        } else {
+          await copyFile(sourcePath, destPath);
+          console.log(`Copied lang file: ${langFile}`);
+        }
+      }
+    } else {
+      console.warn(`Warning: Lang directory not found: ${sourceLangDir}`);
+    }
+  } catch (error) {
+    console.error('Error copying lang files:', error);
+  }
+}
+
 async function minifyJsonFile(sourcePath, destPath) {
   try {
     const content = await readFile(sourcePath, 'utf8');
@@ -241,6 +276,9 @@ async function main() {
 
   console.log('\nCopying icons:');
   await copyIcons();
+
+  console.log('\nCopying lang files:');
+  await copyLangFiles();
 
   console.log('\nDeployment preparation completed!');
 }
