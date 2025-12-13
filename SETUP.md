@@ -55,6 +55,14 @@ server {
   font/otf
   image/svg+xml;
 
+  # Security: Deny access to sensitive files
+  location ~ /\. {
+    deny all;
+  }
+  location = /secrets.json {
+    deny all;
+  }
+
   location = /WespJSSDKEncV4.min.js {
     try_files $uri =404;
   }

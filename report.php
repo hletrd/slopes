@@ -14,6 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Rate Limiting: 1 request per 60 seconds per IP
+$ip = $_SERVER['REMOTE_ADDR'];
+$limitFile = sys_get_temp_dir() . '/rate_limit_' . md5($ip);
+$currentUserTime = time();
+$lastRequestTime = file_exists($limitFile) ? (int)file_get_contents($limitFile) : 0;
+
+if ($currentUserTime - $lastRequestTime < 60) {
+    http_response_code(429);
+    echo json_encode(['success' => false, 'error' => 'Too many requests. Please try again later.']);
+    exit;
+}
+file_put_contents($limitFile, $currentUserTime);
+
 $secrets = json_decode(file_get_contents($secretsFile), true);
 $recaptchaSecret = $secrets['recaptcha_secret'] ?? '';
 $githubToken = $secrets['github_token'] ?? '';
