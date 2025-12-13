@@ -2285,21 +2285,20 @@ body.light-mode .location-name.clickable:hover {
 }
 
 .bug-report-link {
-  background-color: transparent;
+  background-color: rgba(128, 128, 128, 0.2);
   color: inherit;
-  border: none;
+  border: 1px solid rgba(128, 128, 128, 0.3);
   border-radius: 4px;
-  padding: 2px 6px;
-  font-size: 0.8rem;
+  padding: 2px 8px;
+  font-size: 0.75rem;
   cursor: pointer;
   margin-left: 5px;
   margin-right: 5px;
   vertical-align: middle;
-  text-decoration: underline;
 }
 
 .bug-report-link:hover {
-  opacity: 0.7;
+  background-color: rgba(128, 128, 128, 0.3);
 }
 
 .grecaptcha-badge {
