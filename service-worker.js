@@ -1,9 +1,12 @@
-const CACHE_NAME = 'slopes-cam-v4';
+const CACHE_NAME = 'slopes-cam-v5';
 const urlsToCache = [
   './',
   './index.html',
   './main.css',
   './main.js',
+  './i18n.js',
+  './lang/ko.json',
+  './lang/en.json',
   './pwa.js',
   './analytics.js',
   './manifest.json',

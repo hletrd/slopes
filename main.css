@@ -1401,6 +1401,50 @@ b {
   align-items: center;
 }
 
+.language-select {
+  padding: 6px 12px;
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  min-width: 100px;
+}
+
+.language-select:hover {
+  background-color: #333;
+  border-color: #555;
+}
+
+.language-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+}
+
+.language-select option {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+body.light-mode .language-select {
+  background-color: #fff;
+  color: #333;
+  border-color: #ddd;
+}
+
+body.light-mode .language-select:hover {
+  background-color: #f8f9fa;
+  border-color: #ccc;
+}
+
+body.light-mode .language-select option {
+  background-color: #fff;
+  color: #333;
+}
+
 .toggle-switch {
   position: relative;
   display: inline-block;

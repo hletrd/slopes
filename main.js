@@ -20,12 +20,18 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+  await i18n.init();
+
+  const t = (key, params) => i18n.t(key, params);
+  const getResortName = (resort) => i18n.getResortName(resort.id, resort.name);
+  const getWebcamName = (resort, webcamIndex, defaultName) => i18n.getWebcamName(resort.id, webcamIndex, defaultName);
+
   const toggleMenu = document.querySelector('.toggle-menu');
   const sidebar = document.querySelector('.sidebar');
   const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
   const mainContent = document.querySelector('.main-content');
-  const basicTitle = "Slopes cam";
+  const basicTitle = t('site.title');
   let activePlayers = [];
   let activeVivaldiPlayers = []; // Track Vivaldi iframes for concurrent stream management
   let quadPlayers = [null, null, null, null];
@@ -127,6 +133,16 @@ document.addEventListener('DOMContentLoaded', function () {
       settings.darkMode = this.checked;
       applyTheme();
       saveSettings();
+    });
+  }
+
+  const languageSelect = document.getElementById('languageSelect');
+  if (languageSelect) {
+    languageSelect.value = i18n.getLanguage();
+    languageSelect.addEventListener('change', async function () {
+      await i18n.setLanguage(this.value);
+      document.documentElement.lang = this.value;
+      window.location.reload();
     });
   }
 
@@ -337,9 +353,9 @@ document.addEventListener('DOMContentLoaded', function () {
       noneGroup.className = 'dropdown-group';
       const noneItem = document.createElement('div');
       noneItem.className = 'dropdown-item';
-      noneItem.textContent = '선택 안 함';
+      noneItem.textContent = t('camera.none');
       noneItem.dataset.value = '';
-      noneItem.addEventListener('click', () => selectItem('', '카메라 선택'));
+      noneItem.addEventListener('click', () => selectItem('', t('camera.select')));
       noneGroup.appendChild(noneItem);
       list.appendChild(noneGroup);
 
@@ -352,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const header = document.createElement('div');
         header.className = 'dropdown-group-header';
-        header.textContent = resort.name;
+        header.textContent = getResortName(resort);
         group.appendChild(header);
 
         webcams.forEach((webcam, webcamIndex) => {
@@ -361,11 +377,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
           const item = document.createElement('div');
           item.className = 'dropdown-item';
-          item.innerHTML = `<i class="bi bi-camera-video"></i> ${webcam.name || `카메라 ${webcamIndex + 1}`}`;
+          const webcamDisplayName = getWebcamName(resort, webcamIndex, webcam.name) || t('camera.default') + ` ${webcamIndex + 1}`;
+          item.innerHTML = `<i class="bi bi-camera-video"></i> ${webcamDisplayName}`;
           item.dataset.value = `${resort.id}||${webcamIndex}`;
 
           item.addEventListener('click', () => {
-            const label = `${resort.name} - ${webcam.name || `카메라 ${webcamIndex + 1}`}`;
+            const label = `${getResortName(resort)} - ${webcamDisplayName}`;
             selectItem(item.dataset.value, label);
           });
 
@@ -379,7 +396,6 @@ document.addEventListener('DOMContentLoaded', function () {
         trigger.textContent = label;
         dropdown.classList.remove('active');
 
-        // Update selection state
         list.querySelectorAll('.dropdown-item').forEach(i => i.classList.remove('selected'));
         const selectedItem = list.querySelector(`.dropdown-item[data-value="${value}"]`);
         if (selectedItem) selectedItem.classList.add('selected');
@@ -387,7 +403,6 @@ document.addEventListener('DOMContentLoaded', function () {
         loadQuadSlot(slotIndex, value);
       }
 
-      // Load saved state
       const savedValue = quadSelections[idx] || '';
       if (savedValue) {
         const [rId, wIdx] = savedValue.split('||');
@@ -396,7 +411,8 @@ document.addEventListener('DOMContentLoaded', function () {
           const webcams = resort.links || resort.webcams || [];
           const webcam = webcams[parseInt(wIdx)];
           if (webcam) {
-            const label = `${resort.name} - ${webcam.name || `카메라 ${parseInt(wIdx) + 1}`}`;
+            const webcamDisplayName = getWebcamName(resort, parseInt(wIdx), webcam.name) || t('camera.default') + ` ${parseInt(wIdx) + 1}`;
+            const label = `${getResortName(resort)} - ${webcamDisplayName}`;
             trigger.textContent = label;
             // Mark as selected
             setTimeout(() => {
@@ -562,7 +578,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (favorites.length === 0) {
       const instruction = document.createElement('div');
       instruction.className = 'instruction';
-      instruction.innerHTML = '<p>북마크한 영상이 없습니다. 영상 오른쪽 위의 북마크 버튼을 눌러 영상을 추가해 보세요.<br>북마크는 같은 브라우저에서만 저장됩니다.</p>';
+      instruction.innerHTML = `<p>${t('bookmarks.empty')}<br>${t('bookmarks.browserOnly')}</p>`;
       favoritesContainer.appendChild(instruction);
     }
 
@@ -628,7 +644,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const removeButton = document.createElement('button');
       removeButton.className = 'favorites-remove-button';
       removeButton.innerHTML = '<i class="bi bi-trash"></i>';
-      removeButton.setAttribute('title', '북마크 제거');
+      removeButton.setAttribute('title', t('buttons.removeBookmark'));
       removeButton.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -753,12 +769,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const timeSpan = document.createElement('span');
       timeSpan.className = 'weather-update-time';
-      timeSpan.textContent = `${month}월 ${day}일 ${hours}:${minutes} 기준`;
+      timeSpan.textContent = t('weather.updateTime', { month, day, hours, minutes });
       if (displaySource) {
         if (data.name.startsWith('리조트_')) {
-          timeSpan.textContent += ` (리조트 제공)`;
+          timeSpan.textContent += ` (${t('weather.resortProvided')})`;
         } else {
-          timeSpan.textContent += ` (기상청 제공)`;
+          timeSpan.textContent += ` (${t('weather.kmaProvided')})`;
         }
       }
       locationNameDiv.appendChild(timeSpan);
@@ -831,7 +847,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const allResortsWeatherContainer = document.createElement('div');
     allResortsWeatherContainer.className = 'all-resorts-weather';
-    allResortsWeatherContainer.innerHTML = '<h3>전국 스키장 날씨 <span style="font-size: 0.6em; font-weight: normal; color: #999; margin-left: 6px;">기상청 데이터 기준</span></h3>';
+    allResortsWeatherContainer.innerHTML = `<h3>${t('weather.allResortsTitle')} <span style="font-size: 0.6em; font-weight: normal; color: #999; margin-left: 6px;">${t('weather.kmaData')}</span></h3>`;
 
     const weatherGrid = document.createElement('div');
     weatherGrid.className = 'weather-container';
@@ -872,9 +888,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const resortProvidedWeatherTitle = document.createElement('h3');
     resortProvidedWeatherTitle.style.marginTop = '16px';
-    resortProvidedWeatherTitle.textContent = '전국 스키장 날씨';
+    resortProvidedWeatherTitle.textContent = t('weather.allResortsTitle');
     const resortProvidedWeatherSpan = document.createElement('span');
-    resortProvidedWeatherSpan.textContent = '리조트 데이터 기준';
+    resortProvidedWeatherSpan.textContent = t('weather.resortData');
     resortProvidedWeatherSpan.style.fontSize = '0.6em';
     resortProvidedWeatherSpan.style.fontWeight = 'normal';
     resortProvidedWeatherSpan.style.color = '#999';
@@ -963,13 +979,13 @@ document.addEventListener('DOMContentLoaded', function () {
       const webcams = resort.links || resort.webcams || [];
 
       if (!isNaN(webcamIndex) && webcams[webcamIndex]) {
-        const webcamName = webcams[webcamIndex].name;
-        document.title = `${basicTitle} - ${webcamName} - ${resort.name}`;
+        const webcamName = getWebcamName(resort, webcamIndex, webcams[webcamIndex].name);
+        document.title = `${basicTitle} - ${webcamName} - ${getResortName(resort)}`;
       } else {
-        document.title = `${basicTitle} - ${resort.name}`;
+        document.title = `${basicTitle} - ${getResortName(resort)}`;
       }
     } else {
-      document.title = `${basicTitle} - ${resort.name}`;
+      document.title = `${basicTitle} - ${getResortName(resort)}`;
     }
   }
 
@@ -1093,7 +1109,7 @@ document.addEventListener('DOMContentLoaded', function () {
           miscSection.classList.add('active');
         }
 
-        document.title = `${basicTitle} - 유용한 기능`;
+        document.title = `${basicTitle} - ${t('nav.usefulFeatures')}`;
         return;
       }
 
@@ -1138,7 +1154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             forecastSection.classList.add('active');
           }
 
-          document.title = `${basicTitle} - 일기예보`;
+          document.title = `${basicTitle} - ${t('nav.forecast')}`;
           updateAllResortsWeather();
           loadForecastCharts();
           closeSidebar();
@@ -1208,7 +1224,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             videoContainer,
                             resortId,
                             webcamIndex,
-                            webcams[webcamIndex].name,
+                            getWebcamName(resort, webcamIndex, webcams[webcamIndex].name),
                             videoUrl,
                             webcams[webcamIndex].video_type
                           );
@@ -1311,7 +1327,7 @@ document.addEventListener('DOMContentLoaded', function () {
       videoCard.className = 'video-card';
 
       const cardTitle = document.createElement('h3');
-      cardTitle.textContent = webcam.name;
+      cardTitle.textContent = getWebcamName(resort, index, webcam.name);
       cardTitle.className = 'cursor-pointer';
       cardTitle.addEventListener('click', function () {
         const submenuItem = document.querySelector(`#${resortId}-submenu .submenu-item[data-webcam-index="${index}"]`);
@@ -1334,7 +1350,7 @@ document.addEventListener('DOMContentLoaded', function () {
         videoContainer,
         resortId,
         index,
-        webcam.name,
+        getWebcamName(resort, index, webcam.name),
         videoUrl,
         webcam.video_type
       );
@@ -1363,7 +1379,7 @@ document.addEventListener('DOMContentLoaded', function () {
     miscMenuItem.className = 'menu-item';
     miscMenuItem.setAttribute('data-target', 'misc');
     miscMenuItem.setAttribute('data-has-submenu', 'true');
-    miscMenuItem.textContent = '유용한 기능';
+    miscMenuItem.textContent = t('nav.usefulFeatures');
     miscMenuItemContainer.appendChild(miscMenuItem);
 
     const dropdownToggle = document.createElement('span');
@@ -1397,7 +1413,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const forecastSubmenuItem = document.createElement('div');
     forecastSubmenuItem.className = 'submenu-item';
     forecastSubmenuItem.setAttribute('data-target', 'misc-forecast');
-    forecastSubmenuItem.textContent = '일기예보';
+    forecastSubmenuItem.textContent = t('nav.forecast');
     miscSubmenu.appendChild(forecastSubmenuItem);
 
     const forecastSection = document.createElement('div');
@@ -1405,7 +1421,7 @@ document.addEventListener('DOMContentLoaded', function () {
     forecastSection.id = 'misc-forecast';
 
     const forecastTitle = document.createElement('h2');
-    forecastTitle.textContent = '일기예보';
+    forecastTitle.textContent = t('nav.forecast');
     forecastTitle.className = 'inline-title';
     forecastSection.appendChild(forecastTitle);
 
@@ -1437,7 +1453,7 @@ document.addEventListener('DOMContentLoaded', function () {
       forecastSection.classList.add('active');
 
       window.location.hash = 'misc/forecast';
-      document.title = `${basicTitle} - 일기예보`;
+      document.title = `${basicTitle} - ${t('nav.forecast')}`;
 
       updateAllResortsWeather();
       loadForecastCharts();
@@ -1452,14 +1468,14 @@ document.addEventListener('DOMContentLoaded', function () {
     miscSection.id = 'misc';
 
     const miscTitle = document.createElement('h2');
-    miscTitle.textContent = '유용한 기능';
+    miscTitle.textContent = t('nav.usefulFeatures');
     miscTitle.className = 'inline-title';
     miscSection.appendChild(miscTitle);
 
     const miscContent = document.createElement('div');
     miscContent.className = 'misc-content';
     miscContent.innerHTML = `
-      <p>메뉴에서 기능을 선택하세요.</p>
+      <p>${t('nav.selectFromMenu')}</p>
     `;
     miscSection.appendChild(miscContent);
 
@@ -1502,14 +1518,14 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       window.location.hash = 'misc';
-      document.title = `${basicTitle} - 유용한 기능`;
+      document.title = `${basicTitle} - ${t('nav.usefulFeatures')}`;
 
       closeSidebar();
     });
 
     resorts.forEach(resort => {
       const resortId = resort.id;
-      const resortName = resort.name;
+      const resortDisplayName = getResortName(resort);
       const webcams = resort.links || resort.webcams || [];
       const hasSubmenu = webcams.length > 0;
 
@@ -1527,7 +1543,7 @@ document.addEventListener('DOMContentLoaded', function () {
         menuItem.setAttribute('data-has-submenu', 'true');
         menuItem.setAttribute('data-resort-id', resortId);
       }
-      menuItem.textContent = resortName;
+      menuItem.textContent = resortDisplayName;
       menuItemContainer.appendChild(menuItem);
 
       if (hasSubmenu) {
@@ -1562,7 +1578,7 @@ document.addEventListener('DOMContentLoaded', function () {
       contentSection.id = hasSubmenu ? `${resortId}-main` : resortId;
 
       const contentTitle = document.createElement('h2');
-      contentTitle.textContent = resortName;
+      contentTitle.textContent = resortDisplayName;
       contentTitle.className = 'inline-title';
       contentSection.appendChild(contentTitle);
 
@@ -1577,7 +1593,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (resort.status) {
           const statusItem = document.createElement('div');
           statusItem.className = 'submenu-item submenu-item-status';
-          statusItem.innerHTML = '오픈현황 <i class="bi bi-box-arrow-up-right me-1"></i>';
+          statusItem.innerHTML = `${t('nav.openStatus')} <i class="bi bi-box-arrow-up-right me-1"></i>`;
           submenu.appendChild(statusItem);
 
           statusItem.addEventListener('click', function () {
@@ -1586,14 +1602,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         webcams.forEach((webcam, index) => {
-          const webcamName = webcam.name;
-          if (!webcamName) return;
+          const webcamDisplayName = getWebcamName(resort, index, webcam.name);
+          if (!webcamDisplayName) return;
 
           const submenuItem = document.createElement('div');
           submenuItem.className = 'submenu-item';
           submenuItem.setAttribute('data-target', `${resortId}-webcam-${index}`);
           submenuItem.setAttribute('data-webcam-index', index);
-          submenuItem.textContent = webcamName;
+          submenuItem.textContent = webcamDisplayName;
           submenu.appendChild(submenuItem);
 
           const webcamSection = document.createElement('div');
@@ -1601,7 +1617,7 @@ document.addEventListener('DOMContentLoaded', function () {
           webcamSection.id = `${resortId}-webcam-${index}`;
 
           const webcamTitle = document.createElement('h2');
-          webcamTitle.textContent = webcamName;
+          webcamTitle.textContent = webcamDisplayName;
           webcamTitle.className = 'inline-title inline-title-submenu cursor-pointer';
           webcamTitle.addEventListener('click', function () {
             const submenuItem = document.querySelector(`#${resortId}-submenu .submenu-item[data-webcam-index="${index}"]`);
@@ -1612,7 +1628,7 @@ document.addEventListener('DOMContentLoaded', function () {
           webcamSection.appendChild(webcamTitle);
 
           const resortLabel = document.createElement('span');
-          resortLabel.textContent = resortName;
+          resortLabel.textContent = resortDisplayName;
           resortLabel.className = 'resort-label';
           webcamSection.appendChild(resortLabel);
 
@@ -1759,7 +1775,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (resort) {
         const webcams = resort.links || resort.webcams || [];
         if (webcams[webcamIndex]) {
-          webcamName = webcams[webcamIndex].name || '';
+          webcamName = getWebcamName(resort, webcamIndex, webcams[webcamIndex].name) || '';
         }
       }
     }
@@ -1818,7 +1834,7 @@ document.addEventListener('DOMContentLoaded', function () {
         captureBtn.className = 'capture-button';
         captureBtn.innerHTML = `
           <i class="bi bi-camera"></i>
-          캡처
+          ${t('buttons.capture')}
           `;
         captureBtn.addEventListener('click', () => {
           const captureIframe = container.querySelector('iframe');
@@ -1826,7 +1842,7 @@ document.addEventListener('DOMContentLoaded', function () {
             try {
               const playerContainer = captureIframe.contentDocument.getElementById('player-container');
               if (playerContainer && !playerContainer.classList.contains('playing')) {
-                showToastMessage(container, '영상이 재생 중일 때만 캡처할 수 있습니다.', 'warning');
+                showToastMessage(container, t('messages.captureOnlyWhilePlaying'), 'warning');
                 return;
               }
             } catch (e) {
@@ -1904,7 +1920,7 @@ document.addEventListener('DOMContentLoaded', function () {
       linkButton.className = 'btn btn-primary btn-lg';
       linkButton.innerHTML = `
         <i class="bi bi-box-arrow-up-right me-2"></i>
-        외부 링크
+        ${t('buttons.externalLink')}
       `;
 
       linkContainer.appendChild(linkButton);
@@ -1966,14 +1982,14 @@ document.addEventListener('DOMContentLoaded', function () {
           captionsButton: false,
           pictureInPictureToggle: false
         },
-        notSupportedMessage: '비디오 재생 중 오류가 발생했습니다.'
+        notSupportedMessage: t('errors.videoPlayback')
       });
 
       const captureBtn = document.createElement('button');
       captureBtn.className = 'capture-button';
       captureBtn.innerHTML = `
         <i class="bi bi-camera"></i>
-        캡처
+        ${t('buttons.capture')}
       `;
       captureBtn.addEventListener('click', () => captureVideoFrame(player));
       container.appendChild(captureBtn);
@@ -2010,7 +2026,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }
 
-        let errorHtml = '<div class="error-message"><p>비디오 재생 중 오류가 발생했습니다.</p>';
+        let errorHtml = `<div class="error-message"><p>${t('errors.videoPlayback')}</p>`;
 
         errorHtml += '<div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">';
 
@@ -2018,14 +2034,14 @@ document.addEventListener('DOMContentLoaded', function () {
           errorHtml += `
             <a href="${directLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
               <i class="bi bi-box-arrow-up-right me-2"></i>
-              원본 링크
+              ${t('buttons.originalLink')}
             </a>`;
         }
 
         errorHtml += `
           <button class="btn btn-secondary retry-button">
             <i class="bi bi-arrow-clockwise me-2"></i>
-            재시도
+            ${t('buttons.retry')}
           </button>`;
 
         errorHtml += '</div>';
@@ -2100,7 +2116,7 @@ document.addEventListener('DOMContentLoaded', function () {
     bookmarkBtn.setAttribute('data-webcam-index', webcamIndex);
     bookmarkBtn.innerHTML = `
       <span class="bookmark-icon"><i class="bi bi-bookmark"></i></span>
-      북마크
+      ${t('buttons.bookmark')}
     `;
     bookmarkBtn.addEventListener('click', function () {
       toggleFavorite(
@@ -2131,7 +2147,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const video = player.el().querySelector('video');
 
       if (video.readyState < 2) {
-        showToastMessage(player.el(), '비디오가 로드되지 않았습니다.', 'warning');
+        showToastMessage(player.el(), t('errors.videoNotLoaded'), 'warning');
         return;
       }
 
@@ -2162,8 +2178,8 @@ document.addEventListener('DOMContentLoaded', function () {
           if (resort && !isNaN(webcamIndex)) {
             const webcams = resort.links || resort.webcams || [];
             if (webcams[webcamIndex]) {
-              const resortName = sanitizeForFilename(resort.name);
-              const webcamName = sanitizeForFilename(webcams[webcamIndex].name || `Camera ${webcamIndex + 1}`);
+              const resortName = sanitizeForFilename(getResortName(resort));
+              const webcamName = sanitizeForFilename(getWebcamName(resort, webcamIndex, webcams[webcamIndex].name) || `Camera ${webcamIndex + 1}`);
               const timestamp = formatTimestamp();
               const filename = `capture_${resortName}_${webcamName}_${timestamp}.jpg`;
 
@@ -2172,7 +2188,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
               const container = player.el().parentNode;
 
-              showToastMessage(container, '캡처 완료!', 'success');
+              showToastMessage(container, t('messages.captureSuccess'), 'success');
 
               return;
             }
@@ -2193,7 +2209,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     } catch (e) {
       console.error('Error capturing frame:', e);
-      alert('캡처 중 오류가 발생했습니다.');
+      alert(t('errors.captureError'));
     }
   }
 
@@ -2215,7 +2231,7 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       const iframe = container.querySelector('iframe');
       if (!iframe) {
-        alert('캡처할 영상을 찾을 수 없습니다.');
+        alert(t('errors.captureNotFound'));
         return;
       }
 
@@ -2276,11 +2292,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const dataURL = canvas.toDataURL('image/jpeg');
         downloadImage(dataURL, filename);
 
-        showToastMessage(container, '캡처 완료!', 'success');
+        showToastMessage(container, t('messages.captureSuccess'), 'success');
       });
     } catch (e) {
       console.error('Error capturing screenshot:', e);
-      showToastMessage(container, '캡처 중 오류가 발생했습니다.', 'danger');
+      showToastMessage(container, t('errors.captureError'), 'danger');
     }
   }
 
@@ -2306,7 +2322,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const resortId = parts[0];
       const resort = data.find(r => r.id === resortId);
       if (resort) {
-        return sanitizeForFilename(resort.name);
+        return sanitizeForFilename(getResortName(resort));
       }
     }
 
@@ -2346,7 +2362,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (resort) {
           const webcams = resort.links || resort.webcams || [];
           if (webcams[webcamIndex]) {
-            return sanitizeForFilename(webcams[webcamIndex].name);
+            return sanitizeForFilename(getWebcamName(resort, webcamIndex, webcams[webcamIndex].name));
           }
         }
       }
@@ -2374,7 +2390,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const webcams = resort.links || resort.webcams || [];
             const webcamIndex = parseInt(webcamId);
             if (webcams[webcamIndex]) {
-              return sanitizeForFilename(webcams[webcamIndex].name);
+              return sanitizeForFilename(getWebcamName(resort, webcamIndex, webcams[webcamIndex].name));
             }
           }
         }
@@ -2603,10 +2619,10 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error initializing app:', error);
         const defaultMessage = document.getElementById('default-message');
         if (defaultMessage) {
-          defaultMessage.innerHTML = '<div class="error-message p-5 text-center"><h3>리조트 정보를 불러오지 못했습니다.</h3><p>페이지를 새로고침하세요.</p></div>';
+          defaultMessage.innerHTML = `<div class="error-message p-5 text-center"><h3>${t('errors.loadResortInfo')}</h3><p>${t('errors.refreshPage')}</p></div>`;
           defaultMessage.classList.add('active');
         } else {
-          mainContent.innerHTML = '<div class="error-message">리조트 정보를 불러오지 못했습니다.</div>';
+          mainContent.innerHTML = `<div class="error-message">${t('errors.loadResortInfo')}</div>`;
         }
       });
   }
@@ -2626,7 +2642,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error loading forecast data:', error);
         const forecastDiv = document.getElementById('forecast');
         if (forecastDiv) {
-          forecastDiv.innerHTML = '<div class="alert alert-danger">일기예보 데이터를 불러오지 못했습니다.</div>';
+          forecastDiv.innerHTML = `<div class="alert alert-danger">${t('errors.loadForecast')}</div>`;
         }
       });
   }
@@ -2672,6 +2688,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     resorts.forEach(resort => {
       const resortName = resort.name;
+      const resortDisplayName = getResortName(resort);
 
       const resortData = forecastData.find(item =>
         item && typeof item === 'object' && item.resort === resortName
@@ -2689,7 +2706,7 @@ document.addEventListener('DOMContentLoaded', function () {
       chartHeader.className = 'chart-header';
 
       const chartTitle = document.createElement('h4');
-      chartTitle.textContent = resortName;
+      chartTitle.textContent = resortDisplayName;
       chartHeader.appendChild(chartTitle);
 
       if (!resortData.forecasts) {
@@ -2697,7 +2714,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const errorMessage = document.createElement('div');
         errorMessage.className = 'alert alert-warning';
-        errorMessage.textContent = `${resortName}의 예보 데이터를 불러올 수 없습니다.`;
+        errorMessage.textContent = t('errors.loadForecast');
         chartContainer.appendChild(errorMessage);
         chartGrid.appendChild(chartContainer);
         return;
@@ -2711,13 +2728,12 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(`Sample forecast for ${resortName}:`, validForecasts[0]);
       }
 
-      // Only proceed if we have valid forecasts
       if (validForecasts.length === 0) {
         console.error(`No valid forecasts for resort ${resortName}`);
 
         const errorMessage = document.createElement('div');
         errorMessage.className = 'alert alert-warning';
-        errorMessage.textContent = `${resortName}의 예보 데이터가 비어있습니다.`;
+        errorMessage.textContent = t('errors.loadForecast');
         chartContainer.appendChild(errorMessage);
         chartGrid.appendChild(chartContainer);
         return;
@@ -2730,8 +2746,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const forecastSummary = document.createElement('div');
       forecastSummary.className = 'forecast-summary';
       forecastSummary.innerHTML = `
-        <span class="temp-range">기온: ${minTemp.toFixed(1)}°C ~ ${maxTemp.toFixed(1)}°C</span>
-        <span class="total-snow">총 강설량: ${totalSnowfall.toFixed(1)}cm</span>
+        <span class="temp-range">${t('forecast.temperature')}: ${minTemp.toFixed(1)}°C ~ ${maxTemp.toFixed(1)}°C</span>
+        <span class="total-snow">${t('forecast.totalSnowfall')}: ${totalSnowfall.toFixed(1)}cm</span>
       `;
       chartHeader.appendChild(forecastSummary);
 
@@ -2777,7 +2793,7 @@ document.addEventListener('DOMContentLoaded', function () {
           labels: actualTimeLabels,
           datasets: [
             {
-              label: '기온 (°C)',
+              label: t('forecast.tempLabel'),
               data: temperatureData,
               borderColor: chartColors.temperature,
               backgroundColor: chartColors.temperature + '33',
@@ -2790,7 +2806,7 @@ document.addEventListener('DOMContentLoaded', function () {
               spanGaps: true
             },
             {
-              label: '풍속 (m/s)',
+              label: t('forecast.windLabel'),
               data: windData,
               borderColor: chartColors.wind,
               backgroundColor: chartColors.wind + '33',
@@ -2803,7 +2819,7 @@ document.addEventListener('DOMContentLoaded', function () {
               spanGaps: true
             },
             {
-              label: '강설량 (cm/3h)',
+              label: t('forecast.snowLabel'),
               data: snowfallData,
               borderColor: chartColors.snowfall,
               backgroundColor: chartColors.snowfall + '33',
@@ -2829,8 +2845,9 @@ document.addEventListener('DOMContentLoaded', function () {
               callbacks: {
                 title: function (context) {
                   const date = new Date(context[0].parsed.x);
-                  return date.toLocaleDateString('ko-KR') + ' ' +
-                    date.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+                  const locale = i18n.getLanguage() === 'ko' ? 'ko-KR' : 'en-US';
+                  return date.toLocaleDateString(locale) + ' ' +
+                    date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
                 }
               },
               backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -2859,11 +2876,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 displayFormats: {
                   day: 'M/d'
                 },
-                tooltipFormat: 'yyyy년 MM월 dd일 HH:mm'
+                tooltipFormat: i18n.getLanguage() === 'ko' ? 'yyyy년 MM월 dd일 HH:mm' : 'MMM d, yyyy HH:mm'
               },
               title: {
                 display: true,
-                text: '날짜/시간',
+                text: t('forecast.dateTime'),
                 color: '#e0e0e0',
                 font: {
                   weight: 'bold'
@@ -2884,7 +2901,7 @@ document.addEventListener('DOMContentLoaded', function () {
               position: 'left',
               title: {
                 display: true,
-                text: '기온 (°C)',
+                text: t('forecast.tempLabel'),
                 color: chartColors.temperature,
                 font: {
                   weight: 'bold'
@@ -2906,7 +2923,7 @@ document.addEventListener('DOMContentLoaded', function () {
               position: 'right',
               title: {
                 display: true,
-                text: '풍속 (m/s)',
+                text: t('forecast.windLabel'),
                 color: chartColors.wind,
                 font: {
                   weight: 'bold'
@@ -2927,7 +2944,7 @@ document.addEventListener('DOMContentLoaded', function () {
               position: 'right',
               title: {
                 display: true,
-                text: '강설량 (cm/3h)',
+                text: t('forecast.snowLabel'),
                 color: chartColors.snowfall,
                 font: {
                   weight: 'bold'
@@ -3069,7 +3086,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const recaptchaResponse = grecaptcha.getResponse();
       if (!recaptchaResponse) {
-        alert('CAPTCHA를 확인해주세요.');
+        alert(t('bugReport.captchaRequired'));
         return;
       }
 
@@ -3079,7 +3096,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const submitButton = bugReportForm.querySelector('.submit-button');
 
       submitButton.disabled = true;
-      submitButton.textContent = '등록 중...';
+      submitButton.textContent = t('bugReport.submitting');
 
       const payload = {
         recaptchaResponse: recaptchaResponse,
@@ -3098,22 +3115,22 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            alert('등록되었습니다.');
+            alert(t('bugReport.submitted'));
             bugReportModal.classList.remove('active');
             bugReportForm.reset();
             grecaptcha.reset();
           } else {
-            alert('등록에 실패했습니다: ' + (data.error || 'error'));
+            alert(t('bugReport.submitFailed') + ': ' + (data.error || 'error'));
             console.error('Server Error:', data);
           }
         })
         .catch(error => {
           console.error('Error:', error);
-          alert('등록 중 오류가 발생했습니다.');
+          alert(t('bugReport.submitError'));
         })
         .finally(() => {
           submitButton.disabled = false;
-          submitButton.textContent = '보내기';
+          submitButton.textContent = t('bugReport.submit');
         });
     });
   }
