@@ -2284,6 +2284,23 @@ body.light-mode .location-name.clickable:hover {
   font-size: 24px;
 }
 
+.bug-report-link {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.bug-report-link:hover {
+  background-color: #bb2d3b;
+}
+
 .bug-report-modal {
   display: none;
   position: fixed;
@@ -2383,10 +2400,4 @@ body.light-mode .location-name.clickable:hover {
 .submit-button:disabled {
   background-color: #555;
   cursor: not-allowed;
-}
-
-.recaptcha-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
 }

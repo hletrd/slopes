@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const t = (key, params) => i18n.t(key, params);
   const getResortName = (resort) => i18n.getResortName(resort.id, resort.name);
   const getWebcamName = (resort, webcamIndex, defaultName) => i18n.getWebcamName(resort.id, webcamIndex, defaultName);
+  const getWeatherLocationName = (name) => i18n.getWeatherLocationName(name);
 
   const toggleMenu = document.querySelector('.toggle-menu');
   const sidebar = document.querySelector('.sidebar');
@@ -457,7 +458,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   function updateFloatingLayout() {
     const buttons = [
       document.getElementById('addToHomeButton'),
-      document.getElementById('bugReportButton'),
       document.getElementById('settingsButton'),
       document.getElementById('quadViewButton')
     ];
@@ -755,9 +755,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     const locationNameDiv = document.createElement('div');
     locationNameDiv.className = 'location-name';
     if (data.name.startsWith('리조트_')) {
-      locationNameDiv.textContent = data.name.replace('리조트_', '');
+      const locationName = data.name.replace('리조트_', '');
+      locationNameDiv.textContent = getWeatherLocationName(locationName);
+    } else if (data.id) {
+      locationNameDiv.textContent = getResortName(data);
     } else {
-      locationNameDiv.textContent = data.name;
+      locationNameDiv.textContent = getWeatherLocationName(data.name);
     }
 
     if (timestamp) {
@@ -3081,57 +3084,52 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
     });
 
-    bugReportForm.addEventListener('submit', function (e) {
+    bugReportForm.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      const recaptchaResponse = grecaptcha.getResponse();
-      if (!recaptchaResponse) {
-        alert(t('bugReport.captchaRequired'));
-        return;
-      }
-
       const type = document.getElementById('reportType').value;
-      const subheaderTitle = document.getElementById('reportTitle').value; // Changed variable name to avoid conflict with field ID
+      const subheaderTitle = document.getElementById('reportTitle').value;
       const content = document.getElementById('reportContent').value;
       const submitButton = bugReportForm.querySelector('.submit-button');
 
       submitButton.disabled = true;
       submitButton.textContent = t('bugReport.submitting');
 
-      const payload = {
-        recaptchaResponse: recaptchaResponse,
-        type: type,
-        title: subheaderTitle,
-        content: content
-      };
+      try {
+        const recaptchaResponse = await grecaptcha.execute('6LdnzyUsAAAAAKh6eSEaERifPRTh51qnRnpmX6S0', { action: 'submit' });
 
-      fetch('report.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            alert(t('bugReport.submitted'));
-            bugReportModal.classList.remove('active');
-            bugReportForm.reset();
-            grecaptcha.reset();
-          } else {
-            alert(t('bugReport.submitFailed') + ': ' + (data.error || 'error'));
-            console.error('Server Error:', data);
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert(t('bugReport.submitError'));
-        })
-        .finally(() => {
-          submitButton.disabled = false;
-          submitButton.textContent = t('bugReport.submit');
+        const payload = {
+          recaptchaResponse: recaptchaResponse,
+          type: type,
+          title: subheaderTitle,
+          content: content
+        };
+
+        const response = await fetch('report.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
         });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert(t('bugReport.submitted'));
+          bugReportModal.classList.remove('active');
+          bugReportForm.reset();
+        } else {
+          alert(t('bugReport.submitFailed') + ': ' + (data.error || 'error'));
+          console.error('Server Error:', data);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert(t('bugReport.submitError'));
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = t('bugReport.submit');
+      }
     });
   }
 

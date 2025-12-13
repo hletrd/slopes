@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Slopes cam - 전국 스키장 실시간 웹캠 모음</title>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LdnzyUsAAAAAKh6eSEaERifPRTh51qnRnpmX6S0" async defer></script>
   <script src="/i18n.js"></script>
   <meta name="description" content="전국 스키장 실시간 웹캠 및 날씨">
   <meta name="keywords" content="스키장, 웹캠, 실시간, 날씨">
@@ -91,9 +91,6 @@
     <button id="addToHomeButton" class="add-to-home" data-i18n-title="buttons.addToHome" title="홈 화면에 추가">
       <i class="bi bi-house-add"></i>
     </button>
-    <button id="bugReportButton" class="bug-report-button" data-i18n-title="buttons.bugReport" title="버그  제안">
-      <i class="bi bi-bug"></i>
-    </button>
     <button id="settingsButton" class="settings-button">
       <i class="bi bi-gear"></i>
     </button>
@@ -117,8 +114,7 @@
           <li data-i18n="info.a1_6" data-i18n-html>지산은 24/25시즌 영상 서비스를 <s>중단했습니다.</s>다시 시작했습니다.</li>
         </ul>
         <p data-i18n="info.q2">Q. 날씨 정보가 정확하지 않습니다.</p>
-        <p id="info-a2">A. 날씨 정보는 실시간 관측 정보를 바탕으로 3차원 모델을 통해 계산된 정보입니다. 날씨 정보는 <a href="https://apihub.kma.go.kr/"
-            target="_blank">기상청 API허브</a>에서 제공하는 융합기상 데이터를 공공누리 제1유형 라이센스로 사용하고 있습니다.</p>
+        <p data-i18n="info.a2" data-i18n-html>A. 날씨 정보는 실시간 관측 정보를 바탕으로 3차원 모델을 통해 계산된 정보입니다. 날씨 정보는 <a href="https://apihub.kma.go.kr/" target="_blank">기상청 API허브</a>에서 제공하는 융합기상 데이터를 공공누리 제1유형 라이센스로 사용하고 있습니다.</p>
         <ul>
           <li data-i18n="info.a2_1">날씨 정보는 국지적인 정보를 정확히 반영하지 않을 수 있으며, 부정확한 정보를 포함할 수 있습니다.</li>
           <li data-i18n="info.a2_2">풍속은 10분 풍속, 강수량은 1시간 강수량이며, 적설량은 3시간 적설량입니다.</li>
@@ -127,9 +123,7 @@
         <p data-i18n="info.a3">A. 스키장 영상과 날씨를 바로 모아볼 수 있는 페이지가 없어서 만들었습니다.</p>
         <ul>
           <li data-i18n="info.a3_1">스키장 공식 홈페이지에서 제공하는 영상은 모바일에서 보기가 불편했습니다. 스키를 타면서 노트북을 들고 다니지는 않잖아요?</li>
-          <li id="info-a3_2"><a target="_blank" href="https://ski-resort.kr/">ski-resort.kr</a>와 <a target="_blank"
-              href="https://paulkim-xr.github.io/SkiWatch/">SkiWatch</a>도 참고했습니다만, 원하는 영상을 모아볼 수 있는 기능이 없고 비발디파크를 제대로
-            지원하지 않아 직접 만들었습니다.</li>
+          <li data-i18n="info.a3_2" data-i18n-html><a target="_blank" href="https://ski-resort.kr/">ski-resort.kr</a>와 <a target="_blank" href="https://paulkim-xr.github.io/SkiWatch/">SkiWatch</a>도 참고했습니다만, 원하는 영상을 모아볼 수 있는 기능이 없고 비발디파크를 제대로 지원하지 않아 직접 만들었습니다.</li>
         </ul>
       </div>
     </div>
@@ -186,9 +180,6 @@
           <label for="reportContent" data-i18n="bugReport.content">내용</label>
           <textarea id="reportContent" rows="5" required maxlength="1000" data-i18n-placeholder="bugReport.contentPlaceholder"
             placeholder="내용을 입력해주세요. (최대 1000자)"></textarea>
-        </div>
-        <div class="form-group recaptcha-container">
-          <div class="g-recaptcha" data-sitekey="6LdnzyUsAAAAAKh6eSEaERifPRTh51qnRnpmX6S0"></div>
         </div>
         <button type="submit" class="submit-button" data-i18n="buttons.submit">보내기</button>
       </form>
@@ -268,7 +259,9 @@
         <h2 data-i18n="home.title">전국 스키장 실시간 웹캠 모음</h2>
         <p class="lead" style="font-size: 1.1rem;" data-i18n="nav.selectResort">왼쪽 메뉴에서 스키장 또는 카메라를 선택하세요.</p>
         <p class="disclaimer mt-2" style="font-size: 0.8rem;">
-          <span data-i18n="home.issueReport">사이트 오류 제보, 문의 및 기능 제안</span> <span class="github-button-issue"><a class="github-button github-button-issue"
+          <span data-i18n="home.issueReport">사이트 오류 제보, 문의 및 기능 제안</span>
+          <button id="bugReportButton" class="bug-report-link" data-i18n="buttons.bugReport">버그 제보</button>
+          <span class="github-button-issue"><a class="github-button github-button-issue"
               href="https://github.com/hletrd/slopes/issues"
               data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-issue-opened"
               aria-label="Issue hletrd/slopes on GitHub">Issue</a></span>
@@ -312,7 +305,7 @@
       <div id="iOSInstructions">
         <p><strong data-i18n="installation.iphone">iPhone</strong></p>
         <ol>
-          <li id="ios-step1">Safari 브라우저에서 공유 버튼 <i class="bi bi-box-arrow-up"></i> 탭</li>
+          <li data-i18n="installation.iphoneStep1" data-i18n-html>Safari 브라우저에서 공유 버튼 <i class="bi bi-box-arrow-up"></i> 탭</li>
           <li data-i18n="installation.iphoneStep2">"홈 화면에 추가" 선택</li>
           <li data-i18n="installation.iphoneStep3">"추가" 버튼 탭</li>
         </ol>
@@ -320,7 +313,7 @@
       <div id="androidInstructions">
         <p><strong data-i18n="installation.android">Android</strong></p>
         <ol>
-          <li id="android-step1">Chrome 메뉴 <i class="bi bi-three-dots-vertical"></i> 탭</li>
+          <li data-i18n="installation.androidStep1" data-i18n-html>Chrome 메뉴 <i class="bi bi-three-dots-vertical"></i> 탭</li>
           <li data-i18n="installation.androidStep2">"앱 설치" 또는 "홈 화면에 추가" 선택</li>
         </ol>
       </div>

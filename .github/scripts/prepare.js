@@ -114,7 +114,7 @@ async function addCommitHash(htmlFilePath) {
       content = content.replace(/<a target="_blank" href="https:\/\/github\.com\/hletrd\/slopes\/commit\/\{commit\}"><\/a>/g,
         `<a target="_blank" href="https://github.com/hletrd/slopes/commit/${gitCommit}">${shortCommit}</a>`);
 
-      const date = new Date().toISOString().split('T')[0];
+      const date = new Date().toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '-').replace('.', '');
       content = content.replace('{date}', date);
 
       console.log(`  Replaced {commit} with git commit hash: ${shortCommit}`);

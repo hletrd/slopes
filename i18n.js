@@ -16,12 +16,12 @@ const i18n = (function () {
     const browserLang = navigator.language || navigator.userLanguage;
     if (browserLang) {
       const langCode = browserLang.split('-')[0].toLowerCase();
-      if (SUPPORTED_LANGUAGES.includes(langCode)) {
-        return langCode;
+      if (langCode === 'ko') {
+        return 'ko';
       }
     }
 
-    return DEFAULT_LANGUAGE;
+    return 'en';
   }
 
   async function loadTranslations(lang) {
@@ -153,6 +153,12 @@ const i18n = (function () {
     return result === key ? defaultName : result;
   }
 
+  function getWeatherLocationName(locationName) {
+    const key = `weatherLocations.${locationName}`;
+    const result = get(key);
+    return result === key ? locationName : result;
+  }
+
   return {
     init,
     get,
@@ -162,7 +168,8 @@ const i18n = (function () {
     getSupportedLanguages,
     applyTranslations,
     getResortName,
-    getWebcamName
+    getWebcamName,
+    getWeatherLocationName
   };
 })();
 
