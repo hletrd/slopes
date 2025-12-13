@@ -91,6 +91,15 @@ if (!$verifyJson['success']) {
     exit;
 }
 
+$score = $verifyJson['score'] ?? 0;
+$action = $verifyJson['action'] ?? '';
+
+if ($action !== 'submit' || $score < 0.5) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'error' => 'Recaptcha score too low']);
+    exit;
+}
+
 $category = match ($type) {
     'bug' => 'Bug',
     'feature' => 'Feature',
