@@ -252,6 +252,47 @@
           }
         });
 
+        // Programmatic play function for postMessage control
+        function playStream() {
+          if (!isPlaying) {
+            playButton.style.opacity = '0';
+            playButton.style.visibility = 'hidden';
+            playButton.style.display = 'none';
+            retryCount = 0;
+            tryInitialize();
+          }
+        }
+
+        // Programmatic pause function for postMessage control
+        function pauseStream() {
+          if (isPlaying) {
+            vivaldiPlayer.ctlUIDispose();
+            isPlaying = false;
+            playerContainer.classList.remove('playing');
+
+            playButton.style.display = 'flex';
+            setTimeout(() => {
+              playButton.style.opacity = '1';
+              playButton.style.visibility = 'visible';
+            }, 10);
+
+            pauseButton.style.opacity = '0';
+            pauseButton.style.visibility = 'hidden';
+            pauseButton.style.display = 'none';
+          }
+        }
+
+        // Listen for postMessage commands from parent window
+        window.addEventListener('message', function(event) {
+          if (event.data && event.data.action) {
+            if (event.data.action === 'play') {
+              playStream();
+            } else if (event.data.action === 'pause') {
+              pauseStream();
+            }
+          }
+        });
+
         if (params.autoplay) {
           playButton.style.display = 'none';
           playButton.style.opacity = '0';

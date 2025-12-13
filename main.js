@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const mainContent = document.querySelector('.main-content');
   const basicTitle = "Slopes cam";
   let activePlayers = [];
+  let activeVivaldiPlayers = []; // Track Vivaldi iframes for concurrent stream management
   let quadPlayers = [null, null, null, null];
   let activeResort = null;
   let activeWebcam = null;
@@ -1777,6 +1778,38 @@ document.addEventListener('DOMContentLoaded', function () {
         vivaldiContainer.innerHTML = `<iframe src="vivaldi.html?channel=${channel}&serial=${serial}&autoplay=${shouldAutoplay}" allowfullscreen></iframe>`;
         container.appendChild(vivaldiContainer);
 
+        const iframe = vivaldiContainer.querySelector('iframe');
+
+        // Create a player-like object for Vivaldi iframes to track in manageVideoPlayback
+        const vivaldiPlayerWrapper = {
+          iframe: iframe,
+          container: vivaldiContainer,
+          channel: channel,
+          serial: serial,
+          _paused: !shouldAutoplay,
+          el: function () {
+            return this.container;
+          },
+          paused: function () {
+            return this._paused;
+          },
+          play: function () {
+            if (this._paused && this.iframe && this.iframe.contentWindow) {
+              this.iframe.contentWindow.postMessage({ action: 'play' }, '*');
+              this._paused = false;
+            }
+          },
+          pause: function () {
+            if (!this._paused && this.iframe && this.iframe.contentWindow) {
+              this.iframe.contentWindow.postMessage({ action: 'pause' }, '*');
+              this._paused = true;
+            }
+          }
+        };
+
+        // Track this Vivaldi player for concurrent stream management
+        activeVivaldiPlayers.push(vivaldiPlayerWrapper);
+
         if (resortId && !isNaN(webcamIndex)) {
           addBookmarkButton(container, resortId, webcamIndex, webcamName, videoUrl, videoType, BookmarkButtonType.VIVALDI);
         }
@@ -1788,10 +1821,10 @@ document.addEventListener('DOMContentLoaded', function () {
           캡처
           `;
         captureBtn.addEventListener('click', () => {
-          const iframe = container.querySelector('iframe');
-          if (iframe) {
+          const captureIframe = container.querySelector('iframe');
+          if (captureIframe) {
             try {
-              const playerContainer = iframe.contentDocument.getElementById('player-container');
+              const playerContainer = captureIframe.contentDocument.getElementById('player-container');
               if (playerContainer && !playerContainer.classList.contains('playing')) {
                 showToastMessage(container, '영상이 재생 중일 때만 캡처할 수 있습니다.', 'warning');
                 return;
@@ -1806,6 +1839,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return {
           dispose: function () {
+            // Remove from activeVivaldiPlayers when disposed
+            const idx = activeVivaldiPlayers.indexOf(vivaldiPlayerWrapper);
+            if (idx > -1) {
+              activeVivaldiPlayers.splice(idx, 1);
+            }
             container.innerHTML = '';
           }
         };
@@ -2934,6 +2972,11 @@ document.addEventListener('DOMContentLoaded', function () {
           player.pause();
         }
       });
+      activeVivaldiPlayers.forEach(player => {
+        if (!player.paused()) {
+          player.pause();
+        }
+      });
     } else {
       manageVideoPlayback();
     }
@@ -2948,7 +2991,16 @@ document.addEventListener('DOMContentLoaded', function () {
       return el && document.body.contains(el);
     });
 
-    const playersWithPosition = activePlayers.map(player => {
+    // Filter out disposed Vivaldi players or those not in the DOM
+    activeVivaldiPlayers = activeVivaldiPlayers.filter(player => {
+      const el = player.el();
+      return el && document.body.contains(el);
+    });
+
+    // Combine Video.js players and Vivaldi players for unified management
+    const allPlayers = [...activePlayers, ...activeVivaldiPlayers];
+
+    const playersWithPosition = allPlayers.map(player => {
       const el = player.el();
       const rect = el.getBoundingClientRect();
 
@@ -2968,18 +3020,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const visiblePlayers = playersWithPosition.filter(p => p.visible);
     visiblePlayers.sort((a, b) => a.top - b.top);
 
-    const MAX_CONCURRENT = 4;
+    const MAX_CONCURRENT = isMobile ? 4 : 9;
     const playersToPlay = visiblePlayers.slice(0, MAX_CONCURRENT).map(p => p.player);
 
-    activePlayers.forEach(player => {
+    allPlayers.forEach(player => {
       if (playersToPlay.includes(player)) {
         // Should play
         if (player.paused()) {
           const playPromise = player.play();
-          if (playPromise !== undefined) {
-            playPromise.catch(error => {
+          if (playPromise !== undefined && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {
               // Auto-play was prevented
-              // console.log('Auto-play prevented');
             });
           }
         }

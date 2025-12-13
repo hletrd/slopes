@@ -55,7 +55,6 @@ server {
   font/otf
   image/svg+xml;
 
-  # Security: Deny access to sensitive files
   location ~ /\. {
     deny all;
   }
