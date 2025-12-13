@@ -2213,3 +2213,136 @@ body.light-mode .location-name.clickable:hover {
 .quad-page.light-mode .dropdown-list::-webkit-scrollbar-thumb {
   background-color: #ccc;
 }
+
+/* Bug Report Modal Styles */
+.bug-report-button {
+  background-color: #dc3545;
+  /* Bootstrap danger color for bugs */
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+}
+
+.bug-report-button:hover {
+  background-color: #bb2d3b;
+}
+
+.bug-report-button i {
+  font-size: 24px;
+}
+
+.bug-report-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: fadeIn 0.3s forwards;
+}
+
+.bug-report-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.bug-report-content {
+  background-color: #222;
+  padding: 25px;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s forwards;
+}
+
+.bug-report-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.bug-report-title {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: white;
+  font-weight: 800;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ddd;
+  font-weight: 600;
+}
+
+.form-group select,
+.form-group textarea,
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: white;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0069d9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.submit-button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.recaptcha-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}

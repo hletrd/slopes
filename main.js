@@ -440,6 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function updateFloatingLayout() {
     const buttons = [
       document.getElementById('addToHomeButton'),
+      document.getElementById('bugReportButton'),
       document.getElementById('settingsButton'),
       document.getElementById('quadViewButton')
     ];
@@ -2988,6 +2989,81 @@ document.addEventListener('DOMContentLoaded', function () {
           player.pause();
         }
       }
+    });
+  }
+
+  /* Bug Report Modal Logic */
+  const bugReportButton = document.getElementById('bugReportButton');
+  const bugReportModal = document.getElementById('bugReportModal');
+  const closeBugReportModal = document.getElementById('closeBugReportModal');
+  const bugReportForm = document.getElementById('bugReportForm');
+
+  if (bugReportButton && bugReportModal) {
+    bugReportButton.addEventListener('click', function () {
+      bugReportModal.classList.add('active');
+    });
+
+    closeBugReportModal.addEventListener('click', function () {
+      bugReportModal.classList.remove('active');
+    });
+
+    window.addEventListener('click', function (event) {
+      if (event.target === bugReportModal) {
+        bugReportModal.classList.remove('active');
+      }
+    });
+
+    bugReportForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const recaptchaResponse = grecaptcha.getResponse();
+      if (!recaptchaResponse) {
+        alert('CAPTCHA를 확인해주세요.');
+        return;
+      }
+
+      const type = document.getElementById('reportType').value;
+      const subheaderTitle = document.getElementById('reportTitle').value; // Changed variable name to avoid conflict with field ID
+      const content = document.getElementById('reportContent').value;
+      const submitButton = bugReportForm.querySelector('.submit-button');
+
+      submitButton.disabled = true;
+      submitButton.textContent = '등록 중...';
+
+      const payload = {
+        recaptchaResponse: recaptchaResponse,
+        type: type,
+        title: subheaderTitle,
+        content: content
+      };
+
+      fetch('report.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('등록되었습니다.');
+            bugReportModal.classList.remove('active');
+            bugReportForm.reset();
+            grecaptcha.reset();
+          } else {
+            alert('등록에 실패했습니다: ' + (data.error || 'error'));
+            console.error('Server Error:', data);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('등록 중 오류가 발생했습니다.');
+        })
+        .finally(() => {
+          submitButton.disabled = false;
+          submitButton.textContent = '보내기';
+        });
     });
   }
 
