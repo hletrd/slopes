@@ -20,6 +20,30 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+function showGlobalToast(message, type = 'info', duration = 3000) {
+  let container = document.querySelector('.global-toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'global-toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = `global-toast ${type}`;
+  toast.textContent = message;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add('fade-out');
+    setTimeout(() => {
+      toast.remove();
+      if (container.children.length === 0) {
+        container.remove();
+      }
+    }, 300);
+  }, duration);
+}
+
 document.addEventListener('DOMContentLoaded', async function () {
   await i18n.init();
 
@@ -2212,7 +2236,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     } catch (e) {
       console.error('Error capturing frame:', e);
-      alert(t('errors.captureError'));
+      showGlobalToast(t('errors.captureError'), 'error');
     }
   }
 
@@ -2234,7 +2258,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     try {
       const iframe = container.querySelector('iframe');
       if (!iframe) {
-        alert(t('errors.captureNotFound'));
+        showGlobalToast(t('errors.captureNotFound'), 'error');
         return;
       }
 
@@ -3116,16 +3140,16 @@ document.addEventListener('DOMContentLoaded', async function () {
         const data = await response.json();
 
         if (data.success) {
-          alert(t('bugReport.submitted'));
+          showGlobalToast(t('bugReport.submitted'), 'success');
           bugReportModal.classList.remove('active');
           bugReportForm.reset();
         } else {
-          alert(t('bugReport.submitFailed') + ': ' + (data.error || 'error'));
+          showGlobalToast(t('bugReport.submitFailed') + ': ' + (data.error || 'error'), 'error');
           console.error('Server Error:', data);
         }
       } catch (error) {
         console.error('Error:', error);
-        alert(t('bugReport.submitError'));
+        showGlobalToast(t('bugReport.submitError'), 'error');
       } finally {
         submitButton.disabled = false;
         submitButton.textContent = t('bugReport.submit');

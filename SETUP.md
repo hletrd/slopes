@@ -58,7 +58,10 @@ server {
   location ~ /\. {
     deny all;
   }
-  location = /secrets.json {
+  location ~ \.pem$ {
+    deny all;
+  }
+  location ~ ^/(secrets\.json|secrets\.example\.json)$ {
     deny all;
   }
 
