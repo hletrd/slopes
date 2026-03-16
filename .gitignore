@@ -12,3 +12,6 @@ vivaldi
 secrets.json
 *.pem
 node_modules/
+
+.omc/
+.omx/
