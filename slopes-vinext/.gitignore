@@ -1,0 +1,6 @@
+node_modules
+dist
+.vinext
+.vite
+*.local
+.DS_Store

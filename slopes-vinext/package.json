@@ -1,0 +1,38 @@
+{
+  "name": "slopes-cam",
+  "version": "2.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Slopes cam - Live Ski Resort Webcams",
+  "scripts": {
+    "dev": "vinext dev",
+    "build": "vinext build",
+    "start": "vinext start",
+    "preview": "vite preview"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.9",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "date-fns": "^4.1.0",
+    "html2canvas": "^1.4.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "video.js": "^8.23.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-rsc": "^0.5.19",
+    "typescript": "^5.8.3",
+    "vite": "^7.3.1",
+    "vinext": "latest"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
