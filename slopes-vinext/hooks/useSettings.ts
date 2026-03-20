@@ -10,8 +10,15 @@ function getDefaultSettings(): AppSettings {
   return {
     autoplay: !isMobile,
     darkMode: true,
-    quadViewOpen: false,
   };
+}
+
+function isValidSettings(val: unknown): val is Partial<AppSettings> {
+  if (typeof val !== "object" || val === null) return false;
+  const obj = val as Record<string, unknown>;
+  if ("autoplay" in obj && typeof obj.autoplay !== "boolean") return false;
+  if ("darkMode" in obj && typeof obj.darkMode !== "boolean") return false;
+  return true;
 }
 
 function loadSettings(): AppSettings {
@@ -21,7 +28,8 @@ function loadSettings(): AppSettings {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaults;
-    const parsed = JSON.parse(raw) as Partial<AppSettings>;
+    const parsed = JSON.parse(raw);
+    if (!isValidSettings(parsed)) return defaults;
     return { ...defaults, ...parsed };
   } catch {
     return defaults;

@@ -64,7 +64,6 @@ export interface FavoriteItem {
 export interface AppSettings {
   autoplay: boolean;
   darkMode: boolean;
-  quadViewOpen: boolean;
 }
 
 export type SupportedLanguage = "ko" | "en";

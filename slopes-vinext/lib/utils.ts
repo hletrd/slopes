@@ -13,7 +13,7 @@ export function formatTimestamp(): string {
   const hh = String(now.getHours()).padStart(2, "0");
   const min = String(now.getMinutes()).padStart(2, "0");
   const ss = String(now.getSeconds()).padStart(2, "0");
-  return `${mm}-${dd}_${hh}:${min}:${ss}`;
+  return `${mm}-${dd}_${hh}-${min}-${ss}`;
 }
 
 export function getYoutubeId(url: string): string | null {
@@ -48,7 +48,7 @@ export function downloadImage(dataURL: string, filename: string): void {
     fetch(dataURL)
       .then((res) => res.blob())
       .then((blob) => {
-        const file = new File([blob], filename, { type: "image/png" });
+        const file = new File([blob], filename, { type: "image/jpeg" });
         navigator
           .share({ files: [file] })
           .catch(() => {

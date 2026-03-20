@@ -82,34 +82,6 @@ function resolveKey(
   });
 }
 
-export function applyDOMTranslations(translations: TranslationData): void {
-  document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    if (!key) return;
-
-    const attrMatch = key.match(/^\[(\w+)\](.+)$/);
-    if (attrMatch) {
-      el.setAttribute(attrMatch[1], resolveKey(translations, attrMatch[2]));
-    } else if (el.hasAttribute("data-i18n-html")) {
-      el.innerHTML = resolveKey(translations, key);
-    } else {
-      el.textContent = resolveKey(translations, key);
-    }
-  });
-
-  document.querySelectorAll<HTMLInputElement>("[data-i18n-placeholder]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-placeholder");
-    if (key) el.placeholder = resolveKey(translations, key);
-  });
-
-  document.querySelectorAll<HTMLElement>("[data-i18n-title]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-title");
-    if (key) el.title = resolveKey(translations, key);
-  });
-
-  document.dispatchEvent(new CustomEvent("i18n:loaded"));
-}
-
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<SupportedLanguage>(DEFAULT_LANGUAGE);
   const [translations, setTranslations] = useState<TranslationData>({});
@@ -140,9 +112,17 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       setLanguageState(lang);
       if (typeof window !== "undefined") {
         localStorage.setItem(STORAGE_KEY, lang);
+        document.documentElement.lang = lang;
       }
     }
   }, []);
+
+  // Update html lang on mount
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = language;
+    }
+  }, [language]);
 
   const t = useCallback(
     (key: string, params?: Record<string, string | number>) =>

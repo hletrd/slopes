@@ -9,7 +9,7 @@ export default function RootLayout({
     <html data-theme="dark" lang="ko">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <title>Slopes cam - 전국 스키장 실시간 웹캠 모음</title>
         <meta name="description" content="전국 스키장 실시간 웹캠 및 날씨" />
         <meta name="keywords" content="스키장, 웹캠, 실시간, 날씨" />
@@ -75,6 +75,7 @@ export default function RootLayout({
         {/* html2canvas */}
         <script
           src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"
+          defer
         />
         {/* video.js */}
         <script
@@ -87,8 +88,8 @@ export default function RootLayout({
           src="https://buttons.github.io/buttons.js"
         />
         {/* Chart.js */}
-        <script src="https://cdn.jsdelivr.net/npm/chart.js" />
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js" defer />
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns" defer />
         {/* Google Analytics */}
         <script
           async

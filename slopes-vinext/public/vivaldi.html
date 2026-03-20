@@ -284,6 +284,11 @@
 
         // Listen for postMessage commands from parent window
         window.addEventListener('message', function(event) {
+          // Validate origin - accept same-origin and the production domain
+          var validOrigins = [window.location.origin, 'http://ski.atik.kr'];
+          if (validOrigins.indexOf(event.origin) === -1) {
+            return;
+          }
           if (event.data && event.data.action) {
             if (event.data.action === 'play') {
               playStream();

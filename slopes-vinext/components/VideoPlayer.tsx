@@ -33,6 +33,7 @@ export function VideoPlayer({
 }: VideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
+  const disposedRef = useRef(false);
   const { t } = useI18n();
 
   const videoUrl = webcam.video || webcam.link || "";
@@ -61,20 +62,24 @@ export function VideoPlayer({
         showToast(t("errors.videoNotLoaded") || "Video not loaded yet", "warning");
         return;
       }
-      const canvas = document.createElement("canvas");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      try {
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      const rName = sanitizeForFilename(resortName || "resort");
-      const wName = sanitizeForFilename(webcamName || "webcam");
-      const ts = formatTimestamp();
-      const filename = `capture_${rName}_${wName}_${ts}.jpg`;
-      const dataURL = canvas.toDataURL("image/jpeg");
-      downloadImage(dataURL, filename);
-      showToast(t("messages.captureSuccess") || "Captured!", "success");
+        const rName = sanitizeForFilename(resortName || "resort");
+        const wName = sanitizeForFilename(webcamName || "webcam");
+        const ts = formatTimestamp();
+        const filename = `capture_${rName}_${wName}_${ts}.jpg`;
+        const dataURL = canvas.toDataURL("image/jpeg");
+        downloadImage(dataURL, filename);
+        showToast(t("messages.captureSuccess") || "Captured!", "success");
+      } catch {
+        showToast(t("errors.captureError") || "Capture failed (cross-origin restriction)", "danger");
+      }
       return;
     }
 
@@ -85,13 +90,17 @@ export function VideoPlayer({
         if (typeof html2canvas !== "undefined" && iframe.contentDocument) {
           const iframeBody = iframe.contentDocument.body;
           html2canvas(iframeBody, { useCORS: false }).then((canvas: HTMLCanvasElement) => {
-            const rName = sanitizeForFilename(resortName || "resort");
-            const wName = sanitizeForFilename(webcamName || "webcam");
-            const ts = formatTimestamp();
-            const filename = `capture_${rName}_${wName}_${ts}.jpg`;
-            const dataURL = canvas.toDataURL("image/jpeg");
-            downloadImage(dataURL, filename);
-            showToast(t("messages.captureSuccess") || "Captured!", "success");
+            try {
+              const rName = sanitizeForFilename(resortName || "resort");
+              const wName = sanitizeForFilename(webcamName || "webcam");
+              const ts = formatTimestamp();
+              const filename = `capture_${rName}_${wName}_${ts}.jpg`;
+              const dataURL = canvas.toDataURL("image/jpeg");
+              downloadImage(dataURL, filename);
+              showToast(t("messages.captureSuccess") || "Captured!", "success");
+            } catch {
+              showToast(t("errors.captureError") || "Capture failed", "danger");
+            }
           });
         }
       } catch {
@@ -116,6 +125,8 @@ export function VideoPlayer({
     const container = containerRef.current;
     if (!container || !videoUrl) return;
 
+    disposedRef.current = false;
+
     // Cleanup previous player
     if (playerRef.current && typeof playerRef.current.dispose === "function") {
       try {
@@ -134,10 +145,10 @@ export function VideoPlayer({
         const serial = params[1];
         const iframeContainer = document.createElement("div");
         iframeContainer.className = "iframe-container";
-        iframeContainer.innerHTML = `<iframe src="/vivaldi.html?channel=${channel}&serial=${serial}&autoplay=${autoplay}" allowfullscreen></iframe>`;
+        iframeContainer.innerHTML = `<iframe src="/vivaldi.html?channel=${channel}&serial=${serial}&autoplay=${autoplay}" allowfullscreen title="${webcamName || 'Vivaldi player'}"></iframe>`;
         container.appendChild(iframeContainer);
       } else {
-        container.innerHTML = '<div class="error-message">Invalid vivaldi video URL format.</div>';
+        container.innerHTML = `<div class="error-message">${t("errors.invalidVivaldiUrl") || "Invalid vivaldi video URL format."}</div>`;
       }
       return;
     }
@@ -145,7 +156,7 @@ export function VideoPlayer({
     if (videoType === "iframe") {
       const iframeContainer = document.createElement("div");
       iframeContainer.className = "iframe-container";
-      iframeContainer.innerHTML = `<iframe src="${videoUrl}" allowfullscreen></iframe>`;
+      iframeContainer.innerHTML = `<iframe src="${videoUrl}" allowfullscreen title="${webcamName || 'Video player'}"></iframe>`;
       container.appendChild(iframeContainer);
       return;
     }
@@ -155,7 +166,7 @@ export function VideoPlayer({
       if (ytId) {
         const ytContainer = document.createElement("div");
         ytContainer.className = "iframe-container";
-        ytContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=${autoplay ? "1" : "0"}&mute=1" allowfullscreen></iframe>`;
+        ytContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=${autoplay ? "1" : "0"}&mute=1" allowfullscreen title="${webcamName || 'YouTube player'}"></iframe>`;
         container.appendChild(ytContainer);
       }
       return;
@@ -169,7 +180,7 @@ export function VideoPlayer({
       linkBtn.target = "_blank";
       linkBtn.rel = "noopener noreferrer";
       linkBtn.className = "btn btn-primary btn-lg";
-      linkBtn.innerHTML = `<i class="bi bi-box-arrow-up-right me-2"></i>${t("buttons.externalLink") || "Open Link"}`;
+      linkBtn.innerHTML = `<i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>${t("buttons.externalLink") || "Open Link"}`;
       linkContainer.appendChild(linkBtn);
       container.appendChild(linkContainer);
       return;
@@ -194,9 +205,19 @@ export function VideoPlayer({
     container.appendChild(videoEl);
 
     // Wait for videojs to be available (loaded via CDN in layout)
+    let retryCount = 0;
+    const maxRetries = 50; // 5 seconds max
+
     const initPlayer = () => {
+      if (disposedRef.current) return;
+
       if (typeof videojs === "undefined") {
-        setTimeout(initPlayer, 100);
+        retryCount++;
+        if (retryCount < maxRetries) {
+          setTimeout(initPlayer, 100);
+        } else {
+          container.innerHTML = `<div class="error-message">${t("errors.videoPlayerError") || "Video player failed to load"}</div>`;
+        }
         return;
       }
       try {
@@ -223,13 +244,23 @@ export function VideoPlayer({
         });
 
         player.on("error", () => {
+          // Dispose old player before showing error UI
+          if (playerRef.current && typeof playerRef.current.dispose === "function") {
+            try {
+              playerRef.current.dispose();
+            } catch {
+              // ignore
+            }
+            playerRef.current = null;
+          }
+
           const directLink = webcam.link || null;
           let errorHtml = `<div class="error-message"><p>${t("errors.videoPlayback") || "Video playback error"}</p>`;
           errorHtml += '<div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">';
           if (directLink) {
-            errorHtml += `<a href="${directLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="bi bi-box-arrow-up-right me-2"></i>${t("buttons.originalLink") || "Original"}</a>`;
+            errorHtml += `<a href="${directLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>${t("buttons.originalLink") || "Original"}</a>`;
           }
-          errorHtml += `<button class="btn btn-secondary retry-button"><i class="bi bi-arrow-clockwise me-2"></i>${t("buttons.retry") || "Retry"}</button>`;
+          errorHtml += `<button class="btn btn-secondary retry-button"><i class="bi bi-arrow-clockwise me-2" aria-hidden="true"></i>${t("buttons.retry") || "Retry"}</button>`;
           errorHtml += "</div></div>";
           container.innerHTML = errorHtml;
 
@@ -239,6 +270,7 @@ export function VideoPlayer({
               e.preventDefault();
               container.innerHTML = "";
               container.appendChild(videoEl);
+              retryCount = 0;
               initPlayer();
             });
           }
@@ -247,13 +279,14 @@ export function VideoPlayer({
         playerRef.current = player;
       } catch (e) {
         console.error("Error creating video player:", e);
-        container.innerHTML = '<div class="error-message">Video player error</div>';
+        container.innerHTML = `<div class="error-message">${t("errors.videoPlayerError") || "Video player error"}</div>`;
       }
     };
 
     initPlayer();
 
     return () => {
+      disposedRef.current = true;
       if (playerRef.current && typeof playerRef.current.dispose === "function") {
         try {
           playerRef.current.dispose();
@@ -263,10 +296,10 @@ export function VideoPlayer({
         playerRef.current = null;
       }
     };
-  }, [videoUrl, videoType, autoplay, playerId, t, webcam.link]);
+  }, [videoUrl, videoType, autoplay, playerId, t, webcam.link, webcamName]);
 
   if (!videoUrl) {
-    return <div className="error-message">No video stream available</div>;
+    return <div className="error-message">{t("errors.noVideoStream") || "No video stream available"}</div>;
   }
 
   const showCaptureButton = videoType !== "link";
@@ -276,22 +309,24 @@ export function VideoPlayer({
     <div className="video-container" ref={containerRef}>
       {/* Video content rendered imperatively via useEffect */}
       {showCaptureButton && (
-        <button className="capture-button" onClick={captureVideoFrame}>
-          <i className="bi bi-camera" /> {t("buttons.capture") || "Capture"}
+        <button className="capture-button" onClick={captureVideoFrame} aria-label={t("buttons.capture") || "Capture"}>
+          <i className="bi bi-camera" aria-hidden="true" /> {t("buttons.capture") || "Capture"}
         </button>
       )}
       {showPipButton && (
-        <button className="pip-button" onClick={togglePip}>
-          <i className="bi bi-pip" /> PIP
+        <button className="pip-button" onClick={togglePip} aria-label="Picture in Picture">
+          <i className="bi bi-pip" aria-hidden="true" /> PIP
         </button>
       )}
       {onBookmark && resortId !== undefined && webcamIndex !== undefined && (
         <button
           className={`bookmark-button${isBookmarked ? " active" : ""}`}
           onClick={onBookmark}
+          aria-label={isBookmarked ? (t("buttons.removeBookmark") || "Remove Bookmark") : (t("buttons.bookmark") || "Bookmark")}
+          aria-pressed={isBookmarked}
         >
           <span className="bookmark-icon">
-            <i className={`bi ${isBookmarked ? "bi-bookmark-fill" : "bi-bookmark"}`} />
+            <i className={`bi ${isBookmarked ? "bi-bookmark-fill" : "bi-bookmark"}`} aria-hidden="true" />
           </span>
           {t("buttons.bookmark") || "Bookmark"}
         </button>

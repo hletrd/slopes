@@ -44,8 +44,15 @@ jobs:
           corepack enable
           pnpm install --frozen-lockfile
           pnpm build
+          # Pre-render index.html for static hosting (vinext is SSR-only)
+          npx vinext start &
+          SERVER_PID=$!
+          sleep 3
+          curl -s http://localhost:3000/vinext/ -o dist/client/index.html || true
+          kill $SERVER_PID 2>/dev/null || true
+          wait $SERVER_PID 2>/dev/null || true
           mkdir -p ../dist/vinext
-          cp -r dist/* ../dist/vinext/
+          cp -r dist/client/* ../dist/vinext/
 
       - name: Setup Git LFS
         run: |
