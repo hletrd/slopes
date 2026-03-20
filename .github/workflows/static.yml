@@ -45,12 +45,60 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm build
           # Pre-render index.html for static hosting (vinext is SSR-only)
-          npx vinext start &
+          PORT=41932 npx vinext start &
           SERVER_PID=$!
-          sleep 3
-          curl -s http://localhost:3000/vinext/ -o dist/client/index.html || true
+          # Wait for server to be ready (up to 10 seconds)
+          for i in $(seq 1 10); do
+            sleep 1
+            if curl -sf http://localhost:41932/ -o dist/client/index.html 2>/dev/null; then
+              break
+            fi
+          done
           kill $SERVER_PID 2>/dev/null || true
           wait $SERVER_PID 2>/dev/null || true
+          # Validate pre-rendered HTML
+          if [ ! -s dist/client/index.html ] || ! grep -q '<html' dist/client/index.html 2>/dev/null; then
+            echo "WARNING: Pre-render failed, generating fallback index.html"
+            CSS=$(ls dist/client/assets/*.css 2>/dev/null | head -1 | xargs basename 2>/dev/null)
+            JS_FILES=$(ls dist/client/assets/*.js 2>/dev/null | xargs -I{} basename {} 2>/dev/null)
+            SCRIPT_TAGS=""
+            for f in $JS_FILES; do SCRIPT_TAGS="$SCRIPT_TAGS<script type=\"module\" src=\"/vinext/assets/$f\"></script>"; done
+            cat > dist/client/index.html << HTMLEOF
+          <!DOCTYPE html>
+          <html data-theme="dark" lang="ko">
+          <head>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+            <title>Slopes cam - 전국 스키장 실시간 웹캠 모음</title>
+            <meta name="theme-color" content="#121212"/>
+            <meta name="apple-mobile-web-app-capable" content="yes"/>
+            <link rel="manifest" href="/vinext/manifest.json"/>
+            <link rel="icon" href="/vinext/favicon.ico"/>
+            <link rel="apple-touch-icon" href="/vinext/icons/skiing-180x180.png"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@8.23.3/dist/video-js.min.css"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@videojs/themes@1/dist/forest/index.css"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
+            <link rel="stylesheet" href="/vinext/assets/$CSS"/>
+            <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+            <script src="https://cdn.jsdelivr.net/npm/video.js@8.23.3/dist/alt/video.novtt.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns" defer></script>
+            <script src="https://www.google.com/recaptcha/api.js?render=6LdnzyUsAAAAAKh6eSEaERifPRTh51qnRnpmX6S0" async defer></script>
+          </head>
+          <body>
+            <script>
+            (function(){try{var s=localStorage.getItem('webcamSettings');if(s){var p=JSON.parse(s);if(p&&p.darkMode===false){document.body.classList.add('light-mode');document.documentElement.setAttribute('data-theme','light');}}}catch(e){}})();
+            </script>
+            <div id="root"></div>
+            $SCRIPT_TAGS
+          </body>
+          </html>
+          HTMLEOF
+          fi
+          # Clean old vinext deploy and copy fresh client assets
+          rm -rf ../dist/vinext
           mkdir -p ../dist/vinext
           cp -r dist/client/* ../dist/vinext/
 
