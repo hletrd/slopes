@@ -783,14 +783,14 @@ function HomeContent({
       </div>
 
       {/* Favorites */}
-      <div id="favorites-container" style={{ display: favorites.length > 0 ? "block" : "none" }}>
-        <h3>{t("bookmarks.title") || "Bookmarks"}</h3>
+      <div id="favorites-container" className="favorites-section" style={{ display: favorites.length > 0 ? "block" : "none" }}>
+        <h3 className="bookmarks-title">{t("bookmarks.title") || "Bookmarks"}</h3>
         {favorites.length === 0 && (
           <div className="instruction">
             <p>{t("bookmarks.empty") || "No bookmarks yet."}<br />{t("bookmarks.browserOnly") || ""}</p>
           </div>
         )}
-        <div id="favorites-grid" className="videos-grid">
+        <div id="favorites-grid" className="favorites-grid">
           {favorites.map((fav, idx) => {
             const resort = resorts.find(r => r.id === fav.resortId);
             const webcams = resort ? getResortWebcams(resort) : [];

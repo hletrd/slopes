@@ -1,5 +1,3 @@
-import "./globals.css";
-
 export default function RootLayout({
   children,
 }: {
@@ -66,6 +64,8 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css"
         />
+        {/* App CSS - must load AFTER external CSS for correct cascade */}
+        <link rel="stylesheet" href={`${"/vinext/"}main.css`} />
         {/* reCAPTCHA */}
         <script
           src="https://www.google.com/recaptcha/api.js?render=6LdnzyUsAAAAAKh6eSEaERifPRTh51qnRnpmX6S0"
