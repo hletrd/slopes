@@ -9,7 +9,7 @@ Ensure the code is deployed to `/var/www/ski`.
 ├── index.html
 ├── links.json
 ├── preview.png
-├── WespJSSDKEncV4.min.js
+├── vivaldi.js
 ├── sitemap.xml
 ├── videos+ld.json
 ├── weather.grid.json
@@ -65,7 +65,7 @@ server {
     deny all;
   }
 
-  location = /WespJSSDKEncV4.min.js {
+  location = /vivaldi.js {
     try_files $uri =404;
   }
 

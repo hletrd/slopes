@@ -42,7 +42,7 @@ const CACHE_BUSTER = Date.now().toString();
 console.log(`Using cache buster: ${CACHE_BUSTER}`);
 
 const filesToCopy = {
-  js: ['analytics.js', 'main.js', 'pwa.js', 'service-worker.js', 'i18n.js'],
+  js: ['analytics.js', 'main.js', 'pwa.js', 'service-worker.js', 'i18n.js', 'vivaldi.js'],
   html: ['index.html', 'vivaldi.html'],
   css: ['main.css'],
   json: ['manifest.json'],

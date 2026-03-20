@@ -22,7 +22,7 @@ const urlsToCache = [
   './icons/skiing-maskable-512x512.png',
   './preview.png',
   './vivaldi.html',
-  './WespJSSDKEncV4.min.js',
+  './vivaldi.js',
 ];
 
 const externalResources = [
