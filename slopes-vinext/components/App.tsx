@@ -829,7 +829,7 @@ export function App() {
   useEffect(() => {
     void (async () => {
       try {
-        const res = await fetch("/links.json");
+        const res = await fetch(`${import.meta.env.BASE_URL}links.json`);
         if (res.ok) {
           const data = (await res.json()) as Resort[];
           setResorts(data);
@@ -841,7 +841,7 @@ export function App() {
 
     void (async () => {
       try {
-        const res = await fetch("/weather.json");
+        const res = await fetch(`${import.meta.env.BASE_URL}weather.json`);
         if (res.ok) {
           const data = (await res.json()) as WeatherLocation[];
           setWeatherData(data);

@@ -30,13 +30,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Minify
         run: npm run build
+
+      - name: Build vinext app
+        run: |
+          cd slopes-vinext
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm build
+          mkdir -p ../dist/vinext
+          cp -r dist/* ../dist/vinext/
 
       - name: Setup Git LFS
         run: |

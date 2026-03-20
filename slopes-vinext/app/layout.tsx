@@ -25,9 +25,9 @@ export default function RootLayout({
         <meta property="og:title" content="Slopes cam - 전국 스키장 실시간 웹캠 모음" />
         <meta property="og:description" content="전국 스키장 실시간 웹캠 및 날씨" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://ski.atik.kr" />
+        <meta property="og:url" content="http://ski.atik.kr/vinext" />
         <meta property="og:locale" content="ko_KR" />
-        <meta property="og:image" content="http://ski.atik.kr/preview.png" />
+        <meta property="og:image" content="http://ski.atik.kr/vinext/preview.png" />
         <meta property="og:image:width" content="2400" />
         <meta property="og:image:height" content="1260" />
         <meta property="og:site_name" content="Slopes cam" />
@@ -35,16 +35,16 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Slopes cam - 전국 스키장 실시간 웹캠 모음" />
         <meta name="twitter:description" content="전국 스키장 실시간 웹캠 및 날씨" />
-        <meta name="twitter:image" content="http://ski.atik.kr/preview.png" />
+        <meta name="twitter:image" content="http://ski.atik.kr/vinext/preview.png" />
         {/* Icons */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/icons/skiing-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/icons/skiing-32x32.png" />
-        <link rel="icon" type="image/png" sizes="64x64" href="/icons/skiing-64x64.png" />
-        <link rel="icon" type="image/png" sizes="128x128" href="/icons/skiing-128x128.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/icons/skiing-512x512.png" />
-        <link rel="apple-touch-icon" href="/icons/skiing-180x180.png" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/vinext/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/vinext/icons/skiing-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/vinext/icons/skiing-32x32.png" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/vinext/icons/skiing-64x64.png" />
+        <link rel="icon" type="image/png" sizes="128x128" href="/vinext/icons/skiing-128x128.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/vinext/icons/skiing-512x512.png" />
+        <link rel="apple-touch-icon" href="/vinext/icons/skiing-180x180.png" />
+        <link rel="manifest" href="/vinext/manifest.json" />
         {/* External CSS */}
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
@@ -113,7 +113,7 @@ gtag('config', 'G-TDF3M6JH2R');
               "@type": "WebSite",
               name: "Slopes cam - 전국 스키장 실시간 웹캠 모음",
               alternateName: ["Slopes cam"],
-              url: "http://ski.atik.kr",
+              url: "http://ski.atik.kr/vinext",
             }),
           }}
         />

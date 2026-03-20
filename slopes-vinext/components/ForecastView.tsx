@@ -14,7 +14,7 @@ export function ForecastView() {
   useEffect(() => {
     void (async () => {
       try {
-        const res = await fetch(`/forecast.json?v=${Date.now()}`);
+        const res = await fetch(`${import.meta.env.BASE_URL}forecast.json?v=${Date.now()}`);
         if (res.ok) {
           const data = (await res.json()) as ForecastLocation[];
           setForecasts(data);

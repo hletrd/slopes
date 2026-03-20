@@ -43,7 +43,7 @@ export function getPreferredLanguage(): SupportedLanguage {
 
 async function loadTranslations(lang: SupportedLanguage): Promise<TranslationData | null> {
   try {
-    const response = await fetch(`/lang/${lang}.json?v=${Date.now()}`);
+    const response = await fetch(`${import.meta.env.BASE_URL}lang/${lang}.json?v=${Date.now()}`);
     if (!response.ok) {
       throw new Error(`Failed to load ${lang} translations`);
     }
