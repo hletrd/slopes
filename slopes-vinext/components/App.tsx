@@ -750,6 +750,7 @@ interface HomeContentProps {
     shortCommit: string;
     buildDate: string;
   };
+  active: boolean;
 }
 
 const HomeIntro = React.memo(function HomeIntro({
@@ -761,19 +762,6 @@ const HomeIntro = React.memo(function HomeIntro({
 }) {
   const { t } = useI18n();
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://buttons.github.io/buttons.js";
-    script.async = true;
-    script.defer = true;
-    script.setAttribute("data-github-buttons-react", "true");
-    document.body.appendChild(script);
-
-    return () => {
-      script.remove();
-    };
-  }, []);
-
   return (
     <>
       <p className="disclaimer mt-2" style={{ fontSize: "0.8rem" }}>
@@ -782,37 +770,30 @@ const HomeIntro = React.memo(function HomeIntro({
           {t("buttons.bugReport") || "Report"}
         </button>
         <span className="github-button-issue">
-          <a
-            className="github-button github-button-issue"
-            href="https://github.com/hletrd/slopes/issues"
-            data-color-scheme="no-preference: dark; light: dark; dark: dark;"
-            data-icon="octicon-issue-opened"
-            aria-label="Issue hletrd/slopes on GitHub"
-          >
-            Issue
-          </a>
+          <iframe
+            title="GitHub issue button"
+            src="https://buttons.github.io/buttons.html?user=hletrd&repo=slopes&type=issue&size=small"
+            width="58"
+            height="28"
+            style={{ border: 0, overflow: "hidden", verticalAlign: "middle" }}
+          />
         </span>
       </p>
       <p className="lead github-buttons">
-        <a
-          className="github-button"
-          href="https://github.com/hletrd/slopes"
-          data-color-scheme="no-preference: dark; light: dark; dark: dark;"
-          data-icon="octicon-star"
-          data-show-count="true"
-          aria-label="Star hletrd/slopes on GitHub"
-        >
-          Star
-        </a>{" "}
-        <a
-          className="github-button"
-          href="https://github.com/hletrd"
-          data-color-scheme="no-preference: dark; light: dark; dark: dark;"
-          data-show-count="true"
-          aria-label="Follow @hletrd on GitHub"
-        >
-          Follow @hletrd
-        </a>
+        <iframe
+          title="GitHub star button"
+          src="https://buttons.github.io/buttons.html?user=hletrd&repo=slopes&type=star&count=true&size=small"
+          width="100"
+          height="28"
+          style={{ border: 0, overflow: "hidden", verticalAlign: "middle" }}
+        />{" "}
+        <iframe
+          title="GitHub follow button"
+          src="https://buttons.github.io/buttons.html?user=hletrd&type=follow&count=true&size=small"
+          width="158"
+          height="28"
+          style={{ border: 0, overflow: "hidden", verticalAlign: "middle" }}
+        />
       </p>
       <p className="lead" style={{ fontSize: "0.8rem", marginTop: "1rem" }}>
         Current version:{" "}
@@ -844,6 +825,7 @@ function HomeContent({
   onReorderFavorites,
   autoplay,
   buildInfo,
+  active,
 }: HomeContentProps) {
   const { t } = useI18n();
   const [dragIndex, setDragIndex] = useState<number | null>(null);
@@ -851,7 +833,8 @@ function HomeContent({
   return (
     <div
       id="default-message"
-      className="content-section content-section-default active"
+      className={`content-section content-section-default${active ? " active" : ""}`}
+      style={{ display: active ? undefined : "none" }}
     >
       <div className="text-center p-4">
         <h2>{t("home.title") || "Live Ski Resort Webcams"}</h2>
@@ -899,7 +882,15 @@ function HomeContent({
                     <span
                       className="favorite-location cursor-pointer"
                       onClick={() => {
-                        window.location.hash = `${fav.resortId}/${fav.webcamIndex}`;
+                        window.dispatchEvent(
+                          new CustomEvent("vinext:navigate", {
+                            detail: {
+                              kind: "webcam",
+                              resortId: fav.resortId,
+                              webcamIndex: fav.webcamIndex,
+                            } satisfies AppRoute,
+                          })
+                        );
                       }}
                     >
                       {fav.webcamName}
@@ -1113,40 +1104,59 @@ export function App({
 
   useEffect(() => {
     // Read initial hash
-    applyRoute(parseHash(window.location.hash));
+    const initialHash =
+      sessionStorage.getItem("vinextInitialHash") || window.location.hash;
+    if (sessionStorage.getItem("vinextInitialHash")) {
+      sessionStorage.removeItem("vinextInitialHash");
+    }
+    applyRoute(parseHash(initialHash));
 
-    const onHashChange = () => {
+    const onRouteChange = () => {
       applyRoute(parseHash(window.location.hash));
     };
-    window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
+    const onInternalNavigate = (event: Event) => {
+      const detail = (event as CustomEvent<AppRoute>).detail;
+      applyRoute(detail);
+    };
+    window.addEventListener("hashchange", onRouteChange);
+    window.addEventListener("popstate", onRouteChange);
+    window.addEventListener("vinext:navigate", onInternalNavigate as EventListener);
+    return () => {
+      window.removeEventListener("hashchange", onRouteChange);
+      window.removeEventListener("popstate", onRouteChange);
+      window.removeEventListener("vinext:navigate", onInternalNavigate as EventListener);
+    };
+  }, [applyRoute]);
+
+  const navigateToRoute = useCallback((route: AppRoute) => {
+    applyRoute(route);
   }, [applyRoute]);
 
   // Navigation handlers that also update the URL hash
   const navigateToResort = useCallback((resortId: string) => {
-    window.location.hash = routeToHash({ kind: "resort", resortId });
+    navigateToRoute({ kind: "resort", resortId });
     setSidebarOpen(false);
-  }, []);
+  }, [navigateToRoute]);
 
   const navigateToWebcam = useCallback(
     (resortId: string, webcamIndex: number) => {
-      window.location.hash = routeToHash({
+      navigateToRoute({
         kind: "webcam",
         resortId,
         webcamIndex,
       });
       setSidebarOpen(false);
     },
-    []
+    [navigateToRoute]
   );
 
   const handleQuadOpen = useCallback(() => {
-    window.location.hash = "#quad";
-  }, []);
+    navigateToRoute({ kind: "quad" });
+  }, [navigateToRoute]);
 
   const handleQuadClose = useCallback(() => {
-    window.location.hash = "#";
-  }, []);
+    navigateToRoute({ kind: "home" });
+  }, [navigateToRoute]);
 
   const handleToggleSidebar = useCallback(() => {
     setSidebarOpen((v) => !v);
@@ -1255,7 +1265,7 @@ export function App({
             </button>
           </div>
         )}
-        {!resortsLoading && !resortsError && showHome && (
+        {!resortsLoading && !resortsError && (
           <HomeContent
             onBugReport={handleBugReportOpen}
             weatherData={weatherData}
@@ -1273,6 +1283,7 @@ export function App({
             onReorderFavorites={reorderFavorites}
             autoplay={settings.autoplay}
             buildInfo={buildInfo}
+            active={showHome}
           />
         )}
         {showForecast && <ForecastView />}

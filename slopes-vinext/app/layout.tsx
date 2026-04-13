@@ -120,6 +120,23 @@ gtag('config', 'G-TDF3M6JH2R');
             __html: `
 (function () {
   try {
+    var initialHash = window.location.hash;
+    if (initialHash && initialHash !== '#main-content') {
+      sessionStorage.setItem('vinextInitialHash', initialHash);
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  } catch (e) {
+    console.error('Initial hash init error:', e);
+  }
+})();
+`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function () {
+  try {
     var saved = localStorage.getItem('webcamSettings');
     if (saved) {
       var settings = JSON.parse(saved);

@@ -360,13 +360,9 @@ export function VideoPlayer({
           : bookmarkVariant === "vivaldi"
             ? "bookmark-button bookmark-button-vivaldi"
             : "bookmark-button";
-  const showPlaceholder = bookmarkVariant === null && videoType !== "link";
-
   return (
     <div className="video-container" ref={containerRef}>
-      <div className="video-player-host" ref={playerHostRef}>
-        {showPlaceholder && <div className="iframe-container" aria-hidden="true" />}
-      </div>
+      <div className="video-player-host" ref={playerHostRef} />
       {/* Video content rendered imperatively via useEffect */}
       {showCaptureButton && (
         <button className="capture-button" onClick={captureVideoFrame} aria-label={t("buttons.capture") || "Capture"}>
