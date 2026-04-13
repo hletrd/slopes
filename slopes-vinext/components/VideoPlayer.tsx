@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { getYoutubeId, sanitizeForFilename, formatTimestamp, downloadImage } from "@/lib/utils";
 import type { WebcamLink } from "@/lib/types";
@@ -32,8 +32,10 @@ export function VideoPlayer({
   isBookmarked,
 }: VideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const playerHostRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
   const disposedRef = useRef(false);
+  const [hasPlaybackError, setHasPlaybackError] = useState(false);
   const { t } = useI18n();
 
   const videoUrl = webcam.video || webcam.link || "";
@@ -53,10 +55,10 @@ export function VideoPlayer({
   }, []);
 
   const captureVideoFrame = useCallback(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    const playerHost = playerHostRef.current;
+    if (!playerHost) return;
 
-    const video = container.querySelector("video") as HTMLVideoElement | null;
+    const video = playerHost.querySelector("video") as HTMLVideoElement | null;
     if (video) {
       if (video.readyState < 2) {
         showToast(t("errors.videoNotLoaded") || "Video not loaded yet", "warning");
@@ -84,7 +86,7 @@ export function VideoPlayer({
     }
 
     // For iframes (vivaldi, youtube embeds), use html2canvas
-    const iframe = container.querySelector("iframe") as HTMLIFrameElement | null;
+    const iframe = playerHost.querySelector("iframe") as HTMLIFrameElement | null;
     if (iframe) {
       try {
         if (typeof html2canvas !== "undefined" && iframe.contentDocument) {
@@ -110,9 +112,9 @@ export function VideoPlayer({
   }, [resortName, webcamName, showToast, t]);
 
   const togglePip = useCallback(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const video = container.querySelector("video") as HTMLVideoElement | null;
+    const playerHost = playerHostRef.current;
+    if (!playerHost) return;
+    const video = playerHost.querySelector("video") as HTMLVideoElement | null;
     if (!video) return;
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture().catch(console.error);
@@ -122,10 +124,11 @@ export function VideoPlayer({
   }, []);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container || !videoUrl) return;
+    const playerHost = playerHostRef.current;
+    if (!playerHost || !videoUrl) return;
 
     disposedRef.current = false;
+    setHasPlaybackError(false);
 
     // Cleanup previous player
     if (playerRef.current && typeof playerRef.current.dispose === "function") {
@@ -136,7 +139,7 @@ export function VideoPlayer({
       }
       playerRef.current = null;
     }
-    container.innerHTML = "";
+    playerHost.innerHTML = "";
 
     if (videoType === "vivaldi") {
       const params = videoUrl.split(":");
@@ -146,9 +149,10 @@ export function VideoPlayer({
         const iframeContainer = document.createElement("div");
         iframeContainer.className = "iframe-container";
         iframeContainer.innerHTML = `<iframe src="/vivaldi.html?channel=${channel}&serial=${serial}&autoplay=${autoplay}" allowfullscreen title="${webcamName || 'Vivaldi player'}"></iframe>`;
-        container.appendChild(iframeContainer);
+        playerHost.appendChild(iframeContainer);
       } else {
-        container.innerHTML = `<div class="error-message">${t("errors.invalidVivaldiUrl") || "Invalid vivaldi video URL format."}</div>`;
+        setHasPlaybackError(true);
+        playerHost.innerHTML = `<div class="error-message">${t("errors.invalidVivaldiUrl") || "Invalid vivaldi video URL format."}</div>`;
       }
       return;
     }
@@ -157,7 +161,7 @@ export function VideoPlayer({
       const iframeContainer = document.createElement("div");
       iframeContainer.className = "iframe-container";
       iframeContainer.innerHTML = `<iframe src="${videoUrl}" allowfullscreen title="${webcamName || 'Video player'}"></iframe>`;
-      container.appendChild(iframeContainer);
+      playerHost.appendChild(iframeContainer);
       return;
     }
 
@@ -167,7 +171,7 @@ export function VideoPlayer({
         const ytContainer = document.createElement("div");
         ytContainer.className = "iframe-container";
         ytContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=${autoplay ? "1" : "0"}&mute=1" allowfullscreen title="${webcamName || 'YouTube player'}"></iframe>`;
-        container.appendChild(ytContainer);
+        playerHost.appendChild(ytContainer);
       }
       return;
     }
@@ -182,7 +186,7 @@ export function VideoPlayer({
       linkBtn.className = "btn btn-primary btn-lg";
       linkBtn.innerHTML = `<i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>${t("buttons.externalLink") || "Open Link"}`;
       linkContainer.appendChild(linkBtn);
-      container.appendChild(linkContainer);
+      playerHost.appendChild(linkContainer);
       return;
     }
 
@@ -202,7 +206,7 @@ export function VideoPlayer({
     source.type = "application/x-mpegURL";
     videoEl.appendChild(source);
 
-    container.appendChild(videoEl);
+    playerHost.appendChild(videoEl);
 
     // Wait for videojs to be available (loaded via CDN in layout)
     let retryCount = 0;
@@ -216,7 +220,8 @@ export function VideoPlayer({
         if (retryCount < maxRetries) {
           setTimeout(initPlayer, 100);
         } else {
-          container.innerHTML = `<div class="error-message">${t("errors.videoPlayerError") || "Video player failed to load"}</div>`;
+          setHasPlaybackError(true);
+          playerHost.innerHTML = `<div class="error-message">${t("errors.videoPlayerError") || "Video player failed to load"}</div>`;
         }
         return;
       }
@@ -262,14 +267,16 @@ export function VideoPlayer({
           }
           errorHtml += `<button class="btn btn-secondary retry-button"><i class="bi bi-arrow-clockwise me-2" aria-hidden="true"></i>${t("buttons.retry") || "Retry"}</button>`;
           errorHtml += "</div></div>";
-          container.innerHTML = errorHtml;
+          setHasPlaybackError(true);
+          playerHost.innerHTML = errorHtml;
 
-          const retryBtn = container.querySelector(".retry-button");
+          const retryBtn = playerHost.querySelector(".retry-button");
           if (retryBtn) {
             retryBtn.addEventListener("click", (e) => {
               e.preventDefault();
-              container.innerHTML = "";
-              container.appendChild(videoEl);
+              setHasPlaybackError(false);
+              playerHost.innerHTML = "";
+              playerHost.appendChild(videoEl);
               retryCount = 0;
               initPlayer();
             });
@@ -279,7 +286,8 @@ export function VideoPlayer({
         playerRef.current = player;
       } catch (e) {
         console.error("Error creating video player:", e);
-        container.innerHTML = `<div class="error-message">${t("errors.videoPlayerError") || "Video player error"}</div>`;
+        setHasPlaybackError(true);
+        playerHost.innerHTML = `<div class="error-message">${t("errors.videoPlayerError") || "Video player error"}</div>`;
       }
     };
 
@@ -302,11 +310,12 @@ export function VideoPlayer({
     return <div className="error-message">{t("errors.noVideoStream") || "No video stream available"}</div>;
   }
 
-  const showCaptureButton = videoType !== "link";
-  const showPipButton = !videoType || videoType === undefined;
+  const showCaptureButton = !hasPlaybackError && videoType !== "link";
+  const showPipButton = !hasPlaybackError && (!videoType || videoType === undefined);
 
   return (
     <div className="video-container" ref={containerRef}>
+      <div className="video-player-host" ref={playerHostRef} />
       {/* Video content rendered imperatively via useEffect */}
       {showCaptureButton && (
         <button className="capture-button" onClick={captureVideoFrame} aria-label={t("buttons.capture") || "Capture"}>

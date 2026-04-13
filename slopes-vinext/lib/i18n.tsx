@@ -8,10 +8,17 @@ import React, {
   useState,
 } from "react";
 import type { SupportedLanguage, TranslationData } from "@/lib/types";
+import koTranslations from "@/public/lang/ko.json";
+import enTranslations from "@/public/lang/en.json";
 
 export const SUPPORTED_LANGUAGES: SupportedLanguage[] = ["en", "ko"];
 export const DEFAULT_LANGUAGE: SupportedLanguage = "ko";
 export const STORAGE_KEY = "webcamLanguage";
+
+const TRANSLATIONS: Record<SupportedLanguage, TranslationData> = {
+  ko: koTranslations as TranslationData,
+  en: enTranslations as TranslationData,
+};
 
 interface I18nContextValue {
   t: (key: string, params?: Record<string, string | number>) => string;
@@ -41,17 +48,8 @@ export function getPreferredLanguage(): SupportedLanguage {
   return "en";
 }
 
-async function loadTranslations(lang: SupportedLanguage): Promise<TranslationData | null> {
-  try {
-    const response = await fetch(`${import.meta.env.BASE_URL}lang/${lang}.json?v=${Date.now()}`);
-    if (!response.ok) {
-      throw new Error(`Failed to load ${lang} translations`);
-    }
-    return (await response.json()) as TranslationData;
-  } catch (error) {
-    console.error(`Error loading translations for ${lang}:`, error);
-    return null;
-  }
+function getTranslations(lang: SupportedLanguage): TranslationData {
+  return TRANSLATIONS[lang] ?? TRANSLATIONS[DEFAULT_LANGUAGE];
 }
 
 function resolveKey(
@@ -84,36 +82,27 @@ function resolveKey(
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<SupportedLanguage>(DEFAULT_LANGUAGE);
-  const [translations, setTranslations] = useState<TranslationData>({});
+  const [translations, setTranslations] = useState<TranslationData>(
+    getTranslations(DEFAULT_LANGUAGE)
+  );
 
   useEffect(() => {
     const preferred = getPreferredLanguage();
     setLanguageState(preferred);
-
-    void (async () => {
-      let data = await loadTranslations(preferred);
-      if (!data) {
-        data = await loadTranslations(DEFAULT_LANGUAGE);
-        if (data) setLanguageState(DEFAULT_LANGUAGE);
-      }
-      if (data) setTranslations(data);
-    })();
+    setTranslations(getTranslations(preferred));
   }, []);
 
-  const setLanguage = useCallback(async (lang: SupportedLanguage) => {
+  const setLanguage = useCallback((lang: SupportedLanguage) => {
     if (!(SUPPORTED_LANGUAGES as string[]).includes(lang)) {
       console.error(`Unsupported language: ${lang}`);
       return;
     }
 
-    const data = await loadTranslations(lang);
-    if (data) {
-      setTranslations(data);
-      setLanguageState(lang);
-      if (typeof window !== "undefined") {
-        localStorage.setItem(STORAGE_KEY, lang);
-        document.documentElement.lang = lang;
-      }
+    setTranslations(getTranslations(lang));
+    setLanguageState(lang);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_KEY, lang);
+      document.documentElement.lang = lang;
     }
   }, []);
 

@@ -475,11 +475,18 @@ interface InstallationModalProps {
 const InstallationModal = React.memo(function InstallationModal({ open, onClose }: InstallationModalProps) {
   const { t } = useI18n();
   const trapRef = useFocusTrap(open);
+  const [isIOS, setIsIOS] = useState(false);
+
+  useEffect(() => {
+    if (typeof navigator === "undefined") return;
+    setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream);
+  }, []);
 
   return (
     <div
       id="installationModal"
       className={`installation-modal${open ? " active" : ""}`}
+      style={{ display: open ? "block" : "none" }}
       role="dialog"
       aria-modal={open ? "true" : undefined}
       aria-labelledby="installation-modal-title"
@@ -490,7 +497,7 @@ const InstallationModal = React.memo(function InstallationModal({ open, onClose 
         </button>
         <h4 id="installation-modal-title">{t("installation.title") || "Add to Home Screen"}</h4>
         <div className="installation-steps">
-          <div id="iOSInstructions">
+          <div id="iOSInstructions" style={{ display: isIOS ? "block" : "none" }}>
             <p>
               <strong>{t("installation.iphone") || "iPhone"}</strong>
             </p>
@@ -500,7 +507,7 @@ const InstallationModal = React.memo(function InstallationModal({ open, onClose 
               <li>{t("installation.iphoneStep3") || 'Tap "Add"'}</li>
             </ol>
           </div>
-          <div id="androidInstructions">
+          <div id="androidInstructions" style={{ display: isIOS ? "none" : "block" }}>
             <p>
               <strong>{t("installation.android") || "Android"}</strong>
             </p>
@@ -539,11 +546,15 @@ function QuadView({
 }: QuadViewProps) {
   const { t, getResortName: getResortNameI18n, getWebcamName: getWebcamNameI18n } = useI18n();
 
+  function encodeQuadSelection(resortId: string, webcamIndex: number) {
+    return `${resortId}||${webcamIndex}`;
+  }
+
   if (!open) return null;
 
   function getSlotWebcam(value: string) {
     if (!value) return null;
-    const [resortId, idxStr] = value.split("/");
+    const [resortId, idxStr] = value.includes("||") ? value.split("||") : value.split("/");
     const webcamIndex = parseInt(idxStr, 10);
     const resort = resorts.find(r => r.id === resortId);
     if (!resort || isNaN(webcamIndex)) return null;
@@ -595,8 +606,8 @@ function QuadView({
                     return (
                       <optgroup key={resort.id} label={getResortNameI18n(resort.id, resort.name)}>
                         {webcams.map((wc, idx) => (
-                          <option key={idx} value={`${resort.id}/${idx}`}>
-                            {getWebcamNameI18n(resort.id, idx, wc.name)}
+                          <option key={idx} value={encodeQuadSelection(resort.id, idx)}>
+                            {`${getResortNameI18n(resort.id, resort.name)} - ${getWebcamNameI18n(resort.id, idx, wc.name)}`}
                           </option>
                         ))}
                       </optgroup>
@@ -641,7 +652,12 @@ const Sidebar = React.memo(function Sidebar({
   onResortClick,
   onWebcamClick,
 }: SidebarProps) {
-  const { t, getResortName: getResortNameI18n, getWebcamName: getWebcamNameI18n } = useI18n();
+  const { getResortName: getResortNameI18n, getWebcamName: getWebcamNameI18n } = useI18n();
+  const [openResortId, setOpenResortId] = useState<string | null>(activeResortId);
+
+  useEffect(() => {
+    setOpenResortId(activeResortId);
+  }, [activeResortId]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent, action: () => void) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -658,25 +674,53 @@ const Sidebar = React.memo(function Sidebar({
       {resorts.map((resort) => {
         const webcams = getResortWebcams(resort);
         const isActive = activeResortId === resort.id;
+        const isSubmenuOpen = openResortId === resort.id;
         return (
           <div key={resort.id} className="menu-item-container">
             <div
-              className={`menu-item${isActive && activeWebcamIndex === null ? " active" : ""}`}
+              className={`menu-item${isActive ? " active" : ""}`}
               role="button"
               tabIndex={0}
-              onClick={() => onResortClick(resort.id)}
-              onKeyDown={(e) => handleKeyDown(e, () => onResortClick(resort.id))}
+              data-has-submenu={webcams.length > 0 ? "true" : undefined}
+              onClick={() => {
+                setOpenResortId(resort.id);
+                onResortClick(resort.id);
+              }}
+              onKeyDown={(e) => handleKeyDown(e, () => {
+                setOpenResortId(resort.id);
+                onResortClick(resort.id);
+              })}
             >
               {getResortNameI18n(resort.id, resort.name)}
+              {webcams.length > 0 && (
+                <span
+                  className="dropdown-toggle"
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Toggle submenu"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setOpenResortId((prev) => (prev === resort.id ? null : resort.id));
+                  }}
+                  onKeyDown={(e) => handleKeyDown(e, () => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setOpenResortId((prev) => (prev === resort.id ? null : resort.id));
+                  })}
+                >
+                  <i className={`bi bi-chevron-${isSubmenuOpen ? "up" : "down"}`} />
+                </span>
+              )}
             </div>
             {webcams.length > 0 && (
-              <div className={`submenu${isActive ? " active" : ""}`}>
+              <div className={`submenu${isSubmenuOpen ? " active" : ""}`}>
                 {webcams.map((wc, idx) => (
                   <div
                     key={idx}
                     className={`submenu-item${isActive && activeWebcamIndex === idx ? " active" : ""}`}
                     role="button"
-                    tabIndex={isActive ? 0 : -1}
+                    tabIndex={isSubmenuOpen ? 0 : -1}
                     onClick={() => onWebcamClick(resort.id, idx)}
                     onKeyDown={(e) => handleKeyDown(e, () => onWebcamClick(resort.id, idx))}
                   >
@@ -688,23 +732,6 @@ const Sidebar = React.memo(function Sidebar({
           </div>
         );
       })}
-      {/* Forecast link */}
-      <div className="menu-item-container">
-        <div
-          className="menu-item"
-          role="button"
-          tabIndex={0}
-          onClick={() => { window.location.hash = "misc/forecast"; }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              window.location.hash = "misc/forecast";
-            }
-          }}
-        >
-          {t("nav.forecast") || "Forecast"}
-        </div>
-      </div>
     </nav>
   );
 });
@@ -718,7 +745,95 @@ interface HomeContentProps {
   onRemoveFavorite: (resortId: string, webcamIndex: number) => void;
   onReorderFavorites: (fromIndex: number, toIndex: number) => void;
   autoplay: boolean;
+  buildInfo: {
+    commitUrl: string;
+    shortCommit: string;
+    buildDate: string;
+  };
 }
+
+const HomeIntro = React.memo(function HomeIntro({
+  onBugReport,
+  buildInfo,
+}: {
+  onBugReport: () => void;
+  buildInfo: HomeContentProps["buildInfo"];
+}) {
+  const { t } = useI18n();
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://buttons.github.io/buttons.js";
+    script.async = true;
+    script.defer = true;
+    script.setAttribute("data-github-buttons-react", "true");
+    document.body.appendChild(script);
+
+    return () => {
+      script.remove();
+    };
+  }, []);
+
+  return (
+    <>
+      <p className="disclaimer mt-2" style={{ fontSize: "0.8rem" }}>
+        <span>{t("home.issueReport") || "Report issues, inquiries, and feature suggestions"}</span>
+        <button className="bug-report-link" onClick={onBugReport}>
+          {t("buttons.bugReport") || "Report"}
+        </button>
+        <span className="github-button-issue">
+          <a
+            className="github-button github-button-issue"
+            href="https://github.com/hletrd/slopes/issues"
+            data-color-scheme="no-preference: dark; light: dark; dark: dark;"
+            data-icon="octicon-issue-opened"
+            aria-label="Issue hletrd/slopes on GitHub"
+          >
+            Issue
+          </a>
+        </span>
+      </p>
+      <p className="lead github-buttons">
+        <a
+          className="github-button"
+          href="https://github.com/hletrd/slopes"
+          data-color-scheme="no-preference: dark; light: dark; dark: dark;"
+          data-icon="octicon-star"
+          data-show-count="true"
+          aria-label="Star hletrd/slopes on GitHub"
+        >
+          Star
+        </a>{" "}
+        <a
+          className="github-button"
+          href="https://github.com/hletrd"
+          data-color-scheme="no-preference: dark; light: dark; dark: dark;"
+          data-show-count="true"
+          aria-label="Follow @hletrd on GitHub"
+        >
+          Follow @hletrd
+        </a>
+      </p>
+      <p className="lead" style={{ fontSize: "0.8rem", marginTop: "1rem" }}>
+        Current version:{" "}
+        <a target="_blank" rel="noreferrer" href={buildInfo.commitUrl}>
+          {buildInfo.shortCommit}
+        </a>{" "}
+        ({buildInfo.buildDate})
+        <br />
+        Special thanks to{" "}
+        <a target="_blank" rel="noreferrer" href="https://github.com/paulkim-xr">
+          Paul Kim
+        </a>{" "}
+        and the{" "}
+        <a target="_blank" rel="noreferrer" href="https://paulkim-xr.github.io/SkiWatch/">
+          SkiWatch
+        </a>{" "}
+        project.
+      </p>
+    </>
+  );
+});
 
 function HomeContent({
   onBugReport,
@@ -728,6 +843,7 @@ function HomeContent({
   onRemoveFavorite,
   onReorderFavorites,
   autoplay,
+  buildInfo,
 }: HomeContentProps) {
   const { t } = useI18n();
   const [dragIndex, setDragIndex] = useState<number | null>(null);
@@ -742,48 +858,11 @@ function HomeContent({
         <p className="lead" style={{ fontSize: "1.1rem" }}>
           {t("nav.selectResort") || "Select a ski resort or camera from the menu on the left."}
         </p>
-        <p className="disclaimer mt-2" style={{ fontSize: "0.8rem" }}>
-          <span>{t("home.issueReport") || "Report issues, inquiries, and feature suggestions"}</span>
-          <button className="bug-report-link" onClick={onBugReport}>
-            {t("buttons.bugReport") || "Report"}
-          </button>
-          <span className="github-button-issue">
-            <a
-              className="github-button github-button-issue"
-              href="https://github.com/hletrd/slopes/issues"
-              data-color-scheme="no-preference: dark; light: dark; dark: dark;"
-              data-icon="octicon-issue-opened"
-              aria-label="Issue hletrd/slopes on GitHub"
-            >
-              Issue
-            </a>
-          </span>
-        </p>
-        <p className="lead github-buttons">
-          <a
-            className="github-button"
-            href="https://github.com/hletrd/slopes"
-            data-color-scheme="no-preference: dark; light: dark; dark: dark;"
-            data-icon="octicon-star"
-            data-show-count="true"
-            aria-label="Star hletrd/slopes on GitHub"
-          >
-            Star
-          </a>{" "}
-          <a
-            className="github-button"
-            href="https://github.com/hletrd"
-            data-color-scheme="no-preference: dark; light: dark; dark: dark;"
-            data-show-count="true"
-            aria-label="Follow @hletrd on GitHub"
-          >
-            Follow @hletrd
-          </a>
-        </p>
+        <HomeIntro onBugReport={onBugReport} buildInfo={buildInfo} />
       </div>
 
       {/* Favorites */}
-      <div id="favorites-container" className="favorites-section" style={{ display: favorites.length > 0 ? "block" : "none" }}>
+      <div id="favorites-container" className="favorites-section">
         <h3 className="bookmarks-title">{t("bookmarks.title") || "Bookmarks"}</h3>
         {favorites.length === 0 && (
           <div className="instruction">
@@ -902,7 +981,11 @@ function UpdateToast({ onApply }: { onApply: () => void }) {
 // Main App component
 // ---------------------------------------------------------------------------
 
-export function App() {
+export function App({
+  buildInfo,
+}: {
+  buildInfo: HomeContentProps["buildInfo"];
+}) {
   const { settings, updateSettings } = useSettings();
   const { favorites, isFavorite, toggleFavorite, reorderFavorites } = useFavorites();
   const { quadSelections, updateQuadSelection, isOpen: quadOpen, open: openQuad, close: closeQuad } = useQuadView();
@@ -923,6 +1006,7 @@ export function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [bugReportOpen, setBugReportOpen] = useState(false);
   const [installationOpen, setInstallationOpen] = useState(false);
+  const handleBugReportOpen = useCallback(() => setBugReportOpen(true), []);
 
   // Apply quad-view-open class to body
   useEffect(() => {
@@ -990,11 +1074,11 @@ export function App() {
         const wc = webcams[activeWebcamIndex];
         if (wc) {
           const wcName = getWebcamNameI18n(resort.id, activeWebcamIndex, wc.name);
-          document.title = `${wcName} - ${resortName} - ${baseTitle}`;
+          document.title = `${baseTitle} - ${wcName} - ${resortName}`;
           return;
         }
       }
-      document.title = `${resortName} - ${baseTitle}`;
+      document.title = `${baseTitle} - ${resortName}`;
     }
   }, [activeResortId, activeWebcamIndex, resorts, getResortNameI18n, getWebcamNameI18n]);
 
@@ -1068,12 +1152,15 @@ export function App() {
     setSidebarOpen((v) => !v);
   }, []);
 
-  const handleAddToHome = useCallback(() => {
+  const handleAddToHome = useCallback(async () => {
     if (canInstall) {
-      promptInstall();
-    } else {
-      setInstallationOpen(true);
+      const accepted = await promptInstall();
+      if (!accepted) {
+        setInstallationOpen(true);
+      }
+      return;
     }
+    setInstallationOpen(true);
   }, [canInstall, promptInstall]);
 
   // Determine what main content to show
@@ -1170,7 +1257,7 @@ export function App() {
         )}
         {!resortsLoading && !resortsError && showHome && (
           <HomeContent
-            onBugReport={() => setBugReportOpen(true)}
+            onBugReport={handleBugReportOpen}
             weatherData={weatherData}
             resorts={resorts}
             favorites={favorites}
@@ -1185,16 +1272,12 @@ export function App() {
             }}
             onReorderFavorites={reorderFavorites}
             autoplay={settings.autoplay}
+            buildInfo={buildInfo}
           />
         )}
         {showForecast && <ForecastView />}
         {activeResort && !showForecast && (
           <div className="content-section active">
-            <div className="page-header">
-              <span className="inline-title">
-                {getResortNameI18n(activeResort.id, activeResort.name)}
-              </span>
-            </div>
             {activeWebcamIndex !== null ? (() => {
               const webcams = getResortWebcams(activeResort);
               const wc = webcams[activeWebcamIndex];
@@ -1205,7 +1288,13 @@ export function App() {
               const bookmarked = isFavorite(activeResort.id, activeWebcamIndex);
               return (
                 <div>
-                  <h3 className="inline-title inline-title-submenu">{wcName}</h3>
+                  <h2
+                    className="inline-title inline-title-submenu cursor-pointer"
+                    onClick={() => navigateToWebcam(activeResort.id, activeWebcamIndex)}
+                  >
+                    {wcName}
+                  </h2>
+                  <span className="resort-label">{resName}</span>
                   <VideoPlayer
                     webcam={wc}
                     playerId={`${activeResort.id}-${activeWebcamIndex}`}
@@ -1234,6 +1323,9 @@ export function App() {
               );
             })() : (
               <>
+                <h2 className="inline-title">
+                  {getResortNameI18n(activeResort.id, activeResort.name)}
+                </h2>
                 <div className="videos-grid">
                   {getResortWebcams(activeResort).map((wc, idx) => {
                     const videoUrl = wc.video || wc.link || "";

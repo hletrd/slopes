@@ -81,12 +81,6 @@ export default function RootLayout({
         <script
           src="https://cdn.jsdelivr.net/npm/video.js@8.23.3/dist/alt/video.novtt.min.js"
         />
-        {/* GitHub buttons */}
-        <script
-          async
-          defer
-          src="https://buttons.github.io/buttons.js"
-        />
         {/* Chart.js */}
         <script src="https://cdn.jsdelivr.net/npm/chart.js" defer />
         <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns" defer />

@@ -5,6 +5,16 @@ import { useCallback, useEffect, useState } from "react";
 const STORAGE_KEY = "quadViewSelections";
 const SLOT_COUNT = 4;
 
+function normalizeSelection(value: unknown): string {
+  if (typeof value !== "string") return "";
+  if (value.includes("||")) return value;
+  if (value.includes("/")) {
+    const [resortId, webcamIndex] = value.split("/", 2);
+    if (resortId && webcamIndex) return `${resortId}||${webcamIndex}`;
+  }
+  return value;
+}
+
 function loadSelections(): string[] {
   if (typeof window === "undefined") return Array(SLOT_COUNT).fill("") as string[];
   try {
@@ -16,7 +26,7 @@ function loadSelections(): string[] {
       // Ensure always exactly SLOT_COUNT entries
       const result: string[] = Array(SLOT_COUNT).fill("") as string[];
       for (let i = 0; i < SLOT_COUNT; i++) {
-        result[i] = typeof arr[i] === "string" ? arr[i] : "";
+        result[i] = normalizeSelection(arr[i]);
       }
       return result;
     }
@@ -40,7 +50,7 @@ export function useQuadView() {
     (slotIndex: number, value: string) => {
       setQuadSelections((prev) => {
         const next = [...prev];
-        next[slotIndex] = value;
+        next[slotIndex] = normalizeSelection(value);
         return next;
       });
     },
