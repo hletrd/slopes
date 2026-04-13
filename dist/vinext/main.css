@@ -125,6 +125,19 @@ h2 {
   max-width: 100%;
 }
 
+.video-player-host {
+  width: 100%;
+  position: relative;
+}
+
+.video-player-host:empty::before {
+  content: "";
+  display: block;
+  width: 100%;
+  padding-top: 56.25%;
+  background-color: #000;
+}
+
 .video-js {
   width: 100%;
   height: 0;
