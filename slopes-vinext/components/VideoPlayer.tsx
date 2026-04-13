@@ -20,6 +20,8 @@ interface VideoPlayerProps {
   isBookmarked?: boolean;
 }
 
+type BookmarkVariant = "default" | "error" | "link" | "youtube" | "vivaldi" | null;
+
 export function VideoPlayer({
   webcam,
   playerId,
@@ -35,7 +37,8 @@ export function VideoPlayer({
   const playerHostRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
   const disposedRef = useRef(false);
-  const [hasPlaybackError, setHasPlaybackError] = useState(false);
+  const [controlsReady, setControlsReady] = useState(false);
+  const [bookmarkVariant, setBookmarkVariant] = useState<BookmarkVariant>(null);
   const { t } = useI18n();
 
   const videoUrl = webcam.video || webcam.link || "";
@@ -128,7 +131,8 @@ export function VideoPlayer({
     if (!playerHost || !videoUrl) return;
 
     disposedRef.current = false;
-    setHasPlaybackError(false);
+    setControlsReady(false);
+    setBookmarkVariant(null);
 
     // Cleanup previous player
     if (playerRef.current && typeof playerRef.current.dispose === "function") {
@@ -150,9 +154,15 @@ export function VideoPlayer({
         iframeContainer.className = "iframe-container";
         iframeContainer.innerHTML = `<iframe src="/vivaldi.html?channel=${channel}&serial=${serial}&autoplay=${autoplay}" allowfullscreen title="${webcamName || 'Vivaldi player'}"></iframe>`;
         playerHost.appendChild(iframeContainer);
+        setControlsReady(true);
+        if (onBookmark && resortId !== undefined && webcamIndex !== undefined) {
+          setBookmarkVariant("vivaldi");
+        }
       } else {
-        setHasPlaybackError(true);
         playerHost.innerHTML = `<div class="error-message">${t("errors.invalidVivaldiUrl") || "Invalid vivaldi video URL format."}</div>`;
+        if (onBookmark && resortId !== undefined && webcamIndex !== undefined) {
+          setBookmarkVariant("error");
+        }
       }
       return;
     }
@@ -162,6 +172,10 @@ export function VideoPlayer({
       iframeContainer.className = "iframe-container";
       iframeContainer.innerHTML = `<iframe src="${videoUrl}" allowfullscreen title="${webcamName || 'Video player'}"></iframe>`;
       playerHost.appendChild(iframeContainer);
+      setControlsReady(true);
+      if (onBookmark && resortId !== undefined && webcamIndex !== undefined) {
+        setBookmarkVariant("link");
+      }
       return;
     }
 
@@ -172,6 +186,10 @@ export function VideoPlayer({
         ytContainer.className = "iframe-container";
         ytContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=${autoplay ? "1" : "0"}&mute=1" allowfullscreen title="${webcamName || 'YouTube player'}"></iframe>`;
         playerHost.appendChild(ytContainer);
+        setControlsReady(true);
+        if (onBookmark && resortId !== undefined && webcamIndex !== undefined) {
+          setBookmarkVariant("youtube");
+        }
       }
       return;
     }
@@ -187,6 +205,10 @@ export function VideoPlayer({
       linkBtn.innerHTML = `<i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>${t("buttons.externalLink") || "Open Link"}`;
       linkContainer.appendChild(linkBtn);
       playerHost.appendChild(linkContainer);
+      setControlsReady(true);
+      if (onBookmark && resortId !== undefined && webcamIndex !== undefined) {
+        setBookmarkVariant("link");
+      }
       return;
     }
 
@@ -220,8 +242,10 @@ export function VideoPlayer({
         if (retryCount < maxRetries) {
           setTimeout(initPlayer, 100);
         } else {
-          setHasPlaybackError(true);
           playerHost.innerHTML = `<div class="error-message">${t("errors.videoPlayerError") || "Video player failed to load"}</div>`;
+          if (onBookmark && resortId !== undefined && webcamIndex !== undefined) {
+            setBookmarkVariant("error");
+          }
         }
         return;
       }
@@ -248,6 +272,11 @@ export function VideoPlayer({
           notSupportedMessage: t("errors.videoPlayback") || "Video playback error",
         });
 
+        setControlsReady(true);
+        if (onBookmark && resortId !== undefined && webcamIndex !== undefined) {
+          setBookmarkVariant("default");
+        }
+
         player.on("error", () => {
           // Dispose old player before showing error UI
           if (playerRef.current && typeof playerRef.current.dispose === "function") {
@@ -267,14 +296,18 @@ export function VideoPlayer({
           }
           errorHtml += `<button class="btn btn-secondary retry-button"><i class="bi bi-arrow-clockwise me-2" aria-hidden="true"></i>${t("buttons.retry") || "Retry"}</button>`;
           errorHtml += "</div></div>";
-          setHasPlaybackError(true);
+          setControlsReady(false);
           playerHost.innerHTML = errorHtml;
+          if (onBookmark && resortId !== undefined && webcamIndex !== undefined) {
+            setBookmarkVariant("error");
+          }
 
           const retryBtn = playerHost.querySelector(".retry-button");
           if (retryBtn) {
             retryBtn.addEventListener("click", (e) => {
               e.preventDefault();
-              setHasPlaybackError(false);
+              setControlsReady(false);
+              setBookmarkVariant(null);
               playerHost.innerHTML = "";
               playerHost.appendChild(videoEl);
               retryCount = 0;
@@ -286,8 +319,10 @@ export function VideoPlayer({
         playerRef.current = player;
       } catch (e) {
         console.error("Error creating video player:", e);
-        setHasPlaybackError(true);
         playerHost.innerHTML = `<div class="error-message">${t("errors.videoPlayerError") || "Video player error"}</div>`;
+        if (onBookmark && resortId !== undefined && webcamIndex !== undefined) {
+          setBookmarkVariant("error");
+        }
       }
     };
 
@@ -310,12 +345,28 @@ export function VideoPlayer({
     return <div className="error-message">{t("errors.noVideoStream") || "No video stream available"}</div>;
   }
 
-  const showCaptureButton = !hasPlaybackError && videoType !== "link";
-  const showPipButton = !hasPlaybackError && (!videoType || videoType === undefined);
+  const showCaptureButton =
+    controlsReady && (!videoType || videoType === undefined || videoType === "vivaldi");
+  const showPipButton = controlsReady && (!videoType || videoType === undefined);
+  const showBookmarkButton =
+    bookmarkVariant !== null && onBookmark && resortId !== undefined && webcamIndex !== undefined;
+  const bookmarkClassName =
+    bookmarkVariant === "error"
+      ? "bookmark-button bookmark-button-error"
+      : bookmarkVariant === "link"
+        ? "bookmark-button bookmark-button-link"
+        : bookmarkVariant === "youtube"
+          ? "bookmark-button bookmark-button-youtube"
+          : bookmarkVariant === "vivaldi"
+            ? "bookmark-button bookmark-button-vivaldi"
+            : "bookmark-button";
+  const showPlaceholder = bookmarkVariant === null && videoType !== "link";
 
   return (
     <div className="video-container" ref={containerRef}>
-      <div className="video-player-host" ref={playerHostRef} />
+      <div className="video-player-host" ref={playerHostRef}>
+        {showPlaceholder && <div className="iframe-container" aria-hidden="true" />}
+      </div>
       {/* Video content rendered imperatively via useEffect */}
       {showCaptureButton && (
         <button className="capture-button" onClick={captureVideoFrame} aria-label={t("buttons.capture") || "Capture"}>
@@ -327,9 +378,9 @@ export function VideoPlayer({
           <i className="bi bi-pip" aria-hidden="true" /> PIP
         </button>
       )}
-      {onBookmark && resortId !== undefined && webcamIndex !== undefined && (
+      {showBookmarkButton && (
         <button
-          className={`bookmark-button${isBookmarked ? " active" : ""}`}
+          className={`${bookmarkClassName}${isBookmarked ? " active" : ""}`}
           onClick={onBookmark}
           aria-label={isBookmarked ? (t("buttons.removeBookmark") || "Remove Bookmark") : (t("buttons.bookmark") || "Bookmark")}
           aria-pressed={isBookmarked}
