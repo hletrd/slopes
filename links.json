@@ -576,68 +576,33 @@
         "name": "골드 정상"
       }
     ],
-    "fetch": false,
+    "fetch": true,
     "id": "mona",
     "links": [
       {
         "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
         "name": "발왕산 氣 스카이워크",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam14.stream/playlist.m3u8"
+        "video": "https://live.yongpyong.co.kr/cam01/index.m3u8"
       },
       {
         "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
         "name": "발왕산 천년주목숲길",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam15.stream/playlist.m3u8"
+        "video": "https://live.yongpyong.co.kr/cam02/index.m3u8"
       },
       {
         "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
         "name": "베이스 전경 / 레드 슬로프",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam10.stream/playlist.m3u8"
+        "video": "https://live.yongpyong.co.kr/cam08/index.m3u8"
       },
       {
         "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
         "name": "모나 용평 진입로",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam05.stream/playlist.m3u8"
+        "video": "https://live.yongpyong.co.kr/cam05/index.m3u8"
       },
       {
         "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
         "name": "옐로우 슬로프",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam03.stream/playlist.m3u8"
-      },
-      {
-        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
-        "name": "핑크 슬로프",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam07.stream/playlist.m3u8"
-      },
-      {
-        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
-        "name": "메가그린 슬로프",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam01.stream/playlist.m3u8"
-      },
-      {
-        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
-        "name": "골드 베이스",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam06.stream/playlist.m3u8"
-      },
-      {
-        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
-        "name": "골드 정상",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam04.stream/playlist.m3u8"
-      },
-      {
-        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
-        "name": "레인보우 전경",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam08.stream/playlist.m3u8"
-      },
-      {
-        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
-        "name": "레인보우 파라다이스 입구",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam09.stream/playlist.m3u8"
-      },
-      {
-        "link": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do",
-        "name": "피크 아일랜드",
-        "video": "https://live.yongpyong.co.kr/Ycam1/cam11.stream/playlist.m3u8"
+        "video": "https://live.yongpyong.co.kr/cam11/index.m3u8"
       }
     ],
     "name": "모나 용평",

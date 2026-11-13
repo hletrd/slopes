@@ -344,6 +344,36 @@ def process_link(item, resort_id):
   return result
 
 
+def update_yongpyong_links(links):
+  try:
+    response = requests.get(links[0]['link'], timeout=10)
+    response.raise_for_status()
+    soup = BeautifulSoup(response.text, 'html.parser')
+    streams = {}
+
+    for anchor in soup.select('a[onclick]'):
+      match = re.search(
+        r'''hi_view\(\s*['"]([^'"]+\.m3u8[^'"]*)['"]\s*,\s*['"][^'"]*['"]\s*,\s*['"]([^'"]+)['"]''',
+        anchor['onclick']
+      )
+      if match:
+        video_url, name = match.groups()
+        streams[''.join(name.split())] = video_url
+
+    modified = False
+    for item in links:
+      video_url = streams.get(''.join(item.get('name', '').split()))
+      if video_url and item.get('video') != video_url:
+        item['video'] = video_url
+        modified = True
+        print(f"[mona] Updated {item['name']} to {video_url}")
+
+    return modified
+  except requests.RequestException as e:
+    print(f"[mona] Error fetching webcam streams: {e}")
+    return False
+
+
 def process_resort(resort, max_workers):
   resort_id = resort.get('id', 'unknown')
   print(f"Processing resort: {resort_id}")
@@ -356,6 +386,9 @@ def process_resort(resort, max_workers):
 
   if not links:
     return modified
+
+  if resort_id == 'mona':
+    return update_yongpyong_links(links)
 
   with ThreadPoolExecutor(max_workers=max_workers) as executor:
     futures = [
