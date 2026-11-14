@@ -2,6 +2,7 @@ icons/skiing.svg
 **/.DS_Store
 
 node_modules/
+relay/config.json
 weather.json
 weather.grid.json
 preview.png
@@ -11,6 +12,7 @@ vivaldi
 
 secrets.json
 *.pem
+!relay/certs/*.pem
 node_modules/
 
 .omc/

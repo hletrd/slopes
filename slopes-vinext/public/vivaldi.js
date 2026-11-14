@@ -230,6 +230,8 @@
       this.rds = !!params.rds;
       this.serial = params.serial || '';
       this.channel = params.channel || 1;
+      this.WebSocket = params.WebSocket || globalThis.WebSocket;
+      this.webSocketOptions = params.webSocketOptions;
 
       this.ws = null;
       this.keepAliveTimer = null;
@@ -248,16 +250,19 @@
     connect() {
       if (this.disposed) return;
       this.state = 'connecting';
-      const proto = (this.tls || location.protocol === 'https:') ? 'wss' : 'ws';
+      const proto = (this.tls || (typeof location !== 'undefined' && location.protocol === 'https:')) ? 'wss' : 'ws';
       const url = `${proto}://${this.host}:${this.port}/wesp`;
 
       try {
-        this.ws = new WebSocket(url, 'binary');
+        this.ws = new this.WebSocket(url, 'binary', this.webSocketOptions);
         this.ws.binaryType = 'arraybuffer';
         this.ws.onopen = () => this._onOpen();
         this.ws.onclose = () => this._onClose();
         this.ws.onerror = () => this._onWsError();
-        this.ws.onmessage = (e) => this._onMessage(e);
+        this.ws.onmessage = (e) => {
+          try { this._onMessage(e); }
+          catch (_) { this.onError && this.onError('invalid_packet'); }
+        };
         this._connectTimer = setTimeout(() => {
           if (this.state === 'connecting') {
             Logger.error('Connection timeout');
@@ -277,7 +282,12 @@
       if (this._connectTimer) { clearTimeout(this._connectTimer); this._connectTimer = null; }
       if (this.ws) {
         this.ws.onopen = this.ws.onclose = this.ws.onerror = this.ws.onmessage = null;
-        try { this.ws.close(); } catch(_) {}
+        try {
+          if (typeof this.ws.terminate === 'function') {
+            this.ws.on('error', () => {});
+            this.ws.terminate();
+          } else this.ws.close();
+        } catch(_) {}
         this.ws = null;
       }
       this.state = 'disconnected';
@@ -384,6 +394,7 @@
     }
 
     _handleStreamInfo(hdr) {
+      if (this.state !== 'handshaking') return;
       if (hdr.transmit === Transmit.RES || hdr.transmit === Transmit.SVR) {
         Logger.debug('StreamInfo OK');
         this._sendContentInfoReq();
@@ -419,7 +430,7 @@
     }
 
     _handleEventMap(hdr) {
-      if (hdr.transmit === Transmit.RES) {
+      if (hdr.transmit === Transmit.RES && this.state === 'handshaking') {
         Logger.debug('Handshake complete');
         this.state = 'ready';
         this.onReady && this.onReady();
@@ -478,7 +489,7 @@
     // — Send helpers —
 
     _send(buf) {
-      if (this.ws && this.ws.readyState === WebSocket.OPEN) this.ws.send(buf);
+      if (this.ws && this.ws.readyState === this.WebSocket.OPEN) this.ws.send(buf);
     }
 
     _sendOpenSite() {
@@ -726,6 +737,10 @@
   //  Export — same shape as original WespJSSDK for drop-in compatibility
   // ========================================================================
 
-  window.WespJSSDK = { Logger, Wesp: {}, MonitorUIController };
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { WespConnection, decryptSiteInfo };
+  } else {
+    window.WespJSSDK = { Logger, Wesp: {}, MonitorUIController };
+  }
 
 })();

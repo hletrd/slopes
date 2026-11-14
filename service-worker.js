@@ -1,4 +1,4 @@
-const CACHE_NAME = 'slopes-cam-v5';
+const CACHE_NAME = 'slopes-cam-v6';
 const urlsToCache = [
   './',
   './index.html',
@@ -23,6 +23,7 @@ const urlsToCache = [
   './preview.png',
   './vivaldi.html',
   './vivaldi.js',
+  './vivaldi-player.js',
 ];
 
 const externalResources = [
@@ -70,6 +71,7 @@ self.addEventListener('fetch', event => {
   }
 
   const requestUrl = new URL(event.request.url);
+  if (requestUrl.pathname.startsWith('/relay/')) return;
 
   if (requestUrl.hostname.includes('googletagmanager.com') ||
       requestUrl.hostname.includes('google-analytics.com') ||

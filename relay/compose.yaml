@@ -1,0 +1,21 @@
+services:
+  relay:
+    build:
+      context: .
+      dockerfile: relay/Dockerfile
+    image: slopes-relay:local
+    container_name: slopes-relay
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8790:8790"
+    volumes:
+      - ./config.json:/app/relay/config.json:ro
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 768m
+    cpus: 2
+    pids_limit: 64
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }

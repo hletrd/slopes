@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import { useI18n } from "@/lib/i18n";
-import { getYoutubeId, sanitizeForFilename, formatTimestamp, downloadImage } from "@/lib/utils";
+import { getYoutubeId, sanitizeForFilename, formatTimestamp, downloadImage, relayVideoUrl } from "@/lib/utils";
 import type { WebcamLink } from "@/lib/types";
 
 declare const videojs: any;
@@ -41,7 +41,7 @@ export function VideoPlayer({
   const [bookmarkVariant, setBookmarkVariant] = useState<BookmarkVariant>(null);
   const { t } = useI18n();
 
-  const videoUrl = webcam.video || webcam.link || "";
+  const videoUrl = relayVideoUrl(webcam.video || webcam.link || "");
   const videoType = webcam.video_type;
 
   const showToast = useCallback((message: string, type: string = "success") => {

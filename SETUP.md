@@ -1,4 +1,7 @@
 ## 1. Prerequisites
+
+Video relay setup and deployment: [relay/README.md](relay/README.md). The current players use the shared Vivaldi relay and HLS cache behind NGINX at `/relay/`.
+
 - Nginx
 - PHP-FPM (for `report.php`)
 

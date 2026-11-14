@@ -1786,6 +1786,11 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   function createVideoPlayer(videoUrl, container, id, videoType, autoplayOverride = null) {
+    if (/\.m3u8(?:\?|$)/.test(videoUrl) && !videoUrl.includes('/relay/hls/')) {
+      const source = new URL(videoUrl.replace(/^\/stream_proxy\/(https?)\//, '$1://'));
+      const base = location.hostname === 'hletrd.github.io' ? 'https://ski.atik.kr' : '';
+      videoUrl = `${base}/relay/hls/${source.protocol.slice(0, -1)}/${source.host}${source.pathname}${source.search}`;
+    }
     container.innerHTML = '';
 
     const idParts = id.split('-');

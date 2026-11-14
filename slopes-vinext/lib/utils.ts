@@ -76,3 +76,10 @@ function triggerAnchorDownload(dataURL: string, filename: string): void {
 export function getResortWebcams(resort: Resort): WebcamLink[] {
   return resort.links ?? resort.webcams ?? [];
 }
+
+export function relayVideoUrl(value: string): string {
+  if (!/\.m3u8(?:\?|$)/.test(value) || value.includes('/relay/hls/')) return value;
+  const source = new URL(value.replace(/^\/stream_proxy\/(https?)\//, '$1://'));
+  const base = typeof location !== 'undefined' && location.hostname === 'hletrd.github.io' ? 'https://ski.atik.kr' : '';
+  return `${base}/relay/hls/${source.protocol.slice(0, -1)}/${source.host}${source.pathname}${source.search}`;
+}
