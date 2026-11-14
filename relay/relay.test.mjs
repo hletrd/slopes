@@ -187,6 +187,7 @@ test('HTTP byte ranges reuse cached upstream data', async t => {
   assert.equal(await b.text(), '789');
   const c = await fetch(url, { headers: { range: 'bytes=90-99' } });
   assert.equal(c.status, 416);
+  assert.equal(c.headers.get('cache-control'), 'no-store');
   assert.equal(requests, 1);
 });
 
@@ -205,4 +206,55 @@ test('WESP stream updates do not repeat login initialization or restart live vid
   assert.equal(metadataRequests, 1);
   assert.equal(starts, 1);
   assert.equal(connection.state, 'streaming');
+});
+
+test('HLS master lists, live lists and media have distinct cache lifetimes', async () => {
+  const cache = new HlsCache({ allowedHosts: new Set(['cdn.test']), fetchImpl: async url => {
+    if (url.pathname === '/master.m3u8') return new Response('#EXTM3U\n#EXT-X-STREAM-INF:BANDWIDTH=1000\nlive.m3u8');
+    if (url.pathname === '/live.m3u8') return new Response('#EXTM3U\n#EXT-X-TARGETDURATION:6\n#EXTINF:6,\nsegment.ts');
+    if (url.pathname === '/short.m3u8') return new Response('#EXTM3U\n#EXT-X-TARGETDURATION:2\n#EXTINF:2,\nsegment.ts');
+    if (url.pathname === '/long.m3u8') return new Response('#EXTM3U\n#EXT-X-TARGETDURATION:20\n#EXTINF:20,\nsegment.ts');
+    return new Response('data');
+  } });
+  const now = Date.now();
+  const master = await cache.get('https://cdn.test/master.m3u8');
+  const live = await cache.get('https://cdn.test/live.m3u8');
+  const short = await cache.get('https://cdn.test/short.m3u8');
+  const long = await cache.get('https://cdn.test/long.m3u8');
+  const media = await cache.get('https://cdn.test/segment.ts');
+  const key = await cache.get('https://cdn.test/key.bin');
+  for (const [entry, ttl] of [[master, 30000], [live, 3000], [short, 1000], [long, 5000], [media, 300000], [key, 1000]]) {
+    assert.ok(entry.expires >= now + ttl && entry.expires < now + ttl + 1000);
+  }
+  assert.equal(media.maxAge, 300);
+  assert.equal(live.maxAge, 0);
+  assert.equal(key.maxAge, 0);
+});
+
+test('upstream failures are briefly shared across repeated requests', async () => {
+  let requests = 0;
+  const cache = new HlsCache({ allowedHosts: new Set(['cdn.test']), errorTtl: 15, fetchImpl: async () => {
+    requests++;
+    return new Response(null, { status: 503 });
+  } });
+  await assert.rejects(cache.get('https://cdn.test/live.m3u8'));
+  await assert.rejects(cache.get('https://cdn.test/live.m3u8'));
+  assert.equal(requests, 1);
+  await sleep(25);
+  await assert.rejects(cache.get('https://cdn.test/live.m3u8'));
+  assert.equal(requests, 2);
+});
+
+test('HTTP clients cache media while live playlists remain fresh', async t => {
+  const relay = createRelay({ cameras: new Set(), allowedHosts: ['cdn.test'], createConnection() {},
+    fetchImpl: async url => new Response(url.pathname.endsWith('.m3u8') ? '#EXTM3U\nsegment.ts' : 'video') });
+  relay.server.listen(0, '127.0.0.1');
+  await once(relay.server, 'listening');
+  t.after(() => relay.close());
+  const base = `http://127.0.0.1:${relay.server.address().port}/relay/hls/https/cdn.test`;
+  const media = await fetch(`${base}/segment.ts`);
+  const playlist = await fetch(`${base}/live.m3u8`);
+  assert.equal(media.headers.get('cache-control'), 'public, max-age=300, immutable');
+  assert.equal(playlist.headers.get('cache-control'), 'no-store');
+  await Promise.all([media.arrayBuffer(), playlist.arrayBuffer()]);
 });

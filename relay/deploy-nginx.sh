@@ -2,7 +2,15 @@
 # Run from the deployment root on atik.kr after checking the internal relay.
 set -eu
 test -f relay/nginx.conf
-curl -fsS http://127.0.0.1:8790/healthz >/dev/null
+attempt=0
+until curl -fsS http://127.0.0.1:8790/healthz >/dev/null 2>&1; do
+    attempt=$((attempt + 1))
+    if [ "$attempt" -ge 10 ]; then
+        echo 'Relay did not become ready within 10 seconds' >&2
+        exit 1
+    fi
+    sleep 1
+done
 backup_dir=/var/backups/slopes-relay
 backup_name="default-$(date +%Y%m%d-%H%M%S).conf"
 sudo install -d -m 0755 "$backup_dir"

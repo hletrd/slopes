@@ -143,6 +143,7 @@ export function createRelay({ cameras, allowedHosts, createConnection, allowedOr
         response.setHeader('Content-Range', `bytes ${start}-${end}/${body.length}`);
         body = body.subarray(start, end + 1);
       }
+      if (entry.maxAge) response.setHeader('Cache-Control', `public, max-age=${entry.maxAge}, immutable`);
       response.setHeader('Content-Length', body.length);
       response.end(request.method === 'HEAD' ? undefined : body);
     } catch (_) {

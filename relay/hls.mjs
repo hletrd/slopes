@@ -25,8 +25,10 @@ export function rewritePlaylist(text, base, allowedHosts) {
 
 export class HlsCache {
   constructor({ allowedHosts, fetchImpl = fetch, maxBytes = 128 * 1024 * 1024,
-    maxObjectBytes = 16 * 1024 * 1024, maxEntries = 4096, maxPending = 8, playlistTtl = 1000, segmentTtl = 60000 }) {
-    Object.assign(this, { allowedHosts, fetchImpl, maxBytes, maxObjectBytes, maxEntries, maxPending, playlistTtl, segmentTtl });
+    maxObjectBytes = 16 * 1024 * 1024, maxEntries = 4096, maxPending = 8,
+    playlistTtl = 1000, masterTtl = 30000, segmentTtl = 300000, errorTtl = 3000 }) {
+    Object.assign(this, { allowedHosts, fetchImpl, maxBytes, maxObjectBytes, maxEntries, maxPending,
+      playlistTtl, masterTtl, segmentTtl, errorTtl });
     this.entries = new Map();
     this.pending = new Map();
     this.bytes = 0;
@@ -45,6 +47,7 @@ export class HlsCache {
       this.hits++;
       this.entries.delete(key);
       this.entries.set(key, cached);
+      if (cached.error) throw cached.error;
       return cached;
     }
     if (cached) this.remove(key);
@@ -58,16 +61,23 @@ export class HlsCache {
     this.pending.set(key, request);
     try {
       const entry = await request;
-      while ((this.bytes + entry.body.length > this.maxBytes || this.entries.size >= this.maxEntries) && this.entries.size) {
-        this.remove(this.entries.keys().next().value);
-      }
-      if (entry.body.length <= this.maxBytes) {
-        this.entries.set(key, entry);
-        this.bytes += entry.body.length;
-      }
+      this.store(key, entry);
       return entry;
+    } catch (error) {
+      this.store(key, { error, body: Buffer.alloc(0), expires: Date.now() + this.errorTtl });
+      throw error;
     } finally {
       this.pending.delete(key);
+    }
+  }
+
+  store(key, entry) {
+    while ((this.bytes + entry.body.length > this.maxBytes || this.entries.size >= this.maxEntries) && this.entries.size) {
+      this.remove(this.entries.keys().next().value);
+    }
+    if (entry.body.length <= this.maxBytes) {
+      this.entries.set(key, entry);
+      this.bytes += entry.body.length;
     }
   }
 
@@ -110,12 +120,19 @@ export class HlsCache {
       }
       let body = Buffer.concat(chunks, size);
       const playlist = url.pathname.endsWith('.m3u8') || /mpegurl/i.test(response.headers.get('content-type') || '');
+      const type = response.headers.get('content-type') || 'application/octet-stream';
+      const media = /\.(?:ts|m4s|mp4|m4a|aac|mp3|vtt|webm)$/i.test(url.pathname) || /^(?:video|audio)\//i.test(type);
+      let ttl = media ? this.segmentTtl : this.playlistTtl;
       if (playlist) {
-        if (!body.toString('utf8').startsWith('#EXTM3U')) throw new Error('Invalid playlist');
-        body = Buffer.from(rewritePlaylist(body.toString('utf8'), url, this.allowedHosts));
+        const text = body.toString('utf8');
+        if (!text.startsWith('#EXTM3U')) throw new Error('Invalid playlist');
+        const target = /^#EXT-X-TARGETDURATION:(\d+)\s*$/m.exec(text);
+        const master = /^#EXT-X-(?:STREAM-INF|I-FRAME-STREAM-INF|MEDIA):/m.test(text);
+        ttl = master ? this.masterTtl : target ? Math.max(this.playlistTtl, Math.min(5000, Number(target[1]) * 500)) : this.playlistTtl;
+        body = Buffer.from(rewritePlaylist(text, url, this.allowedHosts));
       }
-      return { body, type: playlist ? 'application/vnd.apple.mpegurl' : response.headers.get('content-type') || 'application/octet-stream',
-        expires: Date.now() + (playlist ? this.playlistTtl : this.segmentTtl) };
+      return { body, type: playlist ? 'application/vnd.apple.mpegurl' : type,
+        maxAge: !playlist && media ? Math.floor(this.segmentTtl / 1000) : 0, expires: Date.now() + ttl };
     }
     throw new Error('Too many redirects');
   }
