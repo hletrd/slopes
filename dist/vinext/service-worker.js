@@ -1,4 +1,4 @@
-const CACHE_NAME = 'slopes-vinext-v1';
+const CACHE_NAME = 'slopes-vinext-v2';
 const BASE = '/vinext/';
 
 const APP_SHELL = [
@@ -18,6 +18,7 @@ const APP_SHELL = [
   BASE + 'lang/en.json',
   BASE + 'vivaldi.html',
   BASE + 'vivaldi.js',
+  BASE + 'vivaldi-player.js',
 ];
 
 const EXTERNAL_RESOURCES = [
@@ -81,6 +82,7 @@ self.addEventListener('fetch', event => {
   if (isLocalhost) return;
 
   const url = new URL(event.request.url);
+  if (url.pathname.startsWith('/relay/')) return;
 
   // Skip analytics and tracking
   if (url.hostname.includes('googletagmanager.com') ||
