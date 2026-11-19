@@ -4,13 +4,15 @@ import { readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { WebSocket, WebSocketServer } from 'ws';
 import { HlsCache } from './hls.mjs';
+import { VideoDecoder } from './video-decoder.mjs';
 
 const require = createRequire(import.meta.url);
 const { WespConnection, decryptSiteInfo } = require('../vivaldi.js');
 
 export class CameraPool {
-  constructor({ createConnection, idleMs = 15000, retryMs = 1000, staleMs = 30000 }) {
-    Object.assign(this, { createConnection, idleMs, retryMs, staleMs });
+  constructor({ createConnection, createDecoder = (codec, onFrame, onError, options) => new VideoDecoder(codec, onFrame, onError, options),
+    idleMs = 15000, retryMs = 1000, staleMs = 30000 }) {
+    Object.assign(this, { createConnection, createDecoder, idleMs, retryMs, staleMs });
     this.cameras = new Map();
   }
 
@@ -18,7 +20,8 @@ export class CameraPool {
     let camera = this.cameras.get(key);
     if (!camera) {
       camera = { key, clients: new Set(), connection: null, idle: null, retry: null, watchdog: null,
-        packet: null, lastFrame: 0, failures: 0, frames: 0, bytes: 0, dropped: 0, attempts: 0 };
+        packet: null, lastFrame: 0, failures: 0, frames: 0, bytes: 0, dropped: 0, attempts: 0,
+        decoder: null, codec: null, error: null, preferEncoded: false };
       this.cameras.set(key, camera);
     }
     clearTimeout(camera.idle);
@@ -43,14 +46,18 @@ export class CameraPool {
   connect(camera) {
     if (!camera.clients.size) return;
     camera.attempts++;
-    const connection = this.createConnection(camera.key);
+    const connection = this.createConnection(camera.key, { preferEncoded: camera.preferEncoded });
     camera.connection = connection;
     let closed = false;
-    const retry = () => {
+    const retry = error => {
       if (closed || camera.connection !== connection) return;
       closed = true;
+      if (!camera.frames && connection.videoEncoding === 3 && connection.state === 'streaming') camera.preferEncoded = true;
       clearTimeout(camera.watchdog);
       connection.disconnect();
+      camera.decoder?.close();
+      camera.decoder = null;
+      camera.error = String(error || 'source_stalled').slice(0, 300);
       camera.connection = null;
       camera.packet = null;
       if (camera.clients.size) {
@@ -64,8 +71,7 @@ export class CameraPool {
     };
     connection.onReady = () => connection.startVideo();
     connection.onError = retry;
-    connection.onFrame = async (blob, timestamp) => {
-      const jpeg = Buffer.from(await blob.arrayBuffer());
+    const deliverFrame = (jpeg, timestamp) => {
       if (closed || camera.connection !== connection || jpeg.length > 4 * 1024 * 1024) return;
       const packet = Buffer.allocUnsafe(8 + jpeg.length);
       packet.writeDoubleBE(timestamp, 0);
@@ -73,10 +79,19 @@ export class CameraPool {
       camera.packet = packet;
       camera.lastFrame = Date.now();
       camera.failures = 0;
+      camera.error = null;
       camera.frames++;
       camera.bytes += jpeg.length;
       armWatchdog();
       for (const client of camera.clients) this.send(camera, client, packet);
+    };
+    connection.onFrame = async (blob, timestamp) => deliverFrame(Buffer.from(await blob.arrayBuffer()), timestamp);
+    connection.onEncodedFrame = (bytes, codec, timestamp) => {
+      if (closed || camera.connection !== connection) return;
+      if (codec !== camera.codec) { camera.decoder?.close(); camera.decoder = null; camera.codec = codec; }
+      if (codec === 3) { deliverFrame(Buffer.from(bytes), timestamp); return; }
+      if (!camera.decoder) camera.decoder = this.createDecoder(codec, deliverFrame, retry, { frameRate: connection.videoFrameRate });
+      return camera.decoder.write(bytes, timestamp);
     };
     armWatchdog();
     try { connection.connect(); } catch (_) { retry(); }
@@ -87,6 +102,8 @@ export class CameraPool {
     clearTimeout(camera.retry);
     clearTimeout(camera.watchdog);
     camera.connection?.disconnect();
+    camera.decoder?.close();
+    camera.decoder = null;
     camera.connection = null;
     this.cameras.delete(camera.key);
   }
@@ -98,7 +115,7 @@ export class CameraPool {
   stats() {
     return [...this.cameras.values()].map(camera => ({ key: camera.key, viewers: camera.clients.size,
       upstream: camera.connection ? 1 : 0, attempts: camera.attempts, frames: camera.frames,
-      bytes: camera.bytes, dropped: camera.dropped, lastFrame: camera.lastFrame }));
+      bytes: camera.bytes, dropped: camera.dropped, lastFrame: camera.lastFrame, codec: camera.codec, error: camera.error }));
   }
 }
 
@@ -206,9 +223,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const params = await decryptSiteInfo(config.siteInfoText);
   const relay = createRelay({ cameras: new Set(config.cameras), allowedHosts: config.allowedHosts,
     allowedOrigins: config.allowedOrigins,
-    createConnection: key => {
+    createConnection: (key, options) => {
       const [serial, channel] = key.split(':');
-      return new WespConnection({ ...params, serial, channel: Number(channel), WebSocket,
+      return new WespConnection({ ...params, ...options, serial, channel: Number(channel), WebSocket,
         webSocketOptions: { maxPayload: 4 * 1024 * 1024, handshakeTimeout: 10000, perMessageDeflate: false,
           origin: 'https://mice.sonohotelsresorts.com' } });
     } });

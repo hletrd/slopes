@@ -15,7 +15,7 @@ services:
     security_opt: [no-new-privileges:true]
     mem_limit: 768m
     cpus: 2
-    pids_limit: 64
+    pids_limit: 128
     logging:
       driver: json-file
       options: { max-size: "10m", max-file: "3" }
