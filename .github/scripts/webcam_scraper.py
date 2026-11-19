@@ -4,9 +4,95 @@ from bs4 import BeautifulSoup
 import json
 import re
 import threading
-from concurrent.futures import ThreadPoolExecutor
+import argparse
+from concurrent.futures import Future, ThreadPoolExecutor
+from yt_dlp import YoutubeDL
 import datetime
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
+
+_youtube_channels = {}
+_youtube_lock = threading.Lock()
+
+
+def youtube_live_entries(channel):
+  with _youtube_lock:
+    leader = channel not in _youtube_channels
+    if leader:
+      _youtube_channels[channel] = Future()
+    future = _youtube_channels[channel]
+  if leader:
+    try:
+      with YoutubeDL({'extract_flat': True, 'playlistend': 30, 'skip_download': True,
+                      'quiet': True, 'no_warnings': True, 'socket_timeout': 10,
+                      'retries': 1, 'extractor_retries': 1}) as client:
+        data = client.extract_info(channel.rstrip('/') + '/streams', download=False)
+      future.set_result([entry for entry in data.get('entries', []) if entry and entry.get('live_status') == 'is_live'])
+    except Exception as error:
+      print(f"[youtube] Unable to refresh channel: {error}")
+      future.set_result([])
+  return future.result()
+
+
+def update_youtube_link(item):
+  if item.get('youtube_page'):
+    try:
+      response = requests.get(item['youtube_page'], timeout=15,
+                              allow_redirects=not item.get('youtube_redirect', False),
+                              stream=item.get('youtube_redirect', False))
+      response.raise_for_status()
+      if item.get('youtube_redirect'):
+        match = re.search(r'youtube(?:-nocookie)?\.com/embed/([\w-]{11})', response.headers.get('Location', ''))
+        video_id = match.group(1) if match else None
+        response.close()
+      elif item.get('youtube_player'):
+        match = re.search(re.escape(item['youtube_player']) + r'''['"]\s*,[\s\S]{0,150}?videoId:\s*['"]([\w-]{11})['"]''', response.text)
+        video_id = match.group(1) if match else None
+      else:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        videos = []
+        for iframe in soup.find_all(['iframe', 'a']):
+          match = re.search(r'youtube(?:-nocookie)?\.com/embed/([\w-]{11})', iframe.get('src') or iframe.get('data-src') or iframe.get('data-url') or '')
+          if match:
+            videos.append(match.group(1))
+        slot = item.get('youtube_slot', 0)
+        video_id = videos[slot] if slot < len(videos) else None
+      if not video_id:
+        return False
+      if video_id == item.get('youtube_unavailable_id'):
+        return False
+    except requests.RequestException as error:
+      print(f"[youtube] Unable to refresh official page: {error}")
+      return False
+  else:
+    entries = youtube_live_entries(item['youtube_channel'])
+    title = ''.join(item.get('youtube_title', '').casefold().split())
+    entry = next((entry for entry in entries if title in ''.join(entry.get('title', '').casefold().split())), None)
+    if not entry:
+      return False
+    video_id = entry['id']
+  video = f"https://www.youtube.com/watch?v={video_id}"
+  video_type = 'link' if item.get('youtube_embed') is False else 'youtube'
+  changed = item.get('video') != video or item.get('video_type') != video_type
+  item.update(video=video, video_type=video_type)
+  return changed
+
+
+def update_phoenix_links(links):
+  try:
+    response = requests.get('https://phoenixhnr.co.kr/api/guide/operation/sketchMovie/pyeongchang', timeout=15)
+    response.raise_for_status()
+    normalize = lambda value: ''.join(value.split())
+    streams = {normalize(row['vwLoc']): row['cctvUrlInfo'] for row in response.json()}
+    changed = False
+    for item in links:
+      video = streams.get(normalize(item['name']).replace('몽블랑정상', '몽블랑'))
+      if video and item.get('video') != video:
+        item['video'] = video
+        changed = True
+    return changed
+  except (requests.RequestException, ValueError, KeyError) as error:
+    print(f"[phoenix] Unable to refresh official webcam list: {error}")
+    return False
 
 
 def extract_m3u8_from_url(url):
@@ -267,6 +353,10 @@ def process_link(item, resort_id):
   video = item.get('video')
   result = {"modified": False, "item": item}
 
+  if item.get('youtube_channel') or item.get('youtube_page'):
+    result['modified'] = update_youtube_link(item)
+    return result
+
   if link:
     print(f"[{resort_id}] Processing link: {link}")
 
@@ -327,7 +417,7 @@ def process_link(item, resort_id):
       result["modified"] = True
     else:
       m3u8_link = extract_m3u8_from_url(link)
-      if resort_id == 'o2resort':
+      if resort_id == 'o2resort' and m3u8_link:
         m3u8_link = m3u8_link.replace('http://', '/stream_proxy/http/')
       if m3u8_link:
         item['video'] = m3u8_link
@@ -390,6 +480,9 @@ def process_resort(resort, max_workers):
   if resort_id == 'mona':
     return update_yongpyong_links(links)
 
+  if resort_id == 'phoenix':
+    return update_phoenix_links(links)
+
   with ThreadPoolExecutor(max_workers=max_workers) as executor:
     futures = [
       executor.submit(process_link, item, resort_id) for item in links
@@ -422,7 +515,7 @@ def generate_video_ld_json(data):
 
     for i, item in enumerate(resort.get('links', [])):
       video_url = item.get('video')
-      if not video_url:
+      if not video_url or item.get('video_type') == 'link':
         continue
 
       camera_name = item.get('name', '')
@@ -458,7 +551,7 @@ def generate_video_ld_json(data):
   print(f"Generated videos+ld.json with {len(video_objects)} video objects")
 
 
-def main():
+def main(metadata_only=False):
   try:
     print("Reading links.json file...")
     with open('links.json', 'r', encoding='utf-8') as f:
@@ -472,6 +565,8 @@ def main():
     resort_results = [False] * len(data)
 
     for i, resort in enumerate(data):
+      if metadata_only:
+        continue
       if resort.get('fetch', True) == False:
         print(f"[{resort.get('id', 'unknown')}] Skipping fetch")
         continue
@@ -549,4 +644,6 @@ def main():
 
 
 if __name__ == "__main__":
-  main()
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--metadata-only', action='store_true', help='Rebuild metadata without fetching sources')
+  main(metadata_only=parser.parse_args().metadata_only)

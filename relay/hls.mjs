@@ -1,3 +1,5 @@
+import { isDirectStream } from '../stream-routing.mjs';
+
 const PREFIX = '/relay/hls/';
 
 export function relayUrl(value, base) {
@@ -12,6 +14,7 @@ export function rewritePlaylist(text, base, allowedHosts) {
   const rewrite = value => {
     const url = new URL(value, base);
     if (!allowedHosts.has(url.host)) throw new Error('Unlisted stream host');
+    if (isDirectStream(url)) return url.href;
     return relayUrl(url);
   };
   return text.split(/\r?\n/).map(line => {
@@ -25,15 +28,17 @@ export function rewritePlaylist(text, base, allowedHosts) {
 
 export class HlsCache {
   constructor({ allowedHosts, fetchImpl = fetch, maxBytes = 128 * 1024 * 1024,
-    maxObjectBytes = 16 * 1024 * 1024, maxEntries = 4096, maxPending = 8,
+    maxObjectBytes = 16 * 1024 * 1024, maxEntries = 4096, maxPending = 16, maxQueued = 64,
     playlistTtl = 1000, masterTtl = 30000, segmentTtl = 300000, errorTtl = 3000 }) {
-    Object.assign(this, { allowedHosts, fetchImpl, maxBytes, maxObjectBytes, maxEntries, maxPending,
+    Object.assign(this, { allowedHosts, fetchImpl, maxBytes, maxObjectBytes, maxEntries, maxPending, maxQueued,
       playlistTtl, masterTtl, segmentTtl, errorTtl });
     this.entries = new Map();
     this.pending = new Map();
     this.bytes = 0;
     this.hits = 0;
     this.misses = 0;
+    this.active = 0;
+    this.waiters = [];
   }
 
   async get(value) {
@@ -55,9 +60,9 @@ export class HlsCache {
       this.hits++;
       return this.pending.get(key);
     }
-    if (this.pending.size >= this.maxPending) throw new Error('Stream fetch capacity reached');
+    if (this.pending.size >= this.maxPending + this.maxQueued) throw new Error('Stream fetch capacity reached');
     this.misses++;
-    const request = this.load(url);
+    const request = this.loadQueued(url);
     this.pending.set(key, request);
     try {
       const entry = await request;
@@ -68,6 +73,16 @@ export class HlsCache {
       throw error;
     } finally {
       this.pending.delete(key);
+    }
+  }
+
+  async loadQueued(url) {
+    if (this.active < this.maxPending) this.active++;
+    else await new Promise(resolve => this.waiters.push(resolve));
+    try { return await this.load(url); }
+    finally {
+      const next = this.waiters.shift();
+      if (next) next(); else this.active--;
     }
   }
 
@@ -93,6 +108,7 @@ export class HlsCache {
       if (!this.allowedHosts.has(url.host) || !['http:', 'https:'].includes(url.protocol) || url.username || url.password) {
         throw new Error('Unlisted redirect host');
       }
+      if (isDirectStream(url)) return { redirect: url.href, body: Buffer.alloc(0), expires: Date.now() + this.masterTtl };
       const response = await this.fetchImpl(url, { signal, redirect: 'manual' });
       if ([301, 302, 303, 307, 308].includes(response.status)) {
         await response.body?.cancel();

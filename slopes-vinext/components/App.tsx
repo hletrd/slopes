@@ -912,7 +912,7 @@ function HomeContent({
                 </div>
                 {webcam && fav.videoUrl && (
                   <VideoPlayer
-                    webcam={{ ...webcam, video: fav.videoUrl, video_type: fav.videoType as any }}
+                    webcam={webcam}
                     playerId={`favorite-player-${idx}`}
                     autoplay={autoplay}
                     resortId={fav.resortId}

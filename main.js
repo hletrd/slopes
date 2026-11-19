@@ -45,6 +45,7 @@ function showGlobalToast(message, type = 'info', duration = 3000) {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
+  const { relayVideoUrl } = await import('./stream-routing.mjs');
   await i18n.init();
 
   const t = (key, params) => i18n.t(key, params);
@@ -686,11 +687,13 @@ document.addEventListener('DOMContentLoaded', async function () {
 
       if (favorite.videoUrl) {
         const playerId = `favorite-player-${idx}`;
+        const currentResort = data.find(resort => resort.id === favorite.resortId);
+        const currentWebcam = (currentResort?.links || currentResort?.webcams || [])[favorite.webcamIndex];
         const player = createVideoPlayer(
-          favorite.videoUrl,
+          currentWebcam?.video || currentWebcam?.link || favorite.videoUrl,
           videoContainer,
           playerId,
-          favorite.videoType
+          currentWebcam ? currentWebcam.video_type : favorite.videoType
         );
         if (player) activePlayers.push(player);
       }
@@ -1786,11 +1789,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   function createVideoPlayer(videoUrl, container, id, videoType, autoplayOverride = null) {
-    if (/\.m3u8(?:\?|$)/.test(videoUrl) && !videoUrl.includes('/relay/hls/')) {
-      const source = new URL(videoUrl.replace(/^\/stream_proxy\/(https?)\//, '$1://'));
-      const base = location.hostname === 'hletrd.github.io' ? 'https://ski.atik.kr' : '';
-      videoUrl = `${base}/relay/hls/${source.protocol.slice(0, -1)}/${source.host}${source.pathname}${source.search}`;
-    }
+    videoUrl = relayVideoUrl(videoUrl);
     container.innerHTML = '';
 
     const idParts = id.split('-');

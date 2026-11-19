@@ -2,8 +2,10 @@ icons/skiing.svg
 **/.DS_Store
 
 node_modules/
+__pycache__/
 relay/config.json
 weather.json
+videos+ld.json
 weather.grid.json
 preview.png
 **/.env

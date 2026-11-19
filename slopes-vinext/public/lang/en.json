@@ -140,8 +140,7 @@
   },
   "messages": {
     "captureSuccess": "Capture complete!",
-    "captureOnlyWhilePlaying": "You can only capture while the video is playing.",
-    "updateAvailable": "Update available."
+    "captureOnlyWhilePlaying": "You can only capture while the video is playing."
   },
   "weatherLocations": {
     "스키하우스": "Ski House",
@@ -222,7 +221,8 @@
         "1": "Upper Slopes (ThinQ, Gram)",
         "2": "Mid Slopes (WHY NOT? Upper)",
         "3": "Beginner/Intermediate Base (Whisen)",
-        "4": "Intermediate/Advanced Base (WHY NOT?, CNP)"
+        "4": "Intermediate/Advanced Base (WHY NOT?, CNP)",
+        "5": "Hanui (official page)"
       }
     },
     "bearstown": {
@@ -271,11 +271,11 @@
     "oakvalley": {
       "name": "Oak Valley",
       "webcams": {
-        "0": "Base",
+        "0": "Snow Park Rooftop",
         "1": "I Slope",
-        "2": "G Slope Lower",
-        "3": "F Slope Upper",
-        "4": "Flower Rest Area"
+        "2": "G Slope",
+        "3": "F Slope",
+        "4": "Flower Summit"
       }
     },
     "wellihilli": {
@@ -285,7 +285,7 @@
         "1": "Base",
         "2": "Slope Plaza / Overview",
         "3": "Summit Plaza",
-        "4": "Slope Overview",
+        "4": "Go-kart / MTB Park",
         "5": "Water Planet"
       }
     },
@@ -317,14 +317,7 @@
         "1": "Balwangsan Millennium Yew Forest Trail",
         "2": "Base Overview / Red Slope",
         "3": "Mona Yongpyong Entrance",
-        "4": "Yellow Slope",
-        "5": "Pink Slope",
-        "6": "Mega Green Slope",
-        "7": "Gold Base",
-        "8": "Gold Summit",
-        "9": "Rainbow Overview",
-        "10": "Rainbow Paradise Entrance",
-        "11": "Peak Island"
+        "4": "Yellow Slope"
       }
     },
     "high1": {
@@ -404,7 +397,10 @@
         "0": "Niseko Village Gondola Base",
         "1": "Niseko Village Green Leaf",
         "2": "Niseko Hanazono Base",
-        "3": "Kiroro Base"
+        "3": "Kiroro Base",
+        "4": "Kiroro 24-hour Snowfall",
+        "5": "Kiroro Asari Peak",
+        "6": "Kiroro Nagamine No. 2"
       }
     },
     "chubu": {
@@ -425,7 +421,10 @@
         "12": "Arai Resort Roppongi Station",
         "13": "Tateyama Murodo",
         "14": "Charmant Hiuchi Center House",
-        "15": "Naspa New Otani Base"
+        "15": "Naspa New Otani Base",
+        "16": "Hakuba Happo Kurobishi 1678 m",
+        "17": "Yachiho First / Anika Area",
+        "18": "Yachiho Ski Area (official page)"
       }
     },
     "kanto": {
@@ -437,7 +436,18 @@
         "3": "Oze Iwakura Romance / Champion A",
         "4": "Oze Iwakura International Women's / Rigen / Expert",
         "5": "Tambara Overview",
-        "6": "Kusatsu Onsen Tengu-yama Base"
+        "6": "Kusatsu Onsen Tengu-yama Base",
+        "7": "Marunuma Sky Terrace 2000 m",
+        "8": "Marunuma Entrance",
+        "9": "Marunuma Tree Adventure",
+        "10": "Marunuma Mount Nikko-Shirane",
+        "11": "Marunuma Tonfan Restaurant",
+        "12": "Oze Iwakura Gondola Base",
+        "13": "Oze Iwakura Gondola Summit",
+        "14": "Oze Iwakura Nishiyama / Horn Restaurant",
+        "15": "Kusatsu Onsen Tenguyama Summit",
+        "16": "Kusatsu Onsen Route 292 Entrance",
+        "17": "Kusatsu Onsen Route 292 (official page)"
       }
     },
     "tohoku": {
@@ -446,7 +456,13 @@
         "0": "Zao Onsen JUPEER Slope",
         "1": "Zao Onsen Central Slope",
         "2": "Zao Onsen Paradise Slope",
-        "3": "Zao Onsen Yokokura Slope"
+        "3": "Zao Onsen Yokokura Slope",
+        "4": "Zao Ropeway Car Park",
+        "5": "Zao Sunrise Slope",
+        "6": "Zao Juhyo Kogen Station",
+        "7": "Zao Omori Car Park",
+        "8": "Zao Chuo Ropeway Car Park 1",
+        "9": "Zao Uwanodai Car Park 1"
       }
     },
     "kansai": {
@@ -457,4 +473,3 @@
     }
   }
 }
-

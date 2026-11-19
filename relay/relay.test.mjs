@@ -5,6 +5,7 @@ import { createRequire } from 'node:module';
 import { WebSocket } from 'ws';
 import { createRelay, CameraPool } from './server.mjs';
 import { HlsCache, rewritePlaylist } from './hls.mjs';
+import { relayVideoUrl } from '../stream-routing.mjs';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const { WespConnection } = createRequire(import.meta.url)('../vivaldi.js');
@@ -257,4 +258,55 @@ test('HTTP clients cache media while live playlists remain fresh', async t => {
   assert.equal(media.headers.get('cache-control'), 'public, max-age=300, immutable');
   assert.equal(playlist.headers.get('cache-control'), 'no-store');
   await Promise.all([media.arrayBuffer(), playlist.arrayBuffer()]);
+});
+
+test('HTTPS CDN streams bypass the relay, including saved proxy URLs', () => {
+  const source = 'https://live.yongpyong.co.kr/cam01/index.m3u8';
+  for (const value of [source, '/relay/hls/https/live.yongpyong.co.kr/cam01/index.m3u8',
+    'https://ski.atik.kr/relay/hls/https/live.yongpyong.co.kr/cam01/index.m3u8']) {
+    assert.equal(relayVideoUrl(value), source);
+  }
+  assert.equal(relayVideoUrl('http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam01.stream/playlist.m3u8'),
+    '/relay/hls/http/konjiam.live.cdn.cloudn.co.kr/konjiam/cam01.stream/playlist.m3u8');
+  assert.equal(relayVideoUrl('/stream_proxy/http/118.46.149.144:8080/ramdisk/cam0.m3u8'),
+    '/relay/hls/http/118.46.149.144:8080/ramdisk/cam0.m3u8');
+  assert.equal(relayVideoUrl('https://streaming.phoenixhnr.co.kr/hls/bc_02_01.m3u8'),
+    '/relay/hls/https/streaming.phoenixhnr.co.kr/hls/bc_02_01.m3u8');
+  assert.equal(relayVideoUrl('8:TW0014A15451'), '8:TW0014A15451');
+  assert.equal(relayVideoUrl('https://www.youtube.com/watch?v=example'), 'https://www.youtube.com/watch?v=example');
+});
+
+test('old CDN relay requests redirect without fetching through our server', async t => {
+  const relay = createRelay({ cameras: new Set(), allowedHosts: ['live.yongpyong.co.kr'], createConnection() {},
+    fetchImpl() { assert.fail('CDN data must not be downloaded by the relay'); } });
+  relay.server.listen(0, '127.0.0.1');
+  await once(relay.server, 'listening');
+  t.after(() => relay.close());
+  const response = await fetch(`http://127.0.0.1:${relay.server.address().port}/relay/hls/https/live.yongpyong.co.kr/cam01/index.m3u8`, { redirect: 'manual' });
+  assert.equal(response.status, 307);
+  assert.equal(response.headers.get('location'), 'https://live.yongpyong.co.kr/cam01/index.m3u8');
+  assert.equal(relay.hls.bytes, 0);
+});
+
+test('playlist rewrites retain direct HTTPS CDN references', () => {
+  const result = rewritePlaylist('#EXTM3U\nhttps://live.yongpyong.co.kr/cam01/index.m3u8\n',
+    'https://origin.test/index.m3u8', new Set(['origin.test', 'live.yongpyong.co.kr']));
+  assert.equal(result, '#EXTM3U\nhttps://live.yongpyong.co.kr/cam01/index.m3u8\n');
+});
+
+test('simultaneous camera requests wait for capacity instead of failing', async () => {
+  let active = 0;
+  let peak = 0;
+  const cache = new HlsCache({ allowedHosts: new Set(['origin.test']), maxPending: 2, maxQueued: 32,
+    fetchImpl: async () => {
+      peak = Math.max(peak, ++active);
+      await sleep(5);
+      active--;
+      return new Response('frame');
+    } });
+  const entries = await Promise.all(Array.from({ length: 20 }, (_, i) => cache.get(`https://origin.test/camera-${i}.ts`)));
+  assert.equal(entries.length, 20);
+  assert.equal(peak, 2);
+  assert.equal(cache.active, 0);
+  assert.equal(cache.waiters.length, 0);
 });

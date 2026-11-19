@@ -47,7 +47,8 @@ const filesToCopy = {
   css: ['main.css'],
   json: ['manifest.json'],
   resources: ['preview.png', 'favicon.ico'],
-  xml: ['sitemap.xml', 'robots.txt']
+  xml: ['sitemap.xml', 'robots.txt'],
+  modules: ['stream-routing.mjs']
 };
 
 const screenshots = [

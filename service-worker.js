@@ -1,9 +1,10 @@
-const CACHE_NAME = 'slopes-cam-v6';
+const CACHE_NAME = 'slopes-cam-v7';
 const urlsToCache = [
   './',
   './index.html',
   './main.css',
   './main.js',
+  './stream-routing.mjs',
   './i18n.js',
   './lang/ko.json',
   './lang/en.json',

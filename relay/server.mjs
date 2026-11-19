@@ -121,7 +121,8 @@ export function createRelay({ cameras, allowedHosts, createConnection, allowedOr
     if (url.pathname === '/healthz') {
       response.setHeader('Content-Type', 'application/json');
       response.end(JSON.stringify({ cameras: pool.stats(), clients: wsServer.clients.size,
-        hls: { entries: hls.entries.size, bytes: hls.bytes, pending: hls.pending.size, hits: hls.hits, misses: hls.misses } }));
+        hls: { entries: hls.entries.size, bytes: hls.bytes, pending: hls.pending.size,
+          active: hls.active, queued: hls.waiters.length, hits: hls.hits, misses: hls.misses } }));
       return;
     }
     const match = /^\/relay\/hls\/(https?)\/([^/]+)(\/.*)$/.exec(url.pathname);
@@ -129,6 +130,7 @@ export function createRelay({ cameras, allowedHosts, createConnection, allowedOr
     if (!hls.allowedHosts.has(match[2])) { response.writeHead(403).end(); return; }
     try {
       const entry = await hls.get(`${match[1]}://${match[2]}${match[3]}${url.search}`);
+      if (entry.redirect) { response.writeHead(307, { Location: entry.redirect }).end(); return; }
       response.setHeader('Content-Type', entry.type);
       response.setHeader('Accept-Ranges', 'bytes');
       let body = entry.body;

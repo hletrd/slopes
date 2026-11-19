@@ -2,9 +2,11 @@
 
 Vivaldi viewers share one WESP connection per recorder/channel. The first viewer starts it; the last viewer leaving closes it after 15 seconds. Frames retain the source timestamp and JPEG encoding. Slow viewers skip frames, disconnected upstreams reconnect with backoff, and a 30-second frame watchdog recovers stalled streams.
 
-HLS players use `/relay/hls/<scheme>/<host>/<path>`. The relay rewrites playlists, nested playlists, segments, encryption-key URLs and initialization-map URLs. Master playlists expire after 30 seconds. Live playlists cache for half the advertised target duration, bounded to one to five seconds. Media objects cache for five minutes on the server and in the browser; changing playlists and keys are not stored by the browser. Upstream failures cache for three seconds to suppress repeated retries. Concurrent requests share one upstream fetch. A 128 MiB LRU cache, 4096-entry limit, 16 MiB object limit and eight concurrent fetches bound memory. Byte ranges use the shared full object. Service workers bypass relay responses so the browser's HTTP cache handles media without retaining live playlists.
+HLS players use `/relay/hls/<scheme>/<host>/<path>`. The relay rewrites playlists, nested playlists, segments, encryption-key URLs and initialization-map URLs. Master playlists expire after 30 seconds. Live playlists cache for half the advertised target duration, bounded to one to five seconds. Media objects cache for five minutes on the server and in the browser; changing playlists and keys are not stored by the browser. Upstream failures cache for three seconds to suppress repeated retries. Concurrent requests share one upstream fetch. A 128 MiB LRU cache, 4096-entry limit and 16 MiB object limit bound memory. Byte ranges use the shared full object. Service workers bypass relay responses so the browser's HTTP cache handles media without retaining live playlists.
 
-Only hosts and camera pairs generated from `links.json` are accepted. WebSocket origins are restricted to the site and its GitHub Pages host. Viewer limits, heartbeat checks and NGINX limits bound connections. `/healthz` is available only on the internal listener and reports viewers, upstream connections, frames and cache hits/misses.
+HTTPS CDN and managed-service feeds play directly, including Yongpyong, Welli Hilli, Jisan and Oak Valley. `stream-routing.mjs` shares this policy between both players and the relay. Old HTTPS CDN relay URLs redirect to the provider without downloading media through our server. HTTP-only feeds, including Konjiam and Muju where the provider certificate does not match the stream hostname, keep an HTTPS compatibility proxy. Resort-operated origins retain shared caching. RTSP.me and YouTube use their official embeds or external links.
+
+Only hosts and camera pairs generated from `links.json` are accepted. WebSocket origins are restricted to the site and its GitHub Pages host. Viewer limits, heartbeat checks and NGINX limits bound connections. HLS downloads use 16 active slots and a bounded queue of 64, so opening a resort's cameras together does not immediately fail at the old eight-request limit. `/healthz` is internal only and reports viewers, upstreams, frames, active/queued fetches and cache hits/misses.
 
 ## Development
 
@@ -25,14 +27,14 @@ The Vivaldi upstream omits its intermediate certificate. `certs/thawte-tls-rsa-c
 
 ## Deployment
 
-On `atik.kr`, the source and generated configuration live in `/home/ubuntu/slopes-relay`. Copy `compose.yaml` from this directory to that deployment root, retain the `relay/` source subdirectory and root `vivaldi.js`, and run:
+On `atik.kr`, source and generated configuration live in `/home/ubuntu/slopes-relay`. Copy `compose.yaml` from this directory to that deployment root, retain the `relay/` source subdirectory plus root `vivaldi.js` and `stream-routing.mjs`, and run:
 
 ```sh
 docker compose up -d --build
 curl -fsS http://127.0.0.1:8790/healthz
 ```
 
-The container uses Node 26, runs as the image's unprivileged `node` user, publishes only `127.0.0.1:8790`, and has a read-only filesystem, dropped capabilities, 768 MiB memory and two CPU limits. NGINX includes `nginx-limits.conf` from its HTTP context and `nginx.conf` in both existing `ski.atik.kr` server blocks. `configure-nginx.py` adds those server includes and moves the existing HTTPS-to-HTTP redirect into `location /`, allowing WSS relay connections through the existing certificate.
+The container uses Node 26, runs as the unprivileged `node` user, publishes only `127.0.0.1:8790`, and has a read-only filesystem, dropped capabilities, 768 MiB memory and two CPU limits. NGINX includes `nginx-limits.conf` from its HTTP context and `nginx.conf` in both site blocks. `configure-nginx.py` moves application/data/PHP routes into the existing TLS server and redirects HTTP page navigation to HTTPS. Existing HTTP relay connections remain available for older players during migration. Existing certificate files and other sites are preserved.
 
 Back up the existing NGINX configuration before applying these files. Validate with `nginx -t`, then reload NGINX. Verify two simultaneous viewers report one upstream, all viewers disconnect and the upstream disappears, and repeated HLS segment requests increment cache hits. The existing static deployment workflow publishes the updated players; no browser connects directly to Vivaldi after migration.
 
