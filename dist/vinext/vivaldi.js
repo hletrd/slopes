@@ -232,6 +232,14 @@
       this.channel = params.channel || 1;
       this.WebSocket = params.WebSocket || globalThis.WebSocket;
       this.webSocketOptions = params.webSocketOptions;
+      this.stream = params.stream || 'sub';
+      this.videoEncoding = EncType.JPEG;
+      this.videoResolution = 11;
+      this.videoFrameRate = 30;
+      this.alarmResolution = 6;
+      this.videoRequestMode = VideoRequest_CP;
+      this._pendingEncodedFrames = 0;
+      this.preferEncoded = !!params.preferEncoded;
 
       this.ws = null;
       this.keepAliveTimer = null;
@@ -243,6 +251,7 @@
 
       this.onReady = null;
       this.onFrame = null;
+      this.onEncodedFrame = null;
       this.onError = null;
       this.onMaxChannel = null;
     }
@@ -340,7 +349,7 @@
       switch (hdr.command) {
         case Command.Login: this._handleLogin(hdr, data); break;
         case Command.OpenSite: this._handleOpenSite(hdr); break;
-        case Command.StreamInfo: this._handleStreamInfo(hdr); break;
+        case Command.StreamInfo: this._handleStreamInfo(hdr, data); break;
         case Command.ContentInfo: this._handleContentInfo(hdr, data); break;
         case Command.ResolutionMap: this._handleResolutionMap(hdr); break;
         case Command.EventMap: this._handleEventMap(hdr); break;
@@ -393,9 +402,28 @@
       }
     }
 
-    _handleStreamInfo(hdr) {
+    _handleStreamInfo(hdr, data) {
       if (this.state !== 'handshaking') return;
       if (hdr.transmit === Transmit.RES || hdr.transmit === Transmit.SVR) {
+        if (this.onEncodedFrame && data && hdr.bodysize >= 4) {
+          const info = new DataView(data, HEADER_SIZE, hdr.bodysize);
+          const streams = [];
+          for (let i = 0; i < info.getUint8(1) && 4 + (i + 1) * 20 <= info.byteLength; i++) {
+            const offset = 4 + i * 20;
+            streams.push({ number: info.getUint8(offset), codec: info.getUint8(offset + 1), resolution: info.getUint8(offset + 6),
+              frameRate: info.getUint32(offset + 2) >>> 24 });
+          }
+          if (this.preferEncoded || !streams.some(stream => stream.codec === EncType.JPEG)) {
+            const supported = streams.filter(stream => stream.codec === EncType.H264 || stream.codec === EncType.H265);
+            const chosen = this.stream === 'main' ? supported[0] : supported.find(stream => stream.number === 2) || supported.at(-1);
+            if (chosen) {
+              this.videoEncoding = chosen.codec;
+              this.videoResolution = this.alarmResolution = chosen.resolution;
+              this.videoFrameRate = Math.max(1, Math.min(30, chosen.frameRate || 15));
+              this.videoRequestMode = 0;
+            }
+          }
+        }
         Logger.debug('StreamInfo OK');
         this._sendContentInfoReq();
       }
@@ -477,10 +505,19 @@
       const imgLen = datasize - VITC_SIZE;
       if (imgStart < 0 || imgStart + imgLen > data.byteLength) return;
 
-      this._sendVideoAck();
-
+      const imgData = new Uint8Array(data, imgStart, imgLen);
+      if (this.onEncodedFrame) {
+        const pending = this.onEncodedFrame(imgData, enctype, timeSec * 1000 + timeMs);
+        this._pendingEncodedFrames++;
+        this.ws?.pause?.();
+        Promise.resolve(pending)
+          .then(() => { if (!this.disposed && this.videoRequestMode === VideoRequest_CP) this._sendVideoAck(); })
+          .catch(() => { if (!this.disposed) this.onError && this.onError('decoder_error'); })
+          .finally(() => { if (--this._pendingEncodedFrames === 0 && !this.disposed) this.ws?.resume?.(); });
+        return;
+      }
+      if (this.videoRequestMode === VideoRequest_CP) this._sendVideoAck();
       if (this.onFrame && enctype === EncType.JPEG) {
-        const imgData = new Uint8Array(data, imgStart, imgLen);
         const blob = new Blob([imgData], { type: 'image/jpeg' });
         this.onFrame(blob, timeSec * 1000 + timeMs);
       }
@@ -521,21 +558,21 @@
       let i = HEADER_SIZE;
       dv.setInt32(i, 1); i += 4;
       dv.setInt8(i, ContentType_Video); i += 1;
-      dv.setInt8(i, EncType.JPEG); i += 1;
-      dv.setInt8(i, VideoRequest_CP); i += 1;
+      dv.setInt8(i, this.videoEncoding); i += 1;
+      dv.setInt8(i, this.videoRequestMode); i += 1;
       dv.setInt8(i, this.channel); i += 1;
       dv.setInt32(i, 32); i += 4;
       dv.setInt32(i, 0); i += 4;
       dv.setInt16(i, 0); i += 2;
-      dv.setInt32(i, 30 << 24); i += 4;
-      dv.setInt8(i, 11); i += 1;
-      dv.setInt32(i, 30 << 24); i += 4;
-      dv.setInt8(i, 6); i += 1;
+      dv.setInt32(i, this.videoFrameRate << 24); i += 4;
+      dv.setInt8(i, this.videoResolution); i += 1;
+      dv.setInt32(i, this.videoFrameRate << 24); i += 4;
+      dv.setInt8(i, this.alarmResolution); i += 1;
       dv.setUint32(i, 0xFFFFFFFF); i += 4;
       dv.setUint32(i, 0xFFFFFFFF); i += 4;
       dv.setInt32(i, 0); i += 4;
       dv.setInt8(i, 10); i += 1;
-      dv.setInt8(i, EncType.JPEG); i += 1;
+      dv.setInt8(i, this.videoEncoding); i += 1;
       dv.setInt8(i, 10); i += 1;
       dv.setInt8(i, 0); i += 1;
       this._send(buf);
