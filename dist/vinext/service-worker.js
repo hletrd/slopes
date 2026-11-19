@@ -1,4 +1,4 @@
-const CACHE_NAME = 'slopes-vinext-v2';
+const CACHE_NAME = 'slopes-vinext-v3';
 const BASE = '/vinext/';
 
 const APP_SHELL = [

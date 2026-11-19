@@ -68,6 +68,12 @@
         "link": "https://m.konjiamresort.co.kr/ski/skiLveCam.dev",
         "name": "중상급 베이스 (와이낫, CNP)",
         "video": "http://konjiam.live.cdn.cloudn.co.kr/konjiam/cam04.stream/playlist.m3u8"
+      },
+      {
+        "name": "하늬",
+        "link": "https://www.konjiamresort.co.kr/popup/haNelPopup.dev",
+        "video": "https://www.konjiamresort.co.kr/popup/haNelPopup.dev",
+        "video_type": "link"
       }
     ],
     "name": "곤지암리조트"
@@ -179,8 +185,10 @@
       {
         "link": "https://www.youtube.com/@11-lf8zw/streams",
         "name": "실시간 영상",
-        "video": "https://www.youtube.com/watch?v=O6_8VBu4FSA",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/@11-lf8zw/streams",
+        "video_type": "link",
+        "youtube_channel": "https://www.youtube.com/@11-lf8zw",
+        "youtube_title": ""
       }
     ],
     "name": "엘리시안 강촌",
@@ -263,7 +271,7 @@
       {
         "link": "https://mice.sonohotelsresorts.com/daemyung.vp.utill.09_02_02_01.ds/dmparse.dm?areaType=S",
         "name": "클래식",
-        "video": "10:TD0314A17496",
+        "video": "10:TW0014A15451",
         "video_type": "vivaldi"
       },
       {
@@ -339,29 +347,29 @@
     "id": "oakvalley",
     "links": [
       {
-        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
-        "name": "베이스",
-        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch2.stream/chunklist.m3u8"
+        "link": "https://oakvalley.co.kr/ski/introduction/realtime",
+        "name": "스노우파크 옥탑",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch2.stream/playlist.m3u8"
       },
       {
-        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
-        "name": "I 슬로프",
-        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch9.stream/chunklist.m3u8"
+        "link": "https://oakvalley.co.kr/ski/introduction/realtime",
+        "name": "I 슬로프 전경",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch9.stream/playlist.m3u8"
       },
       {
-        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
-        "name": "G 슬로프 하단",
-        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch7.stream/chunklist.m3u8"
+        "link": "https://oakvalley.co.kr/ski/introduction/realtime",
+        "name": "G 슬로프 전경",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch7.stream/playlist.m3u8"
       },
       {
-        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
-        "name": "F 슬로프 상단",
-        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch6.stream/chunklist.m3u8"
+        "link": "https://oakvalley.co.kr/ski/introduction/realtime",
+        "name": "F 슬로프 전경",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch6.stream/playlist.m3u8"
       },
       {
-        "link": "https://app.oakvalley.co.kr/mobileapp/reserve/ski/webcam.do",
-        "name": "플라워 휴게소",
-        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch5.stream/chunklist.m3u8"
+        "link": "https://oakvalley.co.kr/ski/introduction/realtime",
+        "name": "플라워 정상",
+        "video": "https://cctv-oak9.ktcdn.co.kr/cctv/ch5.stream/playlist.m3u8"
       }
     ],
     "name": "오크밸리"
@@ -388,32 +396,32 @@
     "id": "wellihilli",
     "links": [
       {
-        "link": "https://m.wellihillipark.com/customer/webcam",
+        "link": "https://www.wellihillipark.com/home/customer/webcam",
         "name": "알파",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam02.stream/playlist.m3u8"
       },
       {
-        "link": "https://m.wellihillipark.com/customer/webcam",
+        "link": "https://www.wellihillipark.com/home/customer/webcam",
         "name": "베이스",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam03.stream/playlist.m3u8"
       },
       {
-        "link": "https://m.wellihillipark.com/customer/webcam",
+        "link": "https://www.wellihillipark.com/home/customer/webcam",
         "name": "슬로프 광장 / 전경",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam04.stream/playlist.m3u8"
       },
       {
-        "link": "https://m.wellihillipark.com/customer/webcam",
+        "link": "https://www.wellihillipark.com/home/customer/webcam",
         "name": "정상 광장",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam05.stream/playlist.m3u8"
       },
       {
-        "link": "https://m.wellihillipark.com/customer/webcam",
-        "name": "슬로프 전경",
+        "link": "https://www.wellihillipark.com/home/customer/webcam",
+        "name": "고카트 / MTB파크",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam06.stream/playlist.m3u8"
       },
       {
-        "link": "https://m.wellihillipark.com/customer/webcam",
+        "link": "https://www.wellihillipark.com/home/customer/webcam",
         "name": "워터플래닛",
         "video": "https://live.wellihillipark.com/wellihillipark/_definst_/cam07.stream/playlist.m3u8"
       }
@@ -444,28 +452,28 @@
         "name": "스패로우 상단"
       }
     ],
-    "fetch": false,
+    "fetch": true,
     "id": "phoenix",
     "links": [
       {
         "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
         "name": "호크 / 스패로우",
-        "video": "https://streaming.phoenixhnr.co.kr/hls/yh_02.m3u8"
+        "video": "https://streaming.phoenixhnr.co.kr/hls/yh_02_02.m3u8"
       },
       {
         "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
         "name": "도도",
-        "video": "https://streaming.phoenixhnr.co.kr/hls/sp_01.m3u8"
+        "video": "https://streaming.phoenixhnr.co.kr/hls/sp_01_01.m3u8"
       },
       {
         "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
         "name": "불새마루",
-        "video": "https://streaming.phoenixhnr.co.kr/hls/ht_01.m3u8"
+        "video": "https://streaming.phoenixhnr.co.kr/hls/ht_01_01.m3u8"
       },
       {
         "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
         "name": "베이스",
-        "video": "https://streaming.phoenixhnr.co.kr/hls/bc_02.m3u8"
+        "video": "https://streaming.phoenixhnr.co.kr/hls/bc_02_01.m3u8"
       },
       {
         "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
@@ -475,12 +483,12 @@
       {
         "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
         "name": "스노우 빌리지",
-        "video": "https://streaming.phoenixhnr.co.kr/hls/yh_01.m3u8"
+        "video": "https://streaming.phoenixhnr.co.kr/hls/yh_01_01.m3u8"
       },
       {
         "link": "https://phoenixhnr.co.kr/page/pyeongchang/guide/operation/sketchMovie",
         "name": "몽블랑 정상",
-        "video": "https://streaming.phoenixhnr.co.kr/hls/mb_03.m3u8"
+        "video": "https://streaming.phoenixhnr.co.kr/hls/mb_03_02.m3u8"
       }
     ],
     "name": "휘닉스 파크",
@@ -522,7 +530,9 @@
         "link": "https://www.alpensia.com/guide/web-cam.do",
         "name": "알펜시아 리조트 라이브캠",
         "video": "https://www.youtube.com/embed/482p_sVR2sA",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "youtube_channel": "https://www.youtube.com/channel/UCrmFQpznvkrLQSjJG1wGdGg",
+        "youtube_title": "알펜시아 실시간"
       }
     ],
     "name": "알펜시아 리조트",
@@ -945,15 +955,18 @@
       {
         "link": "https://rtsp.me/embed/2kTsKt35/",
         "name": "베이직",
-        "video": "/stream_proxy/https/sn.rtsp.me/Z-__mV23-nTQYW5E8DA0aQ/1763829763/hls/2kTsKt35.m3u8?ip=130.162.144.168"
+        "video": "https://rtsp.me/embed/2kTsKt35/",
+        "video_type": "iframe"
       },
       {
         "link": "https://rtsp.me/embed/ry9aTdQh",
         "name": "슬로프 광장",
-        "video": "/stream_proxy/https/sn.rtsp.me/Bfslg7Y39mqZDxPoyh6t4Q/1745176765/hls/ry9aTdQh.m3u8?ip=130.162.144.168"
+        "video": "https://rtsp.me/embed/ry9aTdQh/",
+        "video_type": "iframe"
       }
     ],
-    "name": "에덴밸리리조트"
+    "name": "에덴밸리리조트",
+    "fetch": false
   },
   {
     "coordinates": [
@@ -1008,23 +1021,71 @@
     "links": [
       {
         "name": "니세코 빌리지 곤돌라 베이스",
-        "video": "https://www.youtube.com/watch?v=w_173GPVnwA",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/watch?v=w1BuUCVYdsQ",
+        "video_type": "youtube",
+        "link": "https://www.niseko-village.com/ja/nisekovillage/webcam/",
+        "youtube_channel": "https://www.youtube.com/channel/UCq8U31WJmnaVGevIZG7cSLQ",
+        "youtube_title": "Niseko village Niseko gondola",
+        "youtube_page": "https://www.niseko-village.com/ja/nisekovillage/webcam/",
+        "youtube_slot": 0
       },
       {
         "name": "니세코 빌리지 그린 리프",
-        "video": "https://www.youtube.com/watch?v=T8kCz-CoybY",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/watch?v=WMAL8MGGnRg",
+        "video_type": "youtube",
+        "link": "https://www.niseko-village.com/ja/nisekovillage/webcam/",
+        "youtube_channel": "https://www.youtube.com/channel/UCq8U31WJmnaVGevIZG7cSLQ",
+        "youtube_title": "Niseko Village Green Leaf",
+        "youtube_page": "https://www.niseko-village.com/ja/nisekovillage/webcam/",
+        "youtube_slot": 1
       },
       {
         "name": "니세코 하나조노 베이스",
         "video": "https://www.youtube.com/watch?v=1ksmiy6EsDo",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UCrNyeY4kGLL0-Hs8wC98peg",
+        "youtube_channel": "https://www.youtube.com/channel/UCrNyeY4kGLL0-Hs8wC98peg",
+        "youtube_title": "[4K] Live Camera - Niseko Hanazono Resort"
       },
       {
         "name": "키로로 베이스",
-        "video": "https://www.youtube.com/watch?v=9HZKY9PtaWI",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/watch?v=q96NwhD6Lrw",
+        "video_type": "youtube",
+        "link": "https://www.kiroro.co.jp/livecamera/",
+        "youtube_channel": "https://www.youtube.com/channel/UCfDj0Nie4sGZU6StTsGRe_g",
+        "youtube_title": "キロロ　ベースエリア",
+        "youtube_page": "https://www.kiroro.co.jp/livecamera/",
+        "youtube_slot": 0
+      },
+      {
+        "name": "키로로 24시간 적설계",
+        "video": "https://www.youtube.com/watch?v=Y3bXHw8TA2o",
+        "video_type": "youtube",
+        "link": "https://www.kiroro.co.jp/livecamera/",
+        "youtube_channel": "https://www.youtube.com/channel/UCfDj0Nie4sGZU6StTsGRe_g",
+        "youtube_title": "積雪カメラ",
+        "youtube_page": "https://www.kiroro.co.jp/livecamera/",
+        "youtube_slot": 1
+      },
+      {
+        "name": "키로로 아사리 정상",
+        "video": "https://www.youtube.com/watch?v=qtU23CdE7mU",
+        "video_type": "youtube",
+        "link": "https://www.kiroro.co.jp/livecamera/",
+        "youtube_channel": "https://www.youtube.com/channel/UCfDj0Nie4sGZU6StTsGRe_g",
+        "youtube_title": "朝里山頂",
+        "youtube_page": "https://www.kiroro.co.jp/livecamera/",
+        "youtube_slot": 2
+      },
+      {
+        "name": "키로로 나가미네 제2구역",
+        "video": "https://www.youtube.com/watch?v=RVblxnP4Ry8",
+        "video_type": "youtube",
+        "link": "https://www.kiroro.co.jp/livecamera/",
+        "youtube_channel": "https://www.youtube.com/channel/UCfDj0Nie4sGZU6StTsGRe_g",
+        "youtube_title": "長峰エリア",
+        "youtube_page": "https://www.kiroro.co.jp/livecamera/",
+        "youtube_slot": 3
       }
     ],
     "name": "홋카이도"
@@ -1035,82 +1096,162 @@
       {
         "name": "시가코겐 구마노유 베이스",
         "video": "https://www.youtube.com/live/n4G4iQTme1g",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC9rA3oJa94_m45Km0OJpO5w",
+        "youtube_channel": "https://www.youtube.com/channel/UC9rA3oJa94_m45Km0OJpO5w",
+        "youtube_title": "熊の湯スキー場LIVEカメラ"
       },
       {
         "name": "시가코겐 야마노에키 베이스",
-        "video": "https://www.youtube.com/watch?v=SZAawoS2wUE",
-        "video_type": "youtube"
+        "video": "https://www.shigakogen.gr.jp/live/index.html",
+        "video_type": "link",
+        "link": "https://www.shigakogen.gr.jp/live/index.html"
       },
       {
         "name": "하쿠바 하포네 우사기다이라",
-        "video": "https://www.youtube.com/watch?v=jJFawjEWCr0",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/watch?v=9ej1bDX8Kd8",
+        "video_type": "youtube",
+        "link": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_channel": "https://www.youtube.com/channel/UCny7Q56Pd6P8b4OnJeE2oMw",
+        "youtube_title": "うさぎ平ゲレンデライブカメラ",
+        "youtube_page": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_player": "livecam01"
       },
       {
         "name": "하쿠바 하포네 파노라마",
-        "video": "https://www.youtube.com/watch?v=uz5OuB-evfk",
-        "video_type": "youtube"
+        "video": "https://www.happo-one.jp/gelande/livecamera/",
+        "video_type": "link",
+        "link": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_page": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_player": "livecam02"
       },
       {
         "name": "하쿠바 하포네 시라카바 하단",
         "video": "https://www.youtube.com/watch?v=hMY3VnL4Pyk",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_channel": "https://www.youtube.com/channel/UCny7Q56Pd6P8b4OnJeE2oMw",
+        "youtube_title": "ゴンドラ乗り場ライブカメラ",
+        "youtube_page": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_player": "livecam03"
       },
       {
         "name": "하쿠바 하포네 제3주차장",
         "video": "https://www.youtube.com/watch?v=BHo4tHKIDow",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_channel": "https://www.youtube.com/channel/UCny7Q56Pd6P8b4OnJeE2oMw",
+        "youtube_title": "第3駐車場ライブカメラ",
+        "youtube_page": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_player": "livecam05"
       },
       {
         "name": "야치호코겐 2리프트",
-        "video": "https://www.youtube.com/watch?v=FSnSF3OIHlU",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/watch?v=K75FL2PHBw4",
+        "video_type": "youtube",
+        "link": "https://yachiho-kogen.com/ski/manage25-26/index5_1-4-2.shtml",
+        "youtube_channel": "https://www.youtube.com/channel/UCsxLeaRwmQbzAyJII_xJ0Rg",
+        "youtube_title": "第2リフト乗場横小屋",
+        "youtube_page": "https://camstreamer.com/embed/lc6FPk76h7GnSMo48GWUqJS3buOIfLbI6PWjXClF",
+        "youtube_redirect": true
       },
       {
         "name": "야치호코겐 4코스",
         "video": "https://www.youtube.com/watch?v=03BYfh9kP24",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UCPf8iizPkBevgtTSzKz4E6g",
+        "youtube_channel": "https://www.youtube.com/channel/UCPf8iizPkBevgtTSzKz4E6g",
+        "youtube_title": "第4コース照明柱"
       },
       {
         "name": "가루이자와 프린스 호텔 베이스",
         "video": "https://www.youtube.com/watch?v=fqgXBt2ZzpE",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UCnXXZnHcM2Y-WX7U_fNR2Qg",
+        "youtube_channel": "https://www.youtube.com/channel/UCnXXZnHcM2Y-WX7U_fNR2Qg",
+        "youtube_title": "【LIVE】軽井沢プリンスホテルスキー場　スキーセンター前"
       },
       {
         "name": "아라이 리조트 오케나시산 정상",
-        "video": "https://www.youtube.com/watch?v=nkIkBvvz1PA",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A/streams",
+        "video_type": "link",
+        "link": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A/streams",
+        "youtube_channel": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A",
+        "youtube_title": "大毛無"
       },
       {
         "name": "아라이 리조트 비프리, 앙코르 상단",
-        "video": "https://www.youtube.com/watch?v=OGFpbQqTHq0",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A/streams",
+        "video_type": "link",
+        "link": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A/streams",
+        "youtube_channel": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A",
+        "youtube_title": "BE FREE"
       },
       {
         "name": "아라이 리조트 젠다나 스테이션",
-        "video": "https://www.youtube.com/watch?v=UxKsXYcMehQ",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A/streams",
+        "video_type": "link",
+        "link": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A/streams",
+        "youtube_channel": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A",
+        "youtube_title": "膳棚"
       },
       {
         "name": "아라이 리조트 롯폰기 스테이션",
         "video": "https://www.youtube.com/watch?v=kQskivhwAwE",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A",
+        "youtube_channel": "https://www.youtube.com/channel/UCykbn5kKdajksZb7C0UyY7A",
+        "youtube_title": "アライマウンテンリゾートのライブ配信"
       },
       {
         "name": "다테야마 무로도",
         "video": "https://www.youtube.com/watch?v=rWO9PXZwahM",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UCk4bgav5X0rlbGefFnPcuoQ",
+        "youtube_channel": "https://www.youtube.com/channel/UCk4bgav5X0rlbGefFnPcuoQ",
+        "youtube_title": "【ライブカメラ】北アルプス立山室堂（富山県）チューリップテレビ"
       },
       {
         "name": "샤르만 화타 센터 하우스",
-        "video": "https://www.youtube.com/watch?v=0avlmh_aUdY",
-        "video_type": "youtube"
+        "video": "https://charmant-hiuchi.jp/",
+        "video_type": "link",
+        "link": "https://charmant-hiuchi.jp/",
+        "youtube_page": "https://charmant-hiuchi.jp/",
+        "youtube_slot": 0,
+        "youtube_unavailable_id": "_RWzteeHV70"
       },
       {
         "name": "나스파 뉴 오타니 베이스",
-        "video": "https://www.youtube.com/watch?v=zH4d4dZCB7k",
-        "video_type": "youtube"
+        "video": "https://www.naspa.co.jp/ski/",
+        "video_type": "link",
+        "link": "https://www.naspa.co.jp/ski/"
+      },
+      {
+        "name": "하쿠바 하포네 구로비시 1678m",
+        "video": "https://www.youtube.com/watch?v=21HCv58C99o",
+        "video_type": "youtube",
+        "link": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_channel": "https://www.youtube.com/channel/UCPldIceiQxfDX-nHAQOem7w",
+        "youtube_title": "Camera 白馬八方尾根 -",
+        "youtube_page": "https://www.happo-one.jp/gelande/livecamera/",
+        "youtube_player": "livecam06"
+      },
+      {
+        "name": "야치호코겐 제1 / 아니카 방면",
+        "video": "https://www.youtube.com/watch?v=SQaPmIFqPD4",
+        "video_type": "youtube",
+        "link": "https://yachiho-kogen.com/ski/manage25-26/index5_1-4-2.shtml",
+        "youtube_channel": "https://www.youtube.com/channel/UCJ6pioL6X4U55r6i11YFnEQ",
+        "youtube_title": "第１・アニカ方面"
+      },
+      {
+        "name": "야치호코겐 스키장 전경 (공식 페이지)",
+        "link": "https://yachiho-kogen.com/ski/manage25-26/index5_1-4-2.shtml",
+        "video": "https://yachiho-kogen.com/ski/manage25-26/index5_1-4-2.shtml",
+        "video_type": "link",
+        "youtube_page": "https://yachiho-kogen.com/ski/manage25-26/index5_1-4-2.shtml",
+        "youtube_slot": 0,
+        "youtube_unavailable_id": "hL5XR_O7Wak"
       }
     ],
     "name": "주부"
@@ -1121,37 +1262,159 @@
       {
         "name": "마루누마코겐 바이올렛 코스 1500m",
         "video": "https://www.youtube.com/watch?v=cqvEOhOzN2o",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UCVh1-I9rKs7w7C7_LuUhwcg",
+        "youtube_channel": "https://www.youtube.com/channel/UCVh1-I9rKs7w7C7_LuUhwcg",
+        "youtube_title": "【ライブ配信】丸沼高原バイオレットコース　標高1500m"
       },
       {
         "name": "마루누마코겐 옐로우 곤돌라 1400m",
-        "video": "https://www.youtube.com/watch?v=DUS5L5w3t3U",
-        "video_type": "youtube"
+        "video": "https://www.marunuma.jp/winter/live/",
+        "video_type": "link",
+        "link": "https://www.marunuma.jp/winter/live/"
       },
       {
         "name": "마루누마코겐 옐로우 코스 1400m",
-        "video": "https://www.youtube.com/watch?v=Kg1Q-47xGJQ",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/watch?v=JKcKxGeV0KY",
+        "video_type": "youtube",
+        "link": "https://www.marunuma.jp/winter/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCVh1-I9rKs7w7C7_LuUhwcg",
+        "youtube_title": "【ライブ配信】丸沼高原 イエローコース"
       },
       {
         "name": "오제이와쿠라 로맨스 / 챔피언 A",
-        "video": "https://www.youtube.com/watch?v=kS5SbE6rpFY",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/watch?v=4wYgmnaMAaY",
+        "video_type": "youtube",
+        "link": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCy3hvyby69u7HAWTcUq6EzQ",
+        "youtube_title": "【LIVE配信】ロマンスコース・チャンピオンAコース",
+        "youtube_page": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_slot": 3
       },
       {
         "name": "오제이와쿠라 국제여자 / 리젠 / 엑스퍼트",
-        "video": "https://www.youtube.com/watch?v=nXojsEGVTyg",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/watch?v=UpQfnGrjmQM",
+        "video_type": "youtube",
+        "link": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCy3hvyby69u7HAWTcUq6EzQ",
+        "youtube_title": "【LIVE配信】国体女子沢コース・リーゼンコース・エキスパートコース",
+        "youtube_page": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_slot": 2
       },
       {
         "name": "탐바라 전경",
-        "video": "https://www.youtube.com/watch?v=cjxf_GCBO3s",
-        "video_type": "youtube"
+        "video": "https://www.tambara.co.jp/winter/",
+        "video_type": "link",
+        "link": "https://www.tambara.co.jp/winter/"
       },
       {
         "name": "쿠사츠 온센 텐구야마 베이스",
-        "video": "https://www.youtube.com/watch?v=42FEEwaiN5w",
-        "video_type": "youtube"
+        "video": "https://www.youtube.com/watch?v=eX7vAL4Jtfk",
+        "video_type": "youtube",
+        "link": "https://www.932-onsen.com/common/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCbn5eHDjwmPC2K9RG8P0i_A",
+        "youtube_title": "「LIVECAMERA」草津温泉スキー場　天狗山山麓エリア",
+        "youtube_page": "https://www.932-onsen.com/common/live/",
+        "youtube_slot": 0
+      },
+      {
+        "name": "마루누마코겐 천공 테라스 2000m",
+        "video": "https://www.youtube.com/watch?v=l3AEMkq3jP4",
+        "video_type": "youtube",
+        "link": "https://www.marunuma.jp/winter/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCVh1-I9rKs7w7C7_LuUhwcg",
+        "youtube_title": "【ライブ配信】丸沼高原　標高2000ｍ　天空テラス"
+      },
+      {
+        "name": "마루누마코겐 입구",
+        "video": "https://www.youtube.com/watch?v=QXtbSWXGamE",
+        "video_type": "youtube",
+        "link": "https://www.marunuma.jp/winter/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCVh1-I9rKs7w7C7_LuUhwcg",
+        "youtube_title": "【ライブ配信】丸沼高原　入口"
+      },
+      {
+        "name": "마루누마코겐 트리 어드벤처",
+        "video": "https://www.youtube.com/watch?v=0dscZRUP6Rg",
+        "video_type": "youtube",
+        "link": "https://www.marunuma.jp/winter/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCVh1-I9rKs7w7C7_LuUhwcg",
+        "youtube_title": "【ライブ配信】丸沼高原　ツリーアドベンチャー"
+      },
+      {
+        "name": "마루누마코겐 닛코시라네산",
+        "video": "https://www.youtube.com/watch?v=0Q2YZBnp7vk",
+        "video_type": "youtube",
+        "link": "https://www.marunuma.jp/winter/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCVh1-I9rKs7w7C7_LuUhwcg",
+        "youtube_title": "【ライブ配信】丸沼高原　関東以北最高峰日光白根山"
+      },
+      {
+        "name": "마루누마코겐 돈판 레스토랑",
+        "video": "https://www.youtube.com/watch?v=Xd5ssXY_BVA",
+        "video_type": "youtube",
+        "link": "https://www.marunuma.jp/winter/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCVh1-I9rKs7w7C7_LuUhwcg",
+        "youtube_title": "【ライブ配信】丸沼高原　レストランとんふぁん"
+      },
+      {
+        "name": "오제이와쿠라 곤돌라 하부역",
+        "video": "https://www.youtube.com/watch?v=bB5w9bVNA9s",
+        "video_type": "youtube",
+        "link": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCy3hvyby69u7HAWTcUq6EzQ",
+        "youtube_title": "【LIVE配信】ゴンドラ山麓駅前",
+        "youtube_page": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_slot": 0
+      },
+      {
+        "name": "오제이와쿠라 곤돌라 정상역",
+        "video": "https://www.youtube.com/watch?v=TDTe8m3Z1MY",
+        "video_type": "youtube",
+        "link": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCy3hvyby69u7HAWTcUq6EzQ",
+        "youtube_title": "【LIVE配信】ゴンドラ山頂駅前",
+        "youtube_page": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_slot": 1
+      },
+      {
+        "name": "오제이와쿠라 니시야마 / 호른 레스토랑",
+        "video": "https://www.youtube.com/watch?v=yLmHCuy4Wlg",
+        "video_type": "youtube",
+        "link": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCy3hvyby69u7HAWTcUq6EzQ",
+        "youtube_title": "【LIVE配信】西山ゲレンデ・レストランホルン前",
+        "youtube_page": "https://www.oze-iwakura.co.jp/ski/slopeguide/live/",
+        "youtube_slot": 4
+      },
+      {
+        "name": "구사쓰 온센 텐구야마 정상",
+        "video": "https://www.youtube.com/watch?v=hN8mxz3-1pg",
+        "video_type": "youtube",
+        "link": "https://www.932-onsen.com/common/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCbn5eHDjwmPC2K9RG8P0i_A",
+        "youtube_title": "「LIVE CAMERA」草津温泉スキー場　天狗山山頂エリア",
+        "youtube_page": "https://www.932-onsen.com/common/live/",
+        "youtube_slot": 1
+      },
+      {
+        "name": "구사쓰 온센 국도292호 입구",
+        "video": "https://www.youtube.com/watch?v=rHuoK_TWOnA",
+        "video_type": "youtube",
+        "link": "https://www.932-onsen.com/common/live/",
+        "youtube_channel": "https://www.youtube.com/channel/UCbn5eHDjwmPC2K9RG8P0i_A",
+        "youtube_title": "「LIVECAMERA」国道292号 草津温泉入口",
+        "youtube_page": "https://www.932-onsen.com/common/live/",
+        "youtube_slot": 2
+      },
+      {
+        "name": "구사쓰 온센 국도292호 (공식 페이지)",
+        "link": "https://www.932-onsen.com/common/live/",
+        "video": "https://www.932-onsen.com/common/live/",
+        "video_type": "link",
+        "youtube_page": "https://www.932-onsen.com/common/live/",
+        "youtube_slot": 3,
+        "youtube_unavailable_id": "WB4jllqVRCc"
       }
     ],
     "name": "간토"
@@ -1162,22 +1425,80 @@
       {
         "name": "자오온센 JUPEER 슬로프",
         "video": "https://www.youtube.com/watch?v=D4YiBKIsZVA",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_channel": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_title": "JUPEERゲレンデライブカメラ"
       },
       {
         "name": "자오온센 중앙 슬로프",
         "video": "https://www.youtube.com/watch?v=416KwGEjTK4",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_channel": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_title": "中央ゲレンデライブカメラ"
       },
       {
         "name": "자오온센 파라다이스 슬로프",
-        "video": "https://www.youtube.com/watch?v=nzCGgWtfVg0",
-        "video_type": "youtube"
+        "video": "https://zaochuoropeway.co.jp/",
+        "video_type": "link",
+        "link": "https://zaochuoropeway.co.jp/"
       },
       {
         "name": "자오온센 요코쿠라 슬로프",
         "video": "https://www.youtube.com/watch?v=RHfXwQ-rF24",
-        "video_type": "youtube"
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_channel": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_title": "横倉ゲレンデライブカメラ"
+      },
+      {
+        "name": "자오 로프웨이 주차장",
+        "video": "https://www.youtube.com/watch?v=Rs4CcR79sWA",
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA/streams",
+        "youtube_channel": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_title": "蔵王ロープウェイ駐車場ライブカメラ"
+      },
+      {
+        "name": "자오 선라이즈 슬로프",
+        "video": "https://www.youtube.com/watch?v=G-wKM6Dw3kA",
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA/streams",
+        "youtube_channel": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_title": "蔵王サンライズライブカメラ"
+      },
+      {
+        "name": "자오 주효코겐역",
+        "video": "https://www.youtube.com/watch?v=rpHUbj-7pR0",
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA/streams",
+        "youtube_channel": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_title": "樹氷高原駅舎ライブカメラ"
+      },
+      {
+        "name": "자오 오모리 주차장",
+        "video": "https://www.youtube.com/watch?v=6cR55F-J4ps",
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA/streams",
+        "youtube_channel": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_title": "大森駐車場ライブカメラ"
+      },
+      {
+        "name": "자오 중앙 로프웨이 제1주차장",
+        "video": "https://www.youtube.com/watch?v=1vhtYFrjxBw",
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA/streams",
+        "youtube_channel": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_title": "中央ロープウェイ第一駐車場ライブカメラ"
+      },
+      {
+        "name": "자오 우와노다이 제1주차장",
+        "video": "https://www.youtube.com/watch?v=DnrgCsF1nAM",
+        "video_type": "youtube",
+        "link": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA/streams",
+        "youtube_channel": "https://www.youtube.com/channel/UC1xeTccsAQdz7-fF0eAa5HA",
+        "youtube_title": "上の台第一駐車場ライブカメラ"
       }
     ],
     "name": "도호쿠"
@@ -1188,7 +1509,11 @@
       {
         "name": "하치코겐 900m",
         "video": "https://www.youtube.com/watch?v=8Tc2jpzNHCA",
-        "video_type": "youtube"
+        "video_type": "link",
+        "link": "https://www.youtube.com/channel/UCrNNR-KdmbpaV-uP_E8UpUg",
+        "youtube_channel": "https://www.youtube.com/channel/UCrNNR-KdmbpaV-uP_E8UpUg",
+        "youtube_title": "ハチ高原ライブカメラ【標高900m付近】",
+        "youtube_embed": false
       }
     ],
     "name": "간사이"
