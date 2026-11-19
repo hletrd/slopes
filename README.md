@@ -1,12 +1,12 @@
 ## 전국 스키장 실시간 웹캠 뷰어
 
-* 링크: [http://ski.atik.kr](http://ski.atik.kr)
+* 링크: [https://ski.atik.kr](https://ski.atik.kr)
 
 [![배포](https://github.com/hletrd/slopes/actions/workflows/static.yml/badge.svg)](https://github.com/hletrd/slopes/actions/workflows/static.yml)
 [![날씨 업데이트](https://github.com/hletrd/slopes/actions/workflows/fetch_weather.yml/badge.svg)](https://github.com/hletrd/slopes/actions/workflows/fetch_weather.yml)
 [![웹캠 링크 업데이트](https://github.com/hletrd/slopes/actions/workflows/webcam-scraper.yml/badge.svg)](https://github.com/hletrd/slopes/actions/workflows/webcam-scraper.yml)
 
-![preview](http://ski.atik.kr/preview.png)
+![preview](https://ski.atik.kr/preview.png)
 
 * 전국 스키장의 실시간 웹캠 뷰를 제공합니다.
 * 전국 스키장의 실시간 날씨 정보를 제공합니다.

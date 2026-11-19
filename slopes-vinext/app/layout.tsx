@@ -23,9 +23,9 @@ export default function RootLayout({
         <meta property="og:title" content="Slopes cam - 전국 스키장 실시간 웹캠 모음" />
         <meta property="og:description" content="전국 스키장 실시간 웹캠 및 날씨" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://ski.atik.kr/vinext" />
+        <meta property="og:url" content="https://ski.atik.kr/vinext" />
         <meta property="og:locale" content="ko_KR" />
-        <meta property="og:image" content="http://ski.atik.kr/vinext/preview.png" />
+        <meta property="og:image" content="https://ski.atik.kr/vinext/preview.png" />
         <meta property="og:image:width" content="2400" />
         <meta property="og:image:height" content="1260" />
         <meta property="og:site_name" content="Slopes cam" />
@@ -33,7 +33,7 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Slopes cam - 전국 스키장 실시간 웹캠 모음" />
         <meta name="twitter:description" content="전국 스키장 실시간 웹캠 및 날씨" />
-        <meta name="twitter:image" content="http://ski.atik.kr/vinext/preview.png" />
+        <meta name="twitter:image" content="https://ski.atik.kr/vinext/preview.png" />
         {/* Icons */}
         <link rel="icon" href="/vinext/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/vinext/icons/skiing-16x16.png" />
@@ -108,7 +108,7 @@ gtag('config', 'G-TDF3M6JH2R');
               "@type": "WebSite",
               name: "Slopes cam - 전국 스키장 실시간 웹캠 모음",
               alternateName: ["Slopes cam"],
-              url: "http://ski.atik.kr/vinext",
+              url: "https://ski.atik.kr/vinext",
             }),
           }}
         />

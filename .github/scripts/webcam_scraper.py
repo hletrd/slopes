@@ -405,7 +405,7 @@ def process_resort(resort, max_workers):
 
 def generate_video_ld_json(data):
   print("Generating videos+ld.json...")
-  site_url = "http://ski.atik.kr"
+  site_url = "https://ski.atik.kr"
   now = datetime.datetime.now()
   future_date = now + datetime.timedelta(days=14)
   formatted_now = now.isoformat() + "+00:00"
@@ -504,7 +504,7 @@ def main():
     generate_video_ld_json(data)
 
     print("Generating sitemap.xml...")
-    site_url = "http://ski.atik.kr"
+    site_url = "https://ski.atik.kr"
 
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
