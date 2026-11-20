@@ -58,7 +58,8 @@
     "totalSnowfall": "총 강설량: {amount}cm",
     "windSpeed": "풍속 (m/s)",
     "snowfall": "강설량 (cm/3h)",
-    "dateTime": "날짜/시간"
+    "dateTime": "날짜/시간",
+    "stale": "오래된 자료"
   },
   "forecast": {
     "title": "5일 예보",

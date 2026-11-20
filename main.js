@@ -45,7 +45,9 @@ function showGlobalToast(message, type = 'info', duration = 3000) {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
-  const { relayVideoUrl } = await import('./stream-routing.mjs');
+  const [{ relayVideoUrl }, { latestWeather, isWeatherStale, weatherTimeParts }] = await Promise.all([
+    import('./stream-routing.mjs'), import('./weather-data.mjs')
+  ]);
   await i18n.init();
 
   const t = (key, params) => i18n.t(key, params);
@@ -791,11 +793,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     if (timestamp) {
-      const date = new Date(timestamp);
-      month = date.getMonth() + 1;
-      day = date.getDate();
-      hours = date.getHours().toString().padStart(2, '0');
-      minutes = date.getMinutes().toString().padStart(2, '0');
+      const { month, day, hours, minutes } = weatherTimeParts(timestamp);
 
       const timeSpan = document.createElement('span');
       timeSpan.className = 'weather-update-time';
@@ -807,6 +805,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           timeSpan.textContent += ` (${t('weather.kmaProvided')})`;
         }
       }
+      if (isWeatherStale({ time: timestamp })) timeSpan.textContent += ` • ${t('weather.stale')}`;
       locationNameDiv.appendChild(timeSpan);
     }
 
@@ -833,33 +832,17 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
     }
 
-    if (data.temperature !== null) {
-      const tempMetric = new WeatherMetric('temperature', 'bi bi-thermometer-half', data.temperature, '°C');
-      weatherDataDiv.appendChild(tempMetric);
-    }
-
-    if (data.humidity !== null) {
-      weatherDataDiv.appendChild(document.createTextNode(' • '));
-      const humidityMetric = new WeatherMetric('humidity', 'bi bi-moisture', data.humidity, '%', 0);
-      weatherDataDiv.appendChild(humidityMetric);
-    }
-
-    if (data.wind_speed !== null) {
-      weatherDataDiv.appendChild(document.createTextNode(' • '));
-      const windMetric = new WeatherMetric('wind-speed', 'bi bi-wind', data.wind_speed, 'm/s');
-      weatherDataDiv.appendChild(windMetric);
-    }
-
-    if (data.rainfall !== null) {
-      weatherDataDiv.appendChild(document.createTextNode(' • '));
-      const rainfallMetric = new WeatherMetric('rainfall', 'bi bi-droplet-fill', data.rainfall, 'mm');
-      weatherDataDiv.appendChild(rainfallMetric);
-    }
-
-    if (data.snowfall_3hr !== null) {
-      weatherDataDiv.appendChild(document.createTextNode(' • '));
-      const snowfallMetric = new WeatherMetric('snowfall', 'bi bi-snow', data.snowfall_3hr, 'cm');
-      weatherDataDiv.appendChild(snowfallMetric);
+    const metrics = [
+      ['temperature', 'temperature', 'bi bi-thermometer-half', '°C', 1],
+      ['humidity', 'humidity', 'bi bi-moisture', '%', 0],
+      ['wind_speed', 'wind-speed', 'bi bi-wind', 'm/s', 1],
+      ['rainfall', 'rainfall', 'bi bi-droplet-fill', 'mm', 1],
+      ['snowfall_3hr', 'snowfall', 'bi bi-snow', 'cm', 1]
+    ];
+    for (const [field, className, icon, unit, decimals] of metrics) {
+      if (data[field] === null) continue;
+      if (weatherDataDiv.childNodes.length) weatherDataDiv.appendChild(document.createTextNode(' • '));
+      weatherDataDiv.appendChild(new WeatherMetric(className, icon, data[field], unit, decimals));
     }
 
     return weatherDataDiv;
@@ -894,9 +877,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         const weatherInfo = document.createElement('div');
         weatherInfo.className = 'weather-info';
 
-        const mostRecent = baseAreaWeather.data[baseAreaWeather.data.length - 1];
+        const mostRecent = latestWeather(baseAreaWeather);
+        if (!mostRecent) return;
 
-        const locationNameDiv = createLocationNameDiv(resort, baseAreaWeather.timestamp, false);
+        const locationNameDiv = createLocationNameDiv(resort, mostRecent.time, false);
         const weatherDataDiv = createWeatherDataDiv(mostRecent);
 
         weatherInfo.appendChild(locationNameDiv);
@@ -944,9 +928,10 @@ document.addEventListener('DOMContentLoaded', async function () {
           const weatherInfo = document.createElement('div');
           weatherInfo.className = 'weather-info';
 
-          const mostRecent = baseAreaWeather.data[baseAreaWeather.data.length - 1];
+          const mostRecent = latestWeather(baseAreaWeather);
+          if (!mostRecent) return;
 
-          const locationNameDiv = createLocationNameDiv(resort, baseAreaWeather.timestamp, false);
+          const locationNameDiv = createLocationNameDiv(resort, mostRecent.time, false);
           const weatherDataDiv = createWeatherDataDiv(mostRecent);
 
           weatherInfo.appendChild(locationNameDiv);
@@ -1053,7 +1038,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       resortWeather.forEach(locationData => {
         if (!locationData || !locationData.data || locationData.data.length === 0) return;
 
-        const mostRecent = locationData.data[locationData.data.length - 1];
+        const mostRecent = latestWeather(locationData);
+        if (!mostRecent) return;
 
         const weatherInfoWrapper = document.createElement('div');
         weatherInfoWrapper.className = 'weather-info-wrapper';
@@ -1061,7 +1047,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const weatherInfo = document.createElement('div');
         weatherInfo.className = 'weather-info';
 
-        const locationNameDiv = createLocationNameDiv(locationData, locationData.timestamp, true);
+        const locationNameDiv = createLocationNameDiv(locationData, mostRecent.time, true);
         const weatherDataDiv = createWeatherDataDiv(mostRecent);
 
         weatherInfo.appendChild(locationNameDiv);
@@ -2657,6 +2643,22 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
       });
   }
+
+  async function refreshWeather() {
+    if (document.hidden) return;
+    try {
+      const response = await fetch(`weather.json?v=${Date.now()}`, { cache: 'no-store' });
+      if (!response.ok) return;
+      const next = await response.json();
+      if (!Array.isArray(next)) return;
+      weatherData = next;
+      updateAllResortsWeather();
+      const resortId = location.hash.slice(1).split('/')[0];
+      if (resortId) updateWeatherDisplay(resortId);
+    } catch (error) { console.warn('Weather refresh failed:', error); }
+  }
+  setInterval(refreshWeather, 5 * 60 * 1000);
+  document.addEventListener('visibilitychange', refreshWeather);
 
   function loadForecastCharts() {
     fetch('weather.grid.json?v=' + new Date().getTime())

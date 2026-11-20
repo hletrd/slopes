@@ -19,41 +19,81 @@ import dotenv
 dotenv.load_dotenv()
 
 HOURS = 1
-INTERVAL = 60
+INTERVAL = 5
+WEATHER_FIELDS = ('temperature', 'humidity', 'wind_speed', 'rainfall', 'snow_cover', 'snowfall_3hr')
+
+
+def weather_value(field, value):
+  if isinstance(value, bool):
+    return None
+  try:
+    number = float(value)
+  except (TypeError, ValueError):
+    return None
+  if not math.isfinite(number) or number in (-99, -99.9, -999, -9999):
+    return None
+  if field == 'temperature':
+    return number if -90 <= number <= 60 else None
+  if number < 0 or (field == 'humidity' and number > 100):
+    return None
+  return number
+
+
+def clean_weather_rows(rows, now=None):
+  now = now or datetime.now(pytz.timezone('Asia/Seoul'))
+  result = {}
+  for row in rows:
+    try:
+      observed = datetime.fromisoformat(row.get('time', ''))
+      if observed.tzinfo is None or observed > now:
+        continue
+    except (TypeError, ValueError):
+      continue
+    clean = {field: weather_value(field, row.get(field)) for field in WEATHER_FIELDS}
+    if all(value is None for value in clean.values()):
+      continue
+    result[observed] = {**row, **clean, 'time': observed.isoformat()}
+  return [result[key] for key in sorted(result)]
+
+
+def parse_kma_weather(content, now=None):
+  if '#START7777' not in content or '#7777END' not in content:
+    return []
+  body = content.split('#START7777', 1)[1].split('#7777END', 1)[0]
+  rows = []
+  for line in body.splitlines():
+    parts = [part.strip() for part in line.split(',')]
+    if len(parts) < 7 or not re.fullmatch(r'\d{12}', parts[0]):
+      continue
+    try:
+      observed = pytz.timezone('Asia/Seoul').localize(datetime.strptime(parts[0], '%Y%m%d%H%M'))
+    except ValueError:
+      continue
+    rows.append({'time': observed.isoformat(), **dict(zip(WEATHER_FIELDS, parts[1:7]))})
+  return clean_weather_rows(rows, now)
 
 def format_datetime(dt):
   return dt.strftime("%Y%m%d%H%M")
 
-def convert_to_iso8601(time_str):
-  year = time_str[0:4]
-  month = time_str[4:6]
-  day = time_str[6:8]
-  hour = time_str[8:10]
-  minute = time_str[10:12]
-
-  return f"{year}-{month}-{day}T{hour}:{minute}:00+09:00"
-
 def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_key, is_north_korea=False):
   kst = pytz.timezone('Asia/Seoul')
   now = datetime.now(kst)
-  six_hours_ago = now - timedelta(hours=HOURS)
-
-  tm1 = format_datetime(six_hours_ago)
-  tm2 = format_datetime(now)
+  # Five-minute analysis products can arrive late. Stay within the API's 60-minute window.
+  end = now - timedelta(minutes=10)
+  end = end.replace(minute=end.minute // 5 * 5, second=0, microsecond=0)
+  tm1 = format_datetime(end - timedelta(hours=HOURS))
+  tm2 = format_datetime(end)
 
   if is_north_korea:
     base_url = "https://apihub.kma.go.kr/api/typ01/url/nko_sfctm.php"
   else:
     base_url = "https://apihub.kma.go.kr/api/typ01/url/sfc_nc_var.php"
-  params = (
-    f"?tm1={tm1}&tm2={tm2}&lon={lon}&lat={lat}"
-    f"&obs=ta,hm,ws_10m,rn_60m,sd_tot,sd_3hr&itv={INTERVAL}&help=0"
-    f"&authKey={auth_key}"
-  )
-  url = base_url + params
+  params = {'tm1': tm1, 'tm2': tm2, 'lon': lon, 'lat': lat,
+            'obs': 'ta,hm,ws_10m,rn_60m,sd_tot,sd_3hr',
+            'itv': INTERVAL, 'help': 0, 'authKey': auth_key}
 
   try:
-    response = requests.get(url, timeout=30)
+    response = requests.get(base_url, params=params, timeout=30)
 
     if response.status_code == 403:
       print(f"Received 403 Forbidden from API for {location_name}")
@@ -66,33 +106,10 @@ def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_k
       )
       return None
 
-    content = response.text
-    if "#START7777" not in content or "#7777END" not in content:
-      print(
-        f"Could not find data markers in API response for "
-        f"{location_name}"
-      )
+    data_rows = parse_kma_weather(response.text, now)
+    if not data_rows:
+      print(f"No valid KMA observations for {location_name}")
       return None
-
-    data_text = content.split("#START7777")[1].split("#7777END")[0].strip()
-
-    data_rows = []
-    for line in data_text.split("\n"):
-      if not line.strip():
-        continue
-
-      parts = [part.strip() for part in line.split(",")]
-      if len(parts) >= 7:
-        iso_time = convert_to_iso8601(parts[0])
-        data_rows.append({
-          "time": iso_time,
-          "temperature": float(parts[1]),
-          "humidity": float(parts[2]),
-          "wind_speed": float(parts[3]),
-          "rainfall": float(parts[4]),
-          "snow_cover": float(parts[5]),
-          "snowfall_3hr": float(parts[6])
-        })
 
     return {
       "name": location_name,
@@ -106,7 +123,8 @@ def fetch_weather_data_for_location(lat, lon, location_name, resort_name, auth_k
     }
 
   except Exception as e:
-    print(f"Error fetching weather data for {location_name}: {e}")
+    # Request exception URLs can contain the API credential.
+    print(f"Error fetching weather data for {location_name}: {type(e).__name__}")
     return None
 
 def generate_preview_image(weather_data, resorts):
@@ -148,7 +166,7 @@ def generate_preview_image(weather_data, resorts):
 
   kst = pytz.timezone('Asia/Seoul')
   now = datetime.now(kst)
-  date_str = f"{now.year}년 {now.month}월 {now.day}일 {now.hour:02d}:{now.minute:02d} 기준"
+  date_str = f"{now.year}년 {now.month}월 {now.day}일 {now.hour:02d}:{now.minute:02d} 생성"
   draw.text((width/2, date_y), date_str, fill=(200, 200, 200), font=small_font, anchor="mm")
 
   draw.line([(margin_x, separator_y), (width-margin_x, separator_y)], fill=(80, 80, 80), width=2)
@@ -162,9 +180,13 @@ def generate_preview_image(weather_data, resorts):
     base_area = next((w for w in weather_data if w["resort"] == resort_name and w["name"] == "스키하우스"), None)
 
     if base_area and base_area.get("data") and len(base_area["data"]) > 0:
-      most_recent = base_area["data"][-1]
+      rows = clean_weather_rows(base_area['data'])
+      if not rows or rows[-1]['temperature'] is None:
+        continue
+      most_recent = rows[-1]
       base_areas.append({
         "name": resort_name,
+        "time": most_recent['time'],
         "temperature": most_recent["temperature"],
         "humidity": most_recent["humidity"],
         "wind_speed": most_recent["wind_speed"],
@@ -173,6 +195,9 @@ def generate_preview_image(weather_data, resorts):
       })
 
   base_areas.sort(key=lambda x: x["temperature"])
+
+  def metric(value, decimals=1):
+    return '—' if value is None else f'{value:.{decimals}f}'
 
   columns = 2
   max_resorts = min(12, len(base_areas))
@@ -185,7 +210,8 @@ def generate_preview_image(weather_data, resorts):
     x = margin_x + col * col_width
     y = content_start_y + row * row_height
 
-    draw.text((x, y), resort["name"], fill=(255, 255, 255), font=header_font)
+    observed = datetime.fromisoformat(resort['time']).strftime('%m/%d %H:%M')
+    draw.text((x, y), f"{resort['name']} ({observed})", fill=(255, 255, 255), font=header_font)
 
     metrics_y = y + int(height * 0.045)
     metrics_line2_y = metrics_y + int(height * 0.033)
@@ -195,16 +221,16 @@ def generate_preview_image(weather_data, resorts):
     draw.text((x, metrics_y), f"{resort['temperature']:.1f}°C",
               fill=(255, 107, 107), font=label_font)
 
-    draw.text((x, metrics_line2_y), f"3시간 적설  {resort['snowfall']:.1f}cm",
+    draw.text((x, metrics_line2_y), f"3시간 적설  {metric(resort['snowfall'])}cm",
               fill=(208, 235, 255), font=label_font)
 
-    draw.text((metrics_col2_x, metrics_y), f"습도  {resort['humidity']:.0f}%",
+    draw.text((metrics_col2_x, metrics_y), f"습도  {metric(resort['humidity'], 0)}%",
               fill=(74, 192, 252), font=label_font)
 
-    draw.text((metrics_col2_x, metrics_line2_y), f"10분 풍속  {resort['wind_speed']:.1f}m/s",
+    draw.text((metrics_col2_x, metrics_line2_y), f"10분 풍속  {metric(resort['wind_speed'])}m/s",
               fill=(32, 201, 151), font=label_font)
 
-    draw.text((metrics_col3_x, metrics_y), f"1시간 강수  {resort['rainfall']:.1f}mm",
+    draw.text((metrics_col3_x, metrics_y), f"1시간 강수  {metric(resort['rainfall'])}mm",
               fill=(77, 171, 247), font=label_font)
 
   try:
@@ -566,8 +592,10 @@ def main():
 
   weather_data_dict = {}
   for entry in existing_weather_data:
-    key = f"{entry['resort']}:{entry['name']}"
-    weather_data_dict[key] = entry
+    rows = clean_weather_rows(entry.get('data', []))
+    if rows:
+      key = f"{entry['resort']}:{entry['name']}"
+      weather_data_dict[key] = {**entry, 'data': rows}
 
   updated_locations = 0
   new_locations = 0
@@ -575,6 +603,8 @@ def main():
 
   valid_keys = set()
   for resort in resorts:
+    if resort.get('fetch_weather', True) is False:
+      continue
     resort_name = resort.get("name", "")
     coordinates = resort.get("coordinates", [])
 
@@ -585,8 +615,10 @@ def main():
     valid_keys.add(f"{resort_name}:리조트")
 
   keys_to_remove = []
-  for key in weather_data_dict:
-    if key not in valid_keys:
+  active_resorts = {r['name'] for r in resorts if r.get('fetch_weather', True)}
+  for key, entry in weather_data_dict.items():
+    resort_entry = entry['resort'] in active_resorts and entry['name'].startswith('리조트_')
+    if key not in valid_keys and not resort_entry:
       keys_to_remove.append(key)
       removed_locations += 1
 
@@ -652,7 +684,8 @@ def main():
       key = f"{resort_name}:{location_name}"
       with lock:
         if key in weather_data_dict:
-          weather_data_dict[key] = result
+          if result['data'][-1]['time'] >= weather_data_dict[key]['data'][-1]['time']:
+            weather_data_dict[key] = result
           nonlocal updated_locations
           updated_locations += 1
         else:
@@ -666,7 +699,11 @@ def main():
       executor.submit(fetch_location_data, resort_name, location_name, lat, lon, full_name)
       time.sleep(0.1)
 
-  updated_weather_data = list(weather_data_dict.values())
+  updated_weather_data = []
+  for entry in weather_data_dict.values():
+    rows = clean_weather_rows(entry['data'])
+    if rows:
+      updated_weather_data.append({**entry, 'data': rows})
 
   if updated_weather_data:
     output_file = "weather.json"
@@ -681,7 +718,7 @@ def main():
 
     generate_preview_image(updated_weather_data, resorts)
   else:
-    print("No weather data collected")
+    raise RuntimeError("No valid weather data collected; refusing to publish")
 
 
 if __name__ == "__main__":

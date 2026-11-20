@@ -24,6 +24,7 @@ export interface Resort {
 }
 
 export interface WeatherDataPoint {
+  time: string;
   temperature: number | null;
   humidity: number | null;
   wind_speed: number | null;

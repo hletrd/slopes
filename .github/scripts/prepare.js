@@ -48,7 +48,7 @@ const filesToCopy = {
   json: ['manifest.json'],
   resources: ['preview.png', 'favicon.ico'],
   xml: ['sitemap.xml', 'robots.txt'],
-  modules: ['stream-routing.mjs']
+  modules: ['stream-routing.mjs', 'weather-data.mjs']
 };
 
 const screenshots = [

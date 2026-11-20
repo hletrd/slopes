@@ -1032,18 +1032,25 @@ export function App({
   useEffect(() => {
     fetchResorts();
 
-    // Fetch weather from root (shared data, not vinext-specific)
-    void (async () => {
+    let cancelled = false;
+    const loadWeather = async () => {
+      if (document.hidden) return;
       try {
-        const res = await fetch(`/weather.json?v=${Date.now()}`);
+        const res = await fetch(`/weather.json?v=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const data = (await res.json()) as WeatherLocation[];
-          setWeatherData(data);
+          if (!cancelled && Array.isArray(data)) setWeatherData(data);
         }
-      } catch {
-        // Silently ignore if weather data is not available
-      }
-    })();
+      } catch { /* Keep the last observations during temporary network failures. */ }
+    };
+    void loadWeather();
+    const timer = setInterval(loadWeather, 5 * 60 * 1000);
+    document.addEventListener('visibilitychange', loadWeather);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+      document.removeEventListener('visibilitychange', loadWeather);
+    };
   }, [fetchResorts]);
 
   // Update page title based on navigation

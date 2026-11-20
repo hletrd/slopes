@@ -1,10 +1,11 @@
-const CACHE_NAME = 'slopes-cam-v7';
+const CACHE_NAME = 'slopes-cam-v8';
 const urlsToCache = [
   './',
   './index.html',
   './main.css',
   './main.js',
   './stream-routing.mjs',
+  './weather-data.mjs',
   './i18n.js',
   './lang/ko.json',
   './lang/en.json',
@@ -72,7 +73,7 @@ self.addEventListener('fetch', event => {
   }
 
   const requestUrl = new URL(event.request.url);
-  if (requestUrl.pathname.startsWith('/relay/')) return;
+  if (requestUrl.pathname.startsWith('/relay/') || /\/weather(?:\.grid)?\.json$/.test(requestUrl.pathname)) return;
 
   if (requestUrl.hostname.includes('googletagmanager.com') ||
       requestUrl.hostname.includes('google-analytics.com') ||
