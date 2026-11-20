@@ -30,3 +30,18 @@ export function weatherTimeParts(time) {
   }).formatToParts(new Date(time)).map(({ type, value }) => [type, value]));
   return { month: parts.month, day: parts.day, hours: parts.hour, minutes: parts.minute };
 }
+
+export function forecastLocations(grid, now = Date.now()) {
+  if (!Array.isArray(grid?.weathers)) return [];
+  return grid.weathers.flatMap(location => {
+    const data = (location.forecasts || []).flatMap(row => {
+      const time = typeof row.timestamp === 'number' ? row.timestamp * 1000 : Date.parse(row.timestamp);
+      const temperature = weatherValue('temperature', row.temp);
+      if (!Number.isFinite(time) || time <= now || time > now + 120 * 3600000 || temperature === null) return [];
+      return [{ time: new Date(time).toISOString(), temperature,
+        wind_speed: weatherValue('wind_speed', row.wind_speed),
+        snowfall_3hr: weatherValue('snowfall_3hr', row.snow_3h ?? 0) }];
+    }).sort((a, b) => Date.parse(a.time) - Date.parse(b.time));
+    return data.length ? [{ resort: location.resort, name: location.name, data, update_time: grid.last_fetch_time }] : [];
+  });
+}
