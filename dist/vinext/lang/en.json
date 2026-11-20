@@ -58,7 +58,8 @@
     "totalSnowfall": "Total snowfall: {amount}cm",
     "windSpeed": "Wind Speed (m/s)",
     "snowfall": "Snowfall (cm/3h)",
-    "dateTime": "Date/Time"
+    "dateTime": "Date/Time",
+    "stale": "Outdated data"
   },
   "forecast": {
     "title": "5-Day Forecast",

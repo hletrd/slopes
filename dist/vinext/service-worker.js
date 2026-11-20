@@ -1,4 +1,4 @@
-const CACHE_NAME = 'slopes-vinext-v3';
+const CACHE_NAME = 'slopes-vinext-v4';
 const BASE = '/vinext/';
 
 const APP_SHELL = [
@@ -82,7 +82,7 @@ self.addEventListener('fetch', event => {
   if (isLocalhost) return;
 
   const url = new URL(event.request.url);
-  if (url.pathname.startsWith('/relay/')) return;
+  if (url.pathname.startsWith('/relay/') || /\/weather(?:\.grid)?\.json$/.test(url.pathname)) return;
 
   // Skip analytics and tracking
   if (url.hostname.includes('googletagmanager.com') ||
