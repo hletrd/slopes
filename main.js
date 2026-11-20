@@ -45,7 +45,7 @@ function showGlobalToast(message, type = 'info', duration = 3000) {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
-  const [{ relayVideoUrl }, { latestWeather, isWeatherStale, weatherTimeParts }] = await Promise.all([
+  const [{ relayVideoUrl }, { latestWeather, isWeatherStale, weatherTimeParts, forecastLocations }] = await Promise.all([
     import('./stream-routing.mjs'), import('./weather-data.mjs')
   ]);
   await i18n.init();
@@ -2661,7 +2661,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   document.addEventListener('visibilitychange', refreshWeather);
 
   function loadForecastCharts() {
-    fetch('weather.grid.json?v=' + new Date().getTime())
+    fetch('weather.grid.json?v=' + new Date().getTime(), { cache: 'no-store' })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to load forecast data');
@@ -2689,7 +2689,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const headerDiv = document.createElement('div');
     headerDiv.className = 'forecast-header';
     const updateTime = new Date(gridData.last_fetch_time);
-    headerDiv.innerHTML = `<h4>5일 예보 <small>(${updateTime.toLocaleDateString('ko-KR')} ${updateTime.toLocaleTimeString('ko-KR')} 업데이트)</small></h4>`;
+    headerDiv.innerHTML = `<h4>${t('forecast.title')} <small>(${updateTime.toLocaleString(i18n.getLanguage() === 'ko' ? 'ko-KR' : 'en-US', { timeZone: 'Asia/Seoul' })})</small></h4><a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer">OpenWeather</a>`;
     forecastDiv.appendChild(headerDiv);
 
     const chartColors = {
@@ -2711,7 +2711,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     chartGrid.className = 'chart-grid';
     forecastDiv.appendChild(chartGrid);
 
-    const forecastData = gridData.weathers;
+    const forecastData = forecastLocations(gridData).map(entry => ({
+      ...entry, forecasts: entry.data.map(point => ({ timestamp: point.time,
+        temp: point.temperature, wind_speed: point.wind_speed, snow_3h: point.snowfall_3hr }))
+    }));
 
     console.log("Weather data structure:", {
       lastFetchTime: gridData.last_fetch_time,
@@ -2772,15 +2775,15 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
       }
 
-      const maxTemp = Math.max(...validForecasts.map(d => d.temp || -Infinity));
-      const minTemp = Math.min(...validForecasts.map(d => d.temp || Infinity));
+      const maxTemp = Math.max(...validForecasts.map(d => d.temp));
+      const minTemp = Math.min(...validForecasts.map(d => d.temp));
       const totalSnowfall = validForecasts.reduce((sum, d) => sum + (d.snow_3h || 0), 0);
 
       const forecastSummary = document.createElement('div');
       forecastSummary.className = 'forecast-summary';
       forecastSummary.innerHTML = `
         <span class="temp-range">${t('forecast.temperature')}: ${minTemp.toFixed(1)}°C ~ ${maxTemp.toFixed(1)}°C</span>
-        <span class="total-snow">${t('forecast.totalSnowfall')}: ${totalSnowfall.toFixed(1)}cm</span>
+        <span class="total-snow">${t('forecast.totalSnowfall')}: ${totalSnowfall.toFixed(1)}mm</span>
       `;
       chartHeader.appendChild(forecastSummary);
 

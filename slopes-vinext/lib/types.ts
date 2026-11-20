@@ -42,8 +42,8 @@ export interface WeatherLocation {
 export interface ForecastDataPoint {
   time: string;
   temperature: number;
-  wind_speed: number;
-  snowfall_3hr: number;
+  wind_speed: number | null;
+  snowfall_3hr: number | null;
 }
 
 export interface ForecastLocation {

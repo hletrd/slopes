@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { forecastLocations, weatherTimeParts } from "../../weather-data.mjs";
 import { useI18n } from "@/lib/i18n";
 import type { ForecastLocation } from "@/lib/types";
 
@@ -18,9 +19,9 @@ export const ForecastView = React.memo(function ForecastView() {
     setError(false);
     void (async () => {
       try {
-        const res = await fetch(`/forecast.json?v=${Date.now()}`);
+        const res = await fetch(`/weather.grid.json?v=${Date.now()}`, { cache: "no-store" });
         if (res.ok) {
-          const data = (await res.json()) as ForecastLocation[];
+          const data = forecastLocations(await res.json());
           setForecasts(data);
         } else {
           setError(true);
@@ -81,7 +82,7 @@ export const ForecastView = React.memo(function ForecastView() {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        const labels = forecast.data.map(d => d.time);
+        const labels = forecast.data.map(d => new Date(d.time).toLocaleString(undefined, { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }));
         const temps = forecast.data.map(d => d.temperature);
         const winds = forecast.data.map(d => d.wind_speed);
         const snows = forecast.data.map(d => d.snowfall_3hr);
@@ -112,7 +113,7 @@ export const ForecastView = React.memo(function ForecastView() {
                 tension: 0.3,
               },
               {
-                label: t("weather.snowfall") || "Snow (cm/3hr)",
+                label: t("forecast.snowLabel"),
                 data: snows,
                 borderColor: "#4bc0c0",
                 backgroundColor: "rgba(75, 192, 192, 0.3)",
@@ -197,15 +198,16 @@ export const ForecastView = React.memo(function ForecastView() {
   return (
     <div className="content-section active">
       <h2>{t("nav.forecast") || "Forecast"}</h2>
+      <a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer">OpenWeather</a>
       <div className="forecast-charts">
         {forecasts.map((forecast) => {
           const canvasId = `forecast-chart-${forecast.resort}-${forecast.name}`.replace(/\s+/g, "-");
           return (
             <div key={canvasId} className="forecast-chart-wrapper" style={{ marginBottom: 24 }}>
-              <h4>{forecast.name}</h4>
+              <h4>{forecast.resort} · {forecast.name}</h4>
               {forecast.update_time && (
                 <p style={{ fontSize: "0.8em", color: "#999" }}>
-                  {t("forecast.updateTime", { date: forecast.update_time.split(" ")[0] || "", time: forecast.update_time.split(" ")[1] || "" }) || `Updated: ${forecast.update_time}`}
+                  {t("forecast.updateTime", { date: `${weatherTimeParts(forecast.update_time).month}/${weatherTimeParts(forecast.update_time).day}`, time: `${weatherTimeParts(forecast.update_time).hours}:${weatherTimeParts(forecast.update_time).minutes}` })}
                 </p>
               )}
               <div style={{ height: 300 }}>

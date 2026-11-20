@@ -1,4 +1,4 @@
-const CACHE_NAME = 'slopes-cam-v8';
+const CACHE_NAME = 'slopes-cam-v9';
 const urlsToCache = [
   './',
   './index.html',

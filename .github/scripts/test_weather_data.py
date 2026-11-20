@@ -1,6 +1,9 @@
 import importlib.util
 from datetime import datetime, timedelta
 from pathlib import Path
+import json
+import os
+import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
@@ -68,6 +71,41 @@ TM,-999,-999,-999,-999,-999,-999
         self.assertEqual(len(rows), 1)
         self.assertIsNone(rows[0]['humidity'])
         self.assertEqual(rows[0]['time'], '2026-11-21T04:10:00+09:00')
+
+    def test_forecast_refresh_is_not_limited_to_a_particular_clock_minute(self):
+        now = datetime.now(pytz.timezone('Asia/Seoul'))
+        response = Mock(status_code=200)
+        response.json.return_value = {'list': [
+            {'dt': now.timestamp() + 3600, 'main': {'temp': 0}, 'snow': {'3h': 2.5}},
+            {'dt': now.timestamp() - 3600, 'main': {'temp': 10}},
+        ]}
+        with tempfile.TemporaryDirectory() as root, patch.dict(os.environ, {'OPENWEATHER_API_KEY': 'test-key'}):
+            previous_dir = os.getcwd()
+            try:
+                os.chdir(root)
+                with patch.object(weather.requests, 'get', return_value=response) as get:
+                    weather.fetch_forecast_openweather([{'name': 'Resort', 'coordinates': [{'name': 'Base', 'latitude': 37, 'longitude': 127}]}])
+                data = json.loads(Path('weather.grid.json').read_text())
+                self.assertEqual(len(data['weathers'][0]['forecasts']), 1)
+                self.assertEqual(data['weathers'][0]['forecasts'][0]['temp'], 0)
+                self.assertEqual(data['weathers'][0]['forecasts'][0]['snow_3h'], 2.5)
+                self.assertEqual(get.call_args.kwargs['params']['units'], 'metric')
+            finally:
+                os.chdir(previous_dir)
+
+    def test_recent_forecasts_are_reused_without_api_requests(self):
+        now = datetime.now(pytz.timezone('Asia/Seoul'))
+        data = {'last_fetch_time': now.isoformat(), 'weathers': [{'forecasts': [{'timestamp': now.timestamp() + 3600}]}]}
+        with tempfile.TemporaryDirectory() as root, patch.dict(os.environ, {'OPENWEATHER_API_KEY': 'test-key'}):
+            previous_dir = os.getcwd()
+            try:
+                os.chdir(root)
+                Path('weather.grid.json').write_text(json.dumps(data))
+                with patch.object(weather.requests, 'get') as get:
+                    weather.fetch_forecast_openweather([])
+                get.assert_not_called()
+            finally:
+                os.chdir(previous_dir)
 
 
 if __name__ == '__main__':

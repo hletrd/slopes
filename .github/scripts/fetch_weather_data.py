@@ -474,22 +474,24 @@ def fetch_forecast_openweather(resorts):
     print("OPENWEATHER_API_KEY environment variable not set")
     return
 
-  if os.environ.get("RUN_LOCAL") is None:
-    gmt = datetime.now(pytz.timezone('GMT'))
-    gmt_hour = gmt.hour
-
-    if gmt_hour not in [0, 3, 6, 9, 12, 15, 18, 21]:
-      print(f"Data for current hour is not available, skipping OpenWeatherMap fetch")
+  try:
+    with open('weather.grid.json', encoding='utf-8') as source:
+      previous = json.load(source)
+    fetched = datetime.fromisoformat(previous['last_fetch_time'])
+    has_future = any(p.get('timestamp', 0) > now.timestamp()
+                     for location in previous.get('weathers', []) for p in location.get('forecasts', []))
+    if timedelta(0) <= now - fetched < timedelta(hours=3) and has_future:
+      print('OpenWeather forecast is less than three hours old; keeping it')
       return
-
-    if now.minute >= 10:
-      print("Current minute is >= 10, skipping OpenWeatherMap fetch")
-      return
+  except (OSError, ValueError, KeyError, TypeError):
+    pass
 
   print(f"Fetching weather data from OpenWeatherMap")
 
   locations = []
   for resort in resorts:
+    if resort.get('fetch_weather', True) is False:
+      continue
     resort_name = resort.get("name", "")
     coordinates = resort.get("coordinates", [])
 
@@ -507,15 +509,20 @@ def fetch_forecast_openweather(resorts):
         })
 
   weathers = []
-  for location in locations:
-    url = f"https://api.openweathermap.org/data/2.5/forecast?lat={location['lat']}&lon={location['lon']}&units=metric&appid={api_key}"
+  for index, location in enumerate(locations):
+    if index:
+      time.sleep(1.1)
+    url = 'https://api.openweathermap.org/data/2.5/forecast'
+    params = {'lat': location['lat'], 'lon': location['lon'], 'units': 'metric', 'appid': api_key}
 
     try:
       print(f'Fetching OpenWeatherMap data for {location["resort"]} - {location["name"]}')
-      response = requests.get(url, timeout=30)
+      response = requests.get(url, params=params, timeout=15)
 
       if response.status_code != 200:
         print(f"Error fetching OpenWeatherMap data for {location['resort']} - {location['name']}: HTTP {response.status_code}")
+        if response.status_code in (401, 403, 429):
+          break
         continue
 
       data = response.json()
@@ -535,14 +542,19 @@ def fetch_forecast_openweather(resorts):
           continue
 
         timestamp = item['dt']
+        if not isinstance(timestamp, (int, float)) or timestamp <= now.timestamp():
+          continue
         main = item['main']
         wind = item.get("wind", {})
         snow = item.get("snow", {})
         rain = item.get("rain", {})
 
+        temperature = weather_value('temperature', main.get('temp'))
+        if temperature is None:
+          continue
         forecast = {
           "timestamp": timestamp,
-          "temp": main.get("temp"),
+          "temp": temperature,
           "feels_like": main.get("feels_like"),
           "humidity": main.get("humidity"),
           "wind_speed": wind.get("speed", 0),
@@ -552,10 +564,15 @@ def fetch_forecast_openweather(resorts):
 
         location_data["forecasts"].append(forecast)
 
-      weathers.append(location_data)
+      if location_data['forecasts']:
+        weathers.append(location_data)
 
     except Exception as e:
-      print(f"Error fetching OpenWeatherMap data for {location['resort']} - {location['name']}: {e}")
+      print(f"Error fetching OpenWeatherMap data for {location['resort']} - {location['name']}: {type(e).__name__}")
+
+  if not weathers:
+    print('No valid OpenWeather forecasts; keeping the previous forecast file')
+    return
 
   result_data = {
     "weathers": weathers,

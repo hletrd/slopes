@@ -37,11 +37,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r .github/scripts/requirements.txt
 
-      - name: Keep last valid observations for temporary source outages
+      - name: Keep previous weather and forecasts for temporary source outages
         run: |
-          if ! curl --fail --silent --show-error --max-time 20 https://ski.atik.kr/weather.json -o weather.json; then
-            rm -f weather.json
-          fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import requests
+          for name in ['weather.json', 'weather.grid.json']:
+              try:
+                  response = requests.get(f'https://ski.atik.kr/{name}', timeout=20)
+                  response.raise_for_status()
+                  response.json()
+                  Path(name).write_bytes(response.content)
+              except (requests.RequestException, ValueError):
+                  Path(name).unlink(missing_ok=True)
+          PY
 
       - name: Test weather parsing
         run: python -m unittest discover -s .github/scripts -p 'test_weather_data.py'
@@ -49,6 +59,7 @@ jobs:
       - name: Fetch weather data
         env:
           KMA_API_KEY: ${{ secrets.KMA_API_KEY }}
+          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         run: python .github/scripts/fetch_weather_data.py
 
       - name: Deploy to server
@@ -56,7 +67,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "weather.json preview.png"
+          SOURCE: "weather.json weather.grid.json preview.png"
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
           TARGET: ${{ secrets.SSH_TARGET }}
